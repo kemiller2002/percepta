@@ -9,12 +9,14 @@ on:
       - "examples/Percepta.Examples/**"
       - "tests/Percepta.Core.Tests/**"
       - ".github/workflows/percepta-core.yml"
+      - "global.json"
   pull_request:
     paths:
       - "src/Percepta.Core/**"
       - "examples/Percepta.Examples/**"
       - "tests/Percepta.Core.Tests/**"
       - ".github/workflows/percepta-core.yml"
+      - "global.json"
   workflow_dispatch:
 
 permissions:
