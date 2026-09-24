@@ -62,7 +62,7 @@ let className =
     | MachineAddressable -> "machine-addressable"
     | SemanticSubstitution -> "semantic-substitution"
 
-let replaceRequired oldValue newValue (text: string) =
+let replaceRequired (oldValue: string) (newValue: string) (text: string) =
     if not (text.Contains(oldValue, StringComparison.Ordinal)) then
         failwith $"Mutation source was not found: {oldValue}"
 
@@ -267,7 +267,7 @@ let findRepositoryRoot startDirectory =
 
     loop (DirectoryInfo(Path.GetFullPath(startDirectory)))
 
-let writeResults path canonicalComplete results detectionRate h1Supported h2Supported =
+let writeResults (path: string) (canonicalComplete: bool) (results: ExperimentResult list) (detectionRate: float) (h1Supported: bool) (h2Supported: bool) =
     Directory.CreateDirectory(Path.GetDirectoryName(path)) |> ignore
 
     use stream = File.Create(path)
@@ -304,7 +304,7 @@ let writeResults path canonicalComplete results detectionRate h1Supported h2Supp
     writer.WriteEndObject()
     writer.Flush()
 
-let verifyRequiredCompletion contract adapterEvidence =
+let verifyRequiredCompletion (contract: ScreenContract) (adapterEvidence: BrowserVerification.AdapterEvidence list) =
     contract.EvidenceRequirements
     |> List.filter _.Required
     |> List.forall (fun requirement ->
@@ -316,7 +316,7 @@ let verifyRequiredCompletion contract adapterEvidence =
             |> Option.map (fun evidence -> acceptable evidence.Status)
             |> Option.defaultValue false)
 
-let runVerification root contract htmlPath runName =
+let runVerification (root: string) (contract: ScreenContract) (htmlPath: string) (runName: string) =
     task {
         let outputRoot = Path.Combine(root, "artifacts", "percepta", "adversarial", runName)
 
@@ -398,6 +398,7 @@ let main _ =
                             match item.Status with
                             | Failed _ -> not complete
                             | _ -> false
+                        | MachineAddressable, None -> false
                         | SemanticSubstitution, _ -> complete
 
                     printfn
