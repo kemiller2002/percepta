@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echelonfoundry.com/schemas/percepta-contract.schema.json",
+  "title": "Percepta Screen Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "screen",
+    "purpose",
+    "primaryQuestion",
+    "regions",
+    "capabilities",
+    "stateProjections",
+    "forbiddenPatterns",
+    "breakpoints",
+    "evidenceRequirements"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "screen": { "type": "string", "minLength": 1 },
+    "purpose": { "type": "string", "minLength": 1 },
+    "primaryQuestion": { "type": "string", "minLength": 1 },
+    "regions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "purpose", "hierarchy", "visibility"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "purpose": { "type": "string", "minLength": 1 },
+          "hierarchy": { "enum": ["primary", "secondary", "tertiary", "background"] },
+          "visibility": {
+            "type": "object",
+            "required": ["kind"],
+            "properties": {
+              "kind": { "enum": ["always", "when", "may-collapse", "secondary-navigation"] },
+              "predicate": { "type": "string", "minLength": 1 }
+            },
+            "allOf": [
+              {
+                "if": { "properties": { "kind": { "const": "when" } } },
+                "then": { "required": ["predicate"] }
+              }
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "capability"],
+        "properties": {
+          "kind": {
+            "enum": [
+              "expose",
+              "enable-when-legal",
+              "disable-when-illegal",
+              "explain-when-unavailable",
+              "navigate-to-blocker"
+            ]
+          },
+          "capability": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "stateProjections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["when", "observations"],
+        "properties": {
+          "when": { "type": "string", "minLength": 1 },
+          "observations": { "$ref": "#/$defs/observations" }
+        }
+      }
+    },
+    "forbiddenPatterns": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "breakpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "width", "height", "requiredRegionsVisible", "observations"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "requiredRegionsVisible": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "observations": { "$ref": "#/$defs/observations" }
+        }
+      }
+    },
+    "evidenceRequirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "description", "required"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": {
+            "enum": [
+              "contract-validation",
+              "structural",
+              "state-projection",
+              "interaction",
+              "accessibility",
+              "responsive",
+              "visual-regression",
+              "semantic-visual-review",
+              "accepted-deviation"
+            ]
+          },
+          "description": { "type": "string", "minLength": 1 },
+          "required": { "type": "boolean" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
