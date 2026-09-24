@@ -14,7 +14,7 @@
     "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release"
   },
   "dependencies": {
-    "@echelon-foundry/design-system": "0.2.0",
+    "@echelon-foundry/design-system": "https://github.com/kemiller2002/forma/releases/download/v0.2.0/echelon-foundry-design-system-0.2.0.tgz",
     "@echelon-foundry/print-components": "github:kemiller2002/folio#2b101b6d840a670abb959148fff8e1477c059eda",
     "@echelon-foundry/typescript-wasm-kernel": "0.6.1"
   },
