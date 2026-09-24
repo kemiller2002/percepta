@@ -4,6 +4,12 @@ open Percepta.Core
 
 module IndyInit =
 
+    let private observation id description =
+        {
+            Id = ObservationId id
+            Description = description
+        }
+
     let private evidence id kind description required =
         {
             Id = VerificationId id
@@ -81,35 +87,35 @@ module IndyInit =
                         When = DomainPredicateId "hypothesis-is-falsified"
                         RequiredObservations =
                             [
-                                "Falsified hypothesis remains represented."
-                                "Falsified state is perceivable without color alone."
-                                "Actions that require an active hypothesis are unavailable."
+                                observation "falsified-hypothesis-retained" "Falsified hypothesis remains represented."
+                                observation "falsified-state-noncolor" "Falsified state is perceivable without color alone."
+                                observation "inactive-actions-unavailable" "Actions that require an active hypothesis are unavailable."
                             ]
                     }
                     {
                         When = DomainPredicateId "blocking-unknown-exists"
                         RequiredObservations =
                             [
-                                "Blocker is visible in the active workspace."
-                                "Dependent action is unavailable."
-                                "Reason for unavailability is visible."
-                                "User can navigate to the blocker."
+                                observation "blocker-visible" "Blocker is visible in the active workspace."
+                                observation "dependent-action-unavailable" "Dependent action is unavailable."
+                                observation "unavailable-reason-visible" "Reason for unavailability is visible."
+                                observation "blocker-navigation-available" "User can navigate to the blocker."
                             ]
                     }
                     {
                         When = DomainPredicateId "github-write-is-pending"
                         RequiredObservations =
                             [
-                                "Persistence state is Pending."
-                                "UI does not claim remote success."
+                                observation "persistence-pending-visible" "Persistence state is Pending."
+                                observation "no-false-remote-success" "UI does not claim remote success."
                             ]
                     }
                     {
                         When = DomainPredicateId "corrective-action-not-verified"
                         RequiredObservations =
                             [
-                                "Investigation is not represented as Resolved."
-                                "Verification obligation remains visible."
+                                observation "unresolved-not-resolved" "Investigation is not represented as Resolved."
+                                observation "verification-obligation-visible" "Verification obligation remains visible."
                             ]
                     }
                 ]
@@ -127,43 +133,35 @@ module IndyInit =
                 [
                     {
                         Name = "ipad-portrait"
-                        MinimumWidthCssPx = None
-                        MaximumWidthCssPx = None
-                        RequiredObservations =
-                            [
-                                "Active hypotheses remain directly reachable."
-                                "Blocking unknowns remain visible without secondary navigation."
-                                "Legal actions remain discoverable."
-                            ]
+                        ViewportWidthCssPx = 820
+                        ViewportHeightCssPx = 1180
+                        RequiredRegionsVisible =
+                            [ RegionId "hypotheses"; RegionId "unknowns"; RegionId "legal-actions" ]
+                        RequiredObservations = []
                     }
                     {
                         Name = "ipad-landscape"
-                        MinimumWidthCssPx = None
-                        MaximumWidthCssPx = None
-                        RequiredObservations =
-                            [
-                                "Competing hypotheses can be compared."
-                                "Blocking state remains visible."
-                            ]
+                        ViewportWidthCssPx = 1180
+                        ViewportHeightCssPx = 820
+                        RequiredRegionsVisible =
+                            [ RegionId "hypotheses"; RegionId "unknowns"; RegionId "legal-actions" ]
+                        RequiredObservations = []
                     }
                     {
                         Name = "narrow-phone"
-                        MinimumWidthCssPx = None
-                        MaximumWidthCssPx = Some 480
-                        RequiredObservations =
-                            [
-                                "Semantic hierarchy survives stacking."
-                                "No critical blocker moves behind secondary navigation."
-                            ]
+                        ViewportWidthCssPx = 390
+                        ViewportHeightCssPx = 844
+                        RequiredRegionsVisible =
+                            [ RegionId "hypotheses"; RegionId "unknowns"; RegionId "legal-actions" ]
+                        RequiredObservations = []
                     }
                     {
                         Name = "desktop-reference"
-                        MinimumWidthCssPx = Some 1024
-                        MaximumWidthCssPx = None
-                        RequiredObservations =
-                            [
-                                "Primary investigation state is visually dominant."
-                            ]
+                        ViewportWidthCssPx = 1440
+                        ViewportHeightCssPx = 900
+                        RequiredRegionsVisible =
+                            [ RegionId "observation"; RegionId "hypotheses"; RegionId "unknowns"; RegionId "legal-actions" ]
+                        RequiredObservations = []
                     }
                 ]
             EvidenceRequirements =
