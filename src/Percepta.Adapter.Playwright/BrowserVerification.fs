@@ -214,7 +214,8 @@ module BrowserVerification =
                 if uncovered.Count = 0 then
                     None
                 else
-                    Some($"No state fixture covers: {String.concat ", " uncovered}.")
+                    let uncoveredText = String.concat ", " uncovered
+                    Some($"No state fixture covers: {uncoveredText}.")
 
             return
                 evidence
@@ -298,9 +299,14 @@ module BrowserVerification =
                         let locator = page.Locator($"[data-percepta-blocker-link-for=\"{id}\"]")
                         let! count = locator.CountAsync()
 
-                        if count = 0 || not (let! value = locator.First.IsVisibleAsync() in value) then
+                        if count = 0 then
                             problems.Add($"Capability '{id}' has no visible path to blocking information.")
                         else
+                            let! isVisible = locator.First.IsVisibleAsync()
+
+                            if not isVisible then
+                                problems.Add($"Capability '{id}' has no visible path to blocking information.")
+
                             let! href = locator.First.GetAttributeAsync("href")
 
                             if String.IsNullOrWhiteSpace href || not (href.StartsWith("#", StringComparison.Ordinal)) then
