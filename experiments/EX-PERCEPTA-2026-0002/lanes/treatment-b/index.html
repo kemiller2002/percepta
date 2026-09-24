@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investigation workspace — indy init failure</title>
+<style>
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --surface-2: #efede6;
+  --ink: #1c1d1f;
+  --ink-2: #4a4c50;
+  --line: #d4d1c7;
+  --accent: #1f5fa8;
+  --active: #16663a;
+  --weakened: #8a5a00;
+  --falsified: #5d5f63;
+  --block: #a3262a;
+  --block-bg: #fbeceb;
+  --pending: #7a4d00;
+  --pending-bg: #fdf3dc;
+  --ok: #16663a;
+  --ok-bg: #e7f4ec;
+  --focus: #1f5fa8;
+  --radius: 10px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151618;
+    --surface: #1e2023;
+    --surface-2: #26292d;
+    --ink: #eceae4;
+    --ink-2: #b4b2ab;
+    --line: #3a3d42;
+    --accent: #8cb8ec;
+    --active: #7fd3a0;
+    --weakened: #e6b85c;
+    --falsified: #a9abb0;
+    --block: #f29b95;
+    --block-bg: #3a1e1e;
+    --pending: #f0c36a;
+    --pending-bg: #3a2f17;
+    --ok: #7fd3a0;
+    --ok-bg: #1b3325;
+    --focus: #8cb8ec;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-wrap: anywhere;
+}
+code { font: 0.92em/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--surface-2); padding: 0 .25em; border-radius: 4px; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 12px; top: 12px; background: var(--surface); padding: 8px 12px; z-index: 10; }
+
+/* ---------- header ---------- */
+.top {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.top-inner { max-width: 1480px; margin: 0 auto; display: grid; gap: 10px; }
+.eyebrow { margin: 0; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+h1 { margin: 0; font-size: 20px; line-height: 1.25; }
+.question {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 650;
+  max-width: 48ch;
+}
+.question-label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 2px; }
+.status-row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; }
+.answer { margin: 0; color: var(--ink-2); max-width: 80ch; }
+.answer strong { color: var(--ink); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1.5px solid currentColor; border-radius: 999px;
+  padding: 2px 10px; font-size: 13px; font-weight: 650; line-height: 1.4;
+  background: var(--surface);
+}
+.chip .glyph { font-weight: 800; }
+.chip.open { color: var(--block); background: var(--block-bg); }
+.chip.ready { color: var(--active); background: var(--ok-bg); }
+.chip.resolved { color: var(--ok); background: var(--ok-bg); }
+
+.persist { display: grid; gap: 2px; min-width: 0; }
+.persist .chip { justify-self: start; }
+.persist .detail { font-size: 13px; color: var(--ink-2); max-width: 60ch; }
+.persist.p-pending .chip { color: var(--pending); background: var(--pending-bg); border-style: dashed; }
+.persist.p-local .chip { color: var(--ink-2); border-style: dotted; }
+.persist.p-synced .chip { color: var(--ok); background: var(--ok-bg); }
+.persist.p-conflicted .chip, .persist.p-failed .chip { color: var(--block); background: var(--block-bg); border-width: 2.5px; }
+.persist button { justify-self: start; margin-top: 4px; }
+
+.jump { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; margin: 0; padding: 0; list-style: none; }
+
+/* ---------- layout ---------- */
+main { max-width: 1480px; margin: 0 auto; padding: 16px; }
+.board { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+.board > * { min-width: 0; }
+@media (min-width: 760px) {
+  .jump { display: none; }
+  .board {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    grid-template-areas:
+      "obs  act"
+      "hyp  unk"
+      "hyp  obl"
+      "con  obl"
+      "evi  evi";
+    align-items: start;
+  }
+  #r-observation { grid-area: obs; }
+  #r-actions { grid-area: act; }
+  #r-unknowns { grid-area: unk; }
+  #r-obligations { grid-area: obl; }
+  #r-hypotheses { grid-area: hyp; }
+  #r-contradictions { grid-area: con; }
+  #r-evidence { grid-area: evi; }
+}
+@media (min-width: 1100px) {
+  .board {
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-areas:
+      "obs hyp act"
+      "unk hyp act"
+      "unk con obl"
+      "evi con obl";
+  }
+}
+
+/* ---------- panels ---------- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.panel > h2 { margin: 0 0 4px; font-size: 16px; display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+.panel > h2 .count { font-weight: 500; color: var(--ink-2); font-size: 13px; }
+.panel-note { margin: 0 0 10px; font-size: 13px; color: var(--ink-2); }
+.panel.alert { border: 2px solid var(--block); }
+.panel.alert > h2 { color: var(--block); }
+.empty { margin: 0; color: var(--ink-2); font-style: italic; }
+ul.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.meta { font-size: 13px; color: var(--ink-2); }
+dl.facts { margin: 8px 0 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; font-size: 13px; }
+dl.facts dt { color: var(--ink-2); }
+dl.facts dd { margin: 0; }
+blockquote.obs { margin: 6px 0 0; padding: 8px 12px; border-left: 4px solid var(--ink-2); background: var(--surface-2); border-radius: 0 6px 6px 0; font-size: 15px; }
+
+/* hypotheses: an unordered comparison grid, deliberately not a ranked list */
+.hyp-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); list-style: none; margin: 0; padding: 0; }
+.hyp { border: 2px solid var(--line); border-radius: 8px; padding: 10px; display: grid; gap: 6px; align-content: start; }
+.hyp h3 { margin: 0; font-size: 15px; }
+.hyp p { margin: 0; }
+.hyp.s-active { border-color: var(--active); border-style: solid; }
+.hyp.s-weakened { border-color: var(--weakened); border-style: dashed; }
+.hyp.s-falsified { border-color: var(--falsified); border-style: dotted; background: var(--surface-2); }
+.hyp.s-falsified h3 .t { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.state { display: inline-flex; gap: 5px; align-items: center; font-size: 12px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; border: 1.5px solid currentColor; border-radius: 4px; padding: 0 6px; justify-self: start; }
+.state.s-active { color: var(--active); }
+.state.s-weakened { color: var(--weakened); border-style: dashed; }
+.state.s-falsified { color: var(--falsified); border-style: dotted; }
+.tally { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; color: var(--ink-2); }
+
+.rel { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; font-weight: 650; border: 1px solid currentColor; border-radius: 4px; padding: 0 5px; white-space: nowrap; }
+.rel.supports { color: var(--active); }
+.rel.weakens { color: var(--weakened); border-style: dashed; }
+.rel.conflicts { color: var(--block); border-style: double; border-width: 3px; }
+.rel.falsifies { color: var(--falsified); border-style: dotted; }
+
+.item { border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: grid; gap: 4px; }
+.item p { margin: 0; }
+.item.blocking { border: 2px solid var(--block); background: var(--block-bg); }
+.item.resolved { background: var(--surface-2); }
+.tag { display: inline-block; font-size: 12px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+.tag.blocking { color: var(--block); }
+.tag.open { color: var(--weakened); }
+.tag.resolved { color: var(--ok); }
+.item:target, .flash { box-shadow: 0 0 0 4px var(--focus); }
+
+/* actions */
+.actions { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.action { display: grid; gap: 4px; }
+button {
+  font: inherit; font-weight: 650; min-height: 40px; padding: 8px 14px;
+  border-radius: 8px; border: 1.5px solid var(--accent); cursor: pointer;
+  background: var(--accent); color: var(--surface); text-align: left;
+}
+button.secondary { background: var(--surface); color: var(--accent); }
+button:disabled { cursor: not-allowed; background: var(--surface-2); color: var(--ink-2); border: 1.5px dashed var(--ink-2); }
+button:disabled::before { content: "⊘ "; }
+.action.primary button:not(:disabled) { font-size: 16px; }
+.why { font-size: 13px; color: var(--ink-2); margin: 0; }
+.why strong { color: var(--block); }
+.why a { font-weight: 650; }
+.done { font-size: 13px; color: var(--ok); margin: 0; font-weight: 600; }
+
+/* evidence */
+.evi { display: grid; gap: 4px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.evi:last-child { border-bottom: 0; padding-bottom: 0; }
+.evi p { margin: 0; }
+.rels { display: flex; flex-wrap: wrap; gap: 4px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .flash { transition: box-shadow .2s ease; }
+}
+@media (forced-colors: active) {
+  .chip, .state, .rel, .hyp, .item, button { border-color: CanvasText; }
+  button:disabled { border-color: GrayText; color: GrayText; }
+}
+@media print {
+  body { background: #fff; color: #000; }
+  .jump, .skip, button { display: none; }
+  .board { display: block; }
+  .panel { break-inside: avoid; margin-bottom: 10px; border-color: #999; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#r-actions">Skip to next actions</a>
+<header class="top">
+  <div class="top-inner" id="top"></div>
+</header>
+<main id="main" aria-labelledby="page-title">
+  <div class="board" id="board"></div>
+</main>
+<script>
+"use strict";
+(() => {
+  /* ------------------------------------------------------------------
+   * Pure helpers
+   * ------------------------------------------------------------------ */
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const md = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+  const attrs = (o) => Object.entries(o)
+    .filter(([, v]) => v !== undefined && v !== null && v !== false)
+    .map(([k, v]) => (v === true ? k : `${k}="${esc(v)}"`))
+    .join(" ");
+  const obs = (id, on) => (on ? { "data-percepta-observation": id } : {});
+  const join = (xs) => xs.join("");
+  const freeze = (o) => Object.freeze(o);
+
+  /* ------------------------------------------------------------------
+   * Scenario facts (static, immutable). Domain legality is NOT decided
+   * here; it comes from the supplied state (capabilities + predicates).
+   * ------------------------------------------------------------------ */
+  const OBSERVATION = freeze({
+    summary: "`indy init` exits with code 1 on fresh Linux CI runners: `ENOENT: no such file or directory, open '.indy/state.lock'`.",
+    source: "GitHub Actions run #4812, job build-linux",
+    reportedBy: "release-bot (automated)",
+    observedAt: "2026-09-22 14:07 UTC",
+    scope: "First seen after release 3.2.0; developer laptops unaffected so far.",
+  });
+
+  const HYPOTHESES = freeze([
+    freeze({ id: "h-lock", name: "Init ordering race", claim: "`indy init` opens `.indy/state.lock` before it creates the `.indy` directory." }),
+    freeze({ id: "h-cache", name: "Stale cache restore", claim: "A partial `actions/cache` restore leaves an `.indy` directory without its state files." }),
+    freeze({ id: "h-umask", name: "Runner umask change", claim: "The September runner image's umask prevents `.indy` from being created." }),
+  ]);
+
+  const REL_LABEL = freeze({ supports: "Supports", weakens: "Weakens", conflicts: "Conflicts with", falsifies: "Falsifies" });
+  const REL_GLYPH = freeze({ supports: "+", weakens: "−", conflicts: "≠", falsifies: "✕" });
+  const STATE_GLYPH = freeze({ active: "●", weakened: "◐", falsified: "✕" });
+  const STATE_LABEL = freeze({ active: "Active", weakened: "Weakened", falsified: "Falsified" });
+
+  const nameOf = (hid) => (HYPOTHESES.find((h) => h.id === hid) || { name: hid }).name;
+
+  /* ------------------------------------------------------------------
+   * Fixture normalisation
+   * ------------------------------------------------------------------ */
+  const PERSISTENCE_STATES = freeze(["local", "pending", "synced", "conflicted", "failed"]);
+
+  const normalize = (input) => {
+    const raw = typeof input === "string" ? JSON.parse(input) : (input || {});
+    const predicates = Array.isArray(raw.predicates) ? raw.predicates.map(String) : [];
+    const capabilities = raw.capabilities && typeof raw.capabilities === "object" ? { ...raw.capabilities } : {};
+    const explicit = typeof raw.persistence === "string" ? raw.persistence
+      : raw.persistence && typeof raw.persistence.state === "string" ? raw.persistence.state : null;
+    const remote = PERSISTENCE_STATES.includes(explicit) ? explicit
+      : predicates.includes("github-write-is-pending") ? "pending" : "synced";
+    return freeze({ name: String(raw.name || "unnamed-state"), predicates: freeze(predicates), capabilities: freeze(capabilities), remote });
+  };
+
+  const INITIAL_FIXTURE = normalize({
+    name: "blocked-investigation",
+    predicates: ["hypothesis-is-falsified", "blocking-unknown-exists", "github-write-is-pending",
+      "corrective-action-not-verified", "contradictions-present", "obligations-present"],
+    capabilities: { "confirm-root-cause": "illegal" },
+  });
+
+  const initialState = (fixture) => freeze({
+    fixture,
+    remote: fixture.remote,
+    localChanges: 0,
+    started: freeze([]),
+    rootCauseConfirmed: false,
+    resolved: false,
+  });
+
+  /* ------------------------------------------------------------------
+   * Projection: state -> view model (pure)
+   * ------------------------------------------------------------------ */
+  const deriveEvidence = (has) => [
+    { id: "e1", title: "Stack trace from run #4812", detail: "`open()` on the lock file fails before any `mkdir` call is logged.", source: "Run #4812 log, lines 298–311", rels: [["h-lock", "supports"]] },
+    { id: "e2", title: "Failure on a cache-miss run", detail: "Run #4813 restored no cache and still failed identically.", source: "Run #4813, cache step output", rels: [["h-cache", "weakens"]] },
+    { id: "e3", title: "Local strace reproduction", detail: "Under strace in a fresh container, `openat(.indy/state.lock)` precedes `mkdir(.indy)`.", source: "Maintainer notes, 2026-09-23", rels: [["h-lock", "supports"]] },
+    ...(has("contradictions-present")
+      ? [{ id: "e4", title: "macOS runner passes", detail: "Run #4815 on macOS used the same 3.2.0 build and init ordering, and succeeded.", source: "Run #4815, job build-macos", rels: [["h-lock", "conflicts"]] }]
+      : []),
+    has("hypothesis-is-falsified")
+      ? { id: "e5", title: "Explicit umask 022 still fails", detail: "Run #4818 forced `umask 022` before `indy init`; the failure reproduced unchanged.", source: "Run #4818, job build-linux", rels: [["h-umask", "falsifies"]] }
+      : { id: "e5", title: "Umask differs between images", detail: "Old and new runner images report different default umasks; not yet tested in isolation.", source: "Runner image changelog 2026.09.2", rels: [["h-umask", "weakens"]] },
+  ].map(freeze);
+
+  const statusFor = (hid, evidence) => {
+    const rels = evidence.flatMap((e) => e.rels.filter(([h]) => h === hid).map(([, r]) => r));
+    return rels.includes("falsifies") ? "falsified"
+      : rels.includes("weakens") && !rels.includes("supports") ? "weakened"
+      : "active";
+  };
+
+  const tallyFor = (hid, evidence) => evidence
+    .flatMap((e) => e.rels.filter(([h]) => h === hid).map(([, r]) => r))
+    .reduce((acc, r) => ({ ...acc, [r]: (acc[r] || 0) + 1 }), {});
+
+  const deriveUnknowns = (has) => [
+    has("blocking-unknown-exists")
+      ? { id: "u-clean", question: "Does the failure reproduce on a clean runner image with caching disabled?", status: "blocking", blocks: "Confirm root cause", why: "Without this, the ordering race cannot be separated from runner-image effects.", test: "Run build-linux on image 2026.09.2 with cache disabled, 5 times" }
+      : { id: "u-clean", question: "Does the failure reproduce on a clean runner image with caching disabled?", status: "resolved", answer: "Yes — reproduced in 5 of 5 clean runs (#4820–#4824)." },
+    { id: "u-windows", question: "Are Windows runners affected?", status: "open", why: "Affects the scope of the fix, not the root-cause decision.", test: "Add a Windows job to the reproduction matrix." },
+  ].map(freeze);
+
+  const deriveObligations = (has) => [
+    ...(has("corrective-action-not-verified")
+      ? [{ id: "o-verify", kind: "verification", title: "Verify the corrective action", detail: "PR #219 creates `.indy` before acquiring the lock. It has not been verified on a clean runner.", gates: "Mark investigation resolved" }]
+      : []),
+    ...(has("blocking-unknown-exists")
+      ? [{ id: "o-unknown", kind: "prerequisite", title: "Answer the blocking unknown", detail: "The clean-runner reproduction question must be answered before a root cause can be confirmed.", gates: "Confirm root cause", target: "u-clean" }]
+      : []),
+    ...(has("contradictions-present")
+      ? [{ id: "o-contra", kind: "prerequisite", title: "Explain the macOS contradiction", detail: "Evidence E4 conflicts with the active hypothesis and needs an explanation or a new hypothesis.", gates: "Confirm root cause", target: "c-e4" }]
+      : []),
+  ].map(freeze);
+
+  const confirmBlockers = (has) => [
+    ...(has("blocking-unknown-exists") ? [{ text: "A blocking unknown is still open: clean-runner reproduction has not been answered.", target: "u-clean", label: "Go to the blocking unknown" }] : []),
+    ...(has("contradictions-present") ? [{ text: "Evidence E4 contradicts the active hypothesis.", target: "c-e4", label: "Go to the contradiction" }] : []),
+    ...(has("obligations-present") && !has("blocking-unknown-exists") && !has("contradictions-present") ? [{ text: "Required work is outstanding.", target: "r-obligations", label: "Go to required work" }] : []),
+  ];
+
+  const project = (st) => {
+    const has = (p) => st.fixture.predicates.includes(p);
+    const evidence = deriveEvidence(has);
+    const hypotheses = HYPOTHESES.map((h) => freeze({ ...h, status: statusFor(h.id, evidence), tally: tallyFor(h.id, evidence), evidence: evidence.filter((e) => e.rels.some(([x]) => x === h.id)).map((e) => e.id) }));
+    const contradictions = evidence.flatMap((e) => e.rels.filter(([, r]) => r === "conflicts").map(([h]) => freeze({ id: `c-${e.id}`, evidence: e, hypothesis: h })));
+    const unknowns = deriveUnknowns(has);
+    const obligations = deriveObligations(has);
+    const verificationPending = has("corrective-action-not-verified");
+    const confirmLegal = st.fixture.capabilities["confirm-root-cause"] === "legal" && !st.rootCauseConfirmed;
+    const blockers = confirmBlockers(has);
+    const confirm = st.rootCauseConfirmed
+      ? { legal: false, reason: "Root cause already confirmed in this session.", blockers: [], done: true }
+      : confirmLegal
+        ? { legal: true, blockers: [] }
+        : { legal: false, reason: blockers.length ? null : "The investigation state does not permit confirming a root cause yet.", blockers: blockers.length ? blockers : [{ text: "Review the open unknowns and required work.", target: "r-unknowns", label: "Go to open unknowns" }] };
+    const resolveBlockers = [
+      ...(!st.rootCauseConfirmed ? [{ text: "A root cause has not been confirmed.", target: "act-confirm", label: "Go to Confirm root cause" }] : []),
+      ...(verificationPending ? [{ text: "The corrective action (PR #219) is not verified.", target: "o-verify", label: "Go to the verification obligation" }] : []),
+    ];
+    const blockingUnknowns = unknowns.filter((u) => u.status === "blocking");
+    const investigation = st.resolved ? "resolved"
+      : st.rootCauseConfirmed ? "confirmed"
+      : confirm.legal ? "ready" : "open";
+    const persistence = st.remote === "synced" && st.localChanges > 0 ? "local" : st.remote;
+    return freeze({
+      has, evidence, hypotheses, contradictions, unknowns, obligations, blockingUnknowns,
+      confirm, resolveBlockers, verificationPending, investigation, persistence,
+      localChanges: st.localChanges, started: st.started,
+    });
+  };
+
+  /* ------------------------------------------------------------------
+   * Rendering (pure: view model -> HTML string)
+   * ------------------------------------------------------------------ */
+  const INVESTIGATION_CHIP = freeze({
+    open: { cls: "open", glyph: "◌", text: "Open — not resolved" },
+    ready: { cls: "ready", glyph: "◎", text: "Open — root cause can be confirmed" },
+    confirmed: { cls: "ready", glyph: "◉", text: "Root cause confirmed — not resolved" },
+    resolved: { cls: "resolved", glyph: "✓", text: "Resolved (recorded locally)" },
+  });
+
+  const PERSISTENCE_COPY = freeze({
+    local: { glyph: "◇", label: "Local only", detail: (n) => `${n} change${n === 1 ? "" : "s"} saved in this browser only. Nothing has been sent to GitHub yet.` },
+    pending: { glyph: "⧗", label: "Pending", detail: (n) => `A write to GitHub issue #87 was sent and has not been confirmed. Your latest changes are not on GitHub yet.${n ? ` ${n} newer local change${n === 1 ? "" : "s"} will follow.` : ""}` },
+    synced: { glyph: "✓", label: "Synced", detail: () => "GitHub issue #87 confirmed the latest write." },
+    conflicted: { glyph: "⚠", label: "Conflicted", detail: () => "GitHub has a newer version of this investigation. Nothing was overwritten; review the conflict on issue #87 before saving again." },
+    failed: { glyph: "✕", label: "Failed", detail: () => "GitHub rejected the last write. Your changes are kept in this browser only." },
+  });
+
+  const renderPersistence = (vm) => {
+    const p = PERSISTENCE_COPY[vm.persistence];
+    const pending = vm.persistence === "pending";
+    return `<section ${attrs({ class: `persist p-${vm.persistence}`, "data-percepta-region": "persistence-state", "aria-labelledby": "persist-h" })}>
+      <h2 id="persist-h" class="question-label">Save state</h2>
+      <span ${attrs({ class: "chip", role: "status", ...obs("persistence-pending-visible", pending) })}><span class="glyph" aria-hidden="true">${p.glyph}</span> ${esc(p.label)}</span>
+      <span ${attrs({ class: "detail", ...obs("no-false-remote-success", pending) })}>${esc(p.detail(vm.localChanges))}</span>
+      ${vm.persistence === "failed" ? `<button type="button" class="secondary" data-act="retry-sync">Retry saving to GitHub</button>` : ""}
+    </section>`;
+  };
+
+  const renderAnswer = (vm) => {
+    const active = vm.hypotheses.filter((h) => h.status === "active");
+    const nextTest = vm.blockingUnknowns[0]
+      ? `answer the blocking unknown — ${vm.blockingUnknowns[0].test}`
+      : vm.verificationPending ? "verify the corrective action (PR #219) on a clean runner"
+      : vm.confirm.legal ? "confirm the root cause, or record evidence that argues against it"
+      : "record new evidence";
+    const contested = vm.contradictions.length ? ` (contested by ${vm.contradictions.length} contradiction${vm.contradictions.length === 1 ? "" : "s"})` : "";
+    return `<p class="answer">Still standing${active.length > 1 ? " (unranked)" : ""}: <strong>${esc(active.map((h) => h.name).join(", ") || "no active hypothesis")}</strong>${esc(contested)}. Next: ${md(nextTest)}.</p>`;
+  };
+
+  const renderHeader = (vm) => {
+    const chip = INVESTIGATION_CHIP[vm.investigation];
+    const unresolved = vm.investigation !== "resolved" && vm.verificationPending;
+    return `
+      <p class="eyebrow">Investigation · indy init failure</p>
+      <h1 id="page-title">Investigation workspace</h1>
+      <p class="question"><span class="question-label">Primary question</span>What currently explains the observation, and what should be tested next?</p>
+      ${renderAnswer(vm)}
+      <div class="status-row">
+        <div class="persist">
+          <span class="question-label" id="inv-h">Investigation</span>
+          <span ${attrs({ class: `chip ${chip.cls}`, ...obs("unresolved-not-resolved", unresolved) })}><span class="glyph" aria-hidden="true">${chip.glyph}</span> <span id="inv-v">${esc(chip.text)}</span></span>
+        </div>
+        ${renderPersistence(vm)}
+      </div>
+      <ul class="jump" aria-label="Jump to section">
+        <li><a href="#r-actions">Next actions</a></li>
+        <li><a href="#r-unknowns">Unknowns${vm.blockingUnknowns.length ? ` (${vm.blockingUnknowns.length} blocking)` : ""}</a></li>
+        <li><a href="#r-hypotheses">Hypotheses (${vm.hypotheses.length})</a></li>
+        <li><a href="#r-evidence">Evidence</a></li>
+      </ul>`;
+  };
+
+  const renderObservation = () => `
+    <section class="panel" id="r-observation" data-percepta-region="observation" aria-labelledby="obs-h">
+      <h2 id="obs-h">Triggering observation</h2>
+      <blockquote class="obs">${md(OBSERVATION.summary)}</blockquote>
+      <dl class="facts">
+        <dt>Source</dt><dd>${esc(OBSERVATION.source)}</dd>
+        <dt>Reported by</dt><dd>${esc(OBSERVATION.reportedBy)}</dd>
+        <dt>Observed</dt><dd>${esc(OBSERVATION.observedAt)}</dd>
+        <dt>Scope</dt><dd>${esc(OBSERVATION.scope)}</dd>
+      </dl>
+    </section>`;
+
+  const relChip = (rel, hid) => `<span class="rel ${rel}"><span aria-hidden="true">${REL_GLYPH[rel]}</span> ${esc(REL_LABEL[rel])} ${esc(nameOf(hid))}</span>`;
+
+  const renderTally = (t) => {
+    const parts = [["supports", "supporting"], ["weakens", "weakening"], ["conflicts", "conflicting"], ["falsifies", "falsifying"]]
+      .filter(([k]) => t[k]).map(([k, w]) => `<span>${REL_GLYPH[k]} ${t[k]} ${w}</span>`);
+    return `<p class="tally">${parts.length ? join(parts) : "<span>No linked evidence</span>"}</p>`;
+  };
+
+  const renderHypothesis = (vm) => (h) => {
+    const falsified = h.status === "falsified";
+    const planId = `plan-${h.id}`;
+    const started = vm.started.includes(planId);
+    const action = falsified
+      ? `<div ${attrs({ class: "action", ...obs("inactive-actions-unavailable", true) })}>
+          <button type="button" class="secondary" disabled aria-describedby="${planId}-why">Plan a test for this hypothesis</button>
+          <p class="why" id="${planId}-why">Unavailable: this hypothesis is falsified by evidence E5. Tests require an active or weakened hypothesis.</p>
+        </div>`
+      : started
+        ? `<p class="done">✓ Test plan drafted (saved locally)</p>`
+        : `<button type="button" class="secondary" data-act="start" data-id="${planId}">Plan a test for this hypothesis</button>`;
+    return `<li ${attrs({ class: `hyp s-${h.status}`, id: `hyp-${h.id}`, ...obs("falsified-hypothesis-retained", falsified) })}>
+      <span ${attrs({ class: `state s-${h.status}`, ...obs("falsified-state-noncolor", falsified) })}><span aria-hidden="true">${STATE_GLYPH[h.status]}</span> ${STATE_LABEL[h.status]}</span>
+      <h3><span class="t">${esc(h.name)}</span></h3>
+      <p>${md(h.claim)}</p>
+      ${renderTally(h.tally)}
+      <p class="meta">Evidence: ${h.evidence.map((e) => `<a href="#ev-${e}">${e.toUpperCase()}</a>`).join(", ")}</p>
+      ${action}
+    </li>`;
+  };
+
+  const renderHypotheses = (vm) => {
+    const counts = ["active", "weakened", "falsified"].map((s) => [s, vm.hypotheses.filter((h) => h.status === s).length]).filter(([, n]) => n);
+    return `<section class="panel" id="r-hypotheses" data-percepta-region="hypotheses" aria-labelledby="hyp-h" tabindex="-1">
+      <h2 id="hyp-h">Competing hypotheses <span class="count">${counts.map(([s, n]) => `${n} ${s}`).join(" · ")}</span></h2>
+      <p class="panel-note">Compared side by side, not ranked. Falsified explanations stay here as negative knowledge.</p>
+      <ul class="hyp-grid" aria-label="Hypotheses (unordered)">${join(vm.hypotheses.map(renderHypothesis(vm)))}</ul>
+    </section>`;
+  };
+
+  const renderContradictions = (vm) => {
+    const present = vm.contradictions.length > 0;
+    return `<section ${attrs({ class: `panel${present ? " alert" : ""}`, id: "r-contradictions", "data-percepta-region": "contradictions", "aria-labelledby": "con-h" })}>
+      <h2 id="con-h">${present ? `<span aria-hidden="true">≠</span> ` : ""}Contradictions <span class="count">${present ? `${vm.contradictions.length} unresolved` : "none recorded"}</span></h2>
+      ${present
+        ? `<ul class="plain">${join(vm.contradictions.map((c) => `<li class="item blocking" id="${c.id}" tabindex="-1">
+            <span class="tag blocking">Unresolved contradiction</span>
+            <p><strong>${esc(c.evidence.title)}</strong> conflicts with <a href="#hyp-${c.hypothesis}">${esc(nameOf(c.hypothesis))}</a>.</p>
+            <p class="meta">${md(c.evidence.detail)} Source: ${esc(c.evidence.source)}.</p>
+          </li>`))}</ul>`
+        : `<p class="empty">No evidence currently conflicts with the standing hypotheses.</p>`}
+    </section>`;
+  };
+
+  const renderUnknown = (u) => {
+    const blocking = u.status === "blocking";
+    const tag = { blocking: "⛔ Blocking", open: "○ Open — not blocking", resolved: "✓ Answered" }[u.status];
+    return `<li ${attrs({ class: `item ${u.status}`, id: u.id, tabindex: "-1", ...obs("blocker-visible", blocking) })}>
+      <span class="tag ${u.status}">${tag}</span>
+      <p><strong>${esc(u.question)}</strong></p>
+      ${blocking ? `<p class="meta"><strong>Blocks:</strong> ${esc(u.blocks)}. ${esc(u.why)}</p>` : ""}
+      ${u.status === "open" ? `<p class="meta">${esc(u.why)}</p>` : ""}
+      ${u.test ? `<p class="meta">Test: ${md(u.test)}.</p>` : ""}
+      ${u.answer ? `<p class="meta">${esc(u.answer)}</p>` : ""}
+    </li>`;
+  };
+
+  const renderUnknowns = (vm) => {
+    const order = { blocking: 0, open: 1, resolved: 2 };
+    const sorted = [...vm.unknowns].sort((a, b) => order[a.status] - order[b.status]);
+    const open = vm.unknowns.filter((u) => u.status !== "resolved").length;
+    return `<section ${attrs({ class: `panel${vm.blockingUnknowns.length ? " alert" : ""}`, id: "r-unknowns", "data-percepta-region": "unknowns", "aria-labelledby": "unk-h", tabindex: "-1" })}>
+      <h2 id="unk-h">Unknowns <span class="count">${open} open${vm.blockingUnknowns.length ? ` · ${vm.blockingUnknowns.length} blocking` : " · none blocking"}</span></h2>
+      <ul class="plain">${join(sorted.map(renderUnknown))}</ul>
+    </section>`;
+  };
+
+  const renderObligations = (vm) => {
+    const present = vm.obligations.length > 0;
+    return `<section ${attrs({ class: `panel${present ? " alert" : ""}`, id: "r-obligations", "data-percepta-region": "obligations", "aria-labelledby": "obl-h", tabindex: "-1" })}>
+      <h2 id="obl-h">Required before progress <span class="count">${present ? `${vm.obligations.length} outstanding` : "nothing outstanding"}</span></h2>
+      ${present
+        ? `<ul class="plain">${join(vm.obligations.map((o) => `<li ${attrs({ class: "item blocking", id: o.id, tabindex: "-1", ...obs("verification-obligation-visible", o.kind === "verification") })}>
+            <span class="tag blocking">☐ ${o.kind === "verification" ? "Verification required" : "Prerequisite"}</span>
+            <p><strong>${esc(o.title)}</strong></p>
+            <p class="meta">${md(o.detail)}</p>
+            <p class="meta"><strong>Gates:</strong> ${esc(o.gates)}${o.target ? ` · <a href="#${o.target}" data-nav="${o.target}">Show it</a>` : ""}</p>
+          </li>`))}</ul>`
+        : `<p class="empty">No obligations are gating the next step.</p>`}
+    </section>`;
+  };
+
+  const blockerList = (cap, blockers, reason, reasonId, withHooks) => `
+    <div ${attrs({ class: "why", id: reasonId, ...(withHooks ? { "data-percepta-unavailable-reason-for": cap, ...obs("unavailable-reason-visible", true) } : {}) })}>
+      <strong>Unavailable.</strong> ${esc(reason || blockers.map((b) => b.text).join(" "))}
+    </div>
+    ${blockers.length ? `<p class="why">${blockers.map((b, i) => `<a ${attrs({ href: `#${b.target}`, "data-nav": b.target, ...(withHooks && i === 0 ? { "data-percepta-blocker-link-for": cap, ...obs("blocker-navigation-available", true) } : {}) })}>→ ${esc(b.label)}</a>`).join(" · ")}</p>` : ""}`;
+
+  const renderConfirm = (vm) => {
+    const c = vm.confirm;
+    const blockedByUnknown = vm.blockingUnknowns.length > 0;
+    return `<li ${attrs({ class: "action primary", ...obs("dependent-action-unavailable", !c.legal && blockedByUnknown) })}>
+      <button ${attrs({ type: "button", id: "act-confirm", "data-act": "confirm", "data-percepta-capability": "confirm-root-cause", disabled: !c.legal, "aria-describedby": c.legal ? "confirm-desc" : "confirm-why" })}>Confirm root cause</button>
+      ${c.legal
+        ? `<p class="meta" id="confirm-desc">Records <strong>${esc(vm.hypotheses.filter((h) => h.status === "active").map((h) => h.name).join(", "))}</strong> as the confirmed root cause. Competing hypotheses stay on record.</p>`
+        : c.done
+          ? `<p class="done" id="confirm-why" data-percepta-unavailable-reason-for="confirm-root-cause">✓ ${esc(c.reason)}</p>`
+          : blockerList("confirm-root-cause", c.blockers, c.reason, "confirm-why", true)}
+    </li>`;
+  };
+
+  const renderSimpleAction = (vm) => ({ id, label, legal, blockers = [], reason, note }) => {
+    const started = vm.started.includes(id);
+    return `<li class="action">
+      <button ${attrs({ type: "button", class: "secondary", "data-act": "start", "data-id": id, disabled: !legal || started, "aria-describedby": legal ? undefined : `${id}-why` })}>${esc(label)}</button>
+      ${!legal ? blockerList(id, blockers, reason, `${id}-why`, false) : started ? `<p class="done">✓ Started — draft saved locally</p>` : note ? `<p class="meta">${md(note)}</p>` : ""}
+    </li>`;
+  };
+
+  const renderResolve = (vm) => {
+    const legal = vm.resolveBlockers.length === 0 && vm.investigation !== "resolved";
+    return `<li class="action">
+      <button ${attrs({ type: "button", class: "secondary", "data-act": "resolve", disabled: !legal, "aria-describedby": legal ? undefined : "act-resolve-why" })}>Mark investigation resolved</button>
+      ${legal ? "" : vm.investigation === "resolved"
+        ? `<p class="done" id="act-resolve-why">✓ Marked resolved (saved locally)</p>`
+        : blockerList("act-resolve", vm.resolveBlockers, null, "act-resolve-why", false)}
+    </li>`;
+  };
+
+  const renderActions = (vm) => {
+    const blocking = vm.blockingUnknowns[0];
+    const simple = renderSimpleAction(vm);
+    return `<section class="panel" id="r-actions" data-percepta-region="legal-actions" aria-labelledby="act-h" tabindex="-1">
+      <h2 id="act-h">Next actions</h2>
+      <p class="panel-note">Unavailable actions stay listed with the reason and a link to what blocks them.</p>
+      <ul class="actions">
+        ${blocking ? simple({ id: "act-run-clean", label: "Run clean-runner reproduction", legal: true, note: `Answers the blocking unknown. ${blocking.test}` }) : ""}
+        ${vm.verificationPending ? simple({ id: "act-verify", label: "Run verification of PR #219", legal: true, note: "Fulfils the verification obligation." }) : ""}
+        ${renderConfirm(vm)}
+        ${simple({ id: "act-evidence", label: "Record evidence", legal: true })}
+        ${simple({ id: "act-hypothesis", label: "Add a competing hypothesis", legal: true })}
+        ${renderResolve(vm)}
+      </ul>
+    </section>`;
+  };
+
+  const renderEvidence = (vm) => `
+    <section class="panel" id="r-evidence" data-percepta-region="evidence" aria-labelledby="evi-h">
+      <h2 id="evi-h">Evidence <span class="count">${vm.evidence.length} items</span></h2>
+      <p class="panel-note">Each item shows how it bears on each hypothesis.</p>
+      <ul class="plain">${join(vm.evidence.map((e) => `<li class="evi" id="ev-${e.id}" tabindex="-1">
+        <p><strong>${e.id.toUpperCase()} · ${esc(e.title)}</strong></p>
+        <p>${md(e.detail)}</p>
+        <div class="rels">${join(e.rels.map(([h, r]) => relChip(r, h)))}</div>
+        <p class="meta">Source: ${esc(e.source)}</p>
+      </li>`))}</ul>
+    </section>`;
+
+  const renderBoard = (vm) => join([
+    renderObservation(vm),
+    renderActions(vm),
+    renderUnknowns(vm),
+    renderObligations(vm),
+    renderHypotheses(vm),
+    renderContradictions(vm),
+    renderEvidence(vm),
+  ]);
+
+  /* ------------------------------------------------------------------
+   * Reducer (pure). Legality is taken from the supplied state; the UI
+   * only refuses what that state marks illegal. No transition ever
+   * moves persistence to "synced" on its own — only supplied state can.
+   * ------------------------------------------------------------------ */
+  const withLocalChange = (st) => ({ ...st, localChanges: st.localChanges + 1 });
+
+  const reduce = (st, action) => {
+    const vm = project(st);
+    switch (action.type) {
+      case "set-state":
+        return initialState(action.fixture);
+      case "start":
+        return st.started.includes(action.id) ? st : freeze(withLocalChange({ ...st, started: freeze([...st.started, action.id]) }));
+      case "confirm":
+        return vm.confirm.legal ? freeze(withLocalChange({ ...st, rootCauseConfirmed: true })) : st;
+      case "resolve":
+        return vm.resolveBlockers.length === 0 ? freeze(withLocalChange({ ...st, resolved: true })) : st;
+      case "retry-sync":
+        return st.remote === "failed" ? freeze({ ...st, remote: "pending" }) : st;
+      default:
+        return st;
+    }
+  };
+
+  /* ------------------------------------------------------------------
+   * Effects (the only impure edge)
+   * ------------------------------------------------------------------ */
+  const topEl = document.getElementById("top");
+  const boardEl = document.getElementById("board");
+
+  const paint = (st) => {
+    const vm = project(st);
+    topEl.innerHTML = renderHeader(vm);
+    boardEl.innerHTML = renderBoard(vm);
+  };
+
+  const store = ((init) => {
+    let state = init;
+    const dispatch = (action) => { state = reduce(state, action); paint(state); return state; };
+    return freeze({ dispatch, get: () => state });
+  })(initialState(INITIAL_FIXTURE));
+
+  const focusTarget = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    el.focus({ preventScroll: true });
+    el.classList.add("flash");
+    window.setTimeout(() => el.classList.remove("flash"), 1600);
+  };
+
+  document.addEventListener("click", (ev) => {
+    const nav = ev.target.closest("[data-nav]");
+    if (nav) {
+      ev.preventDefault();
+      focusTarget(nav.getAttribute("data-nav"));
+      return;
+    }
+    const btn = ev.target.closest("button[data-act]");
+    if (!btn || btn.disabled) return;
+    const type = btn.getAttribute("data-act");
+    store.dispatch({ type, id: btn.getAttribute("data-id") || undefined });
+    if (type === "confirm") focusTarget("act-confirm");
+  });
+
+  window.__perceptaSetState = (state) => {
+    store.dispatch({ type: "set-state", fixture: normalize(state) });
+    return store.get().fixture.name;
+  };
+
+  paint(store.get());
+})();
+</script>
+</body>
+</html>
