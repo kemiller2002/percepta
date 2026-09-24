@@ -1,4 +1,4 @@
-name: Percepta Core
+name: Percepta Verification
 
 on:
   push:
@@ -7,8 +7,12 @@ on:
     paths:
       - "src/Percepta.Core/**"
       - "src/Percepta.Foundation/**"
+      - "src/Percepta.Adapter.Playwright/**"
+      - "src/Percepta.Cli/**"
       - "examples/Percepta.Examples/**"
       - "tests/Percepta.Core.Tests/**"
+      - "tests/fixtures/**"
+      - ".percepta/contracts/**"
       - ".github/workflows/percepta-core.yml"
       - "global.json"
       - "Directory.Packages.props"
@@ -16,8 +20,12 @@ on:
     paths:
       - "src/Percepta.Core/**"
       - "src/Percepta.Foundation/**"
+      - "src/Percepta.Adapter.Playwright/**"
+      - "src/Percepta.Cli/**"
       - "examples/Percepta.Examples/**"
       - "tests/Percepta.Core.Tests/**"
+      - "tests/fixtures/**"
+      - ".percepta/contracts/**"
       - ".github/workflows/percepta-core.yml"
       - "global.json"
       - "Directory.Packages.props"
@@ -27,7 +35,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: percepta-fsharp-${{ github.ref }}
+  group: percepta-verification-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -49,5 +57,51 @@ jobs:
       - name: Build Percepta.Foundation
         run: dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release
 
+      - name: Build Playwright adapter
+        run: dotnet build src/Percepta.Adapter.Playwright/Percepta.Adapter.Playwright.fsproj --configuration Release
+
+      - name: Build Percepta CLI
+        run: dotnet build src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release
+
       - name: Run Percepta.Core tests
         run: dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release
+
+      - name: Install matching Chromium
+        run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- install-browser
+
+      - name: Run Percepta doctor
+        run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- doctor
+
+      - name: Compile discoverable contracts
+        run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- compile --out artifacts/percepta/compiled
+
+      - name: Prove required evidence fails closed
+        shell: bash
+        run: |
+          set +e
+          dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --             verify             --contract .percepta/contracts/indy-init-investigation-workspace.json             --url tests/fixtures/indy-init/index.html             --out artifacts/percepta/negative/evidence.json
+          code=$?
+          set -e
+          if [ "$code" -eq 0 ]; then
+            echo "Expected verification without state fixtures to fail closed."
+            exit 1
+          fi
+          echo "Fail-closed behavior confirmed with exit code $code."
+
+      - name: Establish CI visual baselines
+        run: |
+          dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --             verify             --contract .percepta/contracts/indy-init-investigation-workspace.json             --url tests/fixtures/indy-init/index.html             --fixture tests/fixtures/indy-init/blocked.json             --fixture tests/fixtures/indy-init/legal.json             --semantic-review tests/fixtures/indy-init/semantic-review.json             --screenshots artifacts/percepta/screenshots             --baselines artifacts/percepta/baselines             --update-baselines             --out artifacts/percepta/baseline-pass/evidence.json
+
+      - name: Verify rendered Indy Init contract
+        run: |
+          dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --             verify             --contract .percepta/contracts/indy-init-investigation-workspace.json             --url tests/fixtures/indy-init/index.html             --fixture tests/fixtures/indy-init/blocked.json             --fixture tests/fixtures/indy-init/legal.json             --semantic-review tests/fixtures/indy-init/semantic-review.json             --screenshots artifacts/percepta/screenshots             --baselines artifacts/percepta/baselines             --out artifacts/percepta/verification/evidence.json
+
+      - name: Show Percepta status
+        run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- status --evidence artifacts/percepta/verification/evidence.json
+
+      - name: Upload Percepta evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: percepta-verification
+          path: artifacts/percepta
