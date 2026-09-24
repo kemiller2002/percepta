@@ -82,3 +82,10 @@ See:
 - [Contract Model](docs/CONTRACT-MODEL.md)
 - [Verification Model](docs/VERIFICATION-MODEL.md)
 - [Indy Init Investigation Workspace example](examples/indy-init-investigation-workspace.yaml)
+
+
+## Contract compiler
+
+Percepta.Core validates a typed `ScreenContract` and compiles valid contracts into deterministic agent implementation guidance plus a typed verification plan.
+
+See [Contract Compiler](docs/COMPILER.md) and the typed [Indy Init example](examples/Percepta.Examples/IndyInit.fs).
