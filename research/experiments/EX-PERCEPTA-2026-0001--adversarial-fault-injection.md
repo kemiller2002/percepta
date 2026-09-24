@@ -2,7 +2,7 @@
 id: EX-PERCEPTA-2026-0001
 title: Adversarial fault injection against Percepta verification
 research_area: percepta-verification
-status: active
+status: completed
 created: 2026-09-24
 author_agent: chatgpt
 tests_hypotheses:
