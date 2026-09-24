@@ -32,5 +32,35 @@
       "EV-PERCEPTA-2026-0001"
     ],
     "title": "Semantic substitutions can escape deterministic Percepta hooks"
+  },
+  {
+    "author_agent": "chatgpt",
+    "confidence": "very-low",
+    "contradicting_evidence": [],
+    "created": "2026-09-24",
+    "id": "HY-PERCEPTA-2026-0003",
+    "path": "research/hypotheses/HY-PERCEPTA-2026-0003--percepta-improves-first-pass-compliance.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "active",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [],
+    "title": "Percepta contracts improve first-pass semantic compliance over prose requirements"
+  },
+  {
+    "author_agent": "chatgpt",
+    "confidence": "very-low",
+    "contradicting_evidence": [],
+    "created": "2026-09-24",
+    "id": "HY-PERCEPTA-2026-0004",
+    "path": "research/hypotheses/HY-PERCEPTA-2026-0004--percepta-preserves-ui-diversity.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "active",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [],
+    "title": "Percepta semantic constraints preserve implementation diversity"
   }
 ]
