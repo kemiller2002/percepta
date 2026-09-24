@@ -11,13 +11,22 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-      - run: ./ros registry check
-      - run: ./ros validate
+
+      - name: Install pinned Echelon toolchain
+        shell: bash
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/kemiller2002/praxis/main/scripts/install-native.sh | sh
+          echo "$HOME/.echelon/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.echelon/bin:$PATH"
+          echelon setup
+
+      - name: Check ROS registries
+        run: ros registry check
+
+      - name: Validate ROS state
+        run: ros validate
         env:
           ROS_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
