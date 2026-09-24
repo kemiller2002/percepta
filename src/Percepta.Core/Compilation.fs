@@ -79,7 +79,7 @@ module Compilation =
     let private appendLine (builder: StringBuilder) (text: string) =
         builder.AppendLine(text) |> ignore
 
-    let private appendObservation (builder: StringBuilder) observation =
+    let private appendObservation (builder: StringBuilder) (observation: UiObservation) =
         appendLine builder $"  - [{observationId observation.Id}] {observation.Description}"
 
     let private buildAgentGuidance (contract: ScreenContract) =
