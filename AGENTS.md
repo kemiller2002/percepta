@@ -25,6 +25,10 @@ Percepta may compose and extend Echelon components, but it must not fork their s
 Accessibility, mobile behavior, reduced motion, keyboard operation, focus behavior, high-contrast behavior, and print behavior are acceptance criteria, not optional polish.
 
 
+## Experimental blinding exception
+
+For `EX-PERCEPTA-2026-0002` only, files under `research/experiments/EX-PERCEPTA-2026-0002/lanes/` are governed by their nearest nested `AGENTS.md`. The blinded control lanes MUST NOT read the Percepta screen contract or generated Percepta guidance. This exception exists solely to preserve the preregistered control condition and does not apply to production UI work.
+
 ## Percepta semantic contracts
 
 For any consequential UI creation or modification:
