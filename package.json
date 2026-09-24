@@ -11,8 +11,13 @@
     "echelon:verify": "./ros verify && ordo verify && visual-engineering verify --strict && communication-engineering verify --strict && limen verify",
     "echelon:status": "./ros status && ordo status && visual-engineering status && communication-engineering status && limen status",
     "echelon:doctor": "./ros doctor && ordo doctor && visual-engineering doctor && communication-engineering doctor && limen doctor",
-    "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release && npm run test:core",
-    "test:core": "dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release"
+    "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release && dotnet build src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release && npm run test:core",
+    "test:core": "dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release",
+    "percepta": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --",
+    "percepta:doctor": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- doctor",
+    "percepta:compile": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- compile",
+    "percepta:install-browser": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- install-browser",
+    "test:percepta:fixture": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- verify --contract .percepta/contracts/indy-init-investigation-workspace.json --url tests/fixtures/indy-init/index.html --fixture tests/fixtures/indy-init/blocked.json --fixture tests/fixtures/indy-init/legal.json --semantic-review tests/fixtures/indy-init/semantic-review.json"
   },
   "dependencies": {
     "@echelon-foundry/design-system": "https://github.com/kemiller2002/forma/releases/download/v0.2.0/echelon-foundry-design-system-0.2.0.tgz",
