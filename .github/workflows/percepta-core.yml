@@ -6,21 +6,29 @@ on:
       - main
     paths:
       - "src/Percepta.Core/**"
+      - "src/Percepta.Foundation/**"
       - "examples/Percepta.Examples/**"
       - "tests/Percepta.Core.Tests/**"
       - ".github/workflows/percepta-core.yml"
       - "global.json"
+      - "Directory.Packages.props"
   pull_request:
     paths:
       - "src/Percepta.Core/**"
+      - "src/Percepta.Foundation/**"
       - "examples/Percepta.Examples/**"
       - "tests/Percepta.Core.Tests/**"
       - ".github/workflows/percepta-core.yml"
       - "global.json"
+      - "Directory.Packages.props"
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: percepta-fsharp-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -37,6 +45,9 @@ jobs:
 
       - name: Build Percepta.Core
         run: dotnet build src/Percepta.Core/Percepta.Core.fsproj --configuration Release
+
+      - name: Build Percepta.Foundation
+        run: dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release
 
       - name: Run Percepta.Core tests
         run: dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release
