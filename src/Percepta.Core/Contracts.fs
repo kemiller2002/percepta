@@ -4,6 +4,7 @@ type ScreenId = ScreenId of string
 type RegionId = RegionId of string
 type CapabilityId = CapabilityId of string
 type DomainPredicateId = DomainPredicateId of string
+type ObservationId = ObservationId of string
 type VerificationId = VerificationId of string
 
 type Hierarchy =
@@ -53,6 +54,12 @@ type VerificationStatus =
     | NotApplicable of reason: string
     | AcceptedDeviation of reason: string
 
+type UiObservation =
+    {
+        Id: ObservationId
+        Description: string
+    }
+
 type RegionContract =
     {
         Id: RegionId
@@ -64,15 +71,16 @@ type RegionContract =
 type StateProjection =
     {
         When: DomainPredicateId
-        RequiredObservations: string list
+        RequiredObservations: UiObservation list
     }
 
 type BreakpointContract =
     {
         Name: string
-        MinimumWidthCssPx: int option
-        MaximumWidthCssPx: int option
-        RequiredObservations: string list
+        ViewportWidthCssPx: int
+        ViewportHeightCssPx: int
+        RequiredRegionsVisible: RegionId list
+        RequiredObservations: UiObservation list
     }
 
 type EvidenceRequirement =
