@@ -45,6 +45,57 @@ match firstCompilation with
     check "verification plan has six required obligations" (requiredCount = 6)
     check "verification plan has two supporting obligations" (supportingCount = 2)
 
+
+
+let serialized = ContractSerialization.serialize validContract
+
+match ContractSerialization.deserialize serialized with
+| Ok roundTrip ->
+    check "contract serialization round-trips" (roundTrip = validContract)
+| Error errors ->
+    failures <- $"serialized contract failed to deserialize: {errors}" :: failures
+
+match ContractSerialization.deserialize """{"schemaVersion":1}""" with
+| Ok _ ->
+    failures <- "malformed serialized contract was accepted" :: failures
+| Error _ ->
+    ()
+
+let evidenceFor requirement status =
+    {
+        Evidence.EvidenceRecord.Requirement = requirement.Id
+        Kind = requirement.Kind
+        Required = requirement.Required
+        Status = status
+        Summary = "test"
+        EvidenceReferences = []
+        Source = "test"
+    }
+
+let allAcceptableEvidence =
+    validContract.EvidenceRequirements
+    |> List.map (fun requirement ->
+        if requirement.Required then
+            evidenceFor requirement Passed
+        else
+            evidenceFor requirement (Unavailable "supporting evidence omitted"))
+
+check
+    "supporting unavailable evidence does not block completion"
+    (Evidence.evaluateCompletion validContract allAcceptableEvidence)
+
+let requiredUnavailableEvidence =
+    validContract.EvidenceRequirements
+    |> List.map (fun requirement ->
+        if requirement.Required && requirement.Kind = Structural then
+            evidenceFor requirement (Unavailable "adapter missing")
+        else
+            evidenceFor requirement Passed)
+
+check
+    "required unavailable evidence blocks completion"
+    (not (Evidence.evaluateCompletion validContract requiredUnavailableEvidence))
+
 let invalidContract =
     {
         validContract with
