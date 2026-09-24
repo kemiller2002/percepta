@@ -63,7 +63,7 @@
     }
   ],
   "forbiddenPatterns": [
-    "finding-equals-conclusion"
+    "named:finding-equals-conclusion"
   ],
   "breakpoints": [
     {
@@ -76,11 +76,11 @@
       ],
       "observations": [
         {
-          "id": "semantic-priority",
+          "id": "ipad-portrait-semantic-priority",
           "description": "Primary semantic meaning remains directly reachable without hover."
         },
         {
-          "id": "blocked-state",
+          "id": "ipad-portrait-blocked-state",
           "description": "Material blockers remain discoverable in the primary task flow."
         }
       ]
@@ -95,11 +95,11 @@
       ],
       "observations": [
         {
-          "id": "semantic-priority",
+          "id": "ipad-landscape-semantic-priority",
           "description": "Primary semantic meaning remains directly reachable without hover."
         },
         {
-          "id": "blocked-state",
+          "id": "ipad-landscape-blocked-state",
           "description": "Material blockers remain discoverable in the primary task flow."
         }
       ]
@@ -114,11 +114,11 @@
       ],
       "observations": [
         {
-          "id": "semantic-priority",
+          "id": "narrow-phone-semantic-priority",
           "description": "Primary semantic meaning remains directly reachable without hover."
         },
         {
-          "id": "blocked-state",
+          "id": "narrow-phone-blocked-state",
           "description": "Material blockers remain discoverable in the primary task flow."
         }
       ]
@@ -133,11 +133,11 @@
       ],
       "observations": [
         {
-          "id": "semantic-priority",
+          "id": "desktop-reference-semantic-priority",
           "description": "Primary semantic meaning remains directly reachable without hover."
         },
         {
-          "id": "blocked-state",
+          "id": "desktop-reference-blocked-state",
           "description": "Material blockers remain discoverable in the primary task flow."
         }
       ]
