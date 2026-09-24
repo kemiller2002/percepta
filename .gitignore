@@ -44,3 +44,7 @@ site-dist/
 #   npx @echelon-foundry/visual-engineering init
 .visual-engineering/
 # END echelon:visual-engineering
+
+# Generated Percepta verification output
+.percepta/evidence/
+artifacts/percepta/
