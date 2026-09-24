@@ -11,9 +11,7 @@
     "status": "supported",
     "superseded_by": [],
     "supersedes": [],
-    "supporting_evidence": [
-      "EV-PERCEPTA-2026-0001"
-    ],
+    "supporting_evidence": "\\n  - EV-PERCEPTA-2026-0001",
     "title": "Deterministic Percepta verification detects machine-addressable UI contract violations"
   },
   {
@@ -28,9 +26,7 @@
     "status": "supported",
     "superseded_by": [],
     "supersedes": [],
-    "supporting_evidence": [
-      "EV-PERCEPTA-2026-0001"
-    ],
+    "supporting_evidence": "\\n  - EV-PERCEPTA-2026-0001",
     "title": "Semantic substitutions can escape deterministic Percepta hooks"
   }
 ]
