@@ -348,7 +348,9 @@ let main _ =
         let contract =
             match ContractSerialization.deserialize (File.ReadAllText(contractPath)) with
             | Ok value -> value
-            | Error errors -> failwith $"Could not load contract: {String.concat " | " errors}"
+            | Error errors ->
+                let errorText = String.concat " | " errors
+                failwith $"Could not load contract: {errorText}"
 
         let canonicalEvidence =
             runVerification root contract canonicalPath "control"
@@ -386,7 +388,7 @@ let main _ =
                         match expectedEvidence with
                         | Some item -> statusName item.Status, item.Summary
                         | None when mutation.Class = SemanticSubstitution ->
-                            if complete then "Escaped" else "DetectedElsewhere",
+                            (if complete then "Escaped" else "DetectedElsewhere"),
                             "Semantic substitution has no pre-registered deterministic detector."
                         | None -> "MissingEvidence", "Expected evidence category was not produced."
 
