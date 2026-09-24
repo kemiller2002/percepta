@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echelonfoundry.com/schemas/percepta-evidence.schema.json",
+  "title": "Percepta Verification Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "screen",
+    "contractSha256",
+    "generatedAtUtc",
+    "complete",
+    "results"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "screen": { "type": "string", "minLength": 1 },
+    "contractSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "generatedAtUtc": { "type": "string", "format": "date-time" },
+    "complete": { "type": "boolean" },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "requirement",
+          "kind",
+          "required",
+          "status",
+          "summary",
+          "source",
+          "evidenceReferences"
+        ],
+        "properties": {
+          "requirement": { "type": "string", "minLength": 1 },
+          "kind": {
+            "enum": [
+              "contract-validation",
+              "structural",
+              "state-projection",
+              "interaction",
+              "accessibility",
+              "responsive",
+              "visual-regression",
+              "semantic-visual-review",
+              "accepted-deviation"
+            ]
+          },
+          "required": { "type": "boolean" },
+          "status": {
+            "enum": ["Passed", "Failed", "Unavailable", "NotApplicable", "AcceptedDeviation"]
+          },
+          "reason": { "type": "string" },
+          "summary": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "minLength": 1 },
+          "evidenceReferences": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
