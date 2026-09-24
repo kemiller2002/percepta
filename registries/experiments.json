@@ -22,5 +22,26 @@
       "HY-PERCEPTA-2026-0002"
     ],
     "title": "Adversarial fault injection against Percepta verification"
+  },
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-24",
+    "id": "EX-PERCEPTA-2026-0002",
+    "inputs": [
+      "research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md",
+      ".percepta/contracts/indy-init-investigation-workspace.json"
+    ],
+    "outputs": [
+      "research/experiments/EX-PERCEPTA-2026-0002/results.json"
+    ],
+    "path": "research/experiments/EX-PERCEPTA-2026-0002--independent-session-control-v-treatment.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "active",
+    "tests_hypotheses": [
+      "HY-PERCEPTA-2026-0003",
+      "HY-PERCEPTA-2026-0004"
+    ],
+    "title": "Independent-session Percepta treatment versus natural-language control"
   }
 ]
