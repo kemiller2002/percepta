@@ -1,0 +1,7 @@
+{
+  "status": "Passed",
+  "summary": "The fixture preserves the declared information hierarchy and makes blocking state visually prominent.",
+  "evidenceReferences": [
+    "human-review:indy-init-fixture"
+  ]
+}
