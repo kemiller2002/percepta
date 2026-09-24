@@ -1,0 +1,121 @@
+screen: investigation-workspace
+purpose: >
+  Investigate an observed failure without prematurely converging on an
+  explanation.
+primaryQuestion: >
+  What currently explains the observation, and what should be tested next?
+
+regions:
+  - id: observation
+    hierarchy: primary
+    visibility: always
+    purpose: preserve the triggering observation and its source
+
+  - id: hypotheses
+    hierarchy: primary
+    visibility: always
+    purpose: compare active, weakened, and falsified explanations
+
+  - id: contradictions
+    hierarchy: primary
+    visibility: when-present
+    purpose: expose evidence that conflicts with the current explanation
+
+  - id: unknowns
+    hierarchy: primary
+    visibility: always
+    purpose: expose unresolved information, especially blockers
+
+  - id: obligations
+    hierarchy: primary
+    visibility: when-present
+    purpose: show work required before legal progress can continue
+
+  - id: evidence
+    hierarchy: secondary
+    visibility: always
+    purpose: expose evidence and its relationship to hypotheses
+
+  - id: legal-actions
+    hierarchy: primary
+    visibility: always
+    purpose: show available and unavailable next actions
+
+  - id: persistence-state
+    hierarchy: secondary
+    visibility: always
+    purpose: distinguish local, pending, synced, conflicted, and failed persistence
+
+stateProjections:
+  - when: hypothesis-is-falsified
+    require:
+      - falsified hypothesis remains represented
+      - falsified state is perceivable without color alone
+      - actions that require an active hypothesis are unavailable
+
+  - when: blocking-unknown-exists
+    require:
+      - blocker is visible in the active workspace
+      - dependent action is unavailable
+      - reason for unavailability is visible
+      - user can navigate to the blocker
+
+  - when: github-write-is-pending
+    require:
+      - persistence state is Pending
+      - UI does not claim remote success
+
+  - when: corrective-action-not-verified
+    require:
+      - investigation is not represented as Resolved
+      - verification obligation remains visible
+
+capabilities:
+  - id: confirm-root-cause
+    require:
+      - expose
+      - disable-when-illegal
+      - explain-when-unavailable
+      - navigate-to-blocker
+
+forbidden:
+  - chat-only-primary-interface
+  - hide-blocking-obligation
+  - delete-falsified-hypothesis
+  - color-only-state
+  - optimistic-persistence-success
+  - unsupported-confidence-percentage
+  - linearize-competing-hypotheses
+
+breakpoints:
+  - name: ipad-portrait
+    require:
+      - active hypotheses remain directly reachable
+      - blocking unknowns remain visible without secondary navigation
+      - legal actions remain discoverable
+
+  - name: ipad-landscape
+    require:
+      - competing hypotheses can be compared
+      - blocking state remains visible
+
+  - name: narrow-phone
+    require:
+      - semantic hierarchy survives stacking
+      - no critical blocker moves behind secondary navigation
+
+  - name: desktop-reference
+    require:
+      - primary investigation state is visually dominant
+
+evidence:
+  required:
+    - contract-validation
+    - structural
+    - state-projection
+    - interaction
+    - accessibility
+    - responsive
+  supporting:
+    - visual-regression
+    - semantic-visual-review
