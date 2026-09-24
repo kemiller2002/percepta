@@ -8,5 +8,6 @@
   <ItemGroup>
     <Compile Include="Contracts.fs" />
     <Compile Include="Validation.fs" />
+    <Compile Include="Compilation.fs" />
   </ItemGroup>
 </Project>
