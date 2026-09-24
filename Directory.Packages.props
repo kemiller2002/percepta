@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="FSharp.Core" Version="10.1.401" />
+    <PackageVersion Include="Microsoft.Playwright" Version="1.63.0" />
     <PackageVersion Include="EchelonFoundry.Aegis.Core" Version="1.0.0" />
     <PackageVersion Include="EchelonFoundry.Aegis.Integration.GitHub" Version="1.0.0" />
     <PackageVersion Include="EchelonFoundry.Aegis.Store.GitHub" Version="1.0.0" />
