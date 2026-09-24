@@ -14,7 +14,12 @@ let contains (needle: string) (haystack: string) =
 
 let validContract = IndyInit.investigationWorkspace
 
-match Compilation.compile validContract with
+let firstCompilation = Compilation.compile validContract
+let secondCompilation = Compilation.compile validContract
+
+check "compiler output is deterministic" (firstCompilation = secondCompilation)
+
+match firstCompilation with
 | Error issues ->
     failures <- $"valid contract failed compilation: {issues}" :: failures
 | Ok compiled ->
