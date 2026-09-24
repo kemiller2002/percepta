@@ -3,6 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="FSharp.Core" Version="8.0.403" />
     <PackageVersion Include="EchelonFoundry.Aegis.Core" Version="1.0.0" />
     <PackageVersion Include="EchelonFoundry.Aegis.Integration.GitHub" Version="1.0.0" />
     <PackageVersion Include="EchelonFoundry.Aegis.Store.GitHub" Version="1.0.0" />
