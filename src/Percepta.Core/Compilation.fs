@@ -23,6 +23,7 @@ module Compilation =
     let private regionId (RegionId value) = value
     let private capabilityId (CapabilityId value) = value
     let private predicateId (DomainPredicateId value) = value
+    let private observationId (ObservationId value) = value
     let private verificationId (VerificationId value) = value
 
     let private hierarchyName =
@@ -63,20 +64,23 @@ module Compilation =
         | LinearizeCompetingHypotheses -> "forced linearization of competing hypotheses"
         | NamedForbiddenPattern name -> name
 
-    let private evidenceKindName =
+    let evidenceKindName =
         function
-        | ContractValidation -> "contract validation"
+        | ContractValidation -> "contract-validation"
         | Structural -> "structural"
-        | StateProjection -> "state projection"
+        | StateProjection -> "state-projection"
         | Interaction -> "interaction"
         | Accessibility -> "accessibility"
         | Responsive -> "responsive"
-        | VisualRegression -> "visual regression"
-        | SemanticVisualReview -> "semantic visual review"
-        | AcceptedDeviationEvidence -> "accepted deviation"
+        | VisualRegression -> "visual-regression"
+        | SemanticVisualReview -> "semantic-visual-review"
+        | AcceptedDeviationEvidence -> "accepted-deviation"
 
     let private appendLine (builder: StringBuilder) (text: string) =
         builder.AppendLine(text) |> ignore
+
+    let private appendObservation (builder: StringBuilder) observation =
+        appendLine builder $"  - [{observationId observation.Id}] {observation.Description}"
 
     let private buildAgentGuidance (contract: ScreenContract) =
         let builder = StringBuilder()
@@ -116,7 +120,7 @@ module Compilation =
                 appendLine builder $"- When '{predicateId projection.When}':"
 
                 for observation in projection.RequiredObservations do
-                    appendLine builder $"  - {observation}"
+                    appendObservation builder observation
 
         appendLine builder ""
         appendLine builder "## Forbidden outcomes"
@@ -134,17 +138,13 @@ module Compilation =
             appendLine builder "- No breakpoint-specific semantic obligations declared."
         else
             for breakpoint in contract.Breakpoints do
-                let range =
-                    match breakpoint.MinimumWidthCssPx, breakpoint.MaximumWidthCssPx with
-                    | None, None -> "viewport class"
-                    | Some minimum, None -> $"min {minimum}px"
-                    | None, Some maximum -> $"max {maximum}px"
-                    | Some minimum, Some maximum -> $"{minimum}px-{maximum}px"
+                appendLine builder $"- {breakpoint.Name} ({breakpoint.ViewportWidthCssPx}x{breakpoint.ViewportHeightCssPx} CSS px):"
 
-                appendLine builder $"- {breakpoint.Name} ({range}):"
+                for region in breakpoint.RequiredRegionsVisible do
+                    appendLine builder $"  - Region '{regionId region}' remains visible."
 
                 for observation in breakpoint.RequiredObservations do
-                    appendLine builder $"  - {observation}"
+                    appendObservation builder observation
 
         appendLine builder ""
         appendLine builder "## Required verification evidence"
