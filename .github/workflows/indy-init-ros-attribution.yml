@@ -1,0 +1,84 @@
+name: Repair Indy Init Percepta ROS attribution
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/indy-init-ros-attribution.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  attribute:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Echelon tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/kemiller2002/praxis/main/scripts/install-native.sh | sh
+          echo "$HOME/.echelon/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.echelon/bin:$PATH"
+          echelon setup
+
+      - name: Attribute Indy Init contract package through ROS
+        shell: bash
+        env:
+          ROS_BASE_REF: 21280f231ff2bb4583d8e1e7f37e86e711fdfcaa
+          ROS_ACTOR: chatgpt
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.echelon/bin:$PATH"
+          work_id="WI-INDY-UI-001"
+
+          if grep -q "$work_id" .ros/events/events.jsonl 2>/dev/null; then
+            echo "$work_id already attributed."
+            ros validate
+            exit 0
+          fi
+
+          ros add "Add and validate Indy Init Percepta screen contracts" \
+            --id "$work_id" \
+            --priority high \
+            --tag percepta \
+            --tag indy-init \
+            --source cond-managed-repair \
+            --source-reference examples/indy-init/application.json
+
+          ros work backlog-transition \
+            --action ready \
+            --id "$work_id" \
+            --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+
+          ros work start \
+            --id "$work_id" \
+            --type mechanical \
+            --actor chatgpt \
+            --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+
+          ros work complete \
+            --id "$work_id" \
+            --actor chatgpt \
+            --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+
+          ros validate
+
+      - name: Commit ROS-managed attribution artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .ros
+          if git diff --cached --quiet; then
+            echo "No ROS changes to commit."
+            exit 0
+          fi
+          git commit -m "Record ROS attribution for Indy Init Percepta contracts"
+          git push
