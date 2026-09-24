@@ -6,7 +6,8 @@ status: supported
 confidence: medium
 created: 2026-09-24
 author_agent: chatgpt
-supporting_evidence:\n  - EV-PERCEPTA-2026-0001
+supporting_evidence:
+  - EV-PERCEPTA-2026-0001
 contradicting_evidence: []
 related_theories: []
 supersedes: []
