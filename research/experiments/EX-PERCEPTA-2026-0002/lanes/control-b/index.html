@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indy Init Investigation</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --surface-2: #eef0f4;
+    --ink: #1b1f27;
+    --ink-2: #4a5263;
+    --line: #d5d9e1;
+    --accent: #2f5bd3;
+    --accent-ink: #ffffff;
+    --active: #1f6f43;
+    --active-bg: #e5f3ea;
+    --weak: #8a5a00;
+    --weak-bg: #fbf1dc;
+    --false: #7a2530;
+    --false-bg: #f6e6e8;
+    --block: #9b2c10;
+    --block-bg: #fdebe4;
+    --ok: #1f6f43;
+    --pending: #7a5a00;
+    --radius: 10px;
+    --gap: 16px;
+    --nav-h: 48px;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    overflow-wrap: anywhere;
+  }
+  a { color: var(--accent); }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 8px; top: 8px; background: var(--surface); padding: 8px; z-index: 10; }
+
+  header.top {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: 16px;
+  }
+  .top-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: grid; gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @media (min-width: 900px) {
+    .top-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); align-items: start; }
+  }
+  .eyebrow { margin: 0; font-size: 13px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .06em; }
+  h1 { margin: 4px 0 0; font-size: clamp(1.25rem, 2.6vw, 1.75rem); line-height: 1.25; }
+
+  nav.jump {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  nav.jump ul {
+    list-style: none; margin: 0 auto; padding: 6px 12px; max-width: 1400px;
+    display: flex; flex-wrap: wrap; gap: 4px 6px;
+  }
+  nav.jump a {
+    display: inline-block; padding: 6px 10px; border-radius: 999px;
+    text-decoration: none; color: var(--ink); background: var(--surface-2); font-size: 13px;
+  }
+  nav.jump a strong { font-weight: 700; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 16px; }
+  .layout { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 1100px) {
+    .layout { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; }
+  }
+  .col { display: grid; gap: var(--gap); min-width: 0; }
+
+  section.panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px; min-width: 0; scroll-margin-top: calc(var(--nav-h) + 40px);
+  }
+  section.panel > h2 { margin: 0 0 4px; font-size: 1.1rem; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+  .count { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+  .hint { margin: 0 0 12px; color: var(--ink-2); font-size: 13px; }
+  .empty { margin: 0; color: var(--ink-2); font-style: italic; }
+  ul.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+
+  .obs-summary { font-size: 1.05rem; font-weight: 600; margin: 4px 0 8px; }
+  dl.meta { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 2px 12px; margin: 0; font-size: 14px; }
+  dl.meta dt { color: var(--ink-2); }
+  dl.meta dd { margin: 0; }
+
+  .position { background: var(--surface-2); }
+  .position h2 { margin: 0 0 8px; font-size: 1.05rem; }
+  .position-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .position h3 { margin: 0 0 4px; font-size: .95rem; }
+  .position ul { margin: 0; padding-left: 1.2em; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    border: 1px solid currentColor; border-radius: 999px;
+    padding: 1px 8px; font-size: 12px; font-weight: 700; white-space: nowrap;
+  }
+  .s-active { color: var(--active); background: var(--active-bg); }
+  .s-confirmed { color: var(--active); background: var(--active-bg); border-style: double; border-width: 3px; }
+  .s-weakened { color: var(--weak); background: var(--weak-bg); border-style: dashed; }
+  .s-falsified { color: var(--false); background: var(--false-bg); border-style: dotted; }
+  .s-blocking { color: var(--block); background: var(--block-bg); }
+  .s-open { color: var(--ink-2); background: var(--surface-2); }
+  .s-done { color: var(--ok); background: var(--active-bg); }
+
+  .hyp-groups { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); align-items: start; }
+  .hyp-group { min-width: 0; }
+  .hyp-group > h3 { margin: 0 0 8px; font-size: .95rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .card {
+    border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: var(--surface);
+    scroll-margin-top: calc(var(--nav-h) + 40px); min-width: 0;
+  }
+  .card h4 { margin: 6px 0 4px; font-size: 1rem; }
+  .card p { margin: 4px 0; }
+  .card.h-active { border-left: 5px solid var(--active); }
+  .card.h-confirmed { border-left: 5px double var(--active); }
+  .card.h-weakened { border-left: 5px dashed var(--weak); }
+  .card.h-falsified {
+    border-left: 5px dotted var(--false);
+    background: repeating-linear-gradient(135deg, var(--surface) 0 10px, var(--false-bg) 10px 12px);
+  }
+  .card.h-falsified h4 { text-decoration: line-through; text-decoration-thickness: 1px; }
+  .card .why { font-size: 14px; color: var(--ink-2); }
+  .card .test { font-size: 14px; }
+  .rels { list-style: none; padding: 0; margin: 6px 0 0; font-size: 13px; display: grid; gap: 2px; }
+  .rel-supports::before { content: "▲ "; }
+  .rel-contradicts::before { content: "▼ "; }
+  .rel-weakens::before { content: "◆ "; }
+  .rel-related::before { content: "• "; }
+  .card.blocking { border-color: var(--block); box-shadow: inset 0 0 0 1px var(--block); }
+  .card.resolved { opacity: .85; }
+  [data-flash="1"] { animation: flash 1.6s ease-out; }
+  @keyframes flash { 0% { box-shadow: 0 0 0 4px var(--accent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+  @media (prefers-reduced-motion: reduce) { [data-flash="1"] { animation: none; outline: 3px solid var(--accent); } }
+
+  details.resolved-list { margin-top: 10px; }
+  details.resolved-list summary { cursor: pointer; color: var(--ink-2); font-size: 14px; }
+
+  .actions-panel { border-width: 2px; }
+  .action { border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: grid; gap: 6px; }
+  .action.primary { border-color: var(--ink); }
+  .action h3 { margin: 0; font-size: .95rem; }
+  button.act {
+    font: inherit; font-weight: 600; min-height: 44px; padding: 8px 14px; border-radius: 8px;
+    border: 2px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer;
+    justify-self: start; max-width: 100%;
+  }
+  button.act[disabled] {
+    background: var(--surface-2); color: var(--ink-2); border: 2px dashed var(--ink-2); cursor: not-allowed;
+  }
+  .reason { margin: 0; font-size: 14px; }
+  .reason strong { color: var(--block); }
+  .blocker-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 14px; }
+  .blocker-links a::before { content: "→ "; }
+  .notice {
+    border: 2px solid var(--block); background: var(--block-bg); color: var(--ink);
+    border-radius: 8px; padding: 8px 10px; margin: 0 0 12px; font-size: 14px;
+  }
+  .sub { margin: 14px 0 8px; font-size: .9rem; color: var(--ink-2); text-transform: uppercase; letter-spacing: .05em; }
+
+  .persist {
+    border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; background: var(--surface);
+  }
+  .persist h2 { margin: 0; font-size: .85rem; color: var(--ink-2); text-transform: uppercase; letter-spacing: .05em; }
+  .persist .state { margin: 4px 0; font-weight: 700; font-size: 1rem; display: flex; gap: 6px; align-items: center; }
+  .persist p { margin: 2px 0; font-size: 13px; }
+  .persist.p-synced { border-color: var(--ok); }
+  .persist.p-pending { border-color: var(--pending); border-style: dashed; }
+  .persist.p-local { border-color: var(--ink-2); border-style: dotted; }
+  .persist.p-conflicted, .persist.p-failed { border-color: var(--block); background: var(--block-bg); }
+  .persist ol { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: 6px 0 0; font-size: 12px; }
+  .persist ol li { padding: 0 6px; border-radius: 4px; color: var(--ink-2); border: 1px solid transparent; }
+  .persist ol li[aria-current="true"] { color: var(--ink); border-color: var(--ink); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; }
+  .log { font-size: 13px; margin: 8px 0 0; padding-left: 1.2em; }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to workspace</a>
+<div id="app"></div>
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- pure helpers ---------- */
+  const DEFAULT_QUESTION = 'What currently explains the observation, and what should be tested next?';
+  const CONFIRM = 'confirm-root-cause';
+  const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ESC[c]);
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const present = v => v !== undefined && v !== null && v !== '';
+  const lower = v => String(v ?? '').toLowerCase().trim();
+  const canon = v => lower(v).replace(/[\s_]+/g, '-');
+  const first = (o, keys) => (isObj(o) ? keys.map(k => o[k]).find(present) : undefined);
+  const toText = v =>
+    v == null ? ''
+    : typeof v === 'string' ? v
+    : typeof v === 'number' || typeof v === 'boolean' ? String(v)
+    : Array.isArray(v) ? v.map(toText).filter(Boolean).join(', ')
+    : isObj(v) ? toText(first(v, ['text', 'summary', 'title', 'label', 'name', 'description', 'value', 'id']))
+    : '';
+  const pickText = (o, keys, fallback = '') => toText(first(o, keys)) || fallback;
+  const asItem = x => (isObj(x) ? x : { text: toText(x) });
+  const toList = v =>
+    Array.isArray(v) ? v.map(asItem)
+    : isObj(v) ? Object.entries(v).map(([k, x]) => (isObj(x) ? { id: k, ...x } : { id: k, text: toText(x) }))
+    : [];
+  const refIds = v =>
+    (Array.isArray(v) ? v : present(v) && typeof v !== 'boolean' ? [v] : [])
+      .map(x => (isObj(x) ? first(x, ['id', 'ref', 'hypothesisId', 'evidenceId', 'targetId', 'blockerId', 'unknownId', 'obligationId']) : x))
+      .filter(present)
+      .map(String);
+  const slug = v => String(v).replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'item';
+  const humanize = v => {
+    const s = String(v).replace(/[-_]+/g, ' ').trim();
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
+  const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+  const uniqBy = (xs, key) => [...new Map(xs.map(x => [key(x), x])).values()];
+
+  const assignDomIds = kind => items =>
+    items.reduce(
+      (acc, item, i) => {
+        const base = `${kind}-${slug(item.id)}`;
+        const domId = acc.seen.has(base) ? `${base}-${i + 1}` : base;
+        return { seen: new Set([...acc.seen, domId]), out: [...acc.out, { ...item, domId }] };
+      },
+      { seen: new Set(), out: [] }
+    ).out;
+
+  const DONE = new Set(['resolved', 'answered', 'closed', 'done', 'satisfied', 'complete', 'completed', 'met',
+    'fulfilled', 'verified', 'discharged', 'dismissed']);
+  const isDone = o =>
+    [o.resolved, o.satisfied, o.done, o.completed, o.answered].includes(true) ||
+    DONE.has(lower(toText(first(o, ['status', 'state', 'resolution']))));
+
+  const INACTIVE = new Set(['inactive', 'closed', 'archived', 'suspended', 'paused', 'cancelled', 'canceled',
+    'abandoned', 'frozen', 'locked', 'read-only', 'readonly', 'on-hold', 'dormant']);
+
+  /* ---------- domain normalizers ---------- */
+  const HYP_META = {
+    confirmed: { label: 'Confirmed', icon: '✓', desc: 'Confirmed as root cause' },
+    active: { label: 'Active', icon: '●', desc: 'Still a live explanation' },
+    weakened: { label: 'Weakened', icon: '◐', desc: 'Evidence counts against it; not ruled out' },
+    falsified: { label: 'Falsified', icon: '✕', desc: 'Ruled out; kept visible for the record' }
+  };
+  const HYP_ORDER = ['confirmed', 'active', 'weakened', 'falsified'];
+
+  const hypStatus = o => {
+    const s = lower(toText(first(o, ['status', 'state', 'standing', 'verdict'])));
+    return o.falsified === true || /falsif|refut|reject|disprov|eliminat|ruled/.test(s) ? 'falsified'
+      : /weak/.test(s) || o.weakened === true ? 'weakened'
+      : /confirm/.test(s) || o.confirmed === true ? 'confirmed'
+      : 'active';
+  };
+
+  const normHypothesis = (o, i) => ({
+    raw: o,
+    id: String(first(o, ['id', 'key', 'ref']) ?? `h${i + 1}`),
+    title: pickText(o, ['title', 'statement', 'summary', 'text', 'name', 'label', 'description'], `Hypothesis ${i + 1}`),
+    detail: pickText(o, ['description', 'detail', 'details', 'mechanism']),
+    status: hypStatus(o),
+    rawStatus: pickText(o, ['status', 'state', 'standing', 'verdict']),
+    why: pickText(o, ['statusReason', 'falsificationReason', 'falsifiedReason', 'weakenedReason', 'reason', 'rationale']),
+    nextTest: pickText(o, ['nextTest', 'proposedTest', 'discriminatingTest', 'test', 'suggestedTest'])
+  });
+
+  const isBlockingUnknown = o =>
+    o.blocking === true || o.isBlocking === true || o.blocker === true ||
+    (Array.isArray(o.blocking) && o.blocking.length > 0) ||
+    ['blocking', 'blocker', 'critical'].includes(lower(toText(first(o, ['severity', 'priority', 'kind', 'type', 'impact'])))) ||
+    refIds(first(o, ['blocks', 'blocksActions', 'gates'])).length > 0;
+
+  const normUnknown = (o, i) => ({
+    id: String(first(o, ['id', 'key', 'ref']) ?? `u${i + 1}`),
+    text: pickText(o, ['question', 'text', 'title', 'summary', 'description', 'label'], `Unknown ${i + 1}`),
+    blocking: isBlockingUnknown(o),
+    resolved: isDone(o),
+    resolution: pickText(o, ['resolution', 'answer', 'resolvedBy']),
+    test: pickText(o, ['nextTest', 'howToResolve', 'resolveBy', 'proposedTest', 'test', 'suggestedTest']),
+    blocks: refIds(first(o, ['blocks', 'blocksActions', 'gates', 'blocking']))
+  });
+
+  const normObligation = (o, i) => {
+    const text = pickText(o, ['title', 'description', 'text', 'summary', 'requirement', 'label', 'name'], `Obligation ${i + 1}`);
+    const kind = lower(toText(first(o, ['kind', 'type', 'category'])));
+    const blocks = refIds(first(o, ['blocks', 'requiredFor', 'gates', 'blocksActions', 'before']));
+    return {
+      id: String(first(o, ['id', 'key', 'ref']) ?? `o${i + 1}`),
+      text,
+      kind,
+      verification: /verif/.test(kind) || /verif/i.test(text) || o.verification === true,
+      done: isDone(o),
+      blocks,
+      blocking: o.blocking !== false,
+      detail: pickText(o, ['detail', 'details', 'rationale', 'reason'])
+    };
+  };
+
+  const normContradiction = (o, i) => ({
+    id: String(first(o, ['id', 'key', 'ref']) ?? `c${i + 1}`),
+    text: pickText(o, ['summary', 'description', 'text', 'title', 'statement', 'label'], `Contradiction ${i + 1}`),
+    between: refIds(first(o, ['between', 'involves', 'items', 'hypotheses', 'hypothesisIds', 'evidence', 'evidenceIds'])),
+    resolved: isDone(o),
+    blocking: o.blocking !== false
+  });
+
+  const sourceText = src =>
+    isObj(src)
+      ? [first(src, ['name', 'system', 'title', 'label']), first(src, ['type', 'kind']), first(src, ['ref', 'reference', 'id'])]
+          .filter(present).map(toText).join(' · ')
+      : toText(src);
+  const safeUrl = u => (typeof u === 'string' && /^https?:\/\//i.test(u) ? u : '');
+
+  const normEvidence = (o, i) => {
+    const src = first(o, ['source', 'origin', 'collectedFrom']);
+    return {
+      id: String(first(o, ['id', 'key', 'ref']) ?? `e${i + 1}`),
+      text: pickText(o, ['summary', 'title', 'text', 'description', 'finding', 'label'], `Evidence ${i + 1}`),
+      source: sourceText(src),
+      at: pickText(o, ['collectedAt', 'observedAt', 'timestamp', 'at'])
+    };
+  };
+
+  const relKind = r => {
+    const s = lower(r);
+    return /support|confirm|consistent/.test(s) ? 'supports'
+      : /contradict|refut|falsif|against|inconsistent/.test(s) ? 'contradicts'
+      : /weak/.test(s) ? 'weakens'
+      : 'related';
+  };
+  const REL_LABEL = { supports: 'Supports', contradicts: 'Contradicts', weakens: 'Weakens', related: 'Related to' };
+  const EV_REL_KEYS = [
+    ['supports', ['supports', 'supportsHypotheses', 'supportedHypotheses']],
+    ['contradicts', ['contradicts', 'refutes', 'falsifies', 'against', 'contradictsHypotheses', 'refutesHypotheses']],
+    ['weakens', ['weakens', 'weakensHypotheses']],
+    ['related', ['hypotheses', 'hypothesisIds', 'relatedHypotheses', 'relatesTo']]
+  ];
+  const H_REL_KEYS = [
+    ['supports', ['supportingEvidence', 'supportedBy']],
+    ['contradicts', ['contradictingEvidence', 'refutingEvidence', 'contradictedBy', 'falsifiedByEvidence']],
+    ['weakens', ['weakeningEvidence']]
+  ];
+
+  const collectRelations = (s, rawEvidence, rawHyps, evidence, hyps) => {
+    const fromEvidence = rawEvidence.flatMap((o, i) => [
+      ...EV_REL_KEYS.flatMap(([rel, keys]) => keys.flatMap(k => refIds(o[k]).map(h => ({ e: evidence[i].id, h, rel })))),
+      ...toList(first(o, ['relations', 'links', 'relationships'])).map(r => ({
+        e: evidence[i].id,
+        h: String(first(r, ['hypothesisId', 'hypothesis', 'target', 'targetId', 'id']) ?? ''),
+        rel: relKind(toText(first(r, ['relation', 'type', 'kind', 'effect', 'stance'])))
+      })),
+      ...(present(o.hypothesisId) ? [{ e: evidence[i].id, h: String(o.hypothesisId), rel: relKind(toText(first(o, ['relation', 'stance', 'effect']))) }] : [])
+    ]);
+    const fromHyps = rawHyps.flatMap((o, i) => [
+      ...H_REL_KEYS.flatMap(([rel, keys]) => keys.flatMap(k => refIds(o[k]).map(e => ({ e, h: hyps[i].id, rel })))),
+      ...(Array.isArray(o.evidence) || Array.isArray(o.evidenceIds)
+        ? (o.evidence ?? o.evidenceIds).map(x => ({
+            e: String(isObj(x) ? first(x, ['id', 'evidenceId', 'ref']) ?? '' : x),
+            h: hyps[i].id,
+            rel: relKind(isObj(x) ? toText(first(x, ['relation', 'type', 'stance', 'effect'])) : '')
+          }))
+        : [])
+    ]);
+    const fromTop = toList(first(s, ['relations', 'evidenceLinks', 'links'])).map(r => ({
+      e: String(first(r, ['evidenceId', 'evidence', 'from', 'source']) ?? ''),
+      h: String(first(r, ['hypothesisId', 'hypothesis', 'to', 'target']) ?? ''),
+      rel: relKind(toText(first(r, ['relation', 'type', 'kind', 'effect', 'stance'])))
+    }));
+    return uniqBy([...fromEvidence, ...fromHyps, ...fromTop].filter(r => r.e && r.h), r => `${r.e}|${r.h}|${r.rel}`);
+  };
+
+  const PERSIST_META = {
+    local: { label: 'Local only', icon: '◌', text: 'Changes exist only in this browser. Nothing has been sent to the server.' },
+    pending: { label: 'Saving — pending', icon: '⟳', text: 'A write has been sent and is waiting for server confirmation.' },
+    synced: { label: 'Synced', icon: '✓', text: 'The server confirmed the latest changes.' },
+    conflicted: { label: 'Conflict', icon: '⚠', text: 'The server holds a different version. Review before continuing; your local copy is kept.' },
+    failed: { label: 'Save failed', icon: '✕', text: 'The last write was rejected or did not reach the server. Your local copy is kept.' }
+  };
+  const PERSIST_ORDER = ['local', 'pending', 'synced', 'conflicted', 'failed'];
+  const persistKind = s => {
+    const v = lower(s);
+    return /pend|saving|in-?flight|writing|syncing|queued|sending/.test(v) ? 'pending'
+      : /conflict/.test(v) ? 'conflicted'
+      : /fail|error|reject/.test(v) ? 'failed'
+      : /^(synced|saved|remote|success|ok|clean|persisted|committed)$/.test(v) ? 'synced'
+      : 'local';
+  };
+  const normPersistence = s => {
+    const p = first(s, ['persistence', 'persistenceState', 'sync', 'syncState', 'saveState', 'save']);
+    const obj = isObj(p) ? p : { state: p };
+    const declared = persistKind(toText(first(obj, ['state', 'status', 'mode', 'kind'])));
+    const pendingWrites = Number(first(obj, ['pendingWrites', 'pendingCount', 'outstandingWrites']) ?? 0) || 0;
+    const kind = declared === 'synced' && (pendingWrites > 0 || obj.pending === true) ? 'pending' : declared;
+    return {
+      kind,
+      pendingWrites,
+      message: pickText(obj, ['message', 'detail', 'error', 'reason']),
+      lastSynced: pickText(obj, ['lastSyncedAt', 'lastSavedAt', 'syncedAt', 'confirmedAt'])
+    };
+  };
+
+  const explicitAvail = o =>
+    typeof o.available === 'boolean' ? o.available
+    : typeof o.enabled === 'boolean' ? o.enabled
+    : typeof o.legal === 'boolean' ? o.legal
+    : typeof o.allowed === 'boolean' ? o.allowed
+    : typeof o.disabled === 'boolean' ? !o.disabled
+    : (() => {
+        const st = lower(toText(first(o, ['status', 'state', 'availability'])));
+        return !st ? undefined : ['available', 'enabled', 'legal', 'allowed'].includes(st) ? true : ['unavailable', 'disabled', 'illegal', 'blocked', 'forbidden'].includes(st) ? false : undefined;
+      })();
+
+  const normAction = defaultUnavailable => o => {
+    const capability = canon(first(o, ['capability', 'id', 'action', 'key', 'name', 'type', 'text']) ?? 'action');
+    const rawLabel = pickText(o, ['label', 'title', 'name', 'text', 'description']);
+    const label = !rawLabel || canon(rawLabel) === capability ? humanize(capability) : rawLabel;
+    const avail = explicitAvail(o);
+    return {
+      capability,
+      label,
+      available: avail ?? (defaultUnavailable ? false : undefined),
+      reason: pickText(o, ['unavailableReason', 'reason', 'disabledReason', 'whyUnavailable', 'blockedReason', 'explanation']),
+      blockers: refIds(first(o, ['blockedBy', 'blockers', 'blockerIds', 'blockerId', 'blocker', 'dependsOn'])),
+      hint: pickText(o, ['hint', 'help', 'effect'])
+    };
+  };
+
+  const DEFAULT_ACTIONS = [
+    { capability: 'add-evidence', label: 'Record new evidence' },
+    { capability: 'add-hypothesis', label: 'Add a competing hypothesis' },
+    { capability: 'resolve-unknown', label: 'Record an answer to an unknown' }
+  ];
+
+  /* ---------- view model ---------- */
+  const unwrap = s0 => {
+    const base = isObj(s0) ? s0 : {};
+    const inner = [base.state, base.fixture, base.data, base.workspace].find(isObj);
+    const merged = inner ? { ...base, ...inner } : base;
+    return isObj(merged.investigation) ? { ...merged, ...merged.investigation } : merged;
+  };
+
+  const buildView = (s0, local) => {
+    const s = unwrap(s0);
+    const rawHyps = toList(first(s, ['hypotheses', 'hypothesisSet', 'candidates']));
+    const rawEvidence = toList(first(s, ['evidence', 'evidenceItems', 'findings']));
+    const hypotheses = assignDomIds('hypothesis')(rawHyps.map(normHypothesis));
+    const evidence = assignDomIds('evidence')(rawEvidence.map(normEvidence));
+    const unknowns = assignDomIds('unknown')(toList(first(s, ['unknowns', 'openQuestions', 'questions'])).map(normUnknown));
+    const obligations = assignDomIds('obligation')(toList(first(s, ['obligations', 'requirements', 'gates', 'preconditions'])).map(normObligation));
+    const contradictions = assignDomIds('contradiction')(toList(first(s, ['contradictions', 'conflicts', 'inconsistencies'])).map(normContradiction));
+    const relations = collectRelations(s, rawEvidence, rawHyps, evidence, hypotheses);
+
+    const index = new Map(
+      [
+        ...unknowns.map(x => ['unknown', 'blocking unknown', x]),
+        ...obligations.map(x => ['obligation', 'open obligation', x]),
+        ...contradictions.map(x => ['contradiction', 'contradiction', x]),
+        ...hypotheses.map(x => ['hypothesis', 'hypothesis', x]),
+        ...evidence.map(x => ['evidence', 'evidence', x])
+      ]
+        .reverse()
+        .flatMap(([kind, kindLabel, x]) => {
+          const entry = { domId: x.domId, kind, kindLabel, text: x.text ?? x.title };
+          return [[x.id, entry], [`${kind}:${x.id}`, entry], [x.domId, entry]];
+        })
+    );
+    const resolveRef = ref => index.get(ref) ?? index.get(String(ref).replace(/^[a-z-]+[:/]/i, '')) ?? { missing: true, text: String(ref) };
+
+    const statusRaw = lower(toText(first(s, ['investigationStatus', 'lifecycle', 'phase', 'status'])));
+    const inactive = s.active === false || s.isActive === false || INACTIVE.has(statusRaw);
+
+    const openBlockingUnknowns = unknowns.filter(u => u.blocking && !u.resolved);
+    const blocksConfirm = x => x.blocks.length === 0 || x.blocks.map(canon).includes(CONFIRM);
+    const openObligations = obligations.filter(o => !o.done && o.blocking && blocksConfirm(o));
+    const openContradictions = contradictions.filter(c => !c.resolved && c.blocking);
+    const derivedBlockers = [
+      ...openBlockingUnknowns.map(u => ({ domId: u.domId, kind: 'unknown', kindLabel: 'blocking unknown', text: u.text })),
+      ...openObligations.map(o => ({ domId: o.domId, kind: 'obligation', kindLabel: o.verification ? 'verification obligation' : 'open obligation', text: o.text })),
+      ...openContradictions.map(c => ({ domId: c.domId, kind: 'contradiction', kindLabel: 'unresolved contradiction', text: c.text }))
+    ];
+    const liveHyps = hypotheses.filter(h => h.status !== 'falsified');
+    const confirmed = hypotheses.filter(h => h.status === 'confirmed');
+    const rootCauseConfirmed = confirmed.length > 0 || s.rootCauseConfirmed === true || lower(toText(s.rootCause?.status)) === 'confirmed';
+
+    const actionMap = [
+      ...toList(first(s, ['actions', 'legalActions', 'availableActions', 'nextActions', 'capabilities'])).map(normAction(false)),
+      ...toList(first(s, ['unavailableActions', 'illegalActions', 'blockedActions', 'disabledActions'])).map(normAction(true))
+    ].reduce((m, a) => {
+      const prev = m.get(a.capability);
+      return new Map([...m, [a.capability, prev && prev.available === false ? { ...a, ...prev } : prev ? { ...prev, ...a } : a]]);
+    }, new Map());
+    const withConfirm = actionMap.has(CONFIRM) ? actionMap
+      : new Map([[CONFIRM, { capability: CONFIRM, label: 'Confirm root cause', blockers: [], reason: '' }], ...actionMap]);
+    const baseActions = withConfirm.size > 1 ? [...withConfirm.values()]
+      : [...withConfirm.values(), ...DEFAULT_ACTIONS.map(a => ({ ...a, blockers: [], reason: '' }))];
+
+    const reasonFrom = blockers =>
+      blockers.length === 0 ? '' : `Blocked by ${blockers.map(b => (b.missing ? b.text : `${b.kindLabel} “${b.text}”`)).join('; ')}.`;
+
+    const finalizeAction = a => {
+      const isConfirm = a.capability === CONFIRM;
+      const reopen = /reopen|reactivat|resume/.test(a.capability);
+      const given = a.blockers.map(resolveRef);
+      const blockers = given.length > 0 ? given : isConfirm && a.available !== true ? derivedBlockers : [];
+      const derivedAvail = isConfirm ? blockers.length === 0 && liveHyps.length > 0 && !rootCauseConfirmed : blockers.length === 0;
+      const inactiveBlock = inactive && !reopen;
+      const available = inactiveBlock ? false : a.available ?? derivedAvail;
+      const reason = available ? ''
+        : inactiveBlock ? `The investigation is ${statusRaw || 'inactive'}; actions are unavailable until it is reopened.${a.reason ? ' ' + a.reason : ''}`
+        : a.reason || reasonFrom(blockers)
+          || (isConfirm && rootCauseConfirmed ? 'A root cause is already confirmed.'
+            : isConfirm && liveHyps.length === 0 ? 'No hypothesis is still in contention; add or revive one first.'
+            : 'Not available in the current investigation state.');
+      return { ...a, isConfirm, available, reason, blockers: available ? [] : blockers.filter(b => !b.missing || given.length > 0), inactiveBlock };
+    };
+    const actions = baseActions.map(finalizeAction);
+
+    const obsRaw = first(s, ['observation', 'triggeringObservation', 'trigger', 'symptom']);
+    const obs = isObj(obsRaw) ? obsRaw : { text: toText(obsRaw) };
+    const src = first(obs, ['source', 'origin', 'reportedBy', 'reporter', 'sourceSystem']) ?? first(s, ['source', 'observationSource']);
+    const observation = {
+      summary: pickText(obs, ['summary', 'title', 'text', 'statement', 'description', 'label'], 'No triggering observation recorded.'),
+      detail: (d => (d && d !== pickText(obs, ['summary', 'title', 'text', 'statement']) ? d : ''))(pickText(obs, ['details', 'detail', 'description', 'body'])),
+      source: sourceText(src) || 'Source not recorded',
+      sourceUrl: safeUrl(isObj(src) ? first(src, ['url', 'href', 'link']) : first(obs, ['sourceUrl', 'url'])),
+      at: pickText(obs, ['observedAt', 'timestamp', 'time', 'occurredAt', 'reportedAt', 'at'])
+    };
+
+    const nextTests = uniqBy([
+      ...toList(first(s, ['nextTests', 'testsToRun', 'suggestedTests', 'proposedTests'])).map(t => ({ text: pickText(t, ['text', 'title', 'summary', 'description', 'name']), for: '' })),
+      ...liveHyps.filter(h => h.nextTest).map(h => ({ text: h.nextTest, for: h.title, domId: h.domId })),
+      ...unknowns.filter(u => !u.resolved && u.test).map(u => ({ text: u.test, for: u.text, domId: u.domId }))
+    ].filter(t => t.text), t => t.text);
+
+    return {
+      title: pickText(s, ['title', 'name', 'investigationTitle'], 'Indy Init investigation'),
+      question: pickText(s, ['question', 'primaryQuestion'], DEFAULT_QUESTION),
+      statusRaw, inactive, observation, hypotheses, evidence, unknowns, obligations, contradictions, relations,
+      actions, derivedBlockers, liveHyps, confirmed, rootCauseConfirmed, nextTests,
+      persistence: local ? { ...normPersistence(s), kind: 'local', message: local } : normPersistence(s),
+      index
+    };
+  };
+
+  /* ---------- render (pure: view -> html string) ---------- */
+  const hypBadge = (status, extra = '') =>
+    `<span class="badge s-${status}" ${extra}><span aria-hidden="true">${HYP_META[status].icon}</span> ${HYP_META[status].label}${status === 'falsified' ? ' (retained)' : ''}</span>`;
+
+  const relItem = (v, r, targetKey) => {
+    const target = targetKey === 'h' ? v.hypotheses.find(h => h.id === r.h) : v.evidence.find(e => e.id === r.e);
+    const name = target ? (target.title ?? target.text) : (targetKey === 'h' ? r.h : r.e);
+    const link = target ? `<a href="#${esc(target.domId)}" data-nav="${esc(target.domId)}">${esc(name)}</a>` : esc(name);
+    const tail = targetKey === 'h' && target ? ` <span class="count">(${HYP_META[target.status].label})</span>` : '';
+    return `<li class="rel-${r.rel}">${targetKey === 'h' ? REL_LABEL[r.rel] : { supports: 'Supported by', contradicts: 'Contradicted by', weakens: 'Weakened by', related: 'Related' }[r.rel]}: ${link}${tail}</li>`;
+  };
+
+  const renderHypothesis = v => h => {
+    const rels = v.relations.filter(r => r.h === h.id);
+    const falsified = h.status === 'falsified';
+    return `<li><article class="card h-${h.status}" id="${esc(h.domId)}" tabindex="-1" aria-labelledby="${esc(h.domId)}-t"
+      ${falsified ? 'data-percepta-observation="falsified-hypothesis-retained"' : ''}>
+      ${hypBadge(h.status, falsified ? 'data-percepta-observation="falsified-state-noncolor"' : '')}
+      <h4 id="${esc(h.domId)}-t">${falsified ? '<span class="vh">Falsified: </span>' : ''}${esc(h.title)}</h4>
+      ${h.detail && h.detail !== h.title ? `<p>${esc(h.detail)}</p>` : ''}
+      ${h.why ? `<p class="why"><strong>${falsified ? 'Why ruled out' : h.status === 'weakened' ? 'Why weakened' : 'Basis'}:</strong> ${esc(h.why)}</p>` : ''}
+      ${!falsified && h.nextTest ? `<p class="test"><strong>Discriminating test:</strong> ${esc(h.nextTest)}</p>` : ''}
+      ${rels.length ? `<ul class="rels" aria-label="Evidence for this hypothesis">${rels.map(r => relItem(v, r, 'e')).join('')}</ul>`
+        : '<p class="why">No evidence linked yet.</p>'}
+    </article></li>`;
+  };
+
+  const renderHypotheses = v => {
+    const groups = HYP_ORDER.map(st => [st, v.hypotheses.filter(h => h.status === st)])
+      .filter(([st, hs]) => hs.length > 0 || st === 'active' || st === 'falsified');
+    return `<section class="panel" id="sec-hypotheses" data-percepta-region="hypotheses" aria-labelledby="h-hyp">
+      <h2 id="h-hyp">Competing hypotheses <span class="count">${plural(v.liveHyps.length, 'in contention', 'in contention')} · ${plural(v.hypotheses.length - v.liveHyps.length, 'falsified', 'falsified')}</span></h2>
+      <p class="hint">Hypotheses are held in parallel, grouped by standing — not ranked, not a sequence. No confidence scores are assigned; standing follows the linked evidence. Falsified hypotheses stay on the board.</p>
+      ${v.hypotheses.length === 0 ? '<p class="empty">No hypotheses recorded yet.</p>' : `<div class="hyp-groups">${groups.map(([st, hs]) => `
+        <section class="hyp-group" aria-labelledby="g-${st}">
+          <h3 id="g-${st}">${hypBadge(st)} <span class="count">${hs.length} · ${HYP_META[st].desc}</span></h3>
+          ${hs.length ? `<ul class="plain">${hs.map(renderHypothesis(v)).join('')}</ul>` : `<p class="empty">None ${st === 'falsified' ? 'ruled out yet' : 'currently'}.</p>`}
+        </section>`).join('')}</div>`}
+    </section>`;
+  };
+
+  const renderObservation = v => `<section class="panel" id="sec-observation" data-percepta-region="observation" aria-labelledby="h-obs">
+      <h2 id="h-obs">Triggering observation</h2>
+      <p class="obs-summary">${esc(v.observation.summary)}</p>
+      ${v.observation.detail ? `<p>${esc(v.observation.detail)}</p>` : ''}
+      <dl class="meta">
+        <dt>Source</dt><dd>${v.observation.sourceUrl ? `<a href="${esc(v.observation.sourceUrl)}" rel="noopener noreferrer">${esc(v.observation.source)}</a>` : esc(v.observation.source)}</dd>
+        ${v.observation.at ? `<dt>Observed</dt><dd>${esc(v.observation.at)}</dd>` : ''}
+        ${v.statusRaw ? `<dt>Investigation</dt><dd>${esc(humanize(v.statusRaw))}${v.inactive ? ' — inactive' : ''}</dd>` : ''}
+      </dl>
+    </section>`;
+
+  const renderPosition = v => `<section class="panel position" aria-labelledby="h-pos">
+      <h2 id="h-pos">Current position</h2>
+      <div class="position-grid">
+        <div>
+          <h3>What currently explains it</h3>
+          ${v.rootCauseConfirmed
+            ? `<p><span class="badge s-confirmed"><span aria-hidden="true">✓</span> Root cause confirmed</span> ${esc(v.confirmed.map(h => h.title).join('; '))}</p>`
+            : `<p><span class="badge s-open" data-percepta-observation="unresolved-not-resolved"><span aria-hidden="true">?</span> Root cause unresolved</span></p>
+               ${v.liveHyps.length
+                 ? `<p>${plural(v.liveHyps.length, 'explanation remains', 'explanations remain')} in contention (unranked):</p>
+                    <ul>${v.liveHyps.map(h => `<li><a href="#${esc(h.domId)}" data-nav="${esc(h.domId)}">${esc(h.title)}</a> — ${HYP_META[h.status].label.toLowerCase()}</li>`).join('')}</ul>`
+                 : '<p>No explanation currently survives the evidence.</p>'}`}
+        </div>
+        <div>
+          <h3>What to test next</h3>
+          ${v.nextTests.length
+            ? `<ul>${v.nextTests.map(t => `<li>${esc(t.text)}${t.domId ? ` <span class="count">(<a href="#${esc(t.domId)}" data-nav="${esc(t.domId)}">for: ${esc(t.for)}</a>)</span>` : ''}</li>`).join('')}</ul>`
+            : '<p class="empty">No proposed tests recorded. Resolve blocking unknowns first.</p>'}
+          ${v.derivedBlockers.length ? `<p><strong>${plural(v.derivedBlockers.length, 'item blocks', 'items block')}</strong> confirming a root cause.</p>` : ''}
+        </div>
+      </div>
+    </section>`;
+
+  const renderUnknownCard = u => `<li><article class="card ${u.blocking && !u.resolved ? 'blocking' : ''} ${u.resolved ? 'resolved' : ''}" id="${esc(u.domId)}" tabindex="-1"
+      ${u.blocking && !u.resolved ? 'data-percepta-observation="blocker-visible"' : ''}>
+      <div>
+        ${u.resolved
+          ? '<span class="badge s-done"><span aria-hidden="true">✓</span> Resolved</span>'
+          : `<span class="badge s-open" data-percepta-observation="unresolved-not-resolved"><span aria-hidden="true">?</span> Unresolved</span>`}
+        ${u.blocking && !u.resolved ? ' <span class="badge s-blocking"><span aria-hidden="true">⛔</span> Blocking</span>' : ''}
+      </div>
+      <h4>${esc(u.text)}</h4>
+      ${u.resolution ? `<p class="why"><strong>Answer:</strong> ${esc(u.resolution)}</p>` : ''}
+      ${!u.resolved && u.test ? `<p class="test"><strong>How to resolve:</strong> ${esc(u.test)}</p>` : ''}
+      ${u.blocks.length ? `<p class="why">Blocks: ${esc(u.blocks.map(humanize).join(', '))}</p>` : ''}
+    </article></li>`;
+
+  const renderUnknowns = v => {
+    const open = v.unknowns.filter(u => !u.resolved)
+      .sort((a, b) => Number(b.blocking) - Number(a.blocking));
+    const done = v.unknowns.filter(u => u.resolved);
+    const blocking = open.filter(u => u.blocking).length;
+    return `<section class="panel" id="sec-unknowns" data-percepta-region="unknowns" aria-labelledby="h-unk">
+      <h2 id="h-unk">Unknowns <span class="count">${open.length} unresolved · ${blocking} blocking</span></h2>
+      ${open.length ? `<ul class="plain">${open.map(renderUnknownCard).join('')}</ul>` : '<p class="empty">No unresolved unknowns.</p>'}
+      ${done.length ? `<details class="resolved-list"><summary>${plural(done.length, 'resolved unknown', 'resolved unknowns')}</summary><ul class="plain">${done.map(renderUnknownCard).join('')}</ul></details>` : ''}
+    </section>`;
+  };
+
+  const renderObligations = v => `<section class="panel" id="sec-obligations" data-percepta-region="obligations" aria-labelledby="h-obl">
+      <h2 id="h-obl">Obligations before progress <span class="count">${v.obligations.filter(o => !o.done).length} open</span></h2>
+      ${v.obligations.length === 0 ? '<p class="empty">No obligations recorded.</p>' : `<ul class="plain">${v.obligations.map(o => `
+        <li><article class="card ${!o.done && o.blocking ? 'blocking' : ''}" id="${esc(o.domId)}" tabindex="-1"
+          ${o.verification && !o.done ? 'data-percepta-observation="verification-obligation-visible"' : !o.done && o.blocking ? 'data-percepta-observation="blocker-visible"' : ''}>
+          <div>
+            ${o.done ? '<span class="badge s-done"><span aria-hidden="true">✓</span> Satisfied</span>' : '<span class="badge s-blocking"><span aria-hidden="true">☐</span> Open — required</span>'}
+            ${o.verification ? ' <span class="badge s-open"><span aria-hidden="true">⚑</span> Verification</span>' : o.kind ? ` <span class="badge s-open">${esc(humanize(o.kind))}</span>` : ''}
+          </div>
+          <h4>${esc(o.text)}</h4>
+          ${o.detail ? `<p class="why">${esc(o.detail)}</p>` : ''}
+          ${o.blocks.length ? `<p class="why">Required before: ${esc(o.blocks.map(humanize).join(', '))}</p>` : ''}
+        </article></li>`).join('')}</ul>`}
+    </section>`;
+
+  const renderContradictions = v => `<section class="panel" id="sec-contradictions" data-percepta-region="contradictions" aria-labelledby="h-con">
+      <h2 id="h-con">Contradictions <span class="count">${v.contradictions.filter(c => !c.resolved).length} unresolved</span></h2>
+      ${v.contradictions.length === 0 ? '<p class="empty">No contradictions recorded.</p>' : `<ul class="plain">${v.contradictions.map(c => `
+        <li><article class="card ${!c.resolved ? 'blocking' : 'resolved'}" id="${esc(c.domId)}" tabindex="-1">
+          ${c.resolved ? '<span class="badge s-done"><span aria-hidden="true">✓</span> Reconciled</span>' : '<span class="badge s-blocking"><span aria-hidden="true">⚠</span> Unresolved contradiction</span>'}
+          <h4>${esc(c.text)}</h4>
+          ${c.between.length ? `<p class="why">Between: ${c.between.map(ref => {
+            const hit = v.index.get(ref);
+            return hit ? `<a href="#${esc(hit.domId)}" data-nav="${esc(hit.domId)}">${esc(hit.text)}</a>` : esc(ref);
+          }).join(' ⟷ ')}</p>` : ''}
+        </article></li>`).join('')}</ul>`}
+    </section>`;
+
+  const renderEvidence = v => `<section class="panel" id="sec-evidence" data-percepta-region="evidence" aria-labelledby="h-evi">
+      <h2 id="h-evi">Evidence <span class="count">${v.evidence.length} items</span></h2>
+      <p class="hint">Each item shows which hypotheses it supports (▲), contradicts (▼), weakens (◆), or relates to (•).</p>
+      ${v.evidence.length === 0 ? '<p class="empty">No evidence recorded yet.</p>' : `<ul class="plain">${v.evidence.map(e => {
+        const rels = v.relations.filter(r => r.e === e.id);
+        return `<li><article class="card" id="${esc(e.domId)}" tabindex="-1">
+          <h4>${esc(e.text)}</h4>
+          ${e.source || e.at ? `<p class="why">${esc([e.source, e.at].filter(Boolean).join(' · '))}</p>` : ''}
+          ${rels.length ? `<ul class="rels" aria-label="Relationship to hypotheses">${rels.map(r => relItem(v, r, 'h')).join('')}</ul>` : '<p class="why">Not linked to any hypothesis.</p>'}
+        </article></li>`;
+      }).join('')}</ul>`}
+    </section>`;
+
+  const renderAction = a => {
+    const hook = a.isConfirm;
+    const rid = `reason-${slug(a.capability)}`;
+    return `<li class="action ${a.isConfirm ? 'primary' : ''}">
+      <button type="button" class="act" data-action="${esc(a.capability)}"
+        ${hook ? `data-percepta-capability="${CONFIRM}"` : ''}
+        ${a.available ? '' : `disabled aria-describedby="${rid}"`}
+        ${!a.available && a.blockers.length && !a.inactiveBlock ? 'data-percepta-observation="dependent-action-unavailable"' : ''}>
+        ${a.available ? '' : '<span aria-hidden="true">🔒 </span>'}${esc(a.label)}
+      </button>
+      ${a.available
+        ? (a.hint ? `<p class="reason">${esc(a.hint)}</p>` : '')
+        : `<p class="reason" id="${rid}" ${hook ? `data-percepta-unavailable-reason-for="${CONFIRM}"` : ''} data-percepta-observation="unavailable-reason-visible"><strong>Unavailable:</strong> ${esc(a.reason)}</p>
+           ${a.blockers.filter(b => !b.missing).length ? `<ul class="blocker-links" aria-label="Go to what blocks ${esc(a.label)}">${a.blockers.filter(b => !b.missing).map(b =>
+             `<li><a href="#${esc(b.domId)}" data-nav="${esc(b.domId)}" ${hook ? `data-percepta-blocker-link-for="${CONFIRM}"` : ''} data-percepta-observation="blocker-navigation-available">Go to ${esc(b.kindLabel)}: ${esc(b.text)}</a></li>`).join('')}</ul>` : ''}`}
+    </li>`;
+  };
+
+  const renderActions = (v, log) => {
+    const avail = v.actions.filter(a => a.available && !a.isConfirm);
+    const unavail = v.actions.filter(a => !a.available && !a.isConfirm);
+    const confirm = v.actions.find(a => a.isConfirm);
+    return `<section class="panel actions-panel" id="sec-actions" data-percepta-region="legal-actions" aria-labelledby="h-act">
+      <h2 id="h-act">Next actions <span class="count">${v.actions.filter(a => a.available).length} available · ${v.actions.filter(a => !a.available).length} unavailable</span></h2>
+      ${v.inactive ? `<p class="notice" role="status" data-percepta-observation="inactive-actions-unavailable"><strong>Investigation ${esc(v.statusRaw || 'inactive')}.</strong> All actions below are shown but unavailable until the investigation is reopened.</p>` : ''}
+      <h3 class="sub">Conclusion</h3>
+      <ul class="plain">${renderAction(confirm)}</ul>
+      <h3 class="sub">Available now</h3>
+      ${avail.length ? `<ul class="plain">${avail.map(renderAction).join('')}</ul>` : '<p class="empty">No other actions are available right now.</p>'}
+      ${unavail.length ? `<h3 class="sub">Unavailable</h3><ul class="plain">${unavail.map(renderAction).join('')}</ul>` : ''}
+      ${log.length ? `<h3 class="sub">Requested in this session</h3><ol class="log">${log.map(l => `<li>${esc(l)} — recorded locally, not sent</li>`).join('')}</ol>` : ''}
+    </section>`;
+  };
+
+  const renderPersistence = v => {
+    const p = v.persistence;
+    const m = PERSIST_META[p.kind];
+    return `<section class="persist p-${p.kind}" data-percepta-region="persistence-state" aria-labelledby="h-per" aria-live="polite">
+      <h2 id="h-per">Save status</h2>
+      <p class="state" ${p.kind === 'pending' ? 'data-percepta-observation="persistence-pending-visible"' : ''}><span aria-hidden="true">${m.icon}</span> ${m.label}${p.kind === 'pending' && p.pendingWrites ? ` (${plural(p.pendingWrites, 'write', 'writes')} outstanding)` : ''}</p>
+      <p>${esc(m.text)}</p>
+      ${p.kind !== 'synced' ? '<p data-percepta-observation="no-false-remote-success"><strong>Remote save not confirmed.</strong> Do not treat current changes as stored on the server.</p>' : ''}
+      ${p.message ? `<p>${esc(p.message)}</p>` : ''}
+      ${p.lastSynced ? `<p>Last server-confirmed save: ${esc(p.lastSynced)}${p.kind !== 'synced' ? ' (earlier version; newer changes unconfirmed)' : ''}</p>` : ''}
+      <ol aria-label="Possible save states">${PERSIST_ORDER.map(k => `<li ${k === p.kind ? 'aria-current="true"' : ''}>${PERSIST_META[k].icon} ${PERSIST_META[k].label}</li>`).join('')}</ol>
+    </section>`;
+  };
+
+  const renderNav = v => {
+    const blockingOpen = v.unknowns.filter(u => u.blocking && !u.resolved).length;
+    const links = [
+      ['sec-observation', 'Observation', ''],
+      ['sec-hypotheses', 'Hypotheses', String(v.hypotheses.length)],
+      ['sec-unknowns', 'Unknowns', blockingOpen ? `${blockingOpen} blocking` : String(v.unknowns.filter(u => !u.resolved).length)],
+      ['sec-obligations', 'Obligations', String(v.obligations.filter(o => !o.done).length)],
+      ['sec-contradictions', 'Contradictions', String(v.contradictions.filter(c => !c.resolved).length)],
+      ['sec-actions', 'Actions', `${v.actions.filter(a => a.available).length} available`],
+      ['sec-evidence', 'Evidence', String(v.evidence.length)]
+    ];
+    return `<nav class="jump" aria-label="Workspace sections"><ul>${links.map(([id, label, n]) =>
+      `<li><a href="#${id}" data-nav="${id}">${label}${n ? ` <strong>${esc(n)}</strong>` : ''}</a></li>`).join('')}</ul></nav>`;
+  };
+
+  const renderApp = (v, log) => `
+    <header class="top">
+      <div class="top-inner">
+        <div>
+          <p class="eyebrow">${esc(v.title)} · Investigation workspace</p>
+          <h1>${esc(v.question)}</h1>
+        </div>
+        ${renderPersistence(v)}
+      </div>
+    </header>
+    ${renderNav(v)}
+    <main id="main" tabindex="-1">
+      <div class="layout">
+        <div class="col">
+          ${renderObservation(v)}
+          ${renderPosition(v)}
+          ${renderHypotheses(v)}
+        </div>
+        <div class="col">
+          ${renderActions(v, log)}
+          ${renderUnknowns(v)}
+          ${renderObligations(v)}
+          ${renderContradictions(v)}
+          ${renderEvidence(v)}
+        </div>
+      </div>
+    </main>`;
+
+  /* ---------- demo state (used until a fixture is supplied) ---------- */
+  const DEMO = {
+    title: 'Indy Init',
+    status: 'active',
+    observation: {
+      summary: 'indy-init exits with code 78 during boot on 3 of 12 edge nodes after the 4.2 rollout.',
+      details: 'Affected nodes stall at “waiting for config”; unaffected nodes boot normally with the same image.',
+      source: { name: 'Fleet health alert', type: 'monitoring', ref: 'ALERT-2291' },
+      observedAt: '2026-09-22 06:14 UTC'
+    },
+    hypotheses: [
+      { id: 'h-config', title: 'Config bundle fails schema validation on nodes with legacy overrides', status: 'active',
+        nextTest: 'Boot an unaffected node with a legacy override file copied in.' },
+      { id: 'h-race', title: 'Network mount is not ready when indy-init reads config', status: 'weakened',
+        reason: 'Mount timing logs show the mount ready 4 s before read on two affected nodes.',
+        nextTest: 'Delay indy-init start by 30 s on one affected node.' },
+      { id: 'h-disk', title: 'Disk full on /var prevents writing runtime state', status: 'falsified',
+        reason: 'All affected nodes report more than 40% free on /var.' }
+    ],
+    evidence: [
+      { id: 'e1', summary: 'All 3 affected nodes carry /etc/indy/override.d/legacy.yaml', source: 'fleet inventory', supports: ['h-config'] },
+      { id: 'e2', summary: 'Mount ready timestamp precedes config read on 2 of 3 affected nodes', source: 'journald', weakens: ['h-race'] },
+      { id: 'e3', summary: '/var free space 41–63% on affected nodes', source: 'node metrics', contradicts: ['h-disk'] }
+    ],
+    contradictions: [
+      { id: 'c1', summary: 'Node edge-07 has the legacy override but boots normally', between: ['h-config', 'e1'] }
+    ],
+    unknowns: [
+      { id: 'u1', question: 'Does edge-07 load the override, or is it shadowed by a later file?', blocking: true,
+        howToResolve: 'Dump effective config on edge-07 with indy-init --print-config.' },
+      { id: 'u2', question: 'Was the third affected node ever mount-delayed?', blocking: false }
+    ],
+    obligations: [
+      { id: 'o1', title: 'Reproduce the failure on a staging node before confirming a cause', type: 'verification', blocks: ['confirm-root-cause'] }
+    ],
+    actions: [
+      { capability: 'add-evidence', label: 'Record new evidence', available: true },
+      { capability: 'add-hypothesis', label: 'Add a competing hypothesis', available: true },
+      { capability: 'run-test', label: 'Log a discriminating test run', available: true },
+      { capability: 'confirm-root-cause', label: 'Confirm root cause' },
+      { capability: 'close-investigation', label: 'Close investigation', available: false,
+        reason: 'A root cause must be confirmed or the investigation explicitly abandoned first.', blockedBy: ['u1'] }
+    ],
+    persistence: { state: 'pending', pendingWrites: 1, lastSyncedAt: '2026-09-22 09:02 UTC' }
+  };
+
+  /* ---------- effects (the only impure part) ---------- */
+  const app = document.getElementById('app');
+  const session = { raw: DEMO, local: '', log: [] };
+
+  const render = () => {
+    const focusedAction = document.activeElement?.getAttribute?.('data-action');
+    app.innerHTML = renderApp(buildView(session.raw, session.local), session.log);
+    const again = focusedAction && app.querySelector(`[data-action="${CSS.escape(focusedAction)}"]:not([disabled])`);
+    again && again.focus();
+  };
+
+  const navigateTo = id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.closest('details')?.setAttribute('open', '');
+    el.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    el.hasAttribute('tabindex') || el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+    el.setAttribute('data-flash', '1');
+    setTimeout(() => el.removeAttribute('data-flash'), 1700);
+    history.replaceState(null, '', `#${id}`);
+  };
+
+  document.addEventListener('click', ev => {
+    const link = ev.target.closest('a[data-nav]');
+    const btn = ev.target.closest('button[data-action]');
+    if (link) {
+      ev.preventDefault();
+      navigateTo(link.getAttribute('data-nav'));
+    } else if (btn && !btn.disabled) {
+      session.log = [...session.log, btn.textContent.trim()];
+      session.local = 'This request is held in this browser only. No backend is connected, so it has not been sent.';
+      render();
+    }
+  });
+
+  window.__perceptaSetState = input => {
+    session.raw = typeof input === 'string' ? JSON.parse(input) : input;
+    session.local = '';
+    session.log = [];
+    render();
+    return true;
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
