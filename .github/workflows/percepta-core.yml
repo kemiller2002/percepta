@@ -11,6 +11,9 @@ on:
       - "src/Percepta.Cli/**"
       - "examples/Percepta.Examples/**"
       - "tests/Percepta.Core.Tests/**"
+      - "tests/Percepta.Adversarial.Tests/**"
+      - "research/experiments/**"
+      - "research/hypotheses/**"
       - "tests/fixtures/**"
       - ".percepta/contracts/**"
       - ".github/workflows/percepta-core.yml"
@@ -63,6 +66,9 @@ jobs:
       - name: Build Percepta CLI
         run: dotnet build src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release
 
+      - name: Build adversarial experiment
+        run: dotnet build tests/Percepta.Adversarial.Tests/Percepta.Adversarial.Tests.fsproj --configuration Release
+
       - name: Run Percepta.Core tests
         run: dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release
 
@@ -71,6 +77,9 @@ jobs:
 
       - name: Run Percepta doctor
         run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- doctor
+
+      - name: Run adversarial Percepta experiment
+        run: dotnet run --project tests/Percepta.Adversarial.Tests/Percepta.Adversarial.Tests.fsproj --configuration Release
 
       - name: Compile discoverable contracts
         run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- compile --out artifacts/percepta/compiled
