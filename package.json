@@ -11,7 +11,8 @@
     "echelon:verify": "./ros verify && ordo verify && visual-engineering verify --strict && communication-engineering verify --strict && limen verify",
     "echelon:status": "./ros status && ordo status && visual-engineering status && communication-engineering status && limen status",
     "echelon:doctor": "./ros doctor && ordo doctor && visual-engineering doctor && communication-engineering doctor && limen doctor",
-    "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release"
+    "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release && npm run test:core",
+    "test:core": "dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release"
   },
   "dependencies": {
     "@echelon-foundry/design-system": "https://github.com/kemiller2002/forma/releases/download/v0.2.0/echelon-foundry-design-system-0.2.0.tgz",
