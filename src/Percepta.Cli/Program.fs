@@ -81,7 +81,7 @@ module Cli =
             | many ->
                 Error($"Multiple Percepta contracts were found ({many.Length}); pass --contract explicitly.")
 
-    let private ensureDirectoryForFile path =
+    let private ensureDirectoryForFile (path: string) =
         let directory = Path.GetDirectoryName(path)
 
         if not (String.IsNullOrWhiteSpace directory) then
@@ -253,7 +253,7 @@ module Cli =
                 References = [ path ]
             }
 
-    let private toEvidenceRecord requirement source status summary references =
+    let private toEvidenceRecord (requirement: EvidenceRequirement) (source: string) (status: VerificationStatus) (summary: string) (references: string list) : EvidenceRecord =
         {
             Requirement = requirement.Id
             Kind = requirement.Kind
@@ -372,7 +372,7 @@ module Cli =
 
                                     readExternalReview resolved)
 
-                            let resultForRequirement requirement =
+                            let resultForRequirement (requirement: EvidenceRequirement) =
                                 match requirement.Kind with
                                 | ContractValidation ->
                                     toEvidenceRecord
