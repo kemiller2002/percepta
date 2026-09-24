@@ -8,7 +8,10 @@ module Validation =
         | NoRegions
         | DuplicateRegion of RegionId
         | EmptyRegionPurpose of RegionId
-        | InvalidBreakpointRange of name: string
+        | DuplicateObservation of ObservationId
+        | EmptyObservationDescription of ObservationId
+        | InvalidViewport of name: string
+        | UnknownBreakpointRegion of breakpoint: string * region: RegionId
         | DuplicateVerificationId of VerificationId
         | MissingRequiredEvidence
 
@@ -19,6 +22,19 @@ module Validation =
             if count > 1 then Some value else None)
 
     let validate (contract: ScreenContract) =
+        let regionIds = contract.Regions |> List.map (fun region -> region.Id) |> Set.ofList
+
+        let observations =
+            [
+                yield!
+                    contract.StateProjections
+                    |> List.collect (fun projection -> projection.RequiredObservations)
+
+                yield!
+                    contract.Breakpoints
+                    |> List.collect (fun breakpoint -> breakpoint.RequiredObservations)
+            ]
+
         [
             if System.String.IsNullOrWhiteSpace contract.Purpose then
                 EmptyScreenPurpose
@@ -39,12 +55,20 @@ module Validation =
                 if System.String.IsNullOrWhiteSpace region.Purpose then
                     EmptyRegionPurpose region.Id
 
+            for duplicate in observations |> List.map (fun observation -> observation.Id) |> duplicates do
+                DuplicateObservation duplicate
+
+            for observation in observations do
+                if System.String.IsNullOrWhiteSpace observation.Description then
+                    EmptyObservationDescription observation.Id
+
             for breakpoint in contract.Breakpoints do
-                match breakpoint.MinimumWidthCssPx, breakpoint.MaximumWidthCssPx with
-                | Some minimum, Some maximum when minimum > maximum ->
-                    InvalidBreakpointRange breakpoint.Name
-                | _ ->
-                    ()
+                if breakpoint.ViewportWidthCssPx <= 0 || breakpoint.ViewportHeightCssPx <= 0 then
+                    InvalidViewport breakpoint.Name
+
+                for region in breakpoint.RequiredRegionsVisible do
+                    if not (Set.contains region regionIds) then
+                        UnknownBreakpointRegion(breakpoint.Name, region)
 
             for duplicate in
                 contract.EvidenceRequirements
