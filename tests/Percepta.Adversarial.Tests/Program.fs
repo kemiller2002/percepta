@@ -147,7 +147,8 @@ reason.hidden = true;
                 appendScript (
                     wrapStateScript
                         """
-document.querySelector('[data-percepta-blocker-link-for="confirm-root-cause"]')?.remove();
+const blockerLink = document.querySelector('[data-percepta-blocker-link-for="confirm-root-cause"]');
+blockerLink.hidden = true;
 """
                 )
         }
