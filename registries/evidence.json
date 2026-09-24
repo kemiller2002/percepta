@@ -14,8 +14,6 @@
     "source_title": "Percepta Verification run 33",
     "source_uri": "https://github.com/kemiller2002/percepta/actions/runs/35966872347",
     "status": "accepted",
-    "superseded_by": [],
-    "supersedes": [],
     "supports": [
       "HY-PERCEPTA-2026-0001",
       "HY-PERCEPTA-2026-0002"
