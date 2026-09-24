@@ -5,7 +5,7 @@ This directory is a blinded control condition for EX-PERCEPTA-2026-0002.
 For this lane only, the experiment protocol overrides the repository instruction to inspect a Percepta screen contract before UI implementation.
 
 You MUST:
-- use only ../frozen-product-brief.md as the product/UI specification;
+- use only ../../frozen-product-brief.md as the product/UI specification;
 - write only index.html and NOTES.md in this lane;
 - implement the neutral evaluator hooks in the frozen brief faithfully;
 - make your own composition and interaction decisions.
