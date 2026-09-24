@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../Percepta.Core/Percepta.Core.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EchelonFoundry.Aegis.Core" />
     <PackageReference Include="EchelonFoundry.Aegis.Integration.GitHub" />
     <PackageReference Include="EchelonFoundry.Aegis.Store.GitHub" />
