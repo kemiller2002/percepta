@@ -162,13 +162,13 @@ module ContractSerialization =
 
         writer.WriteEndObject()
 
-    let private parseObservation element =
+    let private parseObservation element : UiObservation =
         {
             Id = ObservationId(stringProperty "id" element)
             Description = stringProperty "description" element
         }
 
-    let private writeObservation (writer: Utf8JsonWriter) observation =
+    let private writeObservation (writer: Utf8JsonWriter) (observation: UiObservation) =
         writer.WriteStartObject()
         writer.WriteString("id", observationValue observation.Id)
         writer.WriteString("description", observation.Description)
@@ -258,7 +258,7 @@ module ContractSerialization =
         | :? JsonException as ex -> Error [ $"Invalid JSON: {ex.Message}" ]
         | :? FormatException as ex -> Error [ ex.Message ]
 
-    let serialize contract =
+    let serialize (contract: ScreenContract) =
         use stream = new MemoryStream()
         use writer = new Utf8JsonWriter(stream, JsonWriterOptions(Indented = true))
 
