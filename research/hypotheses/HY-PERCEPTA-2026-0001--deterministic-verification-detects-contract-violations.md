@@ -2,11 +2,11 @@
 id: HY-PERCEPTA-2026-0001
 title: Deterministic Percepta verification detects machine-addressable UI contract violations
 research_area: percepta-verification
-status: active
-confidence: low
+status: supported
+confidence: medium
 created: 2026-09-24
 author_agent: chatgpt
-supporting_evidence: []
+supporting_evidence:\n  - EV-PERCEPTA-2026-0001
 contradicting_evidence: []
 related_theories: []
 supersedes: []
