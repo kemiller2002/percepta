@@ -245,3 +245,127 @@ The scenario SHALL exercise at least:
 When an implementation passes current formal checks but is judged to communicate materially incorrect product meaning, the discrepancy SHALL be treated as evidence of a missing or inadequate contract invariant.
 
 Percepta requirements and contract vocabulary SHOULD evolve from such evidence rather than from arbitrary feature accumulation.
+
+
+## PCT-023 Executable CLI
+
+Percepta SHALL provide an executable repository CLI with at least:
+
+- `compile`;
+- `verify`;
+- `status`;
+- `doctor`.
+
+The CLI SHALL return a non-zero exit code when a required verification obligation is Failed or Unavailable.
+
+## PCT-024 Contract discovery
+
+Percepta SHALL discover serialized contracts from `.percepta/contracts`.
+
+When a command requires exactly one contract and multiple contracts are present, Percepta SHALL require explicit selection rather than guessing.
+
+## PCT-025 Browser adapter isolation
+
+Rendered-page verification SHALL live outside Percepta.Core.
+
+The first browser adapter SHALL use Playwright and SHALL NOT introduce Playwright, DOM, browser, or LLM dependencies into Percepta.Core.
+
+## PCT-026 Fixture-driven state projection
+
+A rendered application MAY expose a test seam that accepts domain-state fixtures.
+
+The test seam SHALL request application state and SHALL NOT grant Percepta authority to invent domain truth.
+
+State-projection verification SHALL exercise declared predicates using explicit fixtures and SHALL report uncovered projections as Unavailable rather than Passed.
+
+## PCT-027 Semantic implementation hooks
+
+The browser adapter SHALL support stable verification hooks including:
+
+- `data-percepta-region`;
+- `data-percepta-observation`;
+- `data-percepta-capability`;
+- `data-percepta-unavailable-reason-for`;
+- `data-percepta-blocker-link-for`.
+
+Hooks SHALL be evidence instrumentation and SHALL NOT become domain authority.
+
+## PCT-028 Machine-readable evidence report
+
+A verification run SHALL be able to emit a versioned JSON evidence report.
+
+The report SHALL contain:
+
+- screen identifier;
+- normalized-contract hash;
+- generation time;
+- completion result;
+- every declared verification requirement;
+- required/supporting classification;
+- Passed/Failed/Unavailable/NotApplicable/AcceptedDeviation status;
+- summary;
+- evidence references;
+- evidence source.
+
+## PCT-029 Fail-closed completion
+
+Required verification evidence SHALL fail closed.
+
+A missing browser, missing fixture, missing adapter, unreadable evidence source, or other unavailable required verification capability SHALL NOT be treated as success.
+
+Supporting evidence MAY be unavailable without blocking completion when governing policy declares it non-required.
+
+## PCT-030 Responsive rendered verification
+
+Percepta SHALL be able to drive each declared viewport size and verify required visible regions.
+
+Responsive verification SHALL detect horizontal document overflow and SHALL capture viewport-specific evidence.
+
+## PCT-031 Screenshot evidence and baselines
+
+Percepta SHALL capture screenshots for declared viewports.
+
+Percepta SHALL support establishing explicit baselines and comparing later captures against them.
+
+The initial exact-baseline implementation SHALL be treated as supporting evidence unless a contract explicitly requires visual-regression evidence.
+
+## PCT-032 Semantic visual review ingestion
+
+Percepta SHALL support ingestion of semantic visual-review evidence produced outside the deterministic core.
+
+External semantic review SHALL use the same evidence status vocabulary.
+
+External semantic review SHALL NOT override or erase deterministic failures.
+
+## PCT-033 Accessibility rendered checks
+
+The browser adapter SHALL produce deterministic accessibility evidence for at least:
+
+- document language;
+- main landmark;
+- top-level heading;
+- duplicate DOM identifiers;
+- image alternative text;
+- accessible naming of visible interactive elements.
+
+These checks are an initial floor and SHALL be extensible without moving accessibility authority into an LLM.
+
+## PCT-034 Doctor
+
+`percepta doctor` SHALL validate discovered contracts and SHALL prove that the configured browser automation runtime can launch.
+
+A browser runtime that cannot launch SHALL make doctor fail.
+
+## PCT-035 Canonical CI proof
+
+CI SHALL prove the full Indy Init vertical slice by:
+
+1. building Core, Foundation, adapter, and CLI;
+2. running Core tests;
+3. installing the Playwright-matched Chromium;
+4. running doctor;
+5. compiling the serialized contract;
+6. demonstrating that missing required state fixtures fail closed;
+7. establishing temporary visual baselines;
+8. re-running verification against those baselines;
+9. producing and retaining evidence artifacts.
