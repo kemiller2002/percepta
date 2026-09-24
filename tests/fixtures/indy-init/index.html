@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Percepta Indy Init Fixture</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f6f6f4; color: #171717; }
+    main { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+    header { margin-bottom: 1rem; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(18rem, .9fr); gap: 1rem; }
+    .stack { display: grid; gap: 1rem; min-width: 0; }
+    section { background: white; border: 1px solid #d7d7d2; border-radius: .75rem; padding: 1rem; min-width: 0; }
+    h1, h2, p { overflow-wrap: anywhere; }
+    .state { font-weight: 700; }
+    .hypothesis { border-left: .25rem solid currentColor; padding-left: .75rem; }
+    .actions { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+    button, a { font: inherit; }
+    button { min-height: 2.75rem; padding: .5rem .9rem; }
+    .status { display: inline-block; padding: .2rem .5rem; border: 1px solid currentColor; border-radius: 999px; }
+    [hidden] { display: none !important; }
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: minmax(0, 1fr); }
+      main { padding: .75rem; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Investigation Workspace</h1>
+    <p>What currently explains the observation, and what should be tested next?</p>
+  </header>
+
+  <div class="grid">
+    <div class="stack">
+      <section data-percepta-region="observation" id="observation">
+        <h2>Observation</h2>
+        <p>Order 8172 is marked delivered, but the customer reports it never arrived.</p>
+      </section>
+
+      <section data-percepta-region="hypotheses" id="hypotheses">
+        <h2>Hypotheses</h2>
+        <article class="hypothesis">
+          <h3>H1: Delivered to the prior address</h3>
+          <p class="state" data-percepta-state="hypothesis" id="hypothesis-state">Proposed</p>
+          <p data-percepta-observation="falsified-hypothesis-retained" hidden>
+            This falsified hypothesis remains in the investigation record.
+          </p>
+          <p data-percepta-observation="falsified-state-noncolor" hidden>
+            State: Falsified. Carrier scan rules out this explanation.
+          </p>
+          <p data-percepta-observation="inactive-actions-unavailable" hidden>
+            Actions that require H1 to remain active are unavailable.
+          </p>
+        </article>
+        <article class="hypothesis">
+          <h3>H2: Carrier delivered to the wrong door</h3>
+          <p class="state" data-percepta-state="hypothesis">Supported</p>
+        </article>
+      </section>
+
+      <section data-percepta-region="contradictions" id="contradictions" hidden>
+        <h2>Contradictions</h2>
+        <p>Carrier scan says delivered while the customer reports non-delivery.</p>
+      </section>
+
+      <section data-percepta-region="evidence" id="evidence">
+        <h2>Evidence</h2>
+        <p>Carrier scan, shipping-address history, and customer report are linked to hypotheses.</p>
+      </section>
+    </div>
+
+    <div class="stack">
+      <section data-percepta-region="unknowns" id="unknowns">
+        <h2>Unknowns</h2>
+        <p id="unknown-copy">No blocking unknowns.</p>
+        <p data-percepta-observation="blocker-visible" hidden>
+          Blocking unknown: delivery photo has not been reviewed.
+        </p>
+      </section>
+
+      <section data-percepta-region="obligations" id="obligations" hidden>
+        <h2>Obligations</h2>
+        <p>Review the delivery photo before confirming root cause.</p>
+        <p data-percepta-observation="verification-obligation-visible" hidden>
+          Verification remains required before resolution.
+        </p>
+      </section>
+
+      <section data-percepta-region="legal-actions" id="legal-actions">
+        <h2>Legal actions</h2>
+        <div class="actions">
+          <button type="button" data-percepta-capability="confirm-root-cause">Confirm root cause</button>
+          <a data-percepta-blocker-link-for="confirm-root-cause" href="#unknowns" hidden>Go to blocker</a>
+        </div>
+        <p data-percepta-unavailable-reason-for="confirm-root-cause" hidden>
+          Confirm root cause is unavailable until the delivery photo is reviewed.
+        </p>
+        <p data-percepta-observation="dependent-action-unavailable" hidden>
+          Confirmation is unavailable while the blocking unknown remains.
+        </p>
+        <p data-percepta-observation="unavailable-reason-visible" hidden>
+          The blocking reason is visible to the user.
+        </p>
+        <p data-percepta-observation="blocker-navigation-available" hidden>
+          A direct path to the blocking unknown is available.
+        </p>
+      </section>
+
+      <section data-percepta-region="persistence-state" id="persistence-state">
+        <h2>Persistence</h2>
+        <p class="status" id="persistence-copy">Synced</p>
+        <p data-percepta-observation="persistence-pending-visible" hidden>
+          Remote persistence: Pending.
+        </p>
+        <p data-percepta-observation="no-false-remote-success" hidden>
+          The interface does not claim remote persistence succeeded.
+        </p>
+      </section>
+
+      <section aria-label="Investigation resolution status">
+        <h2>Resolution</h2>
+        <p id="resolution-copy">Open</p>
+        <p data-percepta-observation="unresolved-not-resolved" hidden>
+          Corrective action is not verified, so the investigation is not resolved.
+        </p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script>
+(() => {
+  const observationPredicates = {
+    "falsified-hypothesis-retained": "hypothesis-is-falsified",
+    "falsified-state-noncolor": "hypothesis-is-falsified",
+    "inactive-actions-unavailable": "hypothesis-is-falsified",
+    "blocker-visible": "blocking-unknown-exists",
+    "dependent-action-unavailable": "blocking-unknown-exists",
+    "unavailable-reason-visible": "blocking-unknown-exists",
+    "blocker-navigation-available": "blocking-unknown-exists",
+    "persistence-pending-visible": "github-write-is-pending",
+    "no-false-remote-success": "github-write-is-pending",
+    "unresolved-not-resolved": "corrective-action-not-verified",
+    "verification-obligation-visible": "corrective-action-not-verified"
+  };
+
+  window.__perceptaSetState = state => {
+    const predicates = new Set(state.predicates || []);
+    const capabilities = state.capabilities || {};
+
+    document.querySelector('[data-percepta-region="contradictions"]').hidden = !predicates.has("contradictions-present");
+    document.querySelector('[data-percepta-region="obligations"]').hidden = !predicates.has("obligations-present");
+
+    for (const el of document.querySelectorAll("[data-percepta-observation]")) {
+      const id = el.getAttribute("data-percepta-observation");
+      el.hidden = !predicates.has(observationPredicates[id]);
+    }
+
+    const falsified = predicates.has("hypothesis-is-falsified");
+    document.getElementById("hypothesis-state").textContent = falsified ? "Falsified" : "Proposed";
+
+    const blocking = predicates.has("blocking-unknown-exists");
+    document.getElementById("unknown-copy").textContent = blocking
+      ? "The delivery photo is a blocking unknown."
+      : "No blocking unknowns.";
+
+    const confirm = document.querySelector('[data-percepta-capability="confirm-root-cause"]');
+    const illegal = capabilities["confirm-root-cause"] === "illegal";
+    confirm.disabled = illegal;
+    confirm.setAttribute("aria-disabled", illegal ? "true" : "false");
+
+    document.querySelector('[data-percepta-unavailable-reason-for="confirm-root-cause"]').hidden = !illegal;
+    document.querySelector('[data-percepta-blocker-link-for="confirm-root-cause"]').hidden = !illegal;
+
+    const pending = predicates.has("github-write-is-pending");
+    document.getElementById("persistence-copy").textContent = pending ? "Pending" : "Synced";
+
+    const unverified = predicates.has("corrective-action-not-verified");
+    document.getElementById("resolution-copy").textContent = unverified ? "Awaiting verification" : "Open";
+  };
+})();
+</script>
+</body>
+</html>
