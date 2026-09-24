@@ -78,11 +78,10 @@ match Compilation.compile duplicateContract with
 
 if List.isEmpty failures then
     printfn "Percepta.Core.Tests: all checks passed."
-    0
 else
     eprintfn "Percepta.Core.Tests: %d failure(s)." failures.Length
 
     for failure in List.rev failures do
         eprintfn "- %s" failure
 
-    1
+    Environment.ExitCode <- 1
