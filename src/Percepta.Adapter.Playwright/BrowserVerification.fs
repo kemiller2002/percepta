@@ -133,10 +133,15 @@ module BrowserVerification =
         }
 
     let private applyFixture (page: IPage) (fixture: Fixture) =
-        page.EvaluateAsync(
-            "json => { if (typeof window.__perceptaSetState !== 'function') throw new Error('window.__perceptaSetState is not defined'); window.__perceptaSetState(JSON.parse(json)); }",
-            fixture.RawJson
-        )
+        task {
+            let! _ =
+                page.EvaluateAsync(
+                    "json => { if (typeof window.__perceptaSetState !== 'function') throw new Error('window.__perceptaSetState is not defined'); window.__perceptaSetState(JSON.parse(json)); }",
+                    fixture.RawJson
+                )
+
+            return ()
+        }
 
     let private checkStructural (page: IPage) (contract: ScreenContract) =
         task {
