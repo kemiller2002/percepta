@@ -89,3 +89,69 @@ See:
 Percepta.Core validates a typed `ScreenContract` and compiles valid contracts into deterministic agent implementation guidance plus a typed verification plan.
 
 See [Contract Compiler](docs/COMPILER.md) and the typed [Indy Init example](examples/Percepta.Examples/IndyInit.fs).
+
+
+## Executable verification
+
+Percepta can verify a rendered application against a serialized semantic UI contract.
+
+The executable stack is:
+
+```text
+.percepta/contracts/*.json
+        ↓
+Percepta.Core validation + compiler
+        ↓
+Percepta CLI
+        ↓
+Percepta.Adapter.Playwright
+        ↓
+rendered application + explicit state fixtures
+        ↓
+structural / state / interaction / accessibility / responsive evidence
+        ↓
+screenshots + optional visual review
+        ↓
+evidence.json
+        ↓
+completion gate
+```
+
+Install the matching Chromium once:
+
+```bash
+npm run percepta:install-browser
+```
+
+Check the environment and contracts:
+
+```bash
+npm run percepta:doctor
+```
+
+Compile all discoverable contracts:
+
+```bash
+npm run percepta:compile
+```
+
+Run the canonical Indy Init fixture:
+
+```bash
+npm run test:percepta:fixture
+```
+
+For an application-specific verification:
+
+```bash
+npm run percepta -- verify \
+  --contract .percepta/contracts/my-screen.json \
+  --url http://localhost:4173/my-screen \
+  --fixture tests/percepta/my-screen-blocked.json
+```
+
+Required evidence fails closed. A required `Unavailable` result is not a pass and produces a non-zero exit code.
+
+The first browser adapter uses Microsoft Playwright. Playwright remains outside `Percepta.Core`.
+
+See [Executable Verification](docs/EXECUTABLE-VERIFICATION.md).
