@@ -79,7 +79,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --             verify             --contract .percepta/contracts/indy-init-investigation-workspace.json             --url tests/fixtures/indy-init/index.html             --out artifacts/percepta/negative/evidence.json
+          dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --             verify             --contract .percepta/contracts/indy-init-investigation-workspace.json             --url tests/fixtures/indy-init/index.html             --semantic-review tests/fixtures/indy-init/semantic-review.json             --out artifacts/percepta/negative/evidence.json
           code=$?
           set -e
           if [ "$code" -eq 0 ]; then
