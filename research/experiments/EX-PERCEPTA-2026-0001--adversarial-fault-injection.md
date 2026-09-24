@@ -16,6 +16,7 @@ inputs:
   - tests/fixtures/indy-init/legal.json
 outputs:
   - artifacts/percepta/adversarial/experiment-results.json
+  - EV-PERCEPTA-2026-0001
 ---
 
 # Experiment
