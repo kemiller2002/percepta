@@ -2,5 +2,23 @@
   "schemaVersion": "1.0.0",
   "repository": "percepta",
   "nextSeq": 1,
-  "items": []
+  "items": [
+    {
+      "id": "WI-INDY-UI-001",
+      "title": "Add and validate Indy Init Percepta screen contracts",
+      "description": null,
+      "tags": [
+        "percepta",
+        "indy-init"
+      ],
+      "priority": "high",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-09-24T21:18:15.159Z",
+      "updatedAt": "2026-09-24T21:18:15.000Z",
+      "createdBy": "chatgpt",
+      "source": "cond-managed-repair",
+      "sourceReference": "examples/indy-init/application.json"
+    }
+  ]
 }

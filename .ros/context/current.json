@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "protocolVersion": "1.0.0",
   "repository": "percepta",
-  "actor": "ros-bootstrap",
+  "actor": "chatgpt",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-09-24T04:22:02.116Z",
+  "updatedAt": "2026-09-24T21:18:15.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -20,6 +20,18 @@
       ],
       "updatedAt": "2026-09-24T04:22:02.116Z",
       "completedAt": "2026-09-24T04:22:02.116Z"
+    },
+    {
+      "id": "WI-INDY-UI-001",
+      "type": "mechanical",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [],
+      "updatedAt": "2026-09-24T21:18:15.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20260924T211815709Z-e0ed4048"
+      ],
+      "completedAt": "2026-09-24T21:18:15.000Z"
     }
   ]
 }
