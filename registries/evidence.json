@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "confidence": "high",
+    "contradicts": [],
+    "created_by_agent": "chatgpt",
+    "evidence_type": "test-result",
+    "id": "EV-PERCEPTA-2026-0001",
+    "path": "research/evidence/EV-PERCEPTA-2026-0001--adversarial-mutation-results.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "retrieved": "2026-09-24",
+    "source_author": "GitHub Actions / Percepta adversarial harness",
+    "source_date": "2026-09-24",
+    "source_title": "Percepta Verification run 33",
+    "source_uri": "https://github.com/kemiller2002/percepta/actions/runs/35966872347",
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "supports": [
+      "HY-PERCEPTA-2026-0001",
+      "HY-PERCEPTA-2026-0002"
+    ],
+    "tags": [
+      "percepta",
+      "mutation-testing",
+      "ui-verification",
+      "semantic-contracts",
+      "adversarial-testing"
+    ],
+    "title": "Adversarial Percepta mutation experiment results"
+  }
+]
