@@ -1,0 +1,40 @@
+name: Percepta Core
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/Percepta.Core/**"
+      - "examples/Percepta.Examples/**"
+      - "tests/Percepta.Core.Tests/**"
+      - ".github/workflows/percepta-core.yml"
+  pull_request:
+    paths:
+      - "src/Percepta.Core/**"
+      - "examples/Percepta.Examples/**"
+      - "tests/Percepta.Core.Tests/**"
+      - ".github/workflows/percepta-core.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build Percepta.Core
+        run: dotnet build src/Percepta.Core/Percepta.Core.fsproj --configuration Release
+
+      - name: Run Percepta.Core tests
+        run: dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release
