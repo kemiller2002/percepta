@@ -61,9 +61,9 @@ match ContractSerialization.deserialize """{"schemaVersion":1}""" with
 | Error _ ->
     ()
 
-let evidenceFor requirement status =
+let evidenceFor (requirement: EvidenceRequirement) (status: VerificationStatus) : Evidence.EvidenceRecord =
     {
-        Evidence.EvidenceRecord.Requirement = requirement.Id
+        Requirement = requirement.Id
         Kind = requirement.Kind
         Required = requirement.Required
         Status = status
