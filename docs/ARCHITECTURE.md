@@ -42,20 +42,46 @@ The Echelon integration layer.
 
 This layer may reference Aegis and later provide adapters for Ordo, ROS, Praxis, Forma, Limen, Visual Engineering, and Communication Engineering.
 
-### Verification adapters
+### Percepta.Cli
 
-Adapters translate Percepta contracts into checks against a concrete UI technology.
+The F# CLI is the repository-facing orchestration boundary.
 
-Potential adapters include:
+It:
 
-- semantic DOM
-- browser automation
-- accessibility tooling
-- responsive capture
-- visual regression
-- vision-model semantic review
+- discovers serialized contracts;
+- validates and compiles them;
+- runs configured verification adapters;
+- merges deterministic and external evidence;
+- emits versioned evidence reports;
+- returns a non-zero exit code when required evidence is unacceptable.
 
-Adapters return evidence through a common verification model.
+### Percepta.Adapter.Playwright
+
+The first rendered-UI adapter uses Microsoft Playwright.
+
+It provides:
+
+- semantic region checks;
+- fixture-driven state projection checks;
+- capability legality and explanation checks;
+- deterministic accessibility checks;
+- responsive viewport verification;
+- screenshot capture;
+- exact-baseline comparison.
+
+Playwright is not referenced by Percepta.Core.
+
+### External semantic visual review
+
+Semantic visual review is ingested as external evidence.
+
+A human or vision-capable reviewer may assess hierarchy and perceptual meaning that deterministic browser checks cannot fully prove. That evidence cannot override deterministic failures.
+
+### Evidence boundary
+
+Adapters return evidence through the common Percepta evidence model.
+
+Percepta decides whether its declared verification obligations are satisfied. ROS or another governing system remains responsible for deciding whether repository work is complete.
 
 ## Authority rule
 
