@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "author_agent": "chatgpt",
+    "confidence": "medium",
+    "contradicting_evidence": [],
+    "created": "2026-09-24",
+    "id": "HY-PERCEPTA-2026-0001",
+    "path": "research/hypotheses/HY-PERCEPTA-2026-0001--deterministic-verification-detects-contract-violations.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "supported",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [
+      "EV-PERCEPTA-2026-0001"
+    ],
+    "title": "Deterministic Percepta verification detects machine-addressable UI contract violations"
+  },
+  {
+    "author_agent": "chatgpt",
+    "confidence": "medium",
+    "contradicting_evidence": [],
+    "created": "2026-09-24",
+    "id": "HY-PERCEPTA-2026-0002",
+    "path": "research/hypotheses/HY-PERCEPTA-2026-0002--semantic-substitution-can-escape-hooks.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "supported",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [
+      "EV-PERCEPTA-2026-0001"
+    ],
+    "title": "Semantic substitutions can escape deterministic Percepta hooks"
+  }
+]
