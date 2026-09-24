@@ -30,3 +30,55 @@ The repository is designed to bootstrap itself in GitHub Actions. The bootstrap 
 7. commit generated manifests, lockfiles, and managed integration files.
 
 Do not copy Forma, Folio, Limen, Aegis, or engineering-context source into this repository. Consume their versioned packages/lifecycle installers and preserve their ownership boundaries.
+
+
+## What Percepta governs
+
+Percepta defines and verifies what a user must be able to perceive about application state, available actions, constraints, and unresolved work.
+
+It exists because an agent can build a UI that is accessible, responsive, visually coherent, and composed entirely from approved Forma components while still building the wrong product.
+
+The core rule is:
+
+> The agent may choose implementation details, but it may not silently redefine product meaning.
+
+Percepta contracts cover:
+
+- screen purpose and primary user question
+- required semantic regions
+- information hierarchy
+- domain-state to UI-state projections
+- legal and illegal action presentation
+- required explanations for unavailable actions
+- forbidden semantic UI patterns
+- responsive obligations
+- accessibility obligations
+- verification evidence
+
+## Architecture
+
+```text
+Ordo
+  governs what is true and legal
+
+Percepta
+  governs what must be perceivable
+
+Forma
+  governs reusable presentation primitives
+
+ROS / Praxis
+  govern work, evidence, metrics, and completion
+```
+
+`src/Percepta.Core` contains the dependency-light semantic contract model.
+
+`src/Percepta.Foundation` contains Echelon integrations such as Aegis and may later host adapters for Ordo, ROS, Praxis, Forma, and Limen.
+
+See:
+
+- [Project Charter](PROJECT-CHARTER.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Contract Model](docs/CONTRACT-MODEL.md)
+- [Verification Model](docs/VERIFICATION-MODEL.md)
+- [Indy Init Investigation Workspace example](examples/indy-init-investigation-workspace.yaml)
