@@ -1,0 +1,25 @@
+{
+  "name": "percepta",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Percepta: Echelon Foundry UI system.",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "echelon:verify": "./ros verify && ordo verify && visual-engineering verify --strict && communication-engineering verify --strict && limen verify",
+    "echelon:status": "./ros status && ordo status && visual-engineering status && communication-engineering status && limen status",
+    "echelon:doctor": "./ros doctor && ordo doctor && visual-engineering doctor && communication-engineering doctor && limen doctor",
+    "verify": "npm run echelon:verify && dotnet build Percepta.slnx --configuration Release"
+  },
+  "dependencies": {
+    "@echelon-foundry/design-system": "0.2.0",
+    "@echelon-foundry/print-components": "0.3.0",
+    "@echelon-foundry/typescript-wasm-kernel": "0.6.1"
+  },
+  "devDependencies": {
+    "@echelon-foundry/communication-engineering": "github:kemiller2002/communication-engineering#4590d2fe6f7e80b339117d3fbee5803f2dd39122",
+    "@echelon-foundry/visual-engineering": "1.0.0"
+  }
+}
