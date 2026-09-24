@@ -3,7 +3,7 @@
 This directory is a treatment condition for EX-PERCEPTA-2026-0002.
 
 You MUST:
-- use ../frozen-product-brief.md;
+- use ../../frozen-product-brief.md;
 - read and apply /.percepta/contracts/indy-init-investigation-workspace.json;
 - follow the Percepta instructions in /AGENTS.md;
 - use executable Percepta semantics as implementation constraints;
