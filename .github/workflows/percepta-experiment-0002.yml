@@ -1,0 +1,306 @@
+name: EX-PERCEPTA-2026-0002 Cross-provider experiment
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/percepta-experiment-0002.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: percepta-experiment-0002
+  cancel-in-progress: false
+
+env:
+  BASELINE_SHA: cb8b2f4324b9016773d4f5a6b97ec086d5b8d637
+  EXP_ROOT: research/experiments/EX-PERCEPTA-2026-0002
+
+jobs:
+  openai-control:
+    name: OpenAI control A
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out frozen blinded inputs
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+          persist-credentials: false
+          sparse-checkout: |
+            research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md
+            research/experiments/EX-PERCEPTA-2026-0002/lanes/control-a/AGENTS.md
+          sparse-checkout-cone-mode: false
+
+      - name: Run Codex control implementation
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          permission-profile: ":workspace"
+          working-directory: ${{ env.EXP_ROOT }}/lanes/control-a
+          effort: high
+          prompt: |
+            You are Control A in a preregistered blinded UI implementation experiment.
+            Read AGENTS.md in the current directory and ../../frozen-product-brief.md.
+            Follow those files exactly.
+            Create only index.html and NOTES.md in the current directory.
+            Do not inspect files outside the sparse checkout. Do not ask for evaluator output.
+            Stop immediately after the first implementation is complete.
+
+      - name: Freeze OpenAI control artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openai-control-a
+          path: |
+            ${{ env.EXP_ROOT }}/lanes/control-a/index.html
+            ${{ env.EXP_ROOT }}/lanes/control-a/NOTES.md
+          if-no-files-found: error
+
+  openai-treatment:
+    name: OpenAI treatment A
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out frozen treatment inputs
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+          persist-credentials: false
+          sparse-checkout: |
+            AGENTS.md
+            .percepta/contracts/indy-init-investigation-workspace.json
+            research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md
+            research/experiments/EX-PERCEPTA-2026-0002/lanes/treatment-a/AGENTS.md
+          sparse-checkout-cone-mode: false
+
+      - name: Run Codex Percepta treatment
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          permission-profile: ":workspace"
+          working-directory: ${{ env.EXP_ROOT }}/lanes/treatment-a
+          effort: high
+          prompt: |
+            You are Treatment A in a preregistered UI implementation experiment.
+            Read AGENTS.md in the current directory, ../../frozen-product-brief.md,
+            /github/workspace/AGENTS.md, and
+            /github/workspace/.percepta/contracts/indy-init-investigation-workspace.json.
+            Follow those files exactly.
+            Create only index.html and NOTES.md in the current directory.
+            Do not inspect sibling lanes. Do not ask for evaluator output.
+            Stop immediately after the first implementation is complete.
+
+      - name: Freeze OpenAI treatment artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openai-treatment-a
+          path: |
+            ${{ env.EXP_ROOT }}/lanes/treatment-a/index.html
+            ${{ env.EXP_ROOT }}/lanes/treatment-a/NOTES.md
+          if-no-files-found: error
+
+  claude-control:
+    name: Claude control B
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out frozen blinded inputs
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+          persist-credentials: false
+          sparse-checkout: |
+            research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md
+            research/experiments/EX-PERCEPTA-2026-0002/lanes/control-b/AGENTS.md
+          sparse-checkout-cone-mode: false
+
+      - name: Run Claude control implementation
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: false
+          prompt: |
+            You are Control B in a preregistered blinded UI implementation experiment.
+            Work only in research/experiments/EX-PERCEPTA-2026-0002/lanes/control-b.
+            Read that directory's AGENTS.md and
+            research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md.
+            Follow those files exactly.
+            Create only index.html and NOTES.md in the assigned lane.
+            Do not inspect files outside the sparse checkout. Do not ask for evaluator output.
+            Stop immediately after the first implementation is complete.
+          claude_args: |
+            --max-turns 20
+            --allowedTools "Read,Write,Edit"
+
+      - name: Freeze Claude control artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-control-b
+          path: |
+            ${{ env.EXP_ROOT }}/lanes/control-b/index.html
+            ${{ env.EXP_ROOT }}/lanes/control-b/NOTES.md
+          if-no-files-found: error
+
+  claude-treatment:
+    name: Claude treatment B
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out frozen treatment inputs
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+          persist-credentials: false
+          sparse-checkout: |
+            AGENTS.md
+            .percepta/contracts/indy-init-investigation-workspace.json
+            research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md
+            research/experiments/EX-PERCEPTA-2026-0002/lanes/treatment-b/AGENTS.md
+          sparse-checkout-cone-mode: false
+
+      - name: Run Claude Percepta treatment
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: false
+          prompt: |
+            You are Treatment B in a preregistered UI implementation experiment.
+            Work only in research/experiments/EX-PERCEPTA-2026-0002/lanes/treatment-b.
+            Read that directory's AGENTS.md,
+            research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md,
+            /github/workspace/AGENTS.md, and
+            /github/workspace/.percepta/contracts/indy-init-investigation-workspace.json.
+            Follow those files exactly.
+            Create only index.html and NOTES.md in the assigned lane.
+            Do not inspect sibling lanes. Do not ask for evaluator output.
+            Stop immediately after the first implementation is complete.
+          claude_args: |
+            --max-turns 20
+            --allowedTools "Read,Write,Edit"
+
+      - name: Freeze Claude treatment artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-treatment-b
+          path: |
+            ${{ env.EXP_ROOT }}/lanes/treatment-b/index.html
+            ${{ env.EXP_ROOT }}/lanes/treatment-b/NOTES.md
+          if-no-files-found: error
+
+  evaluate:
+    name: Evaluate frozen first-pass implementations
+    runs-on: ubuntu-latest
+    needs:
+      - openai-control
+      - openai-treatment
+      - claude-control
+      - claude-treatment
+    steps:
+      - name: Check out frozen evaluator
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+
+      - name: Download OpenAI control
+        uses: actions/download-artifact@v5
+        with:
+          name: openai-control-a
+          path: ${{ env.EXP_ROOT }}/lanes/control-a
+
+      - name: Download OpenAI treatment
+        uses: actions/download-artifact@v5
+        with:
+          name: openai-treatment-a
+          path: ${{ env.EXP_ROOT }}/lanes/treatment-a
+
+      - name: Download Claude control
+        uses: actions/download-artifact@v5
+        with:
+          name: claude-control-b
+          path: ${{ env.EXP_ROOT }}/lanes/control-b
+
+      - name: Download Claude treatment
+        uses: actions/download-artifact@v5
+        with:
+          name: claude-treatment-b
+          path: ${{ env.EXP_ROOT }}/lanes/treatment-b
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install matching Chromium
+        run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- install-browser
+
+      - name: Evaluate all lanes
+        shell: bash
+        run: |
+          set -u
+          mkdir -p artifacts/percepta/experiment-0002
+          : > artifacts/percepta/experiment-0002/summary.tsv
+
+          run_lane() {
+            lane="$1"
+            provider="$2"
+            condition="$3"
+            target="${EXP_ROOT}/lanes/${lane}/index.html"
+            output="artifacts/percepta/experiment-0002/${lane}.evidence.json"
+
+            set +e
+            dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --               verify               --contract .percepta/contracts/indy-init-investigation-workspace.json               --url "$target"               --fixture tests/fixtures/indy-init/blocked.json               --fixture tests/fixtures/indy-init/legal.json               --out "$output"
+            code=$?
+            set -e
+
+            complete="false"
+            if [ -f "$output" ]; then
+              complete="$(python3 -c 'import json,sys; print(str(json.load(open(sys.argv[1]))["complete"]).lower())' "$output")"
+            fi
+
+            printf "%s\t%s\t%s\t%s\t%s\n" "$lane" "$provider" "$condition" "$code" "$complete" >> artifacts/percepta/experiment-0002/summary.tsv
+          }
+
+          run_lane control-a openai control
+          run_lane treatment-a openai treatment
+          run_lane control-b claude control
+          run_lane treatment-b claude treatment
+
+          python3 - <<'PY'
+          import csv, json, pathlib
+          root = pathlib.Path("artifacts/percepta/experiment-0002")
+          rows = []
+          with open(root / "summary.tsv", newline="") as f:
+              for lane, provider, condition, exit_code, complete in csv.reader(f, delimiter="\t"):
+                  evidence_path = root / f"{lane}.evidence.json"
+                  evidence = json.load(open(evidence_path)) if evidence_path.exists() else None
+                  rows.append({
+                      "lane": lane,
+                      "provider": provider,
+                      "condition": condition,
+                      "exitCode": int(exit_code),
+                      "complete": complete == "true",
+                      "results": evidence.get("results", []) if evidence else []
+                  })
+
+          controls = [r for r in rows if r["condition"] == "control"]
+          treatments = [r for r in rows if r["condition"] == "treatment"]
+          result = {
+              "schemaVersion": 1,
+              "experiment": "EX-PERCEPTA-2026-0002",
+              "baselineSha": "cb8b2f4324b9016773d4f5a6b97ec086d5b8d637",
+              "rows": rows,
+              "controlFirstPassPasses": sum(r["complete"] for r in controls),
+              "controlCount": len(controls),
+              "treatmentFirstPassPasses": sum(r["complete"] for r in treatments),
+              "treatmentCount": len(treatments)
+          }
+          json.dump(result, open(root / "results.json", "w"), indent=2)
+          print(json.dumps(result, indent=2))
+          PY
+
+      - name: Upload experiment results
+        uses: actions/upload-artifact@v4
+        with:
+          name: percepta-experiment-0002-results
+          path: artifacts/percepta/experiment-0002
