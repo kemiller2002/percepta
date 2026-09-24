@@ -20,7 +20,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
+
+      - name: Install pinned dependencies
+        run: npm ci
 
       - name: Verify the Limen boundary
-        run: npx --yes @echelon-foundry/typescript-wasm-kernel verify --strict
+        run: npx --no-install limen verify --strict
