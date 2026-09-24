@@ -83,3 +83,37 @@ Before producing consequential communication, read:
 
 Treat research maturity as a constraint. Do not turn provisional findings into universal rules, optimize persuasion at the expense of user autonomy, or substitute style for proof obligations.
 <!-- echelon:communication-engineering:end -->
+
+
+### Executable UI verification
+
+For consequential UI work, agents MUST use executable Percepta verification when a screen contract and runnable target are available.
+
+Before claiming the UI complete:
+
+1. validate/compile the applicable contract;
+2. exercise every declared state projection with explicit fixtures;
+3. run rendered verification through the configured browser adapter;
+4. inspect the generated evidence report;
+5. stop if any required evidence is `Failed` or `Unavailable`;
+6. do not use semantic visual review to override deterministic failures.
+
+Canonical commands:
+
+```bash
+npm run percepta:doctor
+npm run percepta:compile
+npm run percepta -- verify --contract <contract> --url <target> --fixture <fixture>
+```
+
+Applications may expose `window.__perceptaSetState` as a test seam. That seam requests an explicit test state; it does not make Percepta authoritative over the application's domain.
+
+Use these stable verification hooks where applicable:
+
+- `data-percepta-region`
+- `data-percepta-observation`
+- `data-percepta-capability`
+- `data-percepta-unavailable-reason-for`
+- `data-percepta-blocker-link-for`
+
+A UI task with a Percepta contract is not complete merely because it renders or because an agent says it is complete. Required Percepta evidence must be acceptable to the governing completion policy.
