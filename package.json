@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@echelon-foundry/design-system": "0.2.0",
-    "@echelon-foundry/print-components": "0.3.0",
+    "@echelon-foundry/print-components": "github:kemiller2002/folio#2b101b6d840a670abb959148fff8e1477c059eda",
     "@echelon-foundry/typescript-wasm-kernel": "0.6.1"
   },
   "devDependencies": {
