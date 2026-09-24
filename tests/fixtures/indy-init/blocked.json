@@ -1,0 +1,14 @@
+{
+  "name": "blocked-investigation",
+  "predicates": [
+    "hypothesis-is-falsified",
+    "blocking-unknown-exists",
+    "github-write-is-pending",
+    "corrective-action-not-verified",
+    "contradictions-present",
+    "obligations-present"
+  ],
+  "capabilities": {
+    "confirm-root-cause": "illegal"
+  }
+}
