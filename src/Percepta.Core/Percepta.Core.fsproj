@@ -14,5 +14,7 @@
     <Compile Include="Contracts.fs" />
     <Compile Include="Validation.fs" />
     <Compile Include="Compilation.fs" />
+    <Compile Include="ContractSerialization.fs" />
+    <Compile Include="Evidence.fs" />
   </ItemGroup>
 </Project>
