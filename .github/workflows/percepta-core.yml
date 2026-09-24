@@ -54,6 +54,28 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
+      - name: Diagnose Praxis repository state
+        shell: bash
+        run: |
+          set +e
+          curl -fsSL https://raw.githubusercontent.com/kemiller2002/praxis/main/scripts/install-native.sh | sh
+          export PATH="$HOME/.echelon/bin:$PATH"
+          echo "=== praxis artifacts validate ==="
+          praxis artifacts validate --json
+          echo
+          echo "=== praxis registry check ==="
+          praxis registry check
+          echo "=== praxis work validate ==="
+          praxis work validate --json
+          echo
+          echo "=== praxis telemetry validate ==="
+          praxis telemetry validate --json
+          echo
+          echo "=== praxis validate ==="
+          praxis validate --json
+          echo
+          exit 0
+
       - name: Build Percepta.Core
         run: dotnet build src/Percepta.Core/Percepta.Core.fsproj --configuration Release
 
