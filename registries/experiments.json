@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-24",
+    "id": "EX-PERCEPTA-2026-0001",
+    "inputs": [
+      ".percepta/contracts/indy-init-investigation-workspace.json",
+      "tests/fixtures/indy-init/index.html",
+      "tests/fixtures/indy-init/blocked.json",
+      "tests/fixtures/indy-init/legal.json"
+    ],
+    "outputs": [
+      "artifacts/percepta/adversarial/experiment-results.json",
+      "EV-PERCEPTA-2026-0001"
+    ],
+    "path": "research/experiments/EX-PERCEPTA-2026-0001--adversarial-fault-injection.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "completed",
+    "tests_hypotheses": [
+      "HY-PERCEPTA-2026-0001",
+      "HY-PERCEPTA-2026-0002"
+    ],
+    "title": "Adversarial fault injection against Percepta verification"
+  }
+]
