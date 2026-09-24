@@ -41,7 +41,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "10.0.x"
 
       - name: Build Percepta.Core
         run: dotnet build src/Percepta.Core/Percepta.Core.fsproj --configuration Release
