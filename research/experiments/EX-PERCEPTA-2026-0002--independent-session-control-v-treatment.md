@@ -24,14 +24,14 @@ Do independently executed implementation sessions given an explicit Percepta con
 
 ## Design
 
-Four independent GitHub Copilot cloud-agent sessions start from the same frozen repository commit before any implementation output is merged.
+Four independent coding-agent sessions start from the same frozen repository commit before any implementation output is merged: one OpenAI control, one OpenAI treatment, one Claude control, and one Claude treatment.
 
 - control-a and control-b receive the frozen natural-language product brief plus neutral test-hook requirements and are prohibited from reading Percepta contracts, generated Percepta guidance, sibling lanes, prior implementation artifacts, or this experiment's results;
 - treatment-a and treatment-b receive the same frozen product brief and are additionally required to use the canonical Percepta contract and executable verification guidance.
 
 Each session writes only inside its assigned lane.
 
-This is an independent-session, single-agent-platform pilot. It does not establish cross-provider generality.
+This is an independent-session, cross-provider pilot using OpenAI and Claude. With one session per provider per condition, provider-specific effects remain a major limitation.
 
 ## Primary outcome
 
@@ -81,3 +81,19 @@ Pending.
 - all sessions share the same repository-level engineering culture outside the blinded Percepta-specific material;
 - control sessions still receive neutral verification-hook requirements so the same deterministic evaluator can observe them;
 - agent implementation quality may be affected by platform policies unrelated to Percepta.
+
+
+## Pre-execution amendment
+
+Recorded before any lane produced an implementation artifact.
+
+The originally planned single-platform four-session execution was replaced with a cross-provider allocation:
+
+- OpenAI control A
+- OpenAI treatment A
+- Claude control B
+- Claude treatment B
+
+Reason: the GitHub Copilot special assignee could not be invoked through the connected GitHub tool. A subsequent GitHub Actions runner attempt also failed before model execution, so no implementation output was observed.
+
+This amendment changes only the execution providers. The frozen product brief, Percepta contract, lane blinding, hypotheses, primary/secondary outcomes, and interpretation thresholds are unchanged.
