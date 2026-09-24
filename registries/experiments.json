@@ -10,7 +10,8 @@
       "tests/fixtures/indy-init/legal.json"
     ],
     "outputs": [
-      "artifacts/percepta/adversarial/experiment-results.json"
+      "artifacts/percepta/adversarial/experiment-results.json",
+      "EV-PERCEPTA-2026-0001"
     ],
     "path": "research/experiments/EX-PERCEPTA-2026-0001--adversarial-fault-injection.md",
     "related_theories": [],
