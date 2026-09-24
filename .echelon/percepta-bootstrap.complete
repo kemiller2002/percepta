@@ -1,0 +1,15 @@
+Percepta Echelon baseline installed and verified.
+
+Required stack:
+- Praxis
+- Ordo
+- Aegis Core
+- Aegis GitHub integration
+- Aegis GitHub store
+- Forma
+- Folio
+- Limen
+- Visual Engineering
+- Communication Engineering
+
+Package and lifecycle versions are pinned by the committed manifests and lockfiles.
