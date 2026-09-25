@@ -10,6 +10,7 @@ on:
       - "src/Percepta.Adapter.Playwright/**"
       - "src/Percepta.Cli/**"
       - "examples/Percepta.Examples/**"
+      - "examples/indy-init/**"
       - "tests/Percepta.Core.Tests/**"
       - "tests/Percepta.Adversarial.Tests/**"
       - "research/experiments/**"
@@ -26,6 +27,7 @@ on:
       - "src/Percepta.Adapter.Playwright/**"
       - "src/Percepta.Cli/**"
       - "examples/Percepta.Examples/**"
+      - "examples/indy-init/**"
       - "tests/Percepta.Core.Tests/**"
       - "tests/fixtures/**"
       - ".percepta/contracts/**"
@@ -71,6 +73,19 @@ jobs:
 
       - name: Run Percepta.Core tests
         run: dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release
+
+      - name: Compile full Indy Init 25-screen contract package
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/indy-init-percepta"
+          mkdir -p "$root/.percepta/contracts"
+          cp examples/indy-init/screens/*.json "$root/.percepta/contracts/"
+          (
+            cd "$root"
+            dotnet run --project "$GITHUB_WORKSPACE/src/Percepta.Cli/Percepta.Cli.fsproj" --configuration Release -- compile --out "$GITHUB_WORKSPACE/artifacts/percepta/indy-init-compiled"
+          )
+          test "$(find artifacts/percepta/indy-init-compiled -mindepth 1 -maxdepth 1 -type d | wc -l)" -eq 25
 
       - name: Install matching Chromium
         run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- install-browser
