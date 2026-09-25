@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indy Init Investigation Workspace</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --surface-2: #eef0f4;
+    --ink: #16191f;
+    --ink-2: #4a5160;
+    --line: #d4d8e0;
+    --focus: #1f5fd6;
+    --active: #1b6b3a;
+    --active-bg: #e6f4ea;
+    --weak: #8a5a00;
+    --weak-bg: #fdf3dc;
+    --falsified: #7a1f2b;
+    --falsified-bg: #f8e7e9;
+    --block: #9b1c1c;
+    --block-bg: #fdecec;
+    --info: #1d4f91;
+    --info-bg: #e7effb;
+    --radius: 10px;
+    --gap: 16px;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151b; --surface: #1b2029; --surface-2: #242a35; --ink: #eef1f6; --ink-2: #b3bac8;
+      --line: #384152; --focus: #8ab4ff; --active: #7fd49b; --active-bg: #173522; --weak: #f0c46a;
+      --weak-bg: #3a2e12; --falsified: #f3a3ad; --falsified-bg: #3d1c22; --block: #ff9c9c;
+      --block-bg: #421b1b; --info: #9cc2ff; --info-bg: #1a2c47;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    overflow-wrap: anywhere;
+  }
+  code { font: 0.92em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--surface-2); padding: 0 4px; border-radius: 4px; }
+  h1, h2, h3 { line-height: 1.25; margin: 0; }
+  h1 { font-size: 1.35rem; }
+  h2 { font-size: 1.02rem; letter-spacing: 0.01em; }
+  h3 { font-size: 0.98rem; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  a { color: var(--info); }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 12px; top: 12px; background: var(--surface); padding: 8px 12px; z-index: 10; }
+
+  main { max-width: 1440px; margin: 0 auto; padding: 16px; }
+
+  /* Header */
+  .top { display: grid; gap: 12px var(--gap); grid-template-columns: minmax(0, 1fr); margin-bottom: 12px; }
+  .eyebrow { font-size: 0.8rem; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.06em; }
+  .question {
+    margin-top: 8px; font-size: 1.12rem; font-weight: 600; padding: 10px 14px;
+    background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--info); border-radius: var(--radius);
+  }
+  .question .q-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.06em; }
+  .top-status { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); align-content: start; }
+  .top-status .card { padding: 10px 12px; }
+  .top-status h2 { margin-bottom: 2px; font-size: 0.8rem; font-weight: 600; color: var(--ink-2); }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; min-width: 0; }
+  .card > h2 { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .card > h2 .count { font-size: 0.8rem; font-weight: 500; color: var(--ink-2); }
+  .sub { font-size: 0.85rem; color: var(--ink-2); }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700;
+    border: 1.5px solid currentColor; border-radius: 999px; padding: 1px 9px; white-space: nowrap;
+  }
+  .pill .sym { font-weight: 800; }
+  .st-active { color: var(--active); background: var(--active-bg); }
+  .st-weakened { color: var(--weak); background: var(--weak-bg); border-style: dashed; }
+  .st-falsified { color: var(--falsified); background: var(--falsified-bg); border-style: dotted; }
+  .st-blocking { color: var(--block); background: var(--block-bg); border-width: 2px; }
+  .st-open { color: var(--info); background: var(--info-bg); }
+  .st-neutral { color: var(--ink-2); background: var(--surface-2); }
+
+  /* Status + persistence */
+  .inv-status { display: flex; flex-direction: column; gap: 4px; }
+  .persist-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; font-size: 0.85rem; margin-top: 8px; }
+  .persist-row dt { color: var(--ink-2); }
+  .persist-row dd { margin: 0; font-weight: 600; }
+  .persist-label { font-size: 1rem; }
+  [data-pstate="pending"] .persist-label { color: var(--info); }
+  [data-pstate="synced"] .persist-label { color: var(--active); }
+  [data-pstate="conflicted"] .persist-label, [data-pstate="failed"] .persist-label { color: var(--block); }
+
+  /* Jump nav */
+  .jump { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .jump a {
+    font-size: 0.85rem; text-decoration: none; padding: 5px 10px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .jump a .n { color: var(--ink-2); font-size: 0.78rem; }
+
+  /* Layout */
+  .layout { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); }
+  .col { display: flex; flex-direction: column; gap: var(--gap); min-width: 0; }
+  @media (max-width: 759px) {
+    .jump { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 8px 0; margin: 0 0 8px; }
+    .col { display: contents; }
+    .layout > .col > section { min-width: 0; }
+    #region-observation { order: 1; }
+    #region-hypotheses { order: 2; }
+    #region-unknowns { order: 3; }
+    #region-legal-actions { order: 4; }
+    #region-contradictions { order: 5; }
+    #region-obligations { order: 6; }
+    #region-evidence { order: 7; }
+  }
+  @media (min-width: 760px) {
+    .layout { grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr); }
+    .top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  }
+  @media (min-width: 1280px) {
+    .layout { grid-template-columns: minmax(0, 2fr) minmax(340px, 1fr); }
+    .top { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  }
+
+  /* Observation */
+  .obs-quote { margin: 0; padding: 8px 12px; border-left: 4px solid var(--line); background: var(--surface-2); border-radius: 6px; }
+  .meta { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 12px; font-size: 0.85rem; margin-top: 10px; }
+  .meta dt { color: var(--ink-2); }
+  .meta dd { margin: 0; }
+
+  /* Hypotheses */
+  .hyp-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .hyp { border: 1.5px solid var(--line); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; gap: 8px; background: var(--surface); min-width: 0; }
+  .hyp[data-status="active"] { border-left: 6px solid var(--active); }
+  .hyp[data-status="weakened"] { border-left: 6px dashed var(--weak); }
+  .hyp[data-status="falsified"] { border-left: 6px dotted var(--falsified); background: var(--surface-2); }
+  .hyp[data-status="falsified"] .hyp-title { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  .hyp-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between; }
+  .hyp-code { font-weight: 800; font-size: 0.8rem; letter-spacing: 0.05em; }
+  .hyp-tally { font-size: 0.82rem; color: var(--ink-2); }
+  .hyp-actions { display: flex; flex-direction: column; gap: 6px; margin-top: auto; }
+  .hyp-actions .row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .inactive-note { font-size: 0.82rem; color: var(--falsified); }
+  .next-test { font-size: 0.85rem; padding: 8px; border-radius: 6px; background: var(--info-bg); }
+  .candidate-flag { font-size: 0.8rem; font-weight: 700; color: var(--info); }
+
+  /* Buttons */
+  .btn {
+    font: inherit; font-size: 0.86rem; font-weight: 600; cursor: pointer; min-height: 36px;
+    padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--ink-2); background: var(--surface); color: var(--ink);
+  }
+  .btn[aria-pressed="true"] { background: var(--info-bg); border-color: var(--info); color: var(--info); }
+  .btn-primary { background: var(--ink); color: var(--surface); border-color: var(--ink); min-height: 44px; font-size: 0.95rem; }
+  .btn:disabled { cursor: not-allowed; background: var(--surface-2); color: var(--ink-2); border-style: dashed; border-color: var(--line); }
+
+  /* Lists */
+  .items { display: flex; flex-direction: column; gap: 10px; }
+  .item { border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .item.blocking { border: 2px solid var(--block); background: var(--block-bg); }
+  .item-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 0.85rem; }
+
+  /* Evidence */
+  .rel { display: flex; flex-wrap: wrap; gap: 6px; }
+  .rel .pill { font-weight: 600; }
+  .ev-source { font-size: 0.82rem; color: var(--ink-2); }
+
+  /* Actions */
+  .next { padding: 10px; border-radius: 8px; background: var(--info-bg); margin-bottom: 12px; }
+  .next strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--info); }
+  .action { border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .action-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .legality { font-size: 0.82rem; font-weight: 700; }
+  .is-legal .legality { color: var(--active); }
+  .is-illegal .legality { color: var(--block); }
+  .reason { border: 2px solid var(--block); background: var(--block-bg); border-radius: 8px; padding: 10px; font-size: 0.88rem; }
+  .reason-title { font-weight: 700; margin-bottom: 4px; }
+  .reason ul { list-style: disc; padding-left: 18px; margin-bottom: 6px; }
+  .blocker-link { font-weight: 700; }
+  .notice { font-size: 0.85rem; padding: 8px; border-radius: 6px; background: var(--surface-2); }
+
+  .flash { animation: flash 1.8s ease-out; }
+  @keyframes flash { 0%, 40% { box-shadow: 0 0 0 4px var(--focus); } 100% { box-shadow: 0 0 0 0 transparent; } }
+  @media (prefers-reduced-motion: reduce) {
+    .flash { animation: none; box-shadow: 0 0 0 4px var(--focus); }
+    html { scroll-behavior: auto; }
+  }
+  [tabindex="-1"]:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  footer.runtime { margin-top: 16px; font-size: 0.82rem; color: var(--ink-2); }
+  footer.runtime summary { cursor: pointer; }
+  footer.runtime dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; margin: 6px 0 0; }
+  footer.runtime dd { margin: 0; }
+  [hidden] { display: none !important; }
+  @media (forced-colors: active) {
+    .pill, .btn, .item, .hyp, .reason { border-color: CanvasText; }
+  }
+  @media print {
+    .jump, .skip { display: none; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#region-hypotheses">Skip to hypotheses</a>
+<main id="workspace">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Root-cause investigation · <code>indy init</code></p>
+      <h1>Indy Init investigation workspace</h1>
+      <p class="question"><span class="q-label">Primary question</span>What currently explains the observation, and what should be tested next?</p>
+    </div>
+    <div class="top-status">
+      <div class="card inv-status" id="investigation-status" role="status" aria-live="polite"></div>
+      <section class="card" id="region-persistence" data-percepta-region="persistence-state" aria-labelledby="h-persistence">
+        <h2 id="h-persistence">Persistence</h2>
+        <div id="persistence-body" role="status" aria-live="polite"></div>
+      </section>
+    </div>
+  </header>
+
+  <nav class="jump" aria-label="Jump to workspace section" id="jump-nav"></nav>
+
+  <div class="layout">
+    <div class="col col-main">
+      <section class="card" id="region-observation" data-percepta-region="observation" aria-labelledby="h-observation" tabindex="-1"></section>
+      <section class="card" id="region-hypotheses" data-percepta-region="hypotheses" aria-labelledby="h-hypotheses" tabindex="-1"></section>
+      <section class="card" id="region-contradictions" data-percepta-region="contradictions" aria-labelledby="h-contradictions" tabindex="-1" hidden></section>
+      <section class="card" id="region-evidence" data-percepta-region="evidence" aria-labelledby="h-evidence" tabindex="-1"></section>
+    </div>
+    <div class="col col-side">
+      <section class="card" id="region-unknowns" data-percepta-region="unknowns" aria-labelledby="h-unknowns" tabindex="-1"></section>
+      <section class="card" id="region-legal-actions" data-percepta-region="legal-actions" aria-labelledby="h-legal-actions" tabindex="-1"></section>
+      <section class="card" id="region-obligations" data-percepta-region="obligations" aria-labelledby="h-obligations" tabindex="-1" hidden></section>
+    </div>
+  </div>
+
+  <footer class="runtime" id="runtime-footer"></footer>
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- Pure helpers ---------- */
+  const ESC = Object.freeze({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' });
+  const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ESC[c]);
+  const attrs = (obj) => Object.entries(obj)
+    .filter(([, v]) => v !== undefined && v !== null && v !== false)
+    .map(([k, v]) => (v === true ? k : `${k}="${esc(v)}"`))
+    .join(' ');
+  const obsAttr = (id) => (id ? { 'data-percepta-observation': id } : {});
+  const when = (cond, html) => (cond ? html : '');
+  const join = (xs) => xs.join('');
+  const humanize = (name) => name.replace(/[-_]+/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+  const hasAny = (set, names) => names.some((n) => set.has(n));
+
+  /* ---------- Contract predicates ---------- */
+  const P = Object.freeze({
+    contradictions: 'contradictions-present',
+    obligations: 'obligations-present',
+    falsified: 'hypothesis-is-falsified',
+    blocking: 'blocking-unknown-exists',
+    pending: 'github-write-is-pending',
+    notVerified: 'corrective-action-not-verified',
+  });
+  // Persistence predicates other than "pending" are not named by the contract; these names are assumptions.
+  const PERSIST_PREDICATES = Object.freeze({
+    conflicted: ['github-write-is-conflicted', 'github-write-conflicted', 'github-write-conflict', 'persistence-conflicted'],
+    failed: ['github-write-is-failed', 'github-write-failed', 'persistence-failed'],
+    synced: ['github-write-is-synced', 'github-write-synced', 'github-write-succeeded', 'persistence-synced'],
+  });
+  const RESOLVED_PREDICATES = Object.freeze(['investigation-resolved', 'investigation-is-resolved']);
+  const CONFIRM = 'confirm-root-cause';
+
+  /* ---------- Workspace domain content (static sample record) ---------- */
+  const OBSERVATION = Object.freeze({
+    summary: '`indy init` exits with status 1 on fresh CI runners before writing any project files.',
+    quote: "Error: EACCES: permission denied, open '/work/app/.indy/config.lock'",
+    source: 'CI job log · pipeline "main", job #4812 (linux-x64 runner)',
+    reportedBy: 'Build-health alert, triaged by on-call',
+    firstSeen: 'Recurring since runner image update 2026.09.2',
+  });
+
+  const HYPOTHESES = Object.freeze([
+    {
+      id: 'h-lock', code: 'LOCK',
+      title: 'A stale, root-owned config.lock left by an earlier privileged step blocks init.',
+      status: () => 'active',
+      nextTest: 'Run init on a runner where .indy/ is removed beforehand; LOCK predicts the run passes.',
+    },
+    {
+      id: 'h-race', code: 'RACE',
+      title: 'Parallel init steps race while creating .indy/config and collide on the lock file.',
+      status: () => 'weakened',
+      nextTest: 'Run init with --jobs=1 on a clean runner; RACE predicts the failure disappears.',
+    },
+    {
+      id: 'h-node', code: 'NODE',
+      title: 'The runner image ships a Node.js version the init script does not support.',
+      status: (p) => (p.has(P.falsified) ? 'falsified' : 'active'),
+      nextTest: 'Run init on the runner with the pinned Node.js 20.11; NODE predicts the run passes.',
+    },
+  ]);
+
+  const EVIDENCE = Object.freeze([
+    {
+      id: 'e1', code: 'E1', title: 'CI log shows EACCES opening .indy/config.lock',
+      source: 'Job #4812 log, lines 212–219', present: () => true,
+      rel: { 'h-lock': 'supports', 'h-race': 'supports', 'h-node': 'neutral' },
+    },
+    {
+      id: 'e2', code: 'E2', title: 'Runner file listing: config.lock owned by root, modified before the job started',
+      source: 'Debug step `ls -la .indy` on job #4812', present: () => true,
+      rel: { 'h-lock': 'supports', 'h-race': 'weakens', 'h-node': 'neutral' },
+    },
+    {
+      id: 'e5', code: 'E3', title: 'Serialized init (--jobs=1) still fails in 3 of 3 runs',
+      source: 'Manual reruns #4821–#4823', present: () => true,
+      rel: { 'h-race': 'weakens', 'h-lock': 'neutral', 'h-node': 'neutral' },
+    },
+    {
+      id: 'e3', code: 'E4', title: 'Failure reproduces on the pinned, supported Node.js 20.11',
+      source: 'Reproduction run #4830 with `node --version` captured', present: (p) => p.has(P.falsified),
+      rel: { 'h-node': 'falsifies', 'h-lock': 'neutral', 'h-race': 'neutral' },
+    },
+    {
+      id: 'e4', code: 'E5', title: 'Runs #4815 and #4819 failed with EACCES although no config.lock existed',
+      source: 'Debug listings attached to runs #4815, #4819', present: (p) => p.has(P.contradictions),
+      rel: { 'h-lock': 'contradicts', 'h-race': 'neutral', 'h-node': 'neutral' },
+    },
+  ]);
+
+  const RELATION = Object.freeze({
+    supports: { sym: '▲', label: 'Supports', cls: 'st-active' },
+    weakens: { sym: '▽', label: 'Weakens', cls: 'st-weakened' },
+    falsifies: { sym: '✕', label: 'Falsifies', cls: 'st-falsified' },
+    contradicts: { sym: '⚠', label: 'Contradicts', cls: 'st-blocking' },
+    neutral: { sym: '–', label: 'No bearing', cls: 'st-neutral' },
+  });
+
+  const STATUS = Object.freeze({
+    active: { sym: '●', label: 'Active', cls: 'st-active' },
+    weakened: { sym: '◐', label: 'Weakened', cls: 'st-weakened' },
+    falsified: { sym: '✕', label: 'Falsified', cls: 'st-falsified' },
+  });
+
+  const PERSIST = Object.freeze({
+    local: { sym: '●', label: 'Local only', detail: 'Changes are saved in this browser only. Nothing has been written to GitHub.', local: 'Saved in this browser', remote: 'Not written to GitHub' },
+    pending: { sym: '◌', label: 'Pending', detail: 'A write to GitHub is in progress. It has not been confirmed; do not treat the GitHub copy as current.', local: 'Saved in this browser', remote: 'Write in progress — not yet confirmed by GitHub' },
+    synced: { sym: '✓', label: 'Synced', detail: 'GitHub confirmed the latest write.', local: 'Saved in this browser', remote: 'Confirmed by GitHub' },
+    conflicted: { sym: '⇄', label: 'Conflicted', detail: 'GitHub holds a different version. Local changes are kept; resolve the conflict before writing again.', local: 'Saved in this browser (diverged)', remote: 'Conflict — local changes not written' },
+    failed: { sym: '!', label: 'Failed', detail: 'The last write to GitHub failed. Local changes are kept; the write must be retried.', local: 'Saved in this browser', remote: 'Write failed — not saved to GitHub' },
+  });
+
+  /* ---------- Runtime state normalisation (no reinterpretation) ---------- */
+  const normalizeState = (raw) => {
+    const s = raw && typeof raw === 'object' ? raw : {};
+    const caps = s.capabilities && typeof s.capabilities === 'object' ? s.capabilities : {};
+    return Object.freeze({
+      name: typeof s.name === 'string' ? s.name : '(unnamed state)',
+      predicates: new Set(Array.isArray(s.predicates) ? s.predicates.filter((x) => typeof x === 'string') : []),
+      capabilities: Object.freeze(Object.fromEntries(
+        Object.entries(caps).filter(([, v]) => v === 'legal' || v === 'illegal')
+      )),
+    });
+  };
+
+  /* ---------- View-model derivation (pure) ---------- */
+  const persistenceOf = (p) =>
+    p.has(P.pending) ? 'pending'
+      : hasAny(p, PERSIST_PREDICATES.conflicted) ? 'conflicted'
+      : hasAny(p, PERSIST_PREDICATES.failed) ? 'failed'
+      : hasAny(p, PERSIST_PREDICATES.synced) ? 'synced'
+      : 'local';
+
+  const investigationStatusOf = (p) =>
+    p.has(P.notVerified)
+      ? { key: 'unresolved', sym: '◐', label: 'Unresolved', detail: 'A corrective action exists but has not been verified. The investigation stays open until verification is recorded.', obs: 'unresolved-not-resolved' }
+      : hasAny(p, RESOLVED_PREDICATES)
+        ? { key: 'resolved', sym: '✓', label: 'Resolved', detail: 'The runtime reports this investigation as resolved.', obs: null }
+        : { key: 'open', sym: '○', label: 'Open — investigating', detail: 'Competing hypotheses are still being evaluated.', obs: null };
+
+  const unknownsOf = (p) => Object.freeze([
+    {
+      id: 'unknown-lock-owner', code: 'U1',
+      question: 'Which step in the runner image creates .indy/config.lock as root?',
+      blocking: p.has(P.blocking),
+      note: p.has(P.blocking)
+        ? 'Blocking: confirming a root cause depends on knowing what creates the lock.'
+        : 'Open. Useful for the corrective action, not currently blocking.',
+    },
+    {
+      id: 'unknown-macos', code: 'U2',
+      question: 'Does the failure also occur on macOS runners?',
+      blocking: false,
+      note: 'Open. Not blocking; narrows scope of the corrective action.',
+    },
+  ]);
+
+  const obligationsOf = (p) => Object.freeze([
+    ...(p.has(P.obligations) ? [{
+      id: 'obligation-repro', code: 'O1', kind: 'Evidence required',
+      text: 'Attach a clean reproduction for the candidate hypothesis before confirming a root cause.',
+      obs: null,
+    }] : []),
+    ...(p.has(P.notVerified) ? [{
+      id: 'obligation-verify', code: 'O2', kind: 'Verification required',
+      text: 'Verify the corrective action: rerun `indy init` on a clean runner with the lock-cleanup fix applied, and record the result as evidence.',
+      obs: 'verification-obligation-visible',
+    }] : []),
+  ]);
+
+  const contradictionsOf = (p) => Object.freeze(p.has(P.contradictions) ? [{
+    id: 'contradiction-e4', evidence: 'e4', hypothesis: 'h-lock',
+    text: 'E5 conflicts with LOCK: two runs failed with EACCES although no config.lock existed, which LOCK does not explain.',
+  }] : []);
+
+  const confirmReasonsOf = (p, candidate) => [
+    p.has(P.blocking) && { text: 'A blocking unknown is unresolved: which step creates config.lock as root (U1).', target: 'unknown-lock-owner', link: 'Go to blocking unknown U1' },
+    p.has(P.notVerified) && { text: 'The corrective action has not been verified (O2).', target: 'obligation-verify', link: 'Go to verification obligation O2' },
+    p.has(P.obligations) && { text: 'A required obligation is outstanding: reproduction evidence is not attached (O1).', target: 'obligation-repro', link: 'Go to obligation O1' },
+    p.has(P.contradictions) && { text: 'Evidence E5 contradicts the leading hypothesis LOCK.', target: 'contradiction-e4', link: 'Go to contradiction' },
+    p.has(P.falsified) && { text: 'Hypothesis NODE has been falsified; confirmation requires an active hypothesis.', target: 'hyp-h-node', link: 'Go to falsified hypothesis NODE' },
+    !candidate && { text: 'No active hypothesis is available to confirm.', target: 'region-hypotheses', link: 'Go to hypotheses' },
+  ].filter(Boolean);
+
+  const GENERIC_REASON = Object.freeze({ text: 'The runtime reports this action is not executable in the current state.', target: null, link: null });
+  const UNSUPPLIED_REASON = Object.freeze({ text: 'The runtime has not supplied legality for this action, so it is not offered as executable.', target: null, link: null });
+
+  const deriveView = (state, ui) => {
+    const p = state.predicates;
+    const hypotheses = HYPOTHESES.map((h) => Object.freeze({ ...h, status: h.status(p) }));
+    const evidence = EVIDENCE.filter((e) => e.present(p));
+    const tally = (hid) => evidence.reduce((acc, e) => {
+      const r = e.rel[hid] || 'neutral';
+      return r === 'neutral' ? acc : { ...acc, [r]: (acc[r] || 0) + 1 };
+    }, {});
+    const hyps = hypotheses.map((h) => Object.freeze({
+      ...h,
+      tally: tally(h.id),
+      evidenceIds: evidence.filter((e) => (e.rel[h.id] || 'neutral') !== 'neutral').map((e) => e.id),
+    }));
+    const selectable = hyps.filter((h) => h.status === 'active');
+    const candidate = selectable.find((h) => h.id === ui.candidate) || selectable[0] || null;
+
+    const supplied = Object.prototype.hasOwnProperty.call(state.capabilities, CONFIRM);
+    const confirmLegal = state.capabilities[CONFIRM] === 'legal';
+    const specific = confirmReasonsOf(p, candidate);
+    const reasons = confirmLegal ? [] : (!supplied ? [UNSUPPLIED_REASON, ...specific] : (specific.length ? specific : [GENERIC_REASON]));
+    const primary = reasons.find((r) => r.target) || null;
+
+    const otherCaps = Object.entries(state.capabilities)
+      .filter(([name]) => name !== CONFIRM)
+      .map(([name, v]) => Object.freeze({ name, legal: v === 'legal' }));
+
+    const unknowns = unknownsOf(p);
+    const blockingUnknown = unknowns.find((u) => u.blocking) || null;
+    const obligations = obligationsOf(p);
+    const contradictions = contradictionsOf(p);
+
+    const nextTest = blockingUnknown
+      ? 'Trace the runner image build steps to find what creates .indy/config.lock as root. This resolves blocking unknown U1.'
+      : p.has(P.notVerified)
+        ? 'Rerun `indy init` on a clean runner with the lock-cleanup fix applied and record the result (verifies O2).'
+        : candidate
+          ? `Discriminating test for ${candidate.code}: ${candidate.nextTest}`
+          : 'All hypotheses are falsified or weakened. Record a new hypothesis before testing further.';
+
+    return Object.freeze({
+      state, p, ui, hyps, evidence, candidate, unknowns, blockingUnknown, obligations, contradictions,
+      investigation: investigationStatusOf(p),
+      persistence: persistenceOf(p),
+      confirm: Object.freeze({ legal: confirmLegal, supplied, reasons, primary }),
+      otherCaps, nextTest,
+    });
+  };
+
+  /* ---------- Renderers (pure: view -> HTML string) ---------- */
+  const pill = (meta, extra = {}) =>
+    `<span ${attrs({ class: `pill ${meta.cls}`, ...extra })}><span class="sym" aria-hidden="true">${meta.sym}</span>${esc(meta.label)}</span>`;
+
+  const code = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  const navLink = (target, label, extra = {}) =>
+    `<a ${attrs({ href: `#${target}`, 'data-act': 'nav', 'data-target': target, 'data-key': `nav-${target}-${label}`, ...extra })}>${esc(label)}</a>`;
+
+  const renderInvestigation = (v) => {
+    const s = v.investigation;
+    return `<p class="sub">Investigation status</p>
+      <p class="persist-label" ${attrs({ 'data-istate': s.key, ...obsAttr(s.obs) })}><strong><span aria-hidden="true">${s.sym}</span> ${esc(s.label)}</strong></p>
+      <p class="sub">${esc(s.detail)}</p>
+      ${when(v.p.has(P.notVerified), `<p class="links">${navLink('obligation-verify', 'See verification obligation')}</p>`)}`;
+  };
+
+  const renderPersistence = (v) => {
+    const k = v.persistence;
+    const m = PERSIST[k];
+    const pending = k === 'pending';
+    return `<div data-pstate="${k}">
+      <p class="persist-label" ${attrs(obsAttr(pending ? 'persistence-pending-visible' : null))}><strong><span aria-hidden="true">${m.sym}</span> ${esc(m.label)}</strong></p>
+      <p class="sub">${esc(m.detail)}</p>
+      <dl class="persist-row">
+        <dt>This browser</dt><dd>${esc(m.local)}</dd>
+        <dt>GitHub</dt><dd ${attrs(obsAttr(pending ? 'no-false-remote-success' : null))}>${esc(m.remote)}</dd>
+      </dl>
+    </div>`;
+  };
+
+  const renderJump = (v) => {
+    const links = [
+      ['region-observation', 'Observation', null],
+      ['region-hypotheses', 'Hypotheses', v.hyps.length],
+      ...(v.contradictions.length ? [['region-contradictions', 'Contradictions', v.contradictions.length]] : []),
+      ['region-unknowns', v.blockingUnknown ? 'Unknowns · blocking' : 'Unknowns', v.unknowns.length],
+      ...(v.obligations.length ? [['region-obligations', 'Obligations', v.obligations.length]] : []),
+      ['region-legal-actions', 'Next actions', null],
+      ['region-evidence', 'Evidence', v.evidence.length],
+    ];
+    return join(links.map(([t, l, n]) =>
+      `<a ${attrs({ href: `#${t}`, 'data-act': 'nav', 'data-target': t, 'data-key': `jump-${t}` })}>${esc(l)}${n === null ? '' : ` <span class="n">(${n})</span>`}</a>`));
+  };
+
+  const renderObservation = () => `
+    <h2 id="h-observation">Triggering observation</h2>
+    <p>${code(OBSERVATION.summary)}</p>
+    <blockquote class="obs-quote"><code>${esc(OBSERVATION.quote)}</code></blockquote>
+    <dl class="meta">
+      <dt>Source</dt><dd>${esc(OBSERVATION.source)}</dd>
+      <dt>Reported by</dt><dd>${esc(OBSERVATION.reportedBy)}</dd>
+      <dt>Pattern</dt><dd>${esc(OBSERVATION.firstSeen)}</dd>
+    </dl>`;
+
+  const tallyText = (t) => {
+    const parts = ['supports', 'weakens', 'contradicts', 'falsifies']
+      .filter((r) => t[r])
+      .map((r) => `${t[r]} ${RELATION[r].label.toLowerCase()}`);
+    return parts.length ? `Evidence: ${parts.join(', ')}` : 'Evidence: none linked yet';
+  };
+
+  const renderHypothesis = (v) => (h) => {
+    const falsified = h.status === 'falsified';
+    const isCandidate = v.candidate && v.candidate.id === h.id;
+    const testOpen = v.ui.openTests.includes(h.id) && !falsified;
+    const selectDisabled = h.status !== 'active';
+    const inactiveObs = falsified && v.p.has(P.falsified) ? 'inactive-actions-unavailable' : null;
+    const falsifier = falsified ? v.evidence.find((e) => e.rel[h.id] === 'falsifies') : null;
+    return `<li ${attrs({
+      class: 'hyp', id: `hyp-${h.id}`, tabindex: '-1', 'data-status': h.status,
+      'aria-labelledby': `hyp-title-${h.id}`,
+      ...obsAttr(falsified ? 'falsified-hypothesis-retained' : null),
+    })}>
+      <div class="hyp-head">
+        <span class="hyp-code">${esc(h.code)}</span>
+        ${pill(STATUS[h.status], obsAttr(falsified ? 'falsified-state-noncolor' : null))}
+      </div>
+      <h3 class="hyp-title" id="hyp-title-${h.id}">${esc(h.title)}</h3>
+      ${when(falsified, `<p class="sub"><strong>Retained for the record.</strong> ${falsifier ? `Falsified by ${esc(falsifier.code)}: ${esc(falsifier.title)}.` : 'Falsified by recorded evidence.'}</p>`)}
+      ${when(v.contradictions.some((c) => c.hypothesis === h.id), `<p class="sub"><span aria-hidden="true">⚠</span> Contradicted by evidence — ${navLink('contradiction-e4', 'see contradiction')}</p>`)}
+      <p class="hyp-tally">${esc(tallyText(h.tally))} · ${navLink('region-evidence', 'view evidence')}</p>
+      ${when(isCandidate, '<p class="candidate-flag"><span aria-hidden="true">◆</span> Current confirmation candidate</p>')}
+      ${when(testOpen, `<p class="next-test" id="test-${h.id}"><strong>Discriminating test:</strong> ${esc(h.nextTest)}</p>`)}
+      <div ${attrs({ class: 'hyp-actions', role: 'group', 'aria-label': `Actions for hypothesis ${h.code}`, ...obsAttr(inactiveObs) })}>
+        <div class="row">
+          <button ${attrs({
+            type: 'button', class: 'btn', 'data-act': 'toggle-test', 'data-hyp': h.id, 'data-key': `test-${h.id}`,
+            disabled: falsified, 'aria-expanded': falsified ? null : String(testOpen),
+            'aria-controls': testOpen ? `test-${h.id}` : null,
+            'aria-describedby': falsified ? `inactive-${h.id}` : null,
+          })}>${testOpen ? 'Hide test plan' : 'Plan discriminating test'}</button>
+          <button ${attrs({
+            type: 'button', class: 'btn', 'data-act': 'select', 'data-hyp': h.id, 'data-key': `select-${h.id}`,
+            disabled: selectDisabled, 'aria-pressed': selectDisabled ? null : String(!!isCandidate),
+            'aria-describedby': selectDisabled ? `inactive-${h.id}` : null,
+          })}>${isCandidate ? 'Selected as candidate' : 'Select as candidate'}</button>
+        </div>
+        ${when(falsified, `<p class="inactive-note" id="inactive-${h.id}"><span aria-hidden="true">⊘</span> Unavailable: these actions require an active hypothesis, and ${esc(h.code)} is falsified.</p>`)}
+        ${when(h.status === 'weakened', `<p class="sub" id="inactive-${h.id}"><span aria-hidden="true">⊘</span> Cannot be selected as candidate while weakened; a test can still be planned.</p>`)}
+      </div>
+    </li>`;
+  };
+
+  const renderHypotheses = (v) => {
+    const counts = ['active', 'weakened', 'falsified']
+      .map((s) => [s, v.hyps.filter((h) => h.status === s).length])
+      .filter(([, n]) => n > 0)
+      .map(([s, n]) => `${n} ${STATUS[s].label.toLowerCase()}`)
+      .join(' · ');
+    return `<h2 id="h-hypotheses">Competing hypotheses <span class="count">${esc(counts)}</span></h2>
+      <p class="sub" style="margin-bottom:10px">Shown side by side. Order does not imply rank, likelihood, or sequence; no confidence scores are assigned.</p>
+      <ul class="hyp-grid" aria-label="Competing hypotheses, unranked">${join(v.hyps.map(renderHypothesis(v)))}</ul>`;
+  };
+
+  const renderContradictions = (v) => `
+    <h2 id="h-contradictions"><span aria-hidden="true">⚠</span> Contradictions <span class="count">${v.contradictions.length} open</span></h2>
+    <ul class="items">${join(v.contradictions.map((c) => `
+      <li class="item blocking" id="${c.id}" tabindex="-1">
+        <div class="item-head">${pill(RELATION.contradicts)}<strong>Unresolved contradiction</strong></div>
+        <p>${esc(c.text)}</p>
+        <p class="links">${navLink(`evidence-${c.evidence}`, 'View evidence E5')}${navLink(`hyp-${c.hypothesis}`, 'View hypothesis LOCK')}</p>
+      </li>`))}</ul>`;
+
+  const renderEvidence = (v) => `
+    <h2 id="h-evidence">Evidence and hypothesis relationships <span class="count">${v.evidence.length} items</span></h2>
+    <ul class="items">${join(v.evidence.map((e) => `
+      <li class="item" id="evidence-${e.id}" tabindex="-1">
+        <div class="item-head"><strong>${esc(e.code)}</strong><span>${code(e.title)}</span></div>
+        <p class="ev-source">Source: ${code(e.source)}</p>
+        <ul class="rel" aria-label="Relationship of ${esc(e.code)} to each hypothesis">${join(v.hyps.map((h) => {
+          const r = RELATION[e.rel[h.id] || 'neutral'];
+          return `<li>${pill({ ...r, label: `${h.code}: ${r.label}` })}</li>`;
+        }))}</ul>
+      </li>`))}</ul>`;
+
+  const renderUnknowns = (v) => `
+    <h2 id="h-unknowns">Unresolved unknowns <span class="count">${v.unknowns.length} open${v.blockingUnknown ? ' · 1 blocking' : ''}</span></h2>
+    <ul class="items">${join(v.unknowns.map((u) => `
+      <li ${attrs({ class: `item${u.blocking ? ' blocking' : ''}`, id: u.id, tabindex: '-1', ...obsAttr(u.blocking ? 'blocker-visible' : null) })}>
+        <div class="item-head">
+          <strong>${esc(u.code)}</strong>
+          ${u.blocking ? pill({ sym: '⛔', label: 'Blocking', cls: 'st-blocking' }) : pill({ sym: '?', label: 'Open', cls: 'st-open' })}
+        </div>
+        <p>${esc(u.question)}</p>
+        <p class="sub">${esc(u.note)}</p>
+        ${when(u.blocking, `<p class="links">Blocks: ${navLink('action-confirm', 'Confirm root cause')}</p>`)}
+      </li>`))}</ul>`;
+
+  const renderObligations = (v) => `
+    <h2 id="h-obligations">Obligations before progress <span class="count">${v.obligations.length} outstanding</span></h2>
+    <ul class="items">${join(v.obligations.map((o) => `
+      <li ${attrs({ class: 'item blocking', id: o.id, tabindex: '-1', ...obsAttr(o.obs) })}>
+        <div class="item-head"><strong>${esc(o.code)}</strong>${pill({ sym: '☐', label: `${o.kind} · not done`, cls: 'st-blocking' })}</div>
+        <p>${code(o.text)}</p>
+      </li>`))}</ul>`;
+
+  const renderConfirm = (v) => {
+    const c = v.confirm;
+    const blockingDependent = !c.legal && v.p.has(P.blocking);
+    const cand = v.candidate;
+    return `<li ${attrs({ class: `action ${c.legal ? 'is-legal' : 'is-illegal'}`, id: 'action-confirm', tabindex: '-1', ...obsAttr(blockingDependent ? 'dependent-action-unavailable' : null) })}>
+      <div class="action-head">
+        <button ${attrs({
+          type: 'button', class: 'btn btn-primary', 'data-act': 'confirm', 'data-key': 'confirm',
+          'data-percepta-capability': CONFIRM, disabled: !c.legal,
+          'aria-describedby': c.legal ? 'confirm-target' : 'confirm-target reason-confirm-root-cause',
+        })}>Confirm root cause</button>
+        <span class="legality">${c.legal ? '<span aria-hidden="true">✓</span> Available' : '<span aria-hidden="true">⊘</span> Unavailable'}</span>
+      </div>
+      <p class="sub" id="confirm-target">${cand ? `Would confirm <strong>${esc(cand.code)}</strong> as the root cause. Choose a different active hypothesis with “Select as candidate”.` : 'No active hypothesis is available as a candidate.'}</p>
+      ${when(!c.legal, `<div ${attrs({ class: 'reason', id: 'reason-confirm-root-cause', 'data-percepta-unavailable-reason-for': CONFIRM, ...obsAttr('unavailable-reason-visible') })}>
+        <p class="reason-title">Why this is unavailable</p>
+        <ul>${join(c.reasons.map((r) => `<li>${esc(r.text)}</li>`))}</ul>
+        ${when(c.primary, `<p class="links">${navLink(c.primary && c.primary.target, c.primary && c.primary.link, {
+          class: 'blocker-link', 'data-percepta-blocker-link-for': CONFIRM,
+          ...obsAttr(v.p.has(P.blocking) && c.primary && c.primary.target === 'unknown-lock-owner' ? 'blocker-navigation-available' : null),
+        })}${join(c.reasons.filter((r) => r.target && r !== c.primary).map((r) => navLink(r.target, r.link)))}</p>`)}
+      </div>`)}
+      ${when(v.ui.request === CONFIRM && c.legal, `<p class="notice" role="status">Confirmation of ${esc(cand ? cand.code : 'the candidate')} requested. It is not recorded as confirmed until the runtime reports it.</p>`)}
+    </li>`;
+  };
+
+  const renderOtherCap = (v) => (cap) => `
+    <li class="action ${cap.legal ? 'is-legal' : 'is-illegal'}">
+      <div class="action-head">
+        <button ${attrs({
+          type: 'button', class: 'btn', 'data-act': 'cap', 'data-cap': cap.name, 'data-key': `cap-${cap.name}`,
+          'data-percepta-capability': cap.name, disabled: !cap.legal,
+          'aria-describedby': cap.legal ? null : `reason-${cap.name}`,
+        })}>${esc(humanize(cap.name))}</button>
+        <span class="legality">${cap.legal ? '<span aria-hidden="true">✓</span> Available' : '<span aria-hidden="true">⊘</span> Unavailable'}</span>
+      </div>
+      ${when(!cap.legal, `<p ${attrs({ class: 'sub', id: `reason-${cap.name}`, 'data-percepta-unavailable-reason-for': cap.name })}>Why unavailable: ${esc(GENERIC_REASON.text)}</p>`)}
+      ${when(v.ui.request === cap.name && cap.legal, `<p class="notice" role="status">${esc(humanize(cap.name))} requested; awaiting the runtime’s updated state.</p>`)}
+    </li>`;
+
+  const renderActions = (v) => `
+    <h2 id="h-legal-actions">Next actions</h2>
+    <div class="next"><strong>Test next</strong><p>${code(v.nextTest)}</p></div>
+    <ul class="items" aria-label="Available and unavailable actions">
+      ${renderConfirm(v)}
+      ${join(v.otherCaps.map(renderOtherCap(v)))}
+    </ul>
+    <p class="sub" style="margin-top:8px">Availability is supplied by the investigation runtime and is shown as given.</p>`;
+
+  const renderFooter = (v) => `
+    <details>
+      <summary>Runtime state details</summary>
+      <dl>
+        <dt>State</dt><dd>${esc(v.state.name)}</dd>
+        <dt>Predicates</dt><dd>${v.p.size ? esc([...v.p].join(', ')) : 'none'}</dd>
+        <dt>Capabilities</dt><dd>${Object.keys(v.state.capabilities).length ? esc(Object.entries(v.state.capabilities).map(([k, x]) => `${k}: ${x}`).join(', ')) : 'none supplied'}</dd>
+      </dl>
+    </details>`;
+
+  /* ---------- Effects: the only mutable cell and DOM writes ---------- */
+  const byId = (id) => document.getElementById(id);
+  const REGIONS = Object.freeze([
+    ['investigation-status', renderInvestigation, () => true],
+    ['persistence-body', renderPersistence, () => true],
+    ['jump-nav', renderJump, () => true],
+    ['region-observation', renderObservation, () => true],
+    ['region-hypotheses', renderHypotheses, () => true],
+    ['region-contradictions', renderContradictions, (v) => v.p.has(P.contradictions)],
+    ['region-evidence', renderEvidence, () => true],
+    ['region-legal-actions', renderActions, () => true],
+    ['region-unknowns', renderUnknowns, () => true],
+    ['region-obligations', renderObligations, (v) => v.obligations.length > 0],
+    ['runtime-footer', renderFooter, () => true],
+  ]);
+
+  const INITIAL_UI = Object.freeze({ candidate: 'h-lock', openTests: Object.freeze([]), request: null });
+  let store = Object.freeze({
+    state: normalizeState({
+      name: 'sample-default',
+      predicates: [P.blocking, P.pending],
+      capabilities: { [CONFIRM]: 'illegal' },
+    }),
+    ui: INITIAL_UI,
+  });
+
+  const paint = (s) => {
+    const focusKey = document.activeElement && document.activeElement.getAttribute('data-key');
+    const view = deriveView(s.state, s.ui);
+    REGIONS.forEach(([id, render, visible]) => {
+      const el = byId(id);
+      const show = visible(view);
+      el.hidden = !show;
+      el.innerHTML = show ? render(view) : '';
+    });
+    const again = focusKey && document.querySelector(`[data-key="${CSS.escape(focusKey)}"]`);
+    if (again && !again.disabled) again.focus({ preventScroll: true });
+  };
+
+  const commit = (next) => { store = Object.freeze(next); paint(store); };
+  const updateUi = (f) => commit({ ...store, ui: Object.freeze(f(store.ui)) });
+
+  const reduceMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const navigateTo = (id) => {
+    const el = byId(id);
+    if (!el) return;
+    el.scrollIntoView({ block: 'center', behavior: reduceMotion() ? 'auto' : 'smooth' });
+    el.focus({ preventScroll: true });
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
+    window.setTimeout(() => el.classList.remove('flash'), 2000);
+    if (history.replaceState) history.replaceState(null, '', `#${id}`);
+  };
+
+  const HANDLERS = Object.freeze({
+    nav: (t, e) => { e.preventDefault(); navigateTo(t.getAttribute('data-target')); },
+    'toggle-test': (t) => {
+      const id = t.getAttribute('data-hyp');
+      updateUi((ui) => ({ ...ui, openTests: ui.openTests.includes(id) ? ui.openTests.filter((x) => x !== id) : [...ui.openTests, id] }));
+    },
+    select: (t) => updateUi((ui) => ({ ...ui, candidate: t.getAttribute('data-hyp') })),
+    confirm: () => updateUi((ui) => ({ ...ui, request: CONFIRM })),
+    cap: (t) => updateUi((ui) => ({ ...ui, request: t.getAttribute('data-cap') })),
+  });
+
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-act]');
+    if (!t || t.disabled) return;
+    const h = HANDLERS[t.getAttribute('data-act')];
+    if (h) h(t, e);
+  });
+
+  window.__perceptaSetState = (raw) => {
+    commit({ state: normalizeState(raw), ui: Object.freeze({ ...store.ui, request: null }) });
+  };
+
+  paint(store);
+})();
+</script>
+</body>
+</html>
