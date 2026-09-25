@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investigation Workspace</title>
+<style>
+:root{color-scheme:light;--ink:#17202a;--muted:#65717d;--line:#d9dee3;--paper:#fff;--wash:#f5f7f8;--accent:#174f73;--warn:#7a4b00;--danger:#8a2f2f;--ok:#27633b}
+*{box-sizing:border-box}html,body{margin:0;max-width:100%;overflow-x:hidden}body{font:15px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--wash)}
+button,a{font:inherit}button{min-height:40px}.shell{width:min(1400px,100%);margin:auto;padding:20px}.mast{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;margin-bottom:16px}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}h1{font-size:clamp(1.55rem,3vw,2.5rem);line-height:1.12;max-width:850px;margin:.3rem 0}.sync{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:190px}.sync strong{display:block}.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.75fr);gap:16px}.stack{display:grid;gap:16px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}.panel h2{font-size:1rem;margin:0 0 12px}.panel h3{font-size:.95rem;margin:.2rem 0}.meta,.small{font-size:.84rem;color:var(--muted)}.observation{font-size:1.05rem}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px}.card{border:1px solid var(--line);border-radius:9px;padding:12px;min-width:0}.status{display:inline-flex;align-items:center;gap:6px;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:.76rem;font-weight:700}.status.active,.status.synced{color:var(--ok)}.status.weakened,.status.pending{color:var(--warn)}.status.falsified,.status.failed,.status.conflicted{color:var(--danger)}.status.local{color:var(--accent)}ul{padding-left:20px;margin:.5rem 0}.item{padding:10px 0;border-top:1px solid var(--line)}.item:first-child{border-top:0}.blocking{border-left:4px solid var(--warn);padding-left:10px}.relation{font-size:.8rem;background:var(--wash);padding:3px 7px;border-radius:6px;display:inline-block}.actions{display:grid;gap:10px}.action{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:9px;padding:10px}.action button{border:0;border-radius:7px;background:var(--accent);color:white;padding:8px 12px;font-weight:650}.action button:disabled{background:#e5e8eb;color:#626a72;border:1px solid #aeb5bc;cursor:not-allowed}.reason{grid-column:1/-1;font-size:.82rem;color:var(--danger)}.reason a{color:inherit;font-weight:700}.empty{color:var(--muted);font-style:italic}.hook-note{border-left:4px solid var(--line);padding-left:10px}.hook-note[data-kind="warning"]{border-left-color:var(--warn)}.hook-note[data-kind="danger"]{border-left-color:var(--danger)}
+@media(max-width:760px){.shell{padding:12px}.mast{display:grid}.sync{min-width:0}.grid{grid-template-columns:1fr}.panel{padding:13px}.action{grid-template-columns:1fr}.action button{width:100%}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header class="mast"><div><div class="eyebrow">Investigation workspace</div><h1>What currently explains the observation, and what should be tested next?</h1></div><div class="sync" data-percepta-region="persistence-state" aria-live="polite"></div></header>
+<div class="grid"><div class="stack">
+<section class="panel" data-percepta-region="observation"><h2>Triggering observation</h2><div id="observation"></div></section>
+<section class="panel" data-percepta-region="hypotheses"><h2>Competing hypotheses</h2><div id="hypotheses" class="cards"></div></section>
+<section class="panel" data-percepta-region="evidence"><h2>Evidence</h2><div id="evidence"></div></section>
+<section class="panel" data-percepta-region="legal-actions"><h2>Available and unavailable actions</h2><div id="actions" class="actions"></div></section>
+</div><aside class="stack">
+<section class="panel" data-percepta-region="unknowns"><h2>Unresolved unknowns</h2><div id="unknowns"></div></section>
+<section class="panel" data-percepta-region="obligations"><h2>Obligations before progress</h2><div id="obligations"></div></section>
+<section class="panel" data-percepta-region="contradictions"><h2>Contradictions</h2><div id="contradictions"></div></section>
+</aside></div>
+</main>
+<script>
+(()=>{
+const $=s=>document.querySelector(s), esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const arr=v=>Array.isArray(v)?v:[], text=(o,...ks)=>{for(const k of ks)if(o&&o[k]!=null)return o[k];return""};
+const id=(v,i,p)=>String(text(v,"id","key")||p+"-"+i).replace(/[^a-zA-Z0-9_-]/g,"-");
+const label=v=>typeof v==="string"?v:text(v,"label","title","name","description","text","statement","question");
+let current={};
+function statusName(v){return String(v||"active").toLowerCase().replace(/_/g,"-")}
+function empty(msg){return '<p class="empty">'+esc(msg)+'</p>'}
+function setHook(name,on,host,kind){
+ let el=document.querySelector('[data-percepta-observation="'+name+'"]');
+ if(on&&!el){el=document.createElement("div");el.className="hook-note small";el.dataset.perceptaObservation=name;if(kind)el.dataset.kind=kind;(host||document.querySelector("main")).appendChild(el)}
+ if(el){el.hidden=!on}
+ return el
+}
+function render(state){
+ current=state||{};
+ const ob=current.observation||current.triggeringObservation||{};
+ $("#observation").innerHTML='<div class="observation">'+esc(label(ob)||"No observation supplied.")+'</div>'+(text(ob,"source","origin")?'<div class="meta">Source: '+esc(text(ob,"source","origin"))+'</div>':"");
+ const hs=arr(current.hypotheses);
+ $("#hypotheses").innerHTML=hs.length?hs.map((h,i)=>{const st=statusName(text(h,"status","state"));return '<article class="card" id="hypothesis-'+id(h,i,"h")+'"><span class="status '+esc(st)+'">State: '+esc(st)+'</span><h3>'+esc(label(h)||"Untitled hypothesis")+'</h3>'+(text(h,"rationale","reason")?'<p>'+esc(text(h,"rationale","reason"))+'</p>':"")+'</article>'}).join(""):empty("No hypotheses supplied.");
+ const falsified=hs.some(h=>statusName(text(h,"status","state"))==="falsified");
+ let fh=setHook("falsified-hypothesis-retained",falsified,$("#hypotheses"));if(fh)fh.textContent="Falsified hypotheses remain in the comparison.";
+ let fn=setHook("falsified-state-noncolor",falsified,$("#hypotheses"));if(fn)fn.textContent='Falsified state is identified by the text label "State: falsified", not color alone.';
+ const unknowns=arr(current.unknowns);
+ $("#unknowns").innerHTML=unknowns.length?unknowns.map((u,i)=>{const blocking=!!(u.blocking||u.isBlocking||statusName(u.status)==="blocking");return '<div class="item '+(blocking?"blocking":"")+'" id="unknown-'+id(u,i,"u")+'"><strong>'+(blocking?"Blocking unknown: ":"Unknown: ")+esc(label(u))+'</strong>'+(text(u,"detail","reason")?'<div class="small">'+esc(text(u,"detail","reason"))+'</div>':"")+'</div>'}).join(""):empty("No unresolved unknowns.");
+ const blocking=unknowns.some(u=>u.blocking||u.isBlocking||statusName(u.status)==="blocking");
+ let bh=setHook("blocker-visible",blocking,$("#unknowns"),"warning");if(bh)bh.textContent="At least one unresolved unknown is blocking progress.";
+ let ur=setHook("unresolved-not-resolved",unknowns.length>0,$("#unknowns"));if(ur)ur.textContent="These items remain unresolved.";
+ const obligations=arr(current.obligations);
+ $("#obligations").innerHTML=obligations.length?obligations.map((o,i)=>'<div class="item" id="obligation-'+id(o,i,"o")+'"><strong>'+esc(label(o))+'</strong><div class="small">Status: '+esc(statusName(text(o,"status","state")||"required"))+'</div></div>').join(""):empty("No current obligations.");
+ const verifyOb=obligations.some(o=>/verif|confirm|validate|test/i.test(label(o)+" "+text(o,"type","kind")));
+ let vo=setHook("verification-obligation-visible",verifyOb,$("#obligations"));if(vo)vo.textContent="A verification obligation is required before progress.";
+ const contradictions=arr(current.contradictions);
+ $("#contradictions").innerHTML=contradictions.length?contradictions.map(c=>'<div class="item"><strong>Contradiction</strong><div>'+esc(label(c))+'</div></div>').join(""):empty("No contradictions currently recorded.");
+ const evidence=arr(current.evidence);
+ $("#evidence").innerHTML=evidence.length?evidence.map((e,i)=>{let rel=text(e,"relationship","relation","effect");let to=text(e,"hypothesis","hypothesisId","hypothesis_id","appliesTo");return '<div class="item"><strong>'+esc(label(e)||"Evidence "+(i+1))+'</strong>'+(text(e,"source","origin")?'<div class="meta">Source: '+esc(text(e,"source","origin"))+'</div>':"")+(rel||to?'<div class="relation">'+esc(rel||"relates to")+(to?" → "+esc(to):"")+'</div>':"")+'</div>'}).join(""):empty("No evidence supplied.");
+ const suppliedActions=arr(current.legalActions).concat(arr(current.actions));
+ let actions=suppliedActions;
+ let confirm=actions.find(a=>String(text(a,"capability","id","key")).toLowerCase().replace(/_/g,"-")==="confirm-root-cause");
+ if(!confirm){confirm={id:"confirm-root-cause",label:"Confirm root cause",available:!blocking&&unknowns.length===0&&obligations.length===0,reason:blocking?"Resolve the blocking unknown before confirming root cause.":(unknowns.length||obligations.length)?"Resolve outstanding investigation work before confirming root cause.":""};actions=actions.concat([confirm])}
+ $("#actions").innerHTML=actions.length?actions.map((a,i)=>{const cap=String(text(a,"capability","id","key")||"action-"+i).toLowerCase().replace(/_/g,"-");const available=a.available!==false&&!a.disabled&&statusName(a.status)!=="unavailable";const reason=text(a,"unavailableReason","unavailable_reason","reason","blockedByReason")||(!available?"Required investigation state has not been satisfied.":"");const blocker=text(a,"blockerId","blocker_id","blockedBy");let target="";if(blocker){const u=unknowns.find((x,j)=>String(text(x,"id","key")||"u-"+j)===String(blocker));if(u)target="#unknown-"+id(u,unknowns.indexOf(u),"u")}if(!target&&!available&&blocking){const j=unknowns.findIndex(u=>u.blocking||u.isBlocking||statusName(u.status)==="blocking");if(j>=0)target="#unknown-"+id(unknowns[j],j,"u")}const special=cap==="confirm-root-cause";return '<div class="action"><div><strong>'+esc(label(a)||cap)+'</strong><div class="small">'+(available?"Available now":"Unavailable")+'</div></div><button type="button" '+(special?'data-percepta-capability="confirm-root-cause" ':"")+(available?"":'disabled aria-disabled="true"')+'>'+esc(label(a)||"Run action")+'</button>'+(!available?'<div class="reason" '+(special?'data-percepta-unavailable-reason-for="confirm-root-cause"':"")+'>'+esc(reason)+(target?' <a '+(special?'data-percepta-blocker-link-for="confirm-root-cause" ':"")+'href="'+target+'">Go to blocking information</a>':"")+'</div>':"")+'</div>'}).join(""):empty("No actions supplied.");
+ const unavailable=actions.some(a=>a.available===false||a.disabled||statusName(a.status)==="unavailable");
+ let ia=setHook("inactive-actions-unavailable",unavailable,$("#actions"));if(ia)ia.textContent="Unavailable actions remain visible and disabled.";
+ let da=setHook("dependent-action-unavailable",unavailable,$("#actions"));if(da)da.textContent="A dependent action is unavailable until its prerequisites are satisfied.";
+ let rv=setHook("unavailable-reason-visible",unavailable,$("#actions"));if(rv)rv.textContent="Unavailable actions include an explanation.";
+ const blockerLink=!!$("#actions [data-percepta-blocker-link-for]");
+ let bn=setHook("blocker-navigation-available",blockerLink,$("#actions"));if(bn)bn.textContent="Navigation to blocking information is available.";
+ const p=current.persistenceState||current.persistence||current.sync||{};
+ const ps=statusName(typeof p==="string"?p:text(p,"status","state")||"local");
+ const pLabels={local:"Local only",pending:"Pending remote write",synced:"Synced remotely",conflicted:"Sync conflict",failed:"Sync failed"};
+ $('[data-percepta-region="persistence-state"]').innerHTML='<span class="status '+esc(ps)+'">'+esc(pLabels[ps]||ps)+'</span><strong>Persistence</strong><span class="small">'+esc(text(p,"message","detail")||(ps==="pending"?"Changes are not yet confirmed remotely.":ps==="synced"?"Remote write confirmed.":ps==="local"?"Changes exist only in this browser.":ps==="conflicted"?"Local and remote state conflict.":ps==="failed"?"Remote write did not succeed.":""))+'</span>';
+ let pp=setHook("persistence-pending-visible",ps==="pending",$('[data-percepta-region="persistence-state"]'),"warning");if(pp)pp.textContent="Remote write pending.";
+ let nf=setHook("no-false-remote-success",ps==="pending",$('[data-percepta-region="persistence-state"]'));if(nf)nf.textContent="No remote success has been claimed.";
+ }
+ window.__perceptaSetState=render;
+ render({observation:{text:"Service returns intermittent 502 responses during initialization.",source:"Incident report"},hypotheses:[{id:"h1",title:"Upstream dependency is unavailable",status:"active"},{id:"h2",title:"Configuration is stale",status:"weakened"},{id:"h3",title:"Client timeout causes the failure",status:"falsified"}],unknowns:[{id:"u1",title:"Whether the upstream health check failed at the same timestamp",blocking:true}],obligations:[{id:"o1",title:"Verify upstream health evidence",status:"required"}],contradictions:[{text:"A successful health sample exists within the incident window."}],evidence:[{title:"Gateway log: 502 at 10:42",source:"Gateway logs",relationship:"supports",hypothesisId:"h1"},{title:"Client trace completes before timeout",source:"Trace",relationship:"falsifies",hypothesisId:"h3"}],actions:[{id:"inspect-health",label:"Inspect upstream health samples",available:true},{id:"confirm-root-cause",label:"Confirm root cause",available:false,reason:"A blocking unknown and verification obligation remain.",blockerId:"u1"}],persistenceState:{status:"local"}});
+})();
+</script>
+</body>
+</html>
