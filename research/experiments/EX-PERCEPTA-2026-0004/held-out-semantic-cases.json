@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "experiment": "EX-PERCEPTA-2026-0004",
+  "visibility": "evaluation-only",
+  "cases": [
+    {
+      "id": "combined-blocker-falsification",
+      "state": {
+        "name": "held-out-01",
+        "predicates": ["hypothesis-is-falsified", "blocking-unknown-exists"],
+        "capabilities": {"confirm-root-cause": "illegal"}
+      },
+      "semanticObligations": [
+        "falsified hypothesis remains visibly represented",
+        "falsified status is non-color",
+        "blocking unknown is visible",
+        "confirmation is unavailable",
+        "unavailability has a visible reason",
+        "user can navigate from unavailable confirmation to blocking information",
+        "falsification does not erase unrelated blocker semantics"
+      ]
+    },
+    {
+      "id": "pending-unverified",
+      "state": {
+        "name": "held-out-02",
+        "predicates": ["github-write-is-pending", "corrective-action-not-verified"],
+        "capabilities": {"confirm-root-cause": "illegal"}
+      },
+      "semanticObligations": [
+        "persistence is visibly pending",
+        "remote success is not claimed",
+        "investigation is not represented as resolved",
+        "verification work remains visible",
+        "confirmation remains unavailable"
+      ]
+    },
+    {
+      "id": "all-constraints",
+      "state": {
+        "name": "held-out-03",
+        "predicates": ["hypothesis-is-falsified", "blocking-unknown-exists", "github-write-is-pending", "corrective-action-not-verified", "contradictions-present", "obligations-present"],
+        "capabilities": {"confirm-root-cause": "illegal"}
+      },
+      "semanticObligations": [
+        "all simultaneously active meanings remain discoverable",
+        "no active meaning suppresses another active meaning",
+        "contradictions remain visible",
+        "obligations remain visible",
+        "pending persistence remains distinct from investigation resolution",
+        "blocked action remains explained and navigable"
+      ]
+    },
+    {
+      "id": "legal-with-history",
+      "state": {
+        "name": "held-out-04",
+        "predicates": ["hypothesis-is-falsified"],
+        "capabilities": {"confirm-root-cause": "legal"}
+      },
+      "semanticObligations": [
+        "confirmation is executable because supplied capability authority is legal",
+        "falsified historical hypothesis remains represented",
+        "one falsified hypothesis does not imply the whole investigation is blocked"
+      ]
+    },
+    {
+      "id": "illegal-without-known-blocker",
+      "state": {
+        "name": "held-out-05",
+        "predicates": [],
+        "capabilities": {"confirm-root-cause": "illegal"}
+      },
+      "semanticObligations": [
+        "confirmation remains unavailable because capability authority is illegal",
+        "UI does not invent a blocking unknown that was not supplied",
+        "UI does not fabricate a domain-specific reason unsupported by active predicates",
+        "unavailability is still communicated without overriding capability authority"
+      ]
+    }
+  ]
+}
