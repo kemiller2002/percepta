@@ -65,5 +65,26 @@
       "HY-PERCEPTA-2026-0004"
     ],
     "title": "Runtime-protocol-controlled Percepta semantic-contract replication"
+  },
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-25",
+    "id": "EX-PERCEPTA-2026-0004",
+    "inputs": [
+      "research/experiments/EX-PERCEPTA-2026-0004/frozen-product-brief.md",
+      "research/experiments/EX-PERCEPTA-2026-0004/frozen-runtime-protocol.md",
+      ".percepta/contracts/indy-init-investigation-workspace.json"
+    ],
+    "outputs": [
+      "artifacts/percepta/experiment-0004/results.json"
+    ],
+    "path": "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "preregistered",
+    "tests_hypotheses": [
+      "HY-PERCEPTA-2026-0005"
+    ],
+    "title": "Held-out semantic-state generalization"
   }
 ]
