@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investigation Workspace</title>
+<style>
+:root{color-scheme:dark;--bg:#101317;--panel:#181d23;--line:#303943;--text:#edf2f7;--muted:#aeb8c3;--accent:#9fc5ff;--warn:#ffd58a;--bad:#ffaaa3;--good:#9fe0b4}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,sans-serif}main{max-width:1400px;margin:auto;padding:clamp(16px,3vw,36px)}
+header{display:flex;gap:20px;align-items:end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:20px}h1{font-size:clamp(26px,4vw,42px);line-height:1.05;margin:0}h2{font-size:17px;margin:0 0 12px}p{margin:.35rem 0;color:var(--muted)}.eyebrow,.status{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}.card{grid-column:span 4;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}.wide{grid-column:span 8}.full{grid-column:1/-1}
+ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}.item{border-left:3px solid var(--line);padding:8px 10px;background:#12171c;border-radius:4px;overflow-wrap:anywhere}.item strong{display:block;color:var(--text)}.item small{color:var(--muted)}
+.item[data-kind="conflict"]{border-left-color:var(--bad)}.item[data-kind="unknown"],.item[data-kind="obligation"]{border-left-color:var(--warn)}.item[data-kind="available"]{border-left-color:var(--good)}
+.empty{font-style:italic;color:var(--muted)}button{font:inherit;border:1px solid var(--accent);background:transparent;color:var(--text);padding:9px 12px;border-radius:8px;text-align:left}button:disabled{border-color:var(--line);color:var(--muted);cursor:not-allowed}.action{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.reason{flex-basis:100%;font-size:13px;color:var(--muted)}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 7px;margin:2px 4px 2px 0;font-size:12px}.persist{font-weight:650}.persist.unsaved{color:var(--warn)}.persist.saved{color:var(--good)}
+@media(max-width:900px){.card,.wide{grid-column:span 6}}@media(max-width:600px){header{align-items:start;flex-direction:column}.card,.wide{grid-column:1/-1}main{padding:14px}.grid{gap:10px}}
+</style>
+</head>
+<body>
+<main>
+<header><div><div class="eyebrow">Failure analysis</div><h1>Investigation Workspace</h1><p id="state-summary">Waiting for investigation state.</p></div><div class="status" aria-live="polite" id="runtime-status">No runtime state</div></header>
+<div class="grid">
+<section class="card wide" data-percepta-region="observation" aria-labelledby="observation-title"><h2 id="observation-title">Triggering observation</h2><div id="observation"></div></section>
+<section class="card" data-percepta-region="persistence-state" aria-labelledby="persistence-title"><h2 id="persistence-title">Persistence</h2><div id="persistence"></div></section>
+<section class="card" data-percepta-region="hypotheses" aria-labelledby="hypotheses-title"><h2 id="hypotheses-title">Competing hypotheses</h2><ul id="hypotheses"></ul></section>
+<section class="card" data-percepta-region="contradictions" aria-labelledby="contradictions-title"><h2 id="contradictions-title">Contradictions</h2><ul id="contradictions"></ul></section>
+<section class="card" data-percepta-region="unknowns" aria-labelledby="unknowns-title"><h2 id="unknowns-title">Unresolved unknowns</h2><ul id="unknowns"></ul></section>
+<section class="card" data-percepta-region="obligations" aria-labelledby="obligations-title"><h2 id="obligations-title">Outstanding obligations</h2><ul id="obligations"></ul></section>
+<section class="card wide" data-percepta-region="evidence" aria-labelledby="evidence-title"><h2 id="evidence-title">Evidence & relationships</h2><ul id="evidence"></ul></section>
+<section class="card full" data-percepta-region="legal-actions" aria-labelledby="actions-title"><h2 id="actions-title">Actions</h2><div id="actions"></div></section>
+</div>
+</main>
+<script>
+(()=>{
+const regions=["observation","hypotheses","contradictions","unknowns","obligations","evidence"];
+const human=s=>String(s).replace(/[_-]+/g," ").replace(/\b\w/g,c=>c.toUpperCase());
+const tokens=s=>String(s).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+const has=(ts,words)=>words.some(w=>ts.includes(w));
+function classify(p){
+ const t=tokens(p);
+ if(has(t,["observation","observed","trigger","failure","incident","symptom","source"]))return"observation";
+ if(has(t,["contradiction","contradicted","conflict","conflicting","falsified","refuted","disproven"]))return"contradictions";
+ if(has(t,["unknown","uncertain","missing","unresolved","blocked","ambiguity"]))return"unknowns";
+ if(has(t,["obligation","required","requirement","verify","verification","pending","todo","outstanding"]))return"obligations";
+ if(has(t,["evidence","fact","signal","measurement","log","trace","supports","weakens"]))return"evidence";
+ if(has(t,["hypothesis","hypotheses","theory","cause","explanation","candidate","viable"]))return"hypotheses";
+ return"evidence";
+}
+function empty(el,label){el.innerHTML='<li class="empty">No active '+label+' supplied.</li>'}
+function renderList(id,items,kind){
+ const el=document.getElementById(id);el.textContent="";
+ if(!items.length){empty(el,id);return}
+ items.forEach(p=>{const li=document.createElement("li");li.className="item";li.dataset.kind=kind||id;const strong=document.createElement("strong");strong.textContent=human(p);li.append(strong);const small=document.createElement("small");small.textContent="Active runtime predicate";li.append(small);el.append(li)})
+}
+function persistence(predicates){
+ const el=document.getElementById("persistence"), all=predicates.map(p=>[p,tokens(p)]);
+ const remote=all.filter(([,t])=>has(t,["persisted","saved","synced","committed","remote"]));
+ const local=all.filter(([,t])=>has(t,["dirty","unsaved","local","unpersisted","pending"]));
+ el.textContent="";
+ const p=document.createElement("p");p.className="persist "+(local.length?"unsaved":remote.length?"saved":"");
+ p.textContent=local.length?"Local work may not be remotely persisted.":remote.length?"Persistence state is represented by active runtime facts.":"Persistence has not been established by the supplied predicates.";
+ el.append(p);
+ [...local,...remote].forEach(([x])=>{const b=document.createElement("span");b.className="badge";b.textContent=human(x);el.append(b)})
+}
+function render(state){
+ state=state&&typeof state==="object"?state:{};
+ const predicates=Array.isArray(state.predicates)?[...new Set(state.predicates.filter(x=>typeof x==="string"))]:[];
+ const caps=state.capabilities&&typeof state.capabilities==="object"?state.capabilities:{};
+ const buckets=Object.fromEntries(regions.map(r=>[r,[]]));
+ predicates.forEach(p=>buckets[classify(p)].push(p));
+ const obs=document.getElementById("observation");obs.textContent="";
+ if(buckets.observation.length){buckets.observation.forEach(p=>{const d=document.createElement("div");d.className="item";d.innerHTML="<strong></strong><small>Active runtime predicate; source detail is not otherwise supplied.</small>";d.querySelector("strong").textContent=human(p);obs.append(d)})}
+ else{const p=document.createElement("p");p.className="empty";p.textContent="No triggering observation predicate is active.";obs.append(p)}
+ renderList("hypotheses",buckets.hypotheses);
+ renderList("contradictions",buckets.contradictions,"conflict");
+ renderList("unknowns",buckets.unknowns,"unknown");
+ renderList("obligations",buckets.obligations,"obligation");
+ renderList("evidence",buckets.evidence);
+ persistence(predicates);
+ const actions=document.getElementById("actions");actions.textContent="";
+ const entries=Object.entries(caps).filter(([,v])=>v==="legal"||v==="illegal");
+ if(!entries.length){const p=document.createElement("p");p.className="empty";p.textContent="No capability legality was supplied.";actions.append(p)}
+ entries.forEach(([name,legality])=>{const box=document.createElement("div");box.className="item action";box.dataset.kind=legality==="legal"?"available":"";
+ const btn=document.createElement("button");btn.type="button";btn.textContent=human(name);btn.disabled=legality!=="legal";btn.setAttribute("aria-disabled",String(btn.disabled));if(name==="confirm-root-cause")btn.dataset.perceptaCapability="confirm-root-cause";
+ const badge=document.createElement("span");badge.className="badge";badge.textContent=legality==="legal"?"Available":"Unavailable";
+ box.append(btn,badge);if(legality==="illegal"){const r=document.createElement("div");r.className="reason";r.textContent="Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.";box.append(r)}actions.append(box)});
+ document.getElementById("runtime-status").textContent="Runtime state applied";
+ document.getElementById("state-summary").textContent=predicates.length+" active fact"+(predicates.length===1?"":"s")+" · "+entries.length+" capability status"+(entries.length===1?"":"es");
+}
+window.__perceptaSetState=render;
+render({predicates:[],capabilities:{}});
+})();
+</script>
+</body>
+</html>
