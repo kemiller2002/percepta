@@ -62,5 +62,20 @@
     "supersedes": [],
     "supporting_evidence": [],
     "title": "Percepta semantic constraints preserve implementation diversity"
+  },
+  {
+    "author_agent": "chatgpt",
+    "confidence": "very-low",
+    "contradicting_evidence": [],
+    "created": "2026-09-25",
+    "id": "HY-PERCEPTA-2026-0005",
+    "path": "research/hypotheses/HY-PERCEPTA-2026-0005--semantic-contract-held-out-generalization.md",
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "status": "active",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [],
+    "title": "Percepta semantic contracts improve held-out state generalization"
   }
 ]
