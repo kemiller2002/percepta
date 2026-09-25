@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "experiment": "EX-PERCEPTA-2026-0003",
+  "baselineSha": "ca2fdd3c5657a9617ebc5dff854fc0f362e07ced",
+  "primaryOutcome": "whole-lane first-pass required Percepta completion",
+  "rows": [
+    {
+      "candidate": "candidate-01",
+      "branch": "experiment/percepta-0003-openai-treatment-a",
+      "lane": "treatment-a",
+      "provider": "openai",
+      "condition": "treatment",
+      "headCommit": "bab9f6263dc23f289eb3dc8aeb3083b05aff0da5",
+      "indexHtmlGitBlobSha": "737bed94c6b6f2561fd9f80acf03d5a7b22cbc0a",
+      "indexHtmlSha256": "1cd8311afccb3be0ff5c491840106bc174155cd530fbe1bd290ed9a1ba0db1ec",
+      "exitCode": 0,
+      "complete": true,
+      "requiredCategories": {
+        "contract-validation": {
+          "status": "Passed"
+        },
+        "structural": {
+          "status": "Passed"
+        },
+        "state-projection": {
+          "status": "Passed"
+        },
+        "interaction": {
+          "status": "Passed"
+        },
+        "accessibility": {
+          "status": "Passed"
+        },
+        "responsive": {
+          "status": "Passed"
+        }
+      },
+      "requiredPassed": 6,
+      "requiredFailed": 0,
+      "requiredUnavailable": 0,
+      "requiredTotal": 6,
+      "optionalCategories": {
+        "visual-regression": {
+          "status": "Unavailable",
+          "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+        },
+        "semantic-visual-review": {
+          "status": "Unavailable",
+          "reason": "No semantic visual review evidence was supplied."
+        }
+      },
+      "failedObservations": [],
+      "evidenceSha256": "b003c8f99702fe369a12d5c2e761d79632130bb80d611754ee8fcf946594cf10",
+      "stagedByteIdentical": true
+    },
+    {
+      "candidate": "candidate-02",
+      "branch": "experiment/percepta-0003-openai-control-a",
+      "lane": "control-a",
+      "provider": "openai",
+      "condition": "control",
+      "headCommit": "32a4c42209f438f4c95764f92c307d4074a172e3",
+      "indexHtmlGitBlobSha": "e4b3eb41e37fd7f6df545cc67eaabdc3e67886bd",
+      "indexHtmlSha256": "36783fdb584dd8a209ef873a2c5cf4000cb7778235907ec03763e43aa094bcf5",
+      "exitCode": 0,
+      "complete": true,
+      "requiredCategories": {
+        "contract-validation": {
+          "status": "Passed"
+        },
+        "structural": {
+          "status": "Passed"
+        },
+        "state-projection": {
+          "status": "Passed"
+        },
+        "interaction": {
+          "status": "Passed"
+        },
+        "accessibility": {
+          "status": "Passed"
+        },
+        "responsive": {
+          "status": "Passed"
+        }
+      },
+      "requiredPassed": 6,
+      "requiredFailed": 0,
+      "requiredUnavailable": 0,
+      "requiredTotal": 6,
+      "optionalCategories": {
+        "visual-regression": {
+          "status": "Unavailable",
+          "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+        },
+        "semantic-visual-review": {
+          "status": "Unavailable",
+          "reason": "No semantic visual review evidence was supplied."
+        }
+      },
+      "failedObservations": [],
+      "evidenceSha256": "60258a418de959d6d45064d81a4ff7e6fb82018884f957de8c28ac5b93337743",
+      "stagedByteIdentical": true
+    },
+    {
+      "candidate": "candidate-03",
+      "branch": "experiment/percepta-0003-claude-control-b",
+      "lane": "control-b",
+      "provider": "claude",
+      "condition": "control",
+      "headCommit": "6b9c1d669454e88d0a10e51098be8f3ac236d885",
+      "indexHtmlGitBlobSha": "e472b9794c90736b42252d3fa53e22240e10ec57",
+      "indexHtmlSha256": "4d79652f9e9efa751b6ef4874cd3d25eaff8dea7977dba1951db8b338a1b89ea",
+      "exitCode": 0,
+      "complete": true,
+      "requiredCategories": {
+        "contract-validation": {
+          "status": "Passed"
+        },
+        "structural": {
+          "status": "Passed"
+        },
+        "state-projection": {
+          "status": "Passed"
+        },
+        "interaction": {
+          "status": "Passed"
+        },
+        "accessibility": {
+          "status": "Passed"
+        },
+        "responsive": {
+          "status": "Passed"
+        }
+      },
+      "requiredPassed": 6,
+      "requiredFailed": 0,
+      "requiredUnavailable": 0,
+      "requiredTotal": 6,
+      "optionalCategories": {
+        "visual-regression": {
+          "status": "Unavailable",
+          "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+        },
+        "semantic-visual-review": {
+          "status": "Unavailable",
+          "reason": "No semantic visual review evidence was supplied."
+        }
+      },
+      "failedObservations": [],
+      "evidenceSha256": "07667afcfe16ccc7e4d9c517c3e4fab1e4210912eea04a6a852e0032af5c5d06",
+      "stagedByteIdentical": true
+    },
+    {
+      "candidate": "candidate-04",
+      "branch": "experiment/percepta-0003-claude-treatment-b",
+      "lane": "treatment-b",
+      "provider": "claude",
+      "condition": "treatment",
+      "headCommit": "c33098c62404d6aca384e8b6411b390189dcf3da",
+      "indexHtmlGitBlobSha": "63c05e3eb2dde8eaae04df6c8a6f2f7dc74d7a40",
+      "indexHtmlSha256": "797b28748f36f2e3ff4f885f98da0cd205f01fa6f4417d865f45a7e01824c779",
+      "exitCode": 0,
+      "complete": true,
+      "requiredCategories": {
+        "contract-validation": {
+          "status": "Passed"
+        },
+        "structural": {
+          "status": "Passed"
+        },
+        "state-projection": {
+          "status": "Passed"
+        },
+        "interaction": {
+          "status": "Passed"
+        },
+        "accessibility": {
+          "status": "Passed"
+        },
+        "responsive": {
+          "status": "Passed"
+        }
+      },
+      "requiredPassed": 6,
+      "requiredFailed": 0,
+      "requiredUnavailable": 0,
+      "requiredTotal": 6,
+      "optionalCategories": {
+        "visual-regression": {
+          "status": "Unavailable",
+          "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+        },
+        "semantic-visual-review": {
+          "status": "Unavailable",
+          "reason": "No semantic visual review evidence was supplied."
+        }
+      },
+      "failedObservations": [],
+      "evidenceSha256": "72571946c45c91cac47c930376a80a02ac2cef2fd8156655aeb3b91580f3433c",
+      "stagedByteIdentical": true
+    }
+  ],
+  "control": {
+    "completedLanes": 2,
+    "lanes": 2,
+    "wholeLaneCompletionRate": 1.0,
+    "requiredCategoriesPassed": 12,
+    "requiredCategoriesEvaluated": 12,
+    "failuresByCategory": {
+      "contract-validation": 0,
+      "structural": 0,
+      "state-projection": 0,
+      "interaction": 0,
+      "accessibility": 0,
+      "responsive": 0
+    },
+    "candidates": [
+      "candidate-02",
+      "candidate-03"
+    ]
+  },
+  "treatment": {
+    "completedLanes": 2,
+    "lanes": 2,
+    "wholeLaneCompletionRate": 1.0,
+    "requiredCategoriesPassed": 12,
+    "requiredCategoriesEvaluated": 12,
+    "failuresByCategory": {
+      "contract-validation": 0,
+      "structural": 0,
+      "state-projection": 0,
+      "interaction": 0,
+      "accessibility": 0,
+      "responsive": 0
+    },
+    "candidates": [
+      "candidate-01",
+      "candidate-04"
+    ]
+  },
+  "controlFirstPassPasses": 2,
+  "controlCount": 2,
+  "treatmentFirstPassPasses": 2,
+  "treatmentCount": 2,
+  "pairedDescriptive": {
+    "openai": {
+      "control": {
+        "candidate": "candidate-02",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "treatment": {
+        "candidate": "candidate-01",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "descriptiveDifference": "no difference: both lanes complete with all required categories Passed"
+    },
+    "claude": {
+      "control": {
+        "candidate": "candidate-03",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "treatment": {
+        "candidate": "candidate-04",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "descriptiveDifference": "no difference: both lanes complete with all required categories Passed"
+    }
+  },
+  "hypotheses": {
+    "HY-PERCEPTA-2026-0003": {
+      "rule": "replication support iff treatment whole-lane first-pass completion rate > control rate",
+      "treatmentRate": 1.0,
+      "controlRate": 1.0,
+      "replicationSupport": false,
+      "interpretation": "No replication support: control completion (2/2) equals treatment completion (2/2). Descriptive only (n=2 per condition); not statistically conclusive."
+    },
+    "HY-PERCEPTA-2026-0004": {
+      "rule": ">=2 treatment implementations pass all required evidence AND blinded review finds materially different composition/layout",
+      "treatmentLanesPassingAllRequired": 2,
+      "reviewPerformed": true,
+      "treatmentPairReviewLabels": "X-Y",
+      "treatmentPairVerdict": "not-materially-different",
+      "reviewerFlaggedBorderline": true,
+      "support": false,
+      "interpretation": "Not supported: the blinded reviewer judged the treatment pair not materially different (flagged borderline). Threshold applied as preregistered, not weakened."
+    }
+  },
+  "rawEvidenceManifestSha256": "1ca16e2c3ecda82f878569d299c3ca2bab82b6332854e9a3b00d5215f177a5d3",
+  "semanticReviewSha256": "99ea7a76a877f3feee3aecea4d4bf2ddad37f567d075cf2e5effc93d0b4c0931"
+}

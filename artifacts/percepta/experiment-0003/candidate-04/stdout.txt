@@ -1,0 +1,10 @@
+* contract-validation      Passed             Typed contract parsed and validated successfully.
+* structural               Passed             Required semantic structure is present.
+* state-projection         Passed             All declared state projections are exercised and visible.
+* interaction              Passed             Capability exposure and legality projections are correct.
+* accessibility            Passed             Basic accessibility invariants pass.
+* responsive               Passed             Required semantics survive all declared viewport classes.
+  visual-regression        Unavailable        Visual regression evidence is incomplete or differs.
+  semantic-visual-review   Unavailable        Semantic visual review is supporting evidence and was not supplied.
+Evidence: /home/user/percepta/artifacts/percepta/experiment-0003/candidate-04/evidence.json
+Complete: true

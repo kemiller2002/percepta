@@ -1,0 +1,8 @@
+{
+  "reviewLabelToCandidate": {
+    "Screen-W": "candidate-03",
+    "Screen-X": "candidate-04",
+    "Screen-Y": "candidate-01",
+    "Screen-Z": "candidate-02"
+  }
+}
