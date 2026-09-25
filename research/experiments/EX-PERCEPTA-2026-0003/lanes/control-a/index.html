@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indy Init Investigation Workspace</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --ink: #1c2230;
+    --muted: #535c6e;
+    --line: #d4d9e2;
+    --accent: #1f5fbf;
+    --active: #1d6b3a;
+    --weak: #8a5a00;
+    --falsified: #8b1e2d;
+    --warn: #8a5a00;
+    --focus: #1f5fbf;
+    --radius: 8px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; max-width: 100%; overflow-x: hidden; }
+  body { background: var(--bg); line-height: 1.45; font-size: 15px; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; overflow-wrap: anywhere; }
+
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 8px; top: 8px; background: var(--surface); padding: 6px 10px; z-index: 10; }
+
+  header.top { background: var(--surface); border-bottom: 1px solid var(--line); padding: 16px; }
+  header.top h1 { margin: 0 0 4px; font-size: 1.25rem; }
+  .snapshot { margin: 0; color: var(--muted); font-size: 0.85rem; overflow-wrap: anywhere; }
+  .question {
+    margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid var(--accent);
+    background: #eef3fb; font-size: 1.1rem; font-weight: 600;
+  }
+  .answer { margin: 10px 0 0; }
+  .answer p { margin: 4px 0; }
+
+  nav.jump { margin-top: 12px; }
+  nav.jump ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  nav.jump a {
+    display: inline-block; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px;
+    background: var(--surface); text-decoration: none; font-size: 0.88rem;
+  }
+
+  main { padding: 16px; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+  .col { display: grid; gap: 16px; min-width: 0; align-content: start; }
+  @media (min-width: 800px) {
+    main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .col-center { grid-column: 1 / -1; order: -1; }
+  }
+  @media (min-width: 1150px) {
+    main { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) minmax(0, 0.9fr); }
+    .col-center { grid-column: auto; order: 0; }
+  }
+
+  section.panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px; min-width: 0; scroll-margin-top: 12px;
+  }
+  section.panel > h2 { margin: 0 0 8px; font-size: 1.02rem; }
+  .hint { margin: 0 0 10px; color: var(--muted); font-size: 0.85rem; }
+  .empty { color: var(--muted); font-style: italic; margin: 0; }
+  ul.cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; min-width: 0; }
+  .card h3 { margin: 0 0 4px; font-size: 0.98rem; overflow-wrap: anywhere; }
+  .card p { margin: 4px 0; overflow-wrap: anywhere; }
+  .card:target, .card.flash { box-shadow: 0 0 0 3px var(--focus); }
+  .meta { color: var(--muted); font-size: 0.85rem; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 999px;
+    border: 1.5px solid currentColor; font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+  }
+  .badge .glyph { font-weight: 700; }
+  .st-active { color: var(--active); }
+  .st-weakened { color: var(--weak); border-style: dashed; }
+  .st-falsified { color: var(--falsified); border-style: double; border-width: 3px; }
+  .hyp.falsified h3 .title-text { text-decoration: line-through; text-decoration-thickness: 2px; }
+  .hyp.falsified { background: #fbf4f5; border-style: dashed; }
+  .hyp.weakened { border-style: dashed; }
+  .st-open { color: var(--falsified); }
+  .st-resolved { color: var(--active); }
+  .st-warn { color: var(--warn); }
+
+  .rel { margin: 6px 0 0; padding-left: 18px; font-size: 0.88rem; }
+  .rel li { margin: 2px 0; }
+
+  .actions { display: grid; gap: 10px; }
+  .action-group h3 { margin: 6px 0; font-size: 0.92rem; }
+  ul.action-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .action { border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px; }
+  button.act {
+    font: inherit; font-weight: 600; padding: 8px 12px; border-radius: 6px; cursor: pointer;
+    border: 1.5px solid var(--accent); background: var(--accent); color: #fff; max-width: 100%;
+    white-space: normal; text-align: left;
+  }
+  button.act[disabled] {
+    cursor: not-allowed; background: #eceef2; color: #5b6272; border: 1.5px dashed #8a93a4;
+  }
+  .reason { margin: 6px 0 0; font-size: 0.88rem; }
+  .reason strong { font-weight: 600; }
+  .next-test { border-left: 4px solid var(--accent); padding: 8px 10px; background: #eef3fb; border-radius: 4px; }
+  .next-test p { margin: 2px 0; }
+
+  .persist-current { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .persist-current .badge { font-size: 0.9rem; }
+  .p-local { color: #3d4658; }
+  .p-pending { color: var(--warn); border-style: dashed; }
+  .p-synced { color: var(--active); }
+  .p-conflicted { color: var(--falsified); border-style: double; border-width: 3px; }
+  .p-failed { color: var(--falsified); }
+  ul.p-legend { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.8rem; }
+  ul.p-legend li { border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; color: var(--muted); }
+  ul.p-legend li[aria-current="true"] { border: 2px solid var(--ink); color: var(--ink); font-weight: 600; }
+  .remote { margin: 6px 0 0; font-size: 0.9rem; }
+
+  ol.journal { margin: 6px 0 0; padding-left: 18px; font-size: 0.85rem; color: var(--muted); }
+
+  footer { padding: 0 16px 24px; color: var(--muted); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#workspace">Skip to workspace</a>
+
+<header class="top">
+  <h1>Investigation workspace: <code>indy init</code> failure</h1>
+  <p class="snapshot" id="snapshot">Workspace snapshot: initial</p>
+  <p class="question" id="primary-question">What currently explains the observation, and what should be tested next?</p>
+  <div class="answer" id="answer" aria-live="polite"></div>
+  <nav class="jump" aria-label="Jump to workspace sections">
+    <ul>
+      <li><a href="#sec-observation">Observation</a></li>
+      <li><a href="#sec-hypotheses">Hypotheses</a></li>
+      <li><a href="#sec-contradictions">Contradictions</a></li>
+      <li><a href="#sec-unknowns">Unknowns</a></li>
+      <li><a href="#sec-obligations">Obligations</a></li>
+      <li><a href="#sec-evidence">Evidence</a></li>
+      <li><a href="#sec-actions">Next actions</a></li>
+      <li><a href="#sec-persistence">Save status</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="workspace" tabindex="-1">
+  <div class="col col-left">
+    <section class="panel" id="sec-observation" data-percepta-region="observation" aria-labelledby="h-observation" tabindex="-1">
+      <h2 id="h-observation">Triggering observation</h2>
+      <div id="observation-body"></div>
+    </section>
+
+    <section class="panel" id="sec-actions" data-percepta-region="legal-actions" aria-labelledby="h-actions" tabindex="-1">
+      <h2 id="h-actions">Next actions</h2>
+      <p class="hint">Available actions can be run now. Unavailable actions stay listed with the reason they are blocked.</p>
+      <div id="actions-body" class="actions"></div>
+    </section>
+
+    <section class="panel" id="sec-persistence" data-percepta-region="persistence-state" aria-labelledby="h-persistence" tabindex="-1">
+      <h2 id="h-persistence">Save status</h2>
+      <div id="persistence-body" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <div class="col col-center">
+    <section class="panel" id="sec-hypotheses" data-percepta-region="hypotheses" aria-labelledby="h-hypotheses" tabindex="-1">
+      <h2 id="h-hypotheses">Competing hypotheses</h2>
+      <p class="hint">Hypotheses are held in parallel and are not ranked or ordered. Falsified hypotheses stay on record.</p>
+      <ul class="cards" id="hypotheses-body"></ul>
+    </section>
+
+    <section class="panel" id="sec-evidence" data-percepta-region="evidence" aria-labelledby="h-evidence" tabindex="-1">
+      <h2 id="h-evidence">Evidence</h2>
+      <p class="hint">Each item lists how it bears on specific hypotheses.</p>
+      <ul class="cards" id="evidence-body"></ul>
+    </section>
+  </div>
+
+  <div class="col col-right">
+    <section class="panel" id="sec-unknowns" data-percepta-region="unknowns" aria-labelledby="h-unknowns" tabindex="-1">
+      <h2 id="h-unknowns">Unknowns</h2>
+      <p class="hint">Open questions. Blocking unknowns prevent confirming a root cause.</p>
+      <ul class="cards" id="unknowns-body"></ul>
+    </section>
+
+    <section class="panel" id="sec-contradictions" data-percepta-region="contradictions" aria-labelledby="h-contradictions" tabindex="-1">
+      <h2 id="h-contradictions">Contradictions</h2>
+      <ul class="cards" id="contradictions-body"></ul>
+    </section>
+
+    <section class="panel" id="sec-obligations" data-percepta-region="obligations" aria-labelledby="h-obligations" tabindex="-1">
+      <h2 id="h-obligations">Obligations before progress</h2>
+      <ul class="cards" id="obligations-body"></ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Static workspace. State arrives through <code>window.__perceptaSetState(state)</code>; supplied action availability is shown exactly as given.</p>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- pure helpers ---------- */
+
+  const esc = (value) => String(value).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[c]);
+
+  const norm = (p) => String(p).toLowerCase();
+  const any = (preds, test) => preds.some(test);
+  const matches = (re) => (p) => re.test(p);
+  const isResolvedPhrase = (p) => /resolved|answered|closed/.test(p) && !/unresolved|unanswered/.test(p);
+  const isSatisfiedPhrase = (p) => /satisf|fulfil|complete|discharged|\bmet\b|-met\b|_met\b|verified|done/.test(p) && !/unsatisf|unfulfil|incomplete|unverified|not[-_ ]/.test(p);
+  const humanize = (name) => String(name)
+    .replace(/[-_.]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/^./, (c) => c.toUpperCase());
+  const join = (items) => items.length <= 1
+    ? items.join('')
+    : `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+
+  /* ---------- static investigation content ---------- */
+
+  const OBSERVATION = Object.freeze({
+    summary: '`indy init` exits with status 1 on fresh CI checkouts: "Cannot read template manifest".',
+    source: 'CI job log, pipeline "bootstrap", runner image ci-ubuntu-22',
+    observedAt: 'First seen after the indy 2.4 release; reproduced on 3 consecutive runs'
+  });
+
+  const HYPOTHESES = Object.freeze([
+    { id: 'H-A', title: 'Template manifest missing from the published package',
+      detail: 'The 2.4 package may have been published without templates/manifest.json.' },
+    { id: 'H-B', title: 'Registry fetch times out on the CI network',
+      detail: 'Template download from the registry may stall and leave a partial manifest.' },
+    { id: 'H-C', title: 'Unsupported Node.js version on the CI image',
+      detail: 'The runner image may ship a Node.js version that indy 2.4 does not support.' }
+  ]);
+
+  const PERSISTENCE = Object.freeze({
+    local: { glyph: '◇', label: 'Local only',
+      detail: 'Changes are saved in this browser only. Nothing has been sent to the remote store.',
+      remote: 'Remote copy: not sent' },
+    pending: { glyph: '⧗', label: 'Pending',
+      detail: 'Saved locally. A remote write has been sent and is waiting for confirmation.',
+      remote: 'Remote copy: not yet confirmed — do not assume it is saved remotely' },
+    synced: { glyph: '✓', label: 'Synced',
+      detail: 'The remote store acknowledged the latest write.',
+      remote: 'Remote copy: confirmed' },
+    conflicted: { glyph: '⚠', label: 'Conflicted',
+      detail: 'The remote copy changed since the last sync. Review differences before overwriting.',
+      remote: 'Remote copy: diverged from local' },
+    failed: { glyph: '✕', label: 'Failed',
+      detail: 'The last remote write failed. Changes are kept locally only.',
+      remote: 'Remote copy: write failed, not saved remotely' }
+  });
+  const PERSISTENCE_ORDER = Object.freeze(['local', 'pending', 'synced', 'conflicted', 'failed']);
+
+  const CAPABILITY_LABELS = Object.freeze({
+    'confirm-root-cause': 'Confirm root cause',
+    'record-evidence': 'Record evidence',
+    'add-evidence': 'Add evidence',
+    'add-hypothesis': 'Add hypothesis',
+    'run-test': 'Run discriminating test',
+    'run-discriminating-test': 'Run discriminating test',
+    'falsify-hypothesis': 'Mark hypothesis falsified',
+    'resolve-unknown': 'Resolve unknown',
+    'satisfy-obligation': 'Record obligation satisfied',
+    'sync': 'Retry remote sync',
+    'retry-sync': 'Retry remote sync'
+  });
+
+  const DEFAULT_STATE = Object.freeze({
+    name: 'initial',
+    predicates: [
+      'hypothesis-falsified',
+      'hypothesis-weakened',
+      'evidence-contradiction',
+      'blocking-unknown-unresolved',
+      'verification-obligation-open',
+      'persistence-pending'
+    ],
+    capabilities: {
+      'record-evidence': 'legal',
+      'run-discriminating-test': 'legal',
+      'add-hypothesis': 'legal',
+      'confirm-root-cause': 'illegal'
+    }
+  });
+
+  /* ---------- predicate interpretation (pure) ---------- */
+
+  const readFacts = (rawPreds) => {
+    const preds = rawPreds.map(norm);
+    const unknownish = (p) => /unknown|unresolved|blocker|blocking|open[-_ ]question/.test(p) && !/oblig|verif/.test(p);
+    const obligationish = (p) => /oblig|verif|must[-_ ]|requir/.test(p);
+    const persistenceish = (p) => /persist|sync|save|saving|write|remote|offline|local/.test(p);
+
+    const persistence =
+      any(preds, (p) => /conflict/.test(p) && !/conflicting[-_ ]?evidence/.test(p)) ? 'conflicted'
+      : any(preds, (p) => /fail|error|reject/.test(p) && persistenceish(p)) ? 'failed'
+      : any(preds, (p) => /pending|in[-_ ]?flight|unsynced|queued|saving|outstanding[-_ ]write/.test(p)
+          && (persistenceish(p) || !/verif|oblig|test|hypoth|unknown/.test(p))) ? 'pending'
+      : any(preds, (p) => /synced|sync[-_ ]?(ok|success|complete|confirmed)|persisted|remote[-_ ]?(ok|success|confirmed|saved)/.test(p)
+          && !/unsynced|not[-_ ]synced/.test(p)) ? 'synced'
+      : 'local';
+
+    const unknownPreds = preds.filter(unknownish);
+    const obligationPreds = preds.filter(obligationish);
+
+    return Object.freeze({
+      falsified: any(preds, matches(/falsif|refut|ruled[-_ ]?out|disproven/)),
+      weakened: any(preds, matches(/weaken/)),
+      contradiction: any(preds, (p) => /contradict|inconsisten|conflicting[-_ ]?evidence/.test(p) && !/no[-_ ]contradict|contradiction[-_ ]resolved/.test(p)),
+      blockingUnknownOpen: unknownPreds.some((p) => !isResolvedPhrase(p)),
+      blockingUnknownResolved: unknownPreds.length > 0 && unknownPreds.every(isResolvedPhrase),
+      obligationOpen: obligationPreds.some((p) => !isSatisfiedPhrase(p)),
+      obligationSatisfied: obligationPreds.length > 0 && obligationPreds.every(isSatisfiedPhrase),
+      persistence
+    });
+  };
+
+  /* ---------- domain derivation (pure) ---------- */
+
+  const deriveHypotheses = (facts) => HYPOTHESES.map((h) => ({
+    ...h,
+    status: h.id === 'H-C' && facts.falsified ? 'falsified'
+      : h.id === 'H-B' && facts.weakened ? 'weakened'
+      : 'active'
+  }));
+
+  const deriveEvidence = (facts) => [
+    { id: 'E1', title: 'CI log shows "Cannot read template manifest" before any network call completes',
+      source: 'CI job log', relations: [['supports', 'H-A']] },
+    { id: 'E2', title: 'Failure reproduced on 3 consecutive CI runs with identical output',
+      source: 'CI history', relations: [['supports', 'H-A'], ['supports', 'H-B']] },
+    ...(facts.weakened ? [{ id: 'E3', title: 'Registry reachable from CI runner; template fetch completed in 0.4 s during a failing run',
+      source: 'Network trace from runner', relations: [['weakens', 'H-B']] }] : []),
+    ...(facts.falsified ? [{ id: 'E4', title: 'Same failure on runner images with Node.js 20 and Node.js 22 (both supported)',
+      source: 'Matrix CI run', relations: [['falsifies', 'H-C']] }] : []),
+    ...(facts.contradiction ? [{ id: 'E5', title: 'Tarball listing of the published 2.4 package includes templates/manifest.json',
+      source: 'npm pack --dry-run on registry artifact', relations: [['contradicts', 'H-A']] }] : [])
+  ];
+
+  const deriveContradictions = (facts) => facts.contradiction
+    ? [{ id: 'C1', title: 'Manifest reported missing, yet present in the published package',
+        detail: 'E1 supports H-A (manifest missing), but E5 shows the manifest is in the published tarball. Both cannot hold for the same package version.',
+        between: ['E1', 'E5'], hypothesis: 'H-A' }]
+    : [];
+
+  const deriveUnknowns = (facts) => [
+    ...((facts.blockingUnknownOpen || facts.blockingUnknownResolved) ? [{
+      id: 'U1', blocking: true, resolved: !facts.blockingUnknownOpen,
+      title: 'Which indy version does CI actually install: the lockfile pin or the latest release?',
+      detail: 'Until answered, it is not known which package the failing runs exercised, so no hypothesis can be confirmed.'
+    }] : []),
+    { id: 'U2', blocking: false, resolved: false,
+      title: 'Did the failure occur on any run before the 2.4 release?',
+      detail: 'Would help separate a packaging regression from an environment change.' }
+  ];
+
+  const deriveObligations = (facts) => (facts.obligationOpen || facts.obligationSatisfied)
+    ? [{ id: 'O1', kind: 'Verification', satisfied: !facts.obligationOpen,
+        title: 'Reproduce on a clean CI runner, then verify the candidate fix removes the failure',
+        detail: 'Required before a root cause may be confirmed.' }]
+    : [];
+
+  const blockersFor = (model) => [
+    ...model.unknowns.filter((u) => u.blocking && !u.resolved)
+      .map((u) => ({ target: `unknown-${u.id}`, text: `blocking unknown ${u.id} is unresolved` })),
+    ...model.obligations.filter((o) => !o.satisfied)
+      .map((o) => ({ target: `obligation-${o.id}`, text: `${o.kind.toLowerCase()} obligation ${o.id} is not yet satisfied` })),
+    ...model.contradictions
+      .map((c) => ({ target: `contradiction-${c.id}`, text: `contradiction ${c.id} is unexplained` })),
+    ...(model.hypotheses.filter((h) => h.status !== 'falsified').length > 1
+      ? [{ target: 'sec-hypotheses', text: 'more than one hypothesis is still standing' }] : []),
+    ...(['pending', 'conflicted', 'failed'].includes(model.persistence)
+      ? [{ target: 'sec-persistence', text: `the latest changes are ${PERSISTENCE[model.persistence].label.toLowerCase()} and not confirmed remotely` }] : [])
+  ];
+
+  const inferConfirmLegality = (blockers) => blockers.length === 0 ? 'legal' : 'illegal';
+
+  const deriveActions = (capabilities, blockers) => {
+    const supplied = Object.entries(capabilities || {})
+      .filter(([, v]) => v === 'legal' || v === 'illegal');
+    const withConfirm = supplied.some(([k]) => k === 'confirm-root-cause')
+      ? supplied
+      : [...supplied, ['confirm-root-cause', inferConfirmLegality(blockers)]];
+    return withConfirm.map(([name, value]) => ({
+      name,
+      label: CAPABILITY_LABELS[name] || humanize(name),
+      legal: value === 'legal',
+      supplied: supplied.some(([k]) => k === name)
+    }));
+  };
+
+  const suggestNextTest = (model) => {
+    const openBlockingUnknown = model.unknowns.find((u) => u.blocking && !u.resolved);
+    const standing = model.hypotheses.filter((h) => h.status !== 'falsified');
+    return openBlockingUnknown
+      ? { text: `Answer ${openBlockingUnknown.id}: inspect the CI install step and lockfile to see which indy version runs.`,
+          why: `It is blocking, and the answer bears on ${join(standing.map((h) => h.id))}.` }
+      : model.contradictions.length
+      ? { text: 'Install the exact CI package version locally and list its templates directory.',
+          why: 'Directly tests contradiction C1 between E1 and E5.' }
+      : standing.length > 1
+      ? { text: `Run init with registry access mocked offline to discriminate ${join(standing.map((h) => h.id))}.`,
+          why: 'A result that differs between standing hypotheses narrows the field.' }
+      : { text: 'Carry out the verification obligation on a clean runner.',
+          why: 'One hypothesis stands; it still needs verification before it is confirmed.' };
+  };
+
+  const deriveModel = (state) => {
+    const predicates = Array.isArray(state && state.predicates) ? state.predicates.map(String) : [];
+    const facts = readFacts(predicates);
+    const base = {
+      name: state && state.name != null ? String(state.name) : 'unnamed',
+      persistence: facts.persistence,
+      hypotheses: deriveHypotheses(facts),
+      evidence: deriveEvidence(facts),
+      contradictions: deriveContradictions(facts),
+      unknowns: deriveUnknowns(facts),
+      obligations: deriveObligations(facts)
+    };
+    const blockers = blockersFor(base);
+    return Object.freeze({
+      ...base,
+      blockers,
+      actions: deriveActions(state && state.capabilities, blockers),
+      nextTest: suggestNextTest(base)
+    });
+  };
+
+  /* ---------- rendering (pure: model -> HTML strings) ---------- */
+
+  const STATUS_VIEW = Object.freeze({
+    active: { glyph: '●', label: 'Active', cls: 'st-active' },
+    weakened: { glyph: '◐', label: 'Weakened', cls: 'st-weakened' },
+    falsified: { glyph: '✕', label: 'Falsified', cls: 'st-falsified' }
+  });
+
+  const RELATION_VERB = Object.freeze({
+    supports: 'Supports', weakens: 'Weakens', contradicts: 'Contradicts', falsifies: 'Falsifies'
+  });
+
+  const RELATION_PASSIVE = Object.freeze({
+    supports: 'Supported', weakens: 'Weakened', contradicts: 'Contradicted', falsifies: 'Falsified'
+  });
+
+  const md = (text) => esc(text).replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  const renderAnswer = (model) => {
+    const standing = model.hypotheses.filter((h) => h.status !== 'falsified');
+    const falsified = model.hypotheses.filter((h) => h.status === 'falsified');
+    return `
+      <p><strong>Currently explains:</strong> ${standing.length
+        ? `${esc(join(standing.map((h) => `${h.id} (${STATUS_VIEW[h.status].label.toLowerCase()})`)))} remain candidate explanations; none is confirmed.`
+        : 'No standing hypothesis explains the observation.'}
+        ${falsified.length ? ` Ruled out: ${esc(join(falsified.map((h) => h.id)))}.` : ''}</p>
+      <p><strong>Test next:</strong> ${esc(model.nextTest.text)} <a href="#sec-actions">See next actions</a></p>`;
+  };
+
+  const renderObservation = () => `
+    <p>${md(OBSERVATION.summary)}</p>
+    <p class="meta"><strong>Source:</strong> ${esc(OBSERVATION.source)}</p>
+    <p class="meta">${esc(OBSERVATION.observedAt)}</p>`;
+
+  const evidenceFor = (model, hid) => model.evidence
+    .flatMap((e) => e.relations.filter(([, h]) => h === hid).map(([rel]) => ({ rel, id: e.id })));
+
+  const renderHypothesis = (model) => (h) => {
+    const s = STATUS_VIEW[h.status];
+    const rels = evidenceFor(model, h.id);
+    const falsifiedHooks = h.status === 'falsified';
+    return `
+      <li class="card hyp ${h.status}" id="hypothesis-${esc(h.id)}" tabindex="-1"
+        ${falsifiedHooks ? 'data-percepta-observation="falsified-hypothesis-retained"' : ''}>
+        <h3><span class="meta">${esc(h.id)}</span> <span class="title-text">${esc(h.title)}</span></h3>
+        <p><span class="badge ${s.cls}" ${falsifiedHooks ? 'data-percepta-observation="falsified-state-noncolor"' : ''}>
+          <span class="glyph" aria-hidden="true">${s.glyph}</span>Status: ${s.label}</span></p>
+        <p>${esc(h.detail)}</p>
+        ${falsifiedHooks ? '<p class="meta">Kept on record so it is not re-investigated.</p>' : ''}
+        ${rels.length
+          ? `<ul class="rel" aria-label="Evidence bearing on ${esc(h.id)}">${rels.map((r) =>
+              `<li>${RELATION_PASSIVE[r.rel]} by <a href="#evidence-${esc(r.id)}">${esc(r.id)}</a></li>`).join('')}</ul>`
+          : '<p class="meta">No evidence linked yet.</p>'}
+      </li>`;
+  };
+
+  const renderEvidence = (e) => `
+    <li class="card" id="evidence-${esc(e.id)}" tabindex="-1">
+      <h3><span class="meta">${esc(e.id)}</span> ${esc(e.title)}</h3>
+      <p class="meta"><strong>Source:</strong> ${esc(e.source)}</p>
+      <ul class="rel" aria-label="Relationship of ${esc(e.id)} to hypotheses">
+        ${e.relations.map(([rel, hid]) =>
+          `<li>${RELATION_VERB[rel]} <a href="#hypothesis-${esc(hid)}">${esc(hid)}</a></li>`).join('')}
+      </ul>
+    </li>`;
+
+  const renderContradiction = (c) => `
+    <li class="card" id="contradiction-${esc(c.id)}" tabindex="-1">
+      <h3><span class="badge st-warn"><span class="glyph" aria-hidden="true">⚠</span>Contradiction</span>
+        <span class="meta">${esc(c.id)}</span> ${esc(c.title)}</h3>
+      <p>${esc(c.detail)}</p>
+      <p class="meta">Between ${c.between.map((id) => `<a href="#evidence-${esc(id)}">${esc(id)}</a>`).join(' and ')};
+        affects <a href="#hypothesis-${esc(c.hypothesis)}">${esc(c.hypothesis)}</a>.</p>
+    </li>`;
+
+  const renderUnknown = (u) => `
+    <li class="card" id="unknown-${esc(u.id)}" tabindex="-1"
+      ${u.blocking && !u.resolved ? 'data-percepta-observation="blocker-visible"' : ''}>
+      <h3><span class="meta">${esc(u.id)}</span> ${esc(u.title)}</h3>
+      <p>
+        ${u.blocking
+          ? `<span class="badge ${u.resolved ? 'st-resolved' : 'st-open'}"><span class="glyph" aria-hidden="true">${u.resolved ? '✓' : '⛔'}</span>${u.resolved ? 'Was blocking' : 'Blocking'}</span>`
+          : '<span class="badge st-active"><span class="glyph" aria-hidden="true">○</span>Non-blocking</span>'}
+        <span class="badge ${u.resolved ? 'st-resolved' : 'st-warn'}"
+          ${!u.resolved && u.blocking ? 'data-percepta-observation="unresolved-not-resolved"' : ''}>
+          <span class="glyph" aria-hidden="true">${u.resolved ? '✓' : '?'}</span>${u.resolved ? 'Resolved' : 'Unresolved'}</span>
+      </p>
+      <p>${esc(u.detail)}</p>
+    </li>`;
+
+  const renderObligation = (o) => `
+    <li class="card" id="obligation-${esc(o.id)}" tabindex="-1"
+      ${!o.satisfied ? 'data-percepta-observation="verification-obligation-visible"' : ''}>
+      <h3><span class="meta">${esc(o.id)}</span> ${esc(o.title)}</h3>
+      <p><span class="badge st-warn"><span class="glyph" aria-hidden="true">☐</span>${esc(o.kind)} obligation</span>
+        <span class="badge ${o.satisfied ? 'st-resolved' : 'st-open'}"><span class="glyph" aria-hidden="true">${o.satisfied ? '✓' : '✕'}</span>${o.satisfied ? 'Satisfied' : 'Not yet satisfied'}</span></p>
+      <p>${esc(o.detail)}</p>
+    </li>`;
+
+  const reasonFor = (model, action) => action.name === 'confirm-root-cause' && model.blockers.length
+    ? `Cannot confirm a root cause while ${join(model.blockers.map((b) => b.text))}.`
+    : model.blockers.length
+      ? `Not executable in the current workspace state. Outstanding: ${join(model.blockers.map((b) => b.text))}.`
+      : 'Not executable in the current workspace state.';
+
+  const blockerLinkFor = (model) => model.blockers[0]
+    || { target: 'sec-hypotheses', text: 'the competing hypotheses' };
+
+  const renderAction = (model) => (a) => {
+    const isConfirm = a.name === 'confirm-root-cause';
+    const domId = `action-${a.name.replace(/[^a-z0-9_-]/gi, '-')}`;
+    const cap = isConfirm ? 'data-percepta-capability="confirm-root-cause"' : '';
+    if (a.legal) {
+      return `
+        <li class="action">
+          <button type="button" class="act" id="${esc(domId)}" data-action="${esc(a.name)}" ${cap}>${esc(a.label)}</button>
+        </li>`;
+    }
+    const link = blockerLinkFor(model);
+    const reasonId = `${domId}-reason`;
+    const hasBlocker = model.blockers.length > 0;
+    return `
+      <li class="action" ${isConfirm && hasBlocker ? 'data-percepta-observation="dependent-action-unavailable"' : ''}>
+        <button type="button" class="act" id="${esc(domId)}" disabled aria-describedby="${esc(reasonId)}" ${cap}>
+          <span aria-hidden="true">🔒 </span>${esc(a.label)} <span class="meta">(unavailable)</span></button>
+        <p class="reason" id="${esc(reasonId)}"
+          ${isConfirm ? 'data-percepta-unavailable-reason-for="confirm-root-cause"' : ''}>
+          <span ${isConfirm ? 'data-percepta-observation="unavailable-reason-visible"' : ''}><strong>Why unavailable:</strong> ${esc(reasonFor(model, a))}</span>
+        </p>
+        <p class="reason">
+          <a href="#${esc(link.target)}" class="blocker-link" data-target="${esc(link.target)}"
+            ${isConfirm ? 'data-percepta-blocker-link-for="confirm-root-cause" data-percepta-observation="blocker-navigation-available"' : ''}>
+            Go to blocker: ${esc(link.text)}</a>
+        </p>
+      </li>`;
+  };
+
+  const renderActions = (model, journal) => {
+    const legal = model.actions.filter((a) => a.legal);
+    const illegal = model.actions.filter((a) => !a.legal);
+    return `
+      <div class="next-test">
+        <p><strong>Suggested next test:</strong> ${esc(model.nextTest.text)}</p>
+        <p class="meta">${esc(model.nextTest.why)}</p>
+      </div>
+      <div class="action-group">
+        <h3>Available now (${legal.length})</h3>
+        ${legal.length
+          ? `<ul class="action-list">${legal.map(renderAction(model)).join('')}</ul>`
+          : '<p class="empty">No actions are available in this state.</p>'}
+      </div>
+      <div class="action-group" ${illegal.length ? 'data-percepta-observation="inactive-actions-unavailable"' : ''}>
+        <h3>Unavailable (${illegal.length})</h3>
+        ${illegal.length
+          ? `<ul class="action-list">${illegal.map(renderAction(model)).join('')}</ul>`
+          : '<p class="empty">No actions are blocked.</p>'}
+      </div>
+      ${journal.length
+        ? `<div class="action-group"><h3>Recorded in this browser</h3>
+            <ol class="journal">${journal.map((j) => `<li>${esc(j)} — recorded locally, not sent to the remote store</li>`).join('')}</ol></div>`
+        : ''}`;
+  };
+
+  const renderPersistence = (model) => {
+    const p = PERSISTENCE[model.persistence];
+    const isPending = model.persistence === 'pending';
+    const notConfirmed = model.persistence !== 'synced';
+    return `
+      <div class="persist-current">
+        <span class="badge p-${model.persistence}" ${isPending ? 'data-percepta-observation="persistence-pending-visible"' : ''}>
+          <span class="glyph" aria-hidden="true">${p.glyph}</span>Save status: ${esc(p.label)}</span>
+      </div>
+      <p class="remote">${esc(p.detail)}</p>
+      <p class="remote"><strong ${notConfirmed ? 'data-percepta-observation="no-false-remote-success"' : ''}>${esc(p.remote)}</strong></p>
+      <ul class="p-legend" aria-label="Possible save states">
+        ${PERSISTENCE_ORDER.map((k) => `<li ${k === model.persistence ? 'aria-current="true"' : ''}>
+          <span aria-hidden="true">${PERSISTENCE[k].glyph}</span> ${esc(PERSISTENCE[k].label)}${k === model.persistence ? ' (current)' : ''}</li>`).join('')}
+      </ul>`;
+  };
+
+  const renderList = (items, renderItem, emptyText) => items.length
+    ? items.map(renderItem).join('')
+    : `<li><p class="empty">${esc(emptyText)}</p></li>`;
+
+  const views = (model, journal) => ({
+    snapshot: `Workspace snapshot: ${esc(model.name)}`,
+    answer: renderAnswer(model),
+    'observation-body': renderObservation(),
+    'hypotheses-body': renderList(model.hypotheses, renderHypothesis(model), 'No hypotheses recorded.'),
+    'evidence-body': renderList(model.evidence, renderEvidence, 'No evidence recorded.'),
+    'contradictions-body': renderList(model.contradictions, renderContradiction, 'No contradictions are currently recorded.'),
+    'unknowns-body': renderList(model.unknowns, renderUnknown, 'No open unknowns.'),
+    'obligations-body': renderList(model.obligations, renderObligation, 'No obligations are outstanding.'),
+    'actions-body': renderActions(model, journal),
+    'persistence-body': renderPersistence(model)
+  });
+
+  /* ---------- effects (DOM boundary) ---------- */
+
+  const store = { state: DEFAULT_STATE, journal: [] };
+
+  const paint = () => {
+    const model = deriveModel(store.state);
+    Object.entries(views(model, store.journal))
+      .forEach(([id, html]) => { document.getElementById(id).innerHTML = html; });
+    return model;
+  };
+
+  const focusTarget = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ block: 'start' });
+    el.focus({ preventScroll: true });
+    el.classList.add('flash');
+    setTimeout(() => el.classList.remove('flash'), 1600);
+  };
+
+  document.addEventListener('click', (ev) => {
+    const link = ev.target.closest('a[href^="#"]');
+    if (link) {
+      const id = link.getAttribute('href').slice(1);
+      if (document.getElementById(id)) {
+        ev.preventDefault();
+        history.replaceState(null, '', `#${id}`);
+        focusTarget(id);
+      }
+      return;
+    }
+    const btn = ev.target.closest('button[data-action]');
+    if (btn && !btn.disabled) {
+      const model = deriveModel(store.state);
+      const action = model.actions.find((a) => a.name === btn.dataset.action);
+      if (action && action.legal) {
+        store.journal = [...store.journal, action.label];
+        paint();
+        const again = document.getElementById(btn.id);
+        if (again) again.focus();
+      }
+    }
+  });
+
+  window.__perceptaSetState = (state) => {
+    const safe = state && typeof state === 'object' ? state : {};
+    store.state = Object.freeze({
+      name: safe.name,
+      predicates: Array.isArray(safe.predicates) ? [...safe.predicates] : [],
+      capabilities: safe.capabilities && typeof safe.capabilities === 'object' ? { ...safe.capabilities } : {}
+    });
+    store.journal = [];
+    paint();
+    return true;
+  };
+
+  paint();
+})();
+</script>
+</body>
+</html>
