@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "screen": "investigation-workspace",
+  "contractSha256": "db53110e451a34e7d631cd61be0664ce5ab7260ce86f3f1820ee981ad1658ec5",
+  "generatedAtUtc": "2026-09-25T03:41:07.5569475\u002B00:00",
+  "complete": false,
+  "results": [
+    {
+      "requirement": "contract-validation",
+      "kind": "contract-validation",
+      "required": true,
+      "status": "Passed",
+      "summary": "Typed contract parsed and validated successfully.",
+      "source": "percepta-core",
+      "evidenceReferences": [
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/contracts/indy-init-investigation-workspace.json"
+      ]
+    },
+    {
+      "requirement": "structural",
+      "kind": "structural",
+      "required": true,
+      "status": "Passed",
+      "summary": "Required semantic structure is present.",
+      "source": "playwright",
+      "evidenceReferences": []
+    },
+    {
+      "requirement": "state-projection",
+      "kind": "state-projection",
+      "required": true,
+      "status": "Failed",
+      "reason": "Fixture \u0027blocked-investigation\u0027 activates \u0027hypothesis-is-falsified\u0027, but observation \u0027falsified-hypothesis-retained\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027hypothesis-is-falsified\u0027, but observation \u0027falsified-state-noncolor\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027hypothesis-is-falsified\u0027, but observation \u0027inactive-actions-unavailable\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027blocking-unknown-exists\u0027, but observation \u0027blocker-visible\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027blocking-unknown-exists\u0027, but observation \u0027dependent-action-unavailable\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027blocking-unknown-exists\u0027, but observation \u0027unavailable-reason-visible\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027blocking-unknown-exists\u0027, but observation \u0027blocker-navigation-available\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027github-write-is-pending\u0027, but observation \u0027persistence-pending-visible\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027github-write-is-pending\u0027, but observation \u0027no-false-remote-success\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027corrective-action-not-verified\u0027, but observation \u0027unresolved-not-resolved\u0027 is not visible. | Fixture \u0027blocked-investigation\u0027 activates \u0027corrective-action-not-verified\u0027, but observation \u0027verification-obligation-visible\u0027 is not visible.",
+      "summary": "State projection coverage is incomplete or incorrect.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "blocked-investigation",
+        "root-cause-confirmable"
+      ]
+    },
+    {
+      "requirement": "interaction",
+      "kind": "interaction",
+      "required": true,
+      "status": "Failed",
+      "reason": "Capability \u0027confirm-root-cause\u0027 remains executable in illegal fixture \u0027blocked-investigation\u0027. | Capability \u0027confirm-root-cause\u0027 has no visible unavailable explanation. | Capability \u0027confirm-root-cause\u0027 has no visible path to blocking information. | Capability \u0027confirm-root-cause\u0027 blocker target \u0027#u1\u0027 does not exist.",
+      "summary": "Interaction verification is incomplete or incorrect.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "blocked-investigation",
+        "root-cause-confirmable"
+      ]
+    },
+    {
+      "requirement": "accessibility",
+      "kind": "accessibility",
+      "required": true,
+      "status": "Passed",
+      "summary": "Basic accessibility invariants pass.",
+      "source": "playwright",
+      "evidenceReferences": []
+    },
+    {
+      "requirement": "responsive",
+      "kind": "responsive",
+      "required": true,
+      "status": "Passed",
+      "summary": "Required semantics survive all declared viewport classes.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/ipad-portrait.png",
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/ipad-landscape.png",
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/narrow-phone.png",
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/desktop-reference.png"
+      ]
+    },
+    {
+      "requirement": "visual-regression",
+      "kind": "visual-regression",
+      "required": false,
+      "status": "Unavailable",
+      "reason": "No baseline exists for \u0027ipad-portrait\u0027. | No baseline exists for \u0027ipad-landscape\u0027. | No baseline exists for \u0027narrow-phone\u0027. | No baseline exists for \u0027desktop-reference\u0027.",
+      "summary": "Visual regression evidence is incomplete or differs.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/ipad-portrait.png",
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/ipad-landscape.png",
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/narrow-phone.png",
+        "/tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/.percepta/evidence/investigation-workspace/screenshots/desktop-reference.png"
+      ]
+    },
+    {
+      "requirement": "semantic-visual-review",
+      "kind": "semantic-visual-review",
+      "required": false,
+      "status": "Unavailable",
+      "reason": "No semantic visual review evidence was supplied.",
+      "summary": "Semantic visual review is supporting evidence and was not supplied.",
+      "source": "external-semantic-review",
+      "evidenceReferences": []
+    }
+  ]
+}

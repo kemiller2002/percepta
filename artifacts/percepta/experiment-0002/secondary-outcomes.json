@@ -1,0 +1,214 @@
+{
+  "experiment": "EX-PERCEPTA-2026-0002",
+  "baselineSha": "cb8b2f4324b9016773d4f5a6b97ec086d5b8d637",
+  "derivedFrom": "results.json (preregistered workflow aggregation); raw *.evidence.json unmodified",
+  "primaryOutcome": {
+    "control": {
+      "passes": 0,
+      "count": 2,
+      "rate": 0.0
+    },
+    "treatment": {
+      "passes": 1,
+      "count": 2,
+      "rate": 0.5
+    }
+  },
+  "lanes": [
+    {
+      "lane": "control-a",
+      "provider": "openai",
+      "condition": "control",
+      "exitCode": 3,
+      "complete": false,
+      "requiredCategories": 6,
+      "requiredPassed": [
+        "contract-validation",
+        "structural",
+        "accessibility",
+        "responsive"
+      ],
+      "requiredFailed": [
+        "state-projection",
+        "interaction"
+      ],
+      "requiredUnavailable": [],
+      "requiredPassingCount": 4,
+      "failureDetails": {
+        "state-projection": [
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible.",
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible.",
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible.",
+          "Fixture 'blocked-investigation' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible.",
+          "Fixture 'blocked-investigation' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible.",
+          "Fixture 'blocked-investigation' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+        ],
+        "interaction": [
+          "Capability 'confirm-root-cause' remains executable in illegal fixture 'blocked-investigation'.",
+          "Capability 'confirm-root-cause' has no visible unavailable explanation.",
+          "Capability 'confirm-root-cause' has no visible path to blocking information."
+        ]
+      },
+      "optionalResults": {
+        "visual-regression": "Unavailable",
+        "semantic-visual-review": "Unavailable"
+      },
+      "correctiveIterations": 0,
+      "observableChangedFiles": 2,
+      "observableAddedLines": {
+        "index.html": 88,
+        "NOTES.md": 29
+      },
+      "infrastructureFailure": false
+    },
+    {
+      "lane": "treatment-a",
+      "provider": "openai",
+      "condition": "treatment",
+      "exitCode": 3,
+      "complete": false,
+      "requiredCategories": 6,
+      "requiredPassed": [
+        "contract-validation",
+        "structural",
+        "accessibility",
+        "responsive"
+      ],
+      "requiredFailed": [
+        "state-projection",
+        "interaction"
+      ],
+      "requiredUnavailable": [],
+      "requiredPassingCount": 4,
+      "failureDetails": {
+        "state-projection": [
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible.",
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible.",
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible.",
+          "Fixture 'blocked-investigation' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible.",
+          "Fixture 'blocked-investigation' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible.",
+          "Fixture 'blocked-investigation' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+        ],
+        "interaction": [
+          "Capability 'confirm-root-cause' remains executable in illegal fixture 'blocked-investigation'.",
+          "Capability 'confirm-root-cause' has no visible unavailable explanation.",
+          "Capability 'confirm-root-cause' has no visible path to blocking information.",
+          "Capability 'confirm-root-cause' blocker target '#u1' does not exist."
+        ]
+      },
+      "optionalResults": {
+        "visual-regression": "Unavailable",
+        "semantic-visual-review": "Unavailable"
+      },
+      "correctiveIterations": 0,
+      "observableChangedFiles": 2,
+      "observableAddedLines": {
+        "index.html": 231,
+        "NOTES.md": 65
+      },
+      "infrastructureFailure": false
+    },
+    {
+      "lane": "control-b",
+      "provider": "claude",
+      "condition": "control",
+      "exitCode": 3,
+      "complete": false,
+      "requiredCategories": 6,
+      "requiredPassed": [
+        "contract-validation",
+        "structural",
+        "accessibility",
+        "responsive"
+      ],
+      "requiredFailed": [
+        "state-projection",
+        "interaction"
+      ],
+      "requiredUnavailable": [],
+      "requiredPassingCount": 4,
+      "failureDetails": {
+        "state-projection": [
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible.",
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible.",
+          "Fixture 'blocked-investigation' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible.",
+          "Fixture 'blocked-investigation' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible.",
+          "Fixture 'blocked-investigation' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible.",
+          "Fixture 'blocked-investigation' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+        ],
+        "interaction": [
+          "Capability 'confirm-root-cause' has no visible path to blocking information."
+        ]
+      },
+      "optionalResults": {
+        "visual-regression": "Unavailable",
+        "semantic-visual-review": "Unavailable"
+      },
+      "correctiveIterations": 0,
+      "observableChangedFiles": 2,
+      "observableAddedLines": {
+        "index.html": 886,
+        "NOTES.md": 62
+      },
+      "infrastructureFailure": false
+    },
+    {
+      "lane": "treatment-b",
+      "provider": "claude",
+      "condition": "treatment",
+      "exitCode": 0,
+      "complete": true,
+      "requiredCategories": 6,
+      "requiredPassed": [
+        "contract-validation",
+        "structural",
+        "state-projection",
+        "interaction",
+        "accessibility",
+        "responsive"
+      ],
+      "requiredFailed": [],
+      "requiredUnavailable": [],
+      "requiredPassingCount": 6,
+      "failureDetails": {},
+      "optionalResults": {
+        "visual-regression": "Unavailable",
+        "semantic-visual-review": "Unavailable"
+      },
+      "correctiveIterations": 0,
+      "observableChangedFiles": 2,
+      "observableAddedLines": {
+        "index.html": 714,
+        "NOTES.md": 29
+      },
+      "infrastructureFailure": false
+    }
+  ],
+  "hypotheses": {
+    "HY-PERCEPTA-2026-0003": {
+      "preregisteredSupportCondition": "treatment first-pass required-evidence pass rate > control rate",
+      "supportConditionMet": true,
+      "note": "n=2 per group; descriptive pilot result, not statistically conclusive."
+    },
+    "HY-PERCEPTA-2026-0004": {
+      "preregisteredSupportCondition": "at least two first-pass treatment implementations differ materially in layout/composition while both satisfy required semantic evidence",
+      "treatmentsSatisfyingRequiredEvidence": [
+        "treatment-b"
+      ],
+      "supportConditionAttainable": false,
+      "status": "cannot receive the preregistered support condition from this run (fewer than two treatment implementations satisfy required evidence); no blinded composition review performed"
+    }
+  }
+}
