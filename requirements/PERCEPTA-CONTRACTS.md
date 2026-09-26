@@ -369,3 +369,7 @@ CI SHALL prove the full Indy Init vertical slice by:
 7. establishing temporary visual baselines;
 8. re-running verification against those baselines;
 9. producing and retaining evidence artifacts.
+
+## PCT-036 to PCT-043 Experiment provenance and blinding
+
+Provenance and blinding requirements for experiments registered after 2026-09-26 are specified in [`PERCEPTA-EXPERIMENT-PROVENANCE.md`](PERCEPTA-EXPERIMENT-PROVENANCE.md). They apply the Praxis provenance contract (DF-ROS-2026-A037) without redefining it and never modify existing experiments.
