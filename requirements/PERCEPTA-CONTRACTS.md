@@ -369,3 +369,27 @@ CI SHALL prove the full Indy Init vertical slice by:
 7. establishing temporary visual baselines;
 8. re-running verification against those baselines;
 9. producing and retaining evidence artifacts.
+
+## PCT-036 Experiment run provenance
+
+Decision: `DF-PERCEPTA-2026-0001`. Upstream contract: Praxis `RQ-ROS-2026-A010`, `RQ-ROS-2026-A013`, `RQ-ROS-2026-A014`, `RQ-ROS-2026-A015` (not restated here).
+
+This requirement SHALL apply only to experiments preregistered after `DF-PERCEPTA-2026-0001`. EX-PERCEPTA-2026-0001 through EX-PERCEPTA-2026-0004 SHALL NOT be backfilled, and no identity SHALL be inferred for them.
+
+Each lane, evaluator, and reviewer run of such an experiment SHALL be recorded as one run record conforming to `schemas/percepta-experiment-run.schema.json`. The record SHALL embed a Praxis provenance interchange record with exactly one contribution: the run's Praxis actor, keyed by the run's execution.
+
+The execution key SHALL be `ROS_EXECUTION_ID` when Praxis propagated one, and `EXE-percepta.<run>` otherwise. Percepta SHALL NOT mint a Praxis-shaped execution ID.
+
+Identity SHALL come only from declared, non-secret sources. An attribute that is not known SHALL be recorded as `unknown`, never guessed.
+
+Run records SHALL be stored only at `artifacts/percepta/experiment-NNNN/runs/<run>.json`. They SHALL be written only after the first-pass freeze, and they SHALL name the deterministic evidence manifest that was hashed before they were written. That manifest SHALL NOT list run records.
+
+Run provenance SHALL NOT appear in lane-visible inputs, lane outputs, reviewer bundles, or root agent instructions.
+
+Identity SHALL NOT alter evidence status, completion, scoring, or acceptance. The evaluator SHALL NOT read run records.
+
+Reviewers SHALL remain blind to provider, model, execution, and condition. Run records SHALL remain sealed until every blinded review has been recorded.
+
+Malformed run provenance SHALL fail verification and SHALL NOT be silently dropped.
+
+Verification: `npm run test:provenance`.

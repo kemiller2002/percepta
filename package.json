@@ -13,6 +13,7 @@
     "echelon:doctor": "./ros doctor && ordo doctor && visual-engineering doctor && communication-engineering doctor && limen doctor",
     "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release && dotnet build src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release && npm run test:core",
     "test:core": "dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release",
+    "test:provenance": "node --test \"tests/experiment-provenance/*.test.mjs\"",
     "percepta": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --",
     "percepta:doctor": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- doctor",
     "percepta:compile": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- compile",
