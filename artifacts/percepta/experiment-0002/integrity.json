@@ -1,0 +1,120 @@
+{
+  "experiment": "EX-PERCEPTA-2026-0002",
+  "baselineSha": "cb8b2f4324b9016773d4f5a6b97ec086d5b8d637",
+  "evaluationStartedUtc": "2026-09-25T03:40:56Z",
+  "evaluationFinishedUtc": "2026-09-25T03:41:18Z",
+  "evaluator": {
+    "commit": "cb8b2f4324b9016773d4f5a6b97ec086d5b8d637",
+    "srcTree": "9d0b72e289e4919d69e083aa9ad7bf52a53ba449",
+    "sourceVerification": "src/, tests/, .percepta/, Directory.Packages.props byte-identical to baseline (diff -r); only global.json SDK pin differed (see toolchainDeviations)",
+    "procedure": ".github/workflows/percepta-experiment-0002.yml (blob 2db3f642d0ec28ff08774dfa6177ca54623e3b3f, introduced 02399f0 before any lane output), job 'evaluate'",
+    "command": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- verify --contract .percepta/contracts/indy-init-investigation-workspace.json --url research/experiments/EX-PERCEPTA-2026-0002/lanes/<lane>/index.html --fixture tests/fixtures/indy-init/blocked.json --fixture tests/fixtures/indy-init/legal.json --out artifacts/percepta/experiment-0002/<lane>.evidence.json",
+    "browserInstallCommand": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- install-browser",
+    "identicalConfigurationForAllLanes": true
+  },
+  "toolchain": {
+    "dotnetSdk": "10.0.112 (Ubuntu package)",
+    "dotnetRuntimeUsedByCli": "Microsoft.NETCore.App 8.0.31 (CLI targets net8.0)",
+    "playwright": "Microsoft.Playwright 1.63.0 (pinned by baseline Directory.Packages.props)",
+    "browser": "Chrome for Testing / Chrome Headless Shell 153.0.8010.12 (playwright chromium v1243), ffmpeg v1011"
+  },
+  "toolchainDeviations": [
+    "Baseline global.json pins SDK 10.0.401 (rollForward latestPatch); that SDK was not reachable (builds.dotnet.microsoft.com denied by environment network policy). The evaluator was built in a separate copy of the baseline tree whose global.json was changed to 10.0.112/latestFeature. No evaluator source, contract, fixture or package pin changed. The preregistered workflow itself uses setup-dotnet '10.0.x'.",
+    "cdn.playwright.dev was denied by network policy. The preregistered install-browser command was run with PLAYWRIGHT_DOWNLOAD_HOST pointing at a local mirror serving the same Chrome for Testing 153.0.8010.12 zips downloaded from Google's official storage.googleapis.com/chrome-for-testing-public, plus the same-revision ffmpeg v1011 already preinstalled at /opt/pw-browsers."
+  ],
+  "inputs": {
+    "contract": {
+      "path": ".percepta/contracts/indy-init-investigation-workspace.json",
+      "blob": "2017a2eab551551cb59bc6ab525defd525024bbb"
+    },
+    "fixtures": [
+      {
+        "path": "tests/fixtures/indy-init/blocked.json",
+        "blob": "73c98276f0d9ac7eb9b73a2f08246cd36964df3d"
+      },
+      {
+        "path": "tests/fixtures/indy-init/legal.json",
+        "blob": "98623599a8c969f1264bd3afa7ef0d9c924ad2ba"
+      }
+    ],
+    "frozenProductBrief": {
+      "path": "research/experiments/EX-PERCEPTA-2026-0002/frozen-product-brief.md",
+      "blob": "451536ad2984c91eda409346cdfeb9b45ee2b33e"
+    }
+  },
+  "lanes": [
+    {
+      "lane": "control-a",
+      "provider": "openai",
+      "condition": "control",
+      "branch": "experiment/percepta-0002-openai-control-a",
+      "commit": "c02ee0117a8f4e87deb639415f23d699fb1a28b2",
+      "implementationCommit": "c02ee0117a8f4e87deb639415f23d699fb1a28b2",
+      "sourcePath": "research/experiments/EX-PERCEPTA-2026-0002/lanes/control-a",
+      "indexBlob": "05814717a8b2b3a6a5ed18199f6719be19c8ce20",
+      "notesBlob": "4edef19860649ccc905a2fca1ea2402199d165a9",
+      "stagedIndexBlob": "05814717a8b2b3a6a5ed18199f6719be19c8ce20",
+      "postEvaluationIndexBlob": "05814717a8b2b3a6a5ed18199f6719be19c8ce20",
+      "exitCode": 3,
+      "evidenceSha256": "b4f778f131180f5b5608a3cb55e9598877701398d6cb1445ec60a7cef5b02f2d"
+    },
+    {
+      "lane": "treatment-a",
+      "provider": "openai",
+      "condition": "treatment",
+      "branch": "experiment/percepta-0002-openai-treatment-a",
+      "commit": "383ebf61f327c246639a55d8113d4974f6b32ad7",
+      "implementationCommit": "383ebf61f327c246639a55d8113d4974f6b32ad7",
+      "sourcePath": "research/experiments/EX-PERCEPTA-2026-0002/lanes/treatment-a",
+      "indexBlob": "7bde239bb22eb903874b3b25598ad21aabcf6701",
+      "notesBlob": "89dcf644b2e0d52b3b269d54c342cd0066210bf6",
+      "stagedIndexBlob": "7bde239bb22eb903874b3b25598ad21aabcf6701",
+      "postEvaluationIndexBlob": "7bde239bb22eb903874b3b25598ad21aabcf6701",
+      "exitCode": 3,
+      "evidenceSha256": "1c78e0b95bbe1c7aa3e9e5dd0490e2c6803ffdebec7b27246dfefbe43cc4fa66"
+    },
+    {
+      "lane": "control-b",
+      "provider": "claude",
+      "condition": "control",
+      "branch": "experiment/percepta-0002-claude-control-b",
+      "commit": "1ced8888a1e11e43ee2025e2a2cd7144eaa788c6",
+      "implementationCommit": "1ced8888a1e11e43ee2025e2a2cd7144eaa788c6",
+      "sourcePath": "research/experiments/EX-PERCEPTA-2026-0002/lanes/control-b",
+      "indexBlob": "dea205fe0493db838b499b0a8115cbfb1bfafe22",
+      "notesBlob": "a6da9bb290b94a385c884799476d7f63bf1fc8a8",
+      "stagedIndexBlob": "dea205fe0493db838b499b0a8115cbfb1bfafe22",
+      "postEvaluationIndexBlob": "dea205fe0493db838b499b0a8115cbfb1bfafe22",
+      "exitCode": 3,
+      "evidenceSha256": "2e46e4fc5347e9cf7ea7d4f7e61a1fe92d270d4b655268385c7b165c0cd727dd"
+    },
+    {
+      "lane": "treatment-b",
+      "provider": "claude",
+      "condition": "treatment",
+      "branch": "claude/treatment-b-investigation-workspace-flvwgv",
+      "commit": "3e8da52b8be6bbedd737c26ae8fc34b64aca0d78",
+      "implementationCommit": "22026d3",
+      "sourcePath": "experiments/EX-PERCEPTA-2026-0002/lanes/treatment-b",
+      "indexBlob": "0e2b1a5a3290a9b6bdbf2c562d6bf0a4cfed3df1",
+      "notesBlob": "2618700ec7e17d1ad506448af43a46d59ada7313",
+      "stagedIndexBlob": "0e2b1a5a3290a9b6bdbf2c562d6bf0a4cfed3df1",
+      "postEvaluationIndexBlob": "0e2b1a5a3290a9b6bdbf2c562d6bf0a4cfed3df1",
+      "exitCode": 0,
+      "evidenceSha256": "56294e3e779b544f4f3a3efec5d50be1c46423103c67ec46a8b9c20ad8f00af9"
+    }
+  ],
+  "integrityChecks": {
+    "control-a": "1 commit ahead of baseline; commit adds only control-a/index.html and control-a/NOTES.md: PASS",
+    "treatment-a": "1 commit ahead of baseline; commit adds only treatment-a/index.html and treatment-a/NOTES.md: PASS",
+    "control-b": "1 commit ahead of baseline; commit adds only control-b/index.html and control-b/NOTES.md: PASS",
+    "treatment-b": "index.html blob 0e2b1a5a... and NOTES.md blob 2618700e... match the verified frozen SHAs: PASS. Both files last changed in 22026d3 (only commit touching them); the later merge 3e8da52 did not alter them.",
+    "stagingByteIdentity": "git hash-object of every staged file equals its source blob, before and after evaluation: PASS"
+  },
+  "noImplementationModified": true,
+  "noEvaluatorDrivenCorrection": true,
+  "noLaneRerun": true,
+  "correctiveIterations": 0,
+  "resultsSha256": "1aa74f193dc77feb1b100dc3aa42369d1bbc068e2aca2831b087d1b880f422d9",
+  "summaryTsvSha256": "4b5ce303e5ec32516a2bdeab941d198c86578d1082f226106fd0c4510dd4bccf"
+}

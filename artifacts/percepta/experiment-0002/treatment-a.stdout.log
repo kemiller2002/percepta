@@ -1,0 +1,10 @@
+* contract-validation      Passed             Typed contract parsed and validated successfully.
+* structural               Passed             Required semantic structure is present.
+* state-projection         Failed             State projection coverage is incomplete or incorrect.
+* interaction              Failed             Interaction verification is incomplete or incorrect.
+* accessibility            Passed             Basic accessibility invariants pass.
+* responsive               Passed             Required semantics survive all declared viewport classes.
+  visual-regression        Unavailable        Visual regression evidence is incomplete or differs.
+  semantic-visual-review   Unavailable        Semantic visual review is supporting evidence and was not supplied.
+Evidence: /tmp/claude-0/-home-user-percepta/feff9f9f-2c3f-5bc1-9f13-d567b48d87b0/scratchpad/evalbuild/artifacts/percepta/experiment-0002/treatment-a.evidence.json
+Complete: false

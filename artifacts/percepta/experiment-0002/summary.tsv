@@ -1,0 +1,4 @@
+control-a	openai	control	3	false
+treatment-a	openai	treatment	3	false
+control-b	claude	control	3	false
+treatment-b	claude	treatment	0	true
