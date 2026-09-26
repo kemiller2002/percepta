@@ -2,7 +2,7 @@
 id: EX-PERCEPTA-2026-0003
 title: Runtime-protocol-controlled Percepta semantic-contract replication
 research_area: percepta-verification
-status: preregistered
+status: active
 created: 2026-09-25
 author_agent: chatgpt
 tests_hypotheses:
@@ -10,8 +10,8 @@ tests_hypotheses:
   - HY-PERCEPTA-2026-0004
 related_theories: []
 inputs:
-  - research/experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md
-  - research/experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md
+  - experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md
+  - experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md
   - .percepta/contracts/indy-init-investigation-workspace.json
 outputs:
   - artifacts/percepta/experiment-0003/results.json

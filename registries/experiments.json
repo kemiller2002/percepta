@@ -49,8 +49,8 @@
     "created": "2026-09-25",
     "id": "EX-PERCEPTA-2026-0003",
     "inputs": [
-      "research/experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md",
-      "research/experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md",
+      "experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md",
+      "experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md",
       ".percepta/contracts/indy-init-investigation-workspace.json"
     ],
     "outputs": [
@@ -59,7 +59,7 @@
     "path": "research/experiments/EX-PERCEPTA-2026-0003--runtime-protocol-controlled-replication.md",
     "related_theories": [],
     "research_area": "percepta-verification",
-    "status": "preregistered",
+    "status": "active",
     "tests_hypotheses": [
       "HY-PERCEPTA-2026-0003",
       "HY-PERCEPTA-2026-0004"

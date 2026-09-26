@@ -7,8 +7,8 @@ Condition: treatment
 ## Allowed inputs
 
 - this AGENTS.md
-- `research/experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md`
-- `research/experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md`
+- `experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md`
+- `experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md`
 - `.percepta/contracts/indy-init-investigation-workspace.json` is permitted and MUST be used as a semantic implementation constraint.
 - Repository-root `AGENTS.md` may be read only if needed to interpret the canonical Percepta contract.
 
@@ -28,8 +28,8 @@ Do not run Percepta verification or the experimental evaluator before first-pass
 ## Output
 
 Write exactly:
-- `research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/index.html`
-- `research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/NOTES.md`
+- `experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/index.html`
+- `experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/NOTES.md`
 
 Do not modify shared files.
 

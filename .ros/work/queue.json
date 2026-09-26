@@ -19,6 +19,30 @@
       "createdBy": "chatgpt",
       "source": "cond-managed-repair",
       "sourceReference": "examples/indy-init/application.json"
+    },
+    {
+      "id": "WI-PERCEPTA-EX0003-ROS-REPAIR",
+      "title": "Repair EX-PERCEPTA-2026-0003 ROS records",
+      "description": null,
+      "tags": [
+        "percepta",
+        "experiment"
+      ],
+      "priority": "high",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-09-26T06:32:49.989Z",
+      "updatedAt": "2026-09-26T06:34:30Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "openai/codex",
+        "provider": "openai",
+        "model": "unknown",
+        "runtime": "codex"
+      },
+      "source": "manual",
+      "sourceReference": null
     }
   ]
 }

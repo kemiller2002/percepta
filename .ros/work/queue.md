@@ -4,3 +4,4 @@
 |---|---|---|---|---|
 | ROS-INSTALL-3-4-0 | ROS-INSTALL-3-4-0 | complete |  |  |
 | WI-INDY-UI-001 | Add and validate Indy Init Percepta screen contracts | complete | percepta, indy-init | high |
+| WI-PERCEPTA-EX0003-ROS-REPAIR | Repair EX-PERCEPTA-2026-0003 ROS records | complete | percepta, experiment | high |

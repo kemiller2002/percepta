@@ -1,15 +1,16 @@
-# EX-PERCEPTA-2026-0003 lane: control-a
+# EX-PERCEPTA-2026-0003 lane: treatment-a
 
 You are an independent first-pass implementation session in preregistered experiment EX-PERCEPTA-2026-0003.
 
-Condition: control
+Condition: treatment
 
 ## Allowed inputs
 
 - this AGENTS.md
-- `research/experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md`
-- `research/experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md`
-- No Percepta semantic contract or generated Percepta semantic guidance is permitted.
+- `experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md`
+- `experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md`
+- `.percepta/contracts/indy-init-investigation-workspace.json` is permitted and MUST be used as a semantic implementation constraint.
+- Repository-root `AGENTS.md` may be read only if needed to interpret the canonical Percepta contract.
 
 ## Isolation
 
@@ -27,8 +28,8 @@ Do not run Percepta verification or the experimental evaluator before first-pass
 ## Output
 
 Write exactly:
-- `research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/index.html`
-- `research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/NOTES.md`
+- `experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/index.html`
+- `experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/NOTES.md`
 
 Do not modify shared files.
 
