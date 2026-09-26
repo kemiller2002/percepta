@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investigation Workspace</title>
+<style>
+:root{color-scheme:light;--ink:#17202a;--muted:#5f6b76;--line:#d8dee4;--panel:#fff;--soft:#f5f7f9;--accent:#174f78;--warn:#7a4a00;--danger:#8a2635;--ok:#24613b}
+*{box-sizing:border-box}body{margin:0;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:#eef2f5}
+header{background:#122637;color:white;padding:18px clamp(16px,3vw,40px)}header p{margin:5px 0 0;color:#d9e3ea}h1{font-size:clamp(24px,4vw,36px);margin:0}
+main{max-width:1440px;margin:auto;padding:18px;display:grid;gap:16px}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}.wide{grid-column:span 8}.narrow{grid-column:span 4}.half{grid-column:span 6}.full{grid-column:1/-1}
+h2{font-size:18px;margin:0 0 12px}h3{font-size:15px;margin:16px 0 6px}.meta,.muted{color:var(--muted)}.tag,.status{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:650;margin:2px 4px 2px 0}.status.open{color:var(--warn)}.status.conflict{color:var(--danger)}.status.viable{color:var(--ok)}.status.neutral{color:#485560}
+ul{padding-left:20px;margin:8px 0}.item{border-top:1px solid var(--line);padding:10px 0}.item:first-of-type{border-top:0}.relation{background:var(--soft);border-left:3px solid #778896;padding:8px 10px;margin-top:7px}
+button{font:inherit;border-radius:7px;border:1px solid #506170;background:#fff;padding:9px 12px;cursor:pointer}button.primary{background:var(--accent);color:white;border-color:var(--accent)}button:disabled{cursor:not-allowed;opacity:.58}.actions{display:flex;flex-wrap:wrap;gap:8px}.why{font-size:13px;color:var(--muted);margin:6px 0 0}.runtime{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;overflow-wrap:anywhere}.notice{padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--soft);margin:8px 0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.wide,.narrow,.half{grid-column:1/-1}}@media(max-width:480px){main{padding:10px}.panel{padding:13px}.actions button{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>Investigation Workspace</h1><p>Reason from evidence without collapsing uncertainty too early.</p></header>
+<main>
+<section class="panel full" data-percepta-region="observation" aria-labelledby="observation-title">
+<h2 id="observation-title">Triggering observation</h2>
+<p><strong>Observed failure:</strong> The investigated system did not produce the expected outcome.</p>
+<p class="meta"><strong>Source:</strong> Incident report and collected operational evidence. <span class="status neutral">Observation recorded</span></p>
+<div id="runtime-summary" class="notice" aria-live="polite">No runtime predicates have been supplied yet.</div>
+</section>
+<div class="grid">
+<section class="panel wide" data-percepta-region="hypotheses" aria-labelledby="hypotheses-title">
+<h2 id="hypotheses-title">Competing hypotheses</h2>
+<div class="item"><strong>H1 · Input or precondition failure</strong> <span class="status viable">Viable</span><p class="muted">A required input, dependency, or precondition may not have been satisfied. Retained until evidence resolves it.</p></div>
+<div class="item"><strong>H2 · Processing-path failure</strong> <span class="status viable">Viable</span><p class="muted">The expected processing path may have diverged or failed. This can coexist with other explanations.</p></div>
+<div class="item"><strong>H3 · Downstream or persistence failure</strong> <span class="status viable">Viable</span><p class="muted">Work may have occurred locally without the expected downstream or persisted result.</p></div>
+<div id="hypothesis-runtime"></div>
+</section>
+<section class="panel narrow" data-percepta-region="contradictions" aria-labelledby="contradictions-title">
+<h2 id="contradictions-title">Contradictions</h2>
+<p>Conflicting evidence is retained rather than erased when it weakens an explanation.</p>
+<div id="contradiction-runtime"><span class="status neutral">None supplied by runtime</span></div>
+</section>
+<section class="panel half" data-percepta-region="unknowns" aria-labelledby="unknowns-title">
+<h2 id="unknowns-title">Unresolved unknowns</h2>
+<p>Unknowns remain explicit because missing information can block otherwise plausible actions.</p>
+<ul id="unknown-list"><li>Whether all required evidence has been collected.</li><li>Whether the observed local state matches the persisted remote state.</li></ul>
+<div id="unknown-runtime"></div>
+</section>
+<section class="panel half" data-percepta-region="obligations" aria-labelledby="obligations-title">
+<h2 id="obligations-title">Outstanding obligations</h2>
+<ul><li>Resolve material unknowns before closing the investigation.</li><li>Verify any corrective action before marking the work complete.</li><li>Preserve evidence that contradicts a favored explanation.</li></ul>
+<div id="obligation-runtime"></div>
+</section>
+<section class="panel wide" data-percepta-region="evidence" aria-labelledby="evidence-title">
+<h2 id="evidence-title">Evidence &amp; relationships</h2>
+<div class="item"><strong>E1 · Trigger observation</strong><div class="relation">Supports investigating H1, H2, and H3; by itself it does not establish a root cause.</div></div>
+<div class="item"><strong>E2 · Investigation state</strong><div class="relation">Runtime predicates below are treated as supplied facts. Their presence does not imply the opposite when absent.</div></div>
+<div id="evidence-runtime"></div>
+</section>
+<section class="panel narrow" data-percepta-region="persistence-state" aria-labelledby="persistence-title">
+<h2 id="persistence-title">Persistence status</h2>
+<p id="persistence-message"><span class="status neutral">Not established</span> Remote persistence has not been established by the current runtime state.</p>
+<p class="why">Local work and remote persistence are tracked as distinct facts.</p>
+</section>
+<section class="panel full" data-percepta-region="legal-actions" aria-labelledby="actions-title">
+<h2 id="actions-title">Actions</h2>
+<div class="actions">
+<button id="confirm-root" class="primary" data-percepta-capability="confirm-root-cause" type="button">Confirm root cause</button>
+<button id="record-evidence" type="button">Record evidence</button>
+<button id="request-info" type="button">Request missing information</button>
+<button id="verify-work" type="button">Record verification</button>
+</div>
+<p id="confirm-why" class="why">Legality has not been supplied for “confirm-root-cause”; no authorization is inferred.</p>
+<p id="action-feedback" class="why" aria-live="polite"></p>
+</section>
+</div>
+<section class="panel full" aria-labelledby="transport-title"><h2 id="transport-title">Supplied investigation state</h2><div id="predicate-list" class="runtime">No active predicates.</div></section>
+</main>
+<script>
+(function(){
+ const $=id=>document.getElementById(id);
+ const humanize=s=>String(s).replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+ const buckets={
+  contradiction:/contradict|conflict|falsif|refut|inconsisten/i,
+  unknown:/unknown|missing|uncertain|unresolved|undetermined/i,
+  obligation:/obligation|required|pending|verify|verification|outstanding|must/i,
+  persistence:/persist|remote|saved|sync|commit/i,
+  hypothesis:/hypoth|viable|candidate|explanation|cause/i
+ };
+ function addFacts(id,items,label){
+   const el=$(id); el.innerHTML='';
+   items.forEach(p=>{const d=document.createElement('div');d.className='notice';d.innerHTML='<span class="status neutral">Active predicate</span> '+humanize(p);el.appendChild(d)});
+   if(!items.length && label){const s=document.createElement('span');s.className='status neutral';s.textContent=label;el.appendChild(s)}
+ }
+ window.__perceptaSetState=function(state){
+   state=state&&typeof state==='object'?state:{};
+   const predicates=Array.isArray(state.predicates)?state.predicates.map(String):[];
+   const caps=state.capabilities&&typeof state.capabilities==='object'?state.capabilities:{};
+   $('runtime-summary').textContent=predicates.length?predicates.length+' active runtime predicate'+(predicates.length===1?'':'s')+' supplied. They are shown as facts without inventing absent opposites.':'No active runtime predicates were supplied; absence does not establish opposite facts.';
+   $('predicate-list').innerHTML='';
+   if(!predicates.length)$('predicate-list').textContent='No active predicates.';
+   predicates.forEach(p=>{const x=document.createElement('span');x.className='tag';x.textContent=p;$('predicate-list').appendChild(x)});
+   addFacts('contradiction-runtime',predicates.filter(p=>buckets.contradiction.test(p)),'No contradiction predicate supplied');
+   addFacts('unknown-runtime',predicates.filter(p=>buckets.unknown.test(p)),'');
+   addFacts('obligation-runtime',predicates.filter(p=>buckets.obligation.test(p)),'');
+   addFacts('hypothesis-runtime',predicates.filter(p=>buckets.hypothesis.test(p)),'');
+   const ev=$('evidence-runtime');ev.innerHTML='';
+   predicates.forEach(p=>{const d=document.createElement('div');d.className='relation';d.textContent='Runtime fact: '+humanize(p);ev.appendChild(d)});
+   const pp=predicates.filter(p=>buckets.persistence.test(p));
+   $('persistence-message').innerHTML=pp.length?'<span class="status neutral">Runtime facts supplied</span> '+pp.map(humanize).join('; ')+'.':'<span class="status neutral">Not established</span> No persistence predicate is active; no opposite fact is inferred.';
+   const confirm=$('confirm-root'),legality=caps['confirm-root-cause'];
+   confirm.disabled=legality!=='legal';
+   if(legality==='legal') $('confirm-why').textContent='Available: the runtime explicitly marks “confirm-root-cause” legal.';
+   else if(legality==='illegal') $('confirm-why').textContent='Unavailable: the runtime explicitly marks “confirm-root-cause” illegal. Review unresolved unknowns, contradictions, obligations, and evidence for blocking work.';
+   else $('confirm-why').textContent='Unavailable: legality was not supplied for “confirm-root-cause”; authorization is not inferred.';
+   confirm.setAttribute('aria-disabled',String(confirm.disabled));
+ };
+ $('confirm-root').addEventListener('click',()=>{$('action-feedback').textContent='Root-cause confirmation recorded locally. Verification and remote persistence remain separate obligations.'});
+ ['record-evidence','request-info','verify-work'].forEach(id=>$(id).addEventListener('click',()=>{$('action-feedback').textContent='Action recorded locally in this static workspace; remote persistence is not implied.'}));
+ window.__perceptaSetState({predicates:[],capabilities:{}});
+})();
+</script>
+</body></html>
