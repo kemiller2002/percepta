@@ -1,0 +1,107 @@
+{
+  "screens": {
+    "Screen-W": {
+      "composition": "Header spans the full width: eyebrow, title, the primary question as an H2 with a left rule, a 'Current explanation / Test next' summary line, and a row of anchor-chip nav (Hypotheses, Unknowns, Next actions, Obligations, Contradictions, Evidence). Nothing is visibly sticky. Directly under the header, persistence gets its own full-width banner ('SAVE PENDING', a legend of states, and a collapsible runtime state). Desktop (1440) uses a 3-column grid. Left column: observation (labelled fields), then open unknowns. Center column: hypotheses as a 2x2 card grid (H-A, H-B, falsified H-C hatched and struck through, H-D). Right column: next actions (available 0, unavailable 'Confirm root cause' with a yellow reasons box and a 'Go to unknown U1' link) at the top. Second row: obligations on the left, contradictions in the center, right column empty. Evidence sits in a full-width band at the bottom as a 4-column card grid with relation chips. iPad landscape keeps the same 3-column topology, but hypotheses stack in one column and evidence is 3-up. iPad portrait: persistence banner; a 2-column row of observation and next actions; hypotheses full width as a 3-up card grid; unknowns and obligations side by side; contradictions full width; evidence as a 2x2 grid. Narrow phone is a single column: header, persistence, observation, next actions, hypotheses, unknowns, obligations, contradictions, evidence. Medium density. Actions are near the top right on desktop and come right after observation on phone.",
+      "regionsVisiblyPresent": {
+        "observation": true,
+        "hypotheses": true,
+        "hypothesesActive": true,
+        "hypothesesWeakened": "unclear",
+        "hypothesesFalsified": true,
+        "contradictions": true,
+        "unknowns": true,
+        "blockingUnknowns": true,
+        "obligations": true,
+        "evidence": true,
+        "legalActions": true,
+        "disabledConfirmRootCauseWithExplanation": true,
+        "linkToBlocker": true,
+        "persistenceState": true
+      }
+    },
+    "Screen-X": {
+      "composition": "Header is a split band. On the left: eyebrow, title and a boxed 'PRIMARY QUESTION' card. On the right: two cards, 'Investigation status' (Unresolved) and 'Persistence' (Pending, with a per-location table for this browser and GitHub). A nav-chip row with counts follows. Nothing is visibly sticky. Desktop and iPad landscape use a 2-column main + sidebar layout (about 2/3 and 1/3). Main column: observation, hypotheses, contradictions, then evidence as a vertical list of rows, each carrying one relation chip per hypothesis (a matrix-like encoding), then a runtime-details disclosure. Sidebar: unresolved unknowns (the blocking one highlighted), next actions ('TEST NEXT' callout, a disabled Confirm root cause, a 'Why this is unavailable' box with multiple go-to links), then obligations. Hypotheses are 3 side-by-side cards on desktop (Active, Weakened, Falsified, with colored left rules) and 2+1 on landscape. Each hypothesis card carries its own action buttons (Plan discriminating test, Select as candidate), so actions are split between per-hypothesis cards and the sidebar panel. iPad portrait keeps the 2-column main + sidebar, with hypotheses stacked in the main column and the status and persistence cards stacked in the header's right side. Narrow phone is a single column: question, status, persistence, nav, observation, hypotheses, unknowns, next actions, contradictions, obligations, evidence. Medium-high density.",
+      "regionsVisiblyPresent": {
+        "observation": true,
+        "hypotheses": true,
+        "hypothesesActive": true,
+        "hypothesesWeakened": true,
+        "hypothesesFalsified": true,
+        "contradictions": true,
+        "unknowns": true,
+        "blockingUnknowns": true,
+        "obligations": true,
+        "evidence": true,
+        "legalActions": true,
+        "disabledConfirmRootCauseWithExplanation": true,
+        "linkToBlocker": true,
+        "persistenceState": true
+      }
+    },
+    "Screen-Y": {
+      "composition": "The primary question is the page's very large H1 display headline. There is no separate title line, no summary line and no chip nav or sticky elements. A small persistence card sits at the top right of the header. Desktop and iPad landscape use a 2-column main + sidebar layout (about 2/3 and 1/3). Main column: observation, hypotheses (3 side-by-side cards: Active, Weakened, Falsified), contradictions, evidence (a vertical list). Sidebar: unknowns, obligations, next actions. Next actions is the last sidebar panel and shows each action as a row with the button on the right (Inspect; a disabled Confirm with a reason and a 'Go to blocking unknown' link). iPad portrait collapses to a single column: observation, hypotheses (still 3-up), contradictions, evidence, unknowns, obligations, next actions. Actions come last. Narrow phone is a single column in the same order, with hypotheses stacked, persistence right after the headline and actions at the very bottom. Low density, with generous whitespace. Small outlined token pills sit under several items.",
+      "regionsVisiblyPresent": {
+        "observation": true,
+        "hypotheses": true,
+        "hypothesesActive": true,
+        "hypothesesWeakened": true,
+        "hypothesesFalsified": true,
+        "contradictions": true,
+        "unknowns": true,
+        "blockingUnknowns": true,
+        "obligations": true,
+        "evidence": true,
+        "legalActions": true,
+        "disabledConfirmRootCauseWithExplanation": true,
+        "linkToBlocker": true,
+        "persistenceState": true
+      }
+    },
+    "Screen-Z": {
+      "composition": "Header spans the full width: title, snapshot line, the primary question in a shaded banner, 'Currently explains / Test next' lines with a 'See next actions' link, and chip nav that includes 'Save status'. Nothing is visibly sticky. Desktop and iPad landscape use a 3-column grid. Left rail: observation, then next actions ('Suggested next test' callout, available 0, disabled 'Confirm root cause (unavailable)' with a why-paragraph and a go-to-blocker link), then save status (persistence as a card with a state-chip legend). Center column: hypotheses as a single-column stacked list (H-A, H-B, falsified H-C tinted), then evidence as a stacked list with relation bullets. Right rail: unknowns, then contradictions, then obligations. iPad portrait puts hypotheses and evidence first at full width, then a 2-column block (left: observation, next actions, save status; right: unknowns, contradictions, obligations). Narrow phone is a single column: header, observation, next actions, save status, hypotheses, evidence, unknowns, contradictions, obligations, then a footer note. Medium density. Actions sit high in the left rail.",
+      "regionsVisiblyPresent": {
+        "observation": true,
+        "hypotheses": true,
+        "hypothesesActive": true,
+        "hypothesesWeakened": "unclear",
+        "hypothesesFalsified": true,
+        "contradictions": true,
+        "unknowns": true,
+        "blockingUnknowns": true,
+        "obligations": true,
+        "evidence": true,
+        "legalActions": true,
+        "disabledConfirmRootCauseWithExplanation": true,
+        "linkToBlocker": true,
+        "persistenceState": true
+      }
+    }
+  },
+  "pairs": {
+    "W-X": {
+      "verdict": "materially-different",
+      "justification": "W uses a 3-column grid with next actions at the top of its own right column, a full-width persistence banner under the header, and a full-width multi-column evidence grid at the bottom. X uses a 2-column main + sidebar layout with persistence and status as cards in the header, evidence as a list inside the main column, and actions split between buttons on each hypothesis card and a sidebar panel."
+    },
+    "W-Y": {
+      "verdict": "materially-different",
+      "justification": "W is a 3-column grid with actions high on the right (second on phone) and persistence as a full-width banner. Y is a 2-column main + sidebar with next actions last in the sidebar, drops to a single column on iPad portrait with actions at the bottom, and makes the question the display H1 with no nav."
+    },
+    "W-Z": {
+      "verdict": "materially-different",
+      "justification": "Both are 3-column with a similar header (summary line and chip nav), but the regions are assigned to different columns. W: actions in the right column, unknowns under observation, a 2x2 hypothesis grid, full-width evidence at the bottom, persistence as a top banner. Z: actions and save status in the left rail under observation, hypotheses as a stacked list with evidence below them in the center, unknowns, contradictions and obligations grouped in the right rail. Tablet-portrait topologies also differ."
+    },
+    "X-Y": {
+      "verdict": "not-materially-different",
+      "justification": "Borderline. At desktop and landscape both use the same 2-column main + sidebar topology with the same main-column sequence (observation, hypotheses as 3 side-by-side cards, contradictions, evidence list), a sidebar holding unknowns, actions and obligations, and persistence at the top right of the header. The differences are secondary: sidebar order (X puts actions before obligations), per-hypothesis action buttons in X, X keeping 2 columns on iPad portrait where Y goes to 1, and actions sitting mid-page on X's phone view but last on Y's."
+    },
+    "X-Z": {
+      "verdict": "materially-different",
+      "justification": "X is a 2-column main + sidebar with hypotheses as side-by-side cards carrying their own actions, and evidence in the main column. Z is 3-column with actions and persistence in a left rail, hypotheses and evidence as stacked lists in the center, and unknowns, contradictions and obligations in a right rail. Contradictions are grouped differently (main column in X, right rail in Z)."
+    },
+    "Y-Z": {
+      "verdict": "materially-different",
+      "justification": "Y is 2-column (single column on iPad portrait) with actions placed last and no nav. Z is 3-column with actions and save status high in the left rail, hypotheses as a stacked list rather than side-by-side cards, contradictions in the right rail, and a header with a summary line and chip nav."
+    }
+  },
+  "reviewerNotes": "Only the 16 PNGs were viewed. Each screen was judged at all four viewports. The X-Y verdict is the closest call: the desktop and landscape topology is essentially the same, and the differences show up in tablet-portrait and phone ordering and in per-hypothesis action buttons. A stricter reader could call X-Y materially different on those grounds. W and Z share a header pattern (summary line and chip nav) and a 3-column desktop grid, but their column-to-region mapping differs. None of the screens showed visibly sticky elements in these full-page captures. For W and Z no weakened hypothesis was visible (W's header says '0 weakened'). This is noted as visibility only, not graded. The four screens show different scenario content (different hypotheses and evidence text), which was ignored for the layout verdicts."
+}

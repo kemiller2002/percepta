@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "screen": "investigation-workspace",
+  "contractSha256": "db53110e451a34e7d631cd61be0664ce5ab7260ce86f3f1820ee981ad1658ec5",
+  "generatedAtUtc": "2026-09-25T16:11:24.8504280\u002B00:00",
+  "complete": true,
+  "results": [
+    {
+      "requirement": "contract-validation",
+      "kind": "contract-validation",
+      "required": true,
+      "status": "Passed",
+      "summary": "Typed contract parsed and validated successfully.",
+      "source": "percepta-core",
+      "evidenceReferences": [
+        "/home/user/percepta/.percepta/contracts/indy-init-investigation-workspace.json"
+      ]
+    },
+    {
+      "requirement": "structural",
+      "kind": "structural",
+      "required": true,
+      "status": "Passed",
+      "summary": "Required semantic structure is present.",
+      "source": "playwright",
+      "evidenceReferences": []
+    },
+    {
+      "requirement": "state-projection",
+      "kind": "state-projection",
+      "required": true,
+      "status": "Passed",
+      "summary": "All declared state projections are exercised and visible.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "blocked-investigation",
+        "root-cause-confirmable"
+      ]
+    },
+    {
+      "requirement": "interaction",
+      "kind": "interaction",
+      "required": true,
+      "status": "Passed",
+      "summary": "Capability exposure and legality projections are correct.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "blocked-investigation",
+        "root-cause-confirmable"
+      ]
+    },
+    {
+      "requirement": "accessibility",
+      "kind": "accessibility",
+      "required": true,
+      "status": "Passed",
+      "summary": "Basic accessibility invariants pass.",
+      "source": "playwright",
+      "evidenceReferences": []
+    },
+    {
+      "requirement": "responsive",
+      "kind": "responsive",
+      "required": true,
+      "status": "Passed",
+      "summary": "Required semantics survive all declared viewport classes.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/ipad-portrait.png",
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/ipad-landscape.png",
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/narrow-phone.png",
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/desktop-reference.png"
+      ]
+    },
+    {
+      "requirement": "visual-regression",
+      "kind": "visual-regression",
+      "required": false,
+      "status": "Unavailable",
+      "reason": "No baseline exists for \u0027ipad-portrait\u0027. | No baseline exists for \u0027ipad-landscape\u0027. | No baseline exists for \u0027narrow-phone\u0027. | No baseline exists for \u0027desktop-reference\u0027.",
+      "summary": "Visual regression evidence is incomplete or differs.",
+      "source": "playwright",
+      "evidenceReferences": [
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/ipad-portrait.png",
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/ipad-landscape.png",
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/narrow-phone.png",
+        "/home/user/percepta/artifacts/percepta/experiment-0003/candidate-02/screenshots/desktop-reference.png"
+      ]
+    },
+    {
+      "requirement": "semantic-visual-review",
+      "kind": "semantic-visual-review",
+      "required": false,
+      "status": "Unavailable",
+      "reason": "No semantic visual review evidence was supplied.",
+      "summary": "Semantic visual review is supporting evidence and was not supplied.",
+      "source": "external-semantic-review",
+      "evidenceReferences": []
+    }
+  ]
+}
