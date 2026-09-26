@@ -1,0 +1,172 @@
+{
+ "checks": [
+  {
+   "name": "judgment cells",
+   "ok": true,
+   "results": 200,
+   "recomputed": 200
+  },
+  {
+   "name": "case count",
+   "ok": true,
+   "results": 5,
+   "recomputed": 5
+  },
+  {
+   "name": "obligation count",
+   "ok": true,
+   "results": 25,
+   "recomputed": 25
+  },
+  {
+   "name": "Candidate V fully-correct",
+   "ok": true,
+   "results": 2,
+   "recomputed": 2
+  },
+  {
+   "name": "Candidate V obligations passed",
+   "ok": true,
+   "results": 21,
+   "recomputed": 21
+  },
+  {
+   "name": "Candidate M fully-correct",
+   "ok": true,
+   "results": 5,
+   "recomputed": 5
+  },
+  {
+   "name": "Candidate M obligations passed",
+   "ok": true,
+   "results": 25,
+   "recomputed": 25
+  },
+  {
+   "name": "Candidate K fully-correct",
+   "ok": true,
+   "results": 3,
+   "recomputed": 3
+  },
+  {
+   "name": "Candidate K obligations passed",
+   "ok": true,
+   "results": 23,
+   "recomputed": 23
+  },
+  {
+   "name": "Candidate R fully-correct",
+   "ok": true,
+   "results": 5,
+   "recomputed": 5
+  },
+  {
+   "name": "Candidate R obligations passed",
+   "ok": true,
+   "results": 25,
+   "recomputed": 25
+  },
+  {
+   "name": "control numerator",
+   "ok": true,
+   "results": 5,
+   "recomputed": 5
+  },
+  {
+   "name": "control denominator",
+   "ok": true,
+   "results": 10,
+   "recomputed": 10
+  },
+  {
+   "name": "control rate",
+   "ok": true,
+   "results": 0.5,
+   "recomputed": 0.5
+  },
+  {
+   "name": "treatment numerator",
+   "ok": true,
+   "results": 10,
+   "recomputed": 10
+  },
+  {
+   "name": "treatment denominator",
+   "ok": true,
+   "results": 10,
+   "recomputed": 10
+  },
+  {
+   "name": "treatment rate",
+   "ok": true,
+   "results": 1.0,
+   "recomputed": 1.0
+  },
+  {
+   "name": "hypothesis verdict",
+   "ok": true,
+   "results": "descriptive support",
+   "recomputed": "descriptive support"
+  },
+  {
+   "name": "disagreement count",
+   "ok": true,
+   "results": 4,
+   "recomputed": 4
+  },
+  {
+   "name": "Candidate V det required passed",
+   "ok": true,
+   "results": 4,
+   "recomputed": 4
+  },
+  {
+   "name": "Candidate V sha in mapping",
+   "ok": true,
+   "results": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+   "recomputed": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1"
+  },
+  {
+   "name": "Candidate M det required passed",
+   "ok": true,
+   "results": 4,
+   "recomputed": 4
+  },
+  {
+   "name": "Candidate M sha in mapping",
+   "ok": true,
+   "results": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+   "recomputed": "d104371f69ae4b184769e85296fd7d4c1cd85c76"
+  },
+  {
+   "name": "Candidate K det required passed",
+   "ok": true,
+   "results": 4,
+   "recomputed": 4
+  },
+  {
+   "name": "Candidate K sha in mapping",
+   "ok": true,
+   "results": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+   "recomputed": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442"
+  },
+  {
+   "name": "Candidate R det required passed",
+   "ok": true,
+   "results": 5,
+   "recomputed": 5
+  },
+  {
+   "name": "Candidate R sha in mapping",
+   "ok": true,
+   "results": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+   "recomputed": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b"
+  },
+  {
+   "name": "excluded branch absent",
+   "ok": true,
+   "results": false,
+   "recomputed": false
+  }
+ ]
+}

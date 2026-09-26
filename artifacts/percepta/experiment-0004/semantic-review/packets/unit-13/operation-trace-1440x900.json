@@ -1,0 +1,273 @@
+[
+  {
+    "step": 0,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Github write is pending",
+      "href": "#pred-0-github-write-is-pending"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 406,
+      "hash": "",
+      "activeElement": {
+        "tag": "li",
+        "text": "OPEN Github write is pending Predicate github-write-is-pending \u2014 Work still required."
+      },
+      "hashTargetText": "",
+      "hashTargetInViewport": null
+    },
+    "viewportScreenshotAfterClick": "trace/00.jpg"
+  },
+  {
+    "step": 1,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Corrective action not verified",
+      "href": "#pred-1-corrective-action-not-verified"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 406,
+      "hash": "",
+      "activeElement": {
+        "tag": "li",
+        "text": "OPEN Corrective action not verified Predicate corrective-action-not-verified \u2014 Work still required."
+      },
+      "hashTargetText": "",
+      "hashTargetInViewport": null
+    },
+    "viewportScreenshotAfterClick": "trace/01.jpg"
+  },
+  {
+    "step": 2,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Skip to actions",
+      "href": "#region-legal-actions"
+    },
+    "click": {
+      "ok": false,
+      "error": "TimeoutError: elementHandle.click: Timeout 3000ms exceeded."
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 0,
+      "hash": "",
+      "activeElement": null,
+      "hashTargetText": "",
+      "hashTargetInViewport": null
+    },
+    "viewportScreenshotAfterClick": "trace/02.jpg"
+  },
+  {
+    "step": 3,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Observation",
+      "href": "#region-observation"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 150,
+      "hash": "#region-observation",
+      "activeElement": null,
+      "hashTargetText": "Triggering observation Observed Checkout requests intermittently fail with HTTP 502 responses. Source Production alert: gateway error-rate monitor Reported by On-call alerting pipeline Scope Observed failure; no cause has been established by this record.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/03.jpg"
+  },
+  {
+    "step": 4,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Hypotheses",
+      "href": "#region-hypotheses"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 318,
+      "hash": "#region-hypotheses",
+      "activeElement": null,
+      "hashTargetText": "Competing hypotheses (0 active) 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned. VIABLE \u2014 OPENH1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out. VIABLE \u2014 OPENH2: Connection pool exhaustion at the gateway Gateway cannot",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/04.jpg"
+  },
+  {
+    "step": 5,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Contradictions",
+      "href": "#region-contradictions"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 318,
+      "hash": "#region-contradictions",
+      "activeElement": null,
+      "hashTargetText": "Contradictions (0 active) Evidence that conflicts with an explanation or with other evidence. No contradictions are reported as active.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/05.jpg"
+  },
+  {
+    "step": 6,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Unknowns",
+      "href": "#region-unknowns"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 318,
+      "hash": "#region-unknowns",
+      "activeElement": null,
+      "hashTargetText": "Unresolved unknowns (0 active) Information not yet established. Unknowns can block actions. No unknowns are reported as active.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/06.jpg"
+  },
+  {
+    "step": 7,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Obligations",
+      "href": "#region-obligations"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 406,
+      "hash": "#region-obligations",
+      "activeElement": null,
+      "hashTargetText": "Outstanding obligations (2 active) Work that must still be done, including verification after a corrective action. OPEN Github write is pending Predicate github-write-is-pending \u2014 Work still required. OPEN Corrective action not verified Predicate corrective-action-not-verified \u2014 Work still required.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/07.jpg"
+  },
+  {
+    "step": 8,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Evidence",
+      "href": "#region-evidence"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 406,
+      "hash": "#region-evidence",
+      "activeElement": null,
+      "hashTargetText": "Evidence (0 active) Evidence and the explanation it bears on. No evidence state is reported as active.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/08.jpg"
+  },
+  {
+    "step": 9,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Actions",
+      "href": "#region-legal-actions"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 406,
+      "hash": "#region-legal-actions",
+      "activeElement": null,
+      "hashTargetText": "Actions 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here. Unavailable: Confirm root cause Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Github write is pending (obligations) Corrective action not verified (obligations)",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/09.jpg"
+  },
+  {
+    "step": 10,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Persistence",
+      "href": "#region-persistence-state"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 406,
+      "hash": "#region-persistence-state",
+      "activeElement": null,
+      "hashTargetText": "Persistence status Local work in this page No local actions recorded in this page. Remote persistence (runtime-reported) Remote persistence status has not been reported. Do not assume work is saved.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/10.jpg"
+  }
+]

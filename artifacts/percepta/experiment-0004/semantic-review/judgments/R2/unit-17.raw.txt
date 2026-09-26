@@ -1,0 +1,54 @@
+{
+  "reviewUnit": "unit-17",
+  "candidate": "Candidate M",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Button 'Confirm root cause' is rendered visually disabled (greyed out) and the aria snapshot confirms button \"Confirm root cause\" [disabled]. Adjacent status text reads: 'Unavailable: the supplied capability is illegal in the current domain state.' directly tying unavailability to the supplied capability."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same disabled button and 'Unavailable: the supplied capability is illegal in the current domain state.' text visible unchanged in Actions card."},
+        "820x1180": {"verdict": "PASS", "evidence": "Actions card retains disabled 'Confirm root cause' button and identical unavailability text, reflowed to right column, fully legible."},
+        "390x844": {"verdict": "PASS", "evidence": "Actions section shows greyed 'Confirm root cause' button and full 'Unavailable: the supplied capability is illegal in the current domain state.' text stacked, not clipped."}
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The only stated reason for unavailability is the supplied capability's illegality ('Unavailable: the supplied capability is illegal in the current domain state.'); no additional blocker (e.g. missing field, permission, network error) is mentioned anywhere on the page."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same single-reason text present, no extra blocker introduced."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same single-reason text present in reflowed layout."},
+        "390x844": {"verdict": "PASS", "evidence": "Same single-reason text present in stacked mobile layout."}
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "With predicates:[] (none active), the page uses only generic language: 'Source: recorded system observation. No additional domain facts have been supplied.', 'UNKNOWN No opposite fact is inferred from information that has not been supplied.', and ties unavailability solely to capability legality, not to any invented domain cause."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same generic, non-domain-specific text present unchanged."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same generic, non-domain-specific text present unchanged."},
+        "390x844": {"verdict": "PASS", "evidence": "Same generic, non-domain-specific text present unchanged, fully visible in stacked cards."}
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Status text 'Unavailable: the supplied capability is illegal in the current domain state.' plus explicit note 'LEGALITY Availability follows the supplied capability map, not UI inference.' communicates unavailability while explicitly deferring to supplied capability authority rather than the UI's own judgment."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Both the unavailability status and the 'LEGALITY Availability follows the supplied capability map, not UI inference.' note remain visible together."},
+        "820x1180": {"verdict": "PASS", "evidence": "Both the unavailability status and the LEGALITY note remain visible together in the reflowed right column."},
+        "390x844": {"verdict": "PASS", "evidence": "Both the unavailability status and the LEGALITY note remain visible together, stacked and fully readable on mobile."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png"
+  ]
+}

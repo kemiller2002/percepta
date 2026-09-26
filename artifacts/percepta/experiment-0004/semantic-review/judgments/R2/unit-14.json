@@ -1,0 +1,104 @@
+{
+  "reviewUnit": "unit-14",
+  "candidate": "Candidate K",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Actions region shows a disabled-styled button 'Unavailable: Confirm root cause' (aria-snapshot confirms button is [disabled]) with text '0 available, 1 unavailable. Availability comes from the runtime and is not overridden here.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "screenshot-1180x820-part2of2.png shows same 'Unavailable: Confirm root cause' button and explanatory text unclipped."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "screenshot-820x1180-part2of2.png shows the Actions card with 'Unavailable: Confirm root cause' button and text intact."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "screenshot-390x844-part2of3.png shows the Actions card with 'Unavailable: Confirm root cause' button, stacked but fully visible and readable."
+        }
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Unknowns section states 'No unknowns are reported as active' (0 active); Actions explanation text reads 'No specific blocking condition is reported' rather than citing an unknown."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Unresolved unknowns card visible with 'No unknowns are reported as active.' in screenshot-1180x820 full page."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "screenshot-820x1180-part2of2.png top shows 'No unknowns are reported as active.'"
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "screenshot-390x844-part2of3.png shows 'Unresolved unknowns (0 active)' with 'No unknowns are reported as active.'"
+        }
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The unavailability text is generic: 'the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.' No hypothesis (H1/H2/H3) or domain cause is asserted as the reason for unavailability; hypotheses remain separately labeled VIABLE \u2014 OPEN with 'has not been ruled in or out.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same generic unavailability text visible in screenshot-1180x820-part2of2.png; no domain-specific reason tied to it."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same generic text visible in screenshot-820x1180-part2of2.png."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same generic text visible in screenshot-390x844-part2of3.png."
+        }
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Button is rendered disabled (aria-snapshot: 'button \"Unavailable: Confirm root cause\" [disabled]') and operation trace was not run against it (only enabled controls were clicked in trace steps 0-8, confirming it is not operable), consistent with the illegal capability; UI communicates unavailability via label/text rather than granting the action."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Dashed-border disabled button styling for 'Unavailable: Confirm root cause' preserved in screenshot-1180x820-part2of2.png."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Dashed-border disabled button styling preserved in screenshot-820x1180-part2of2.png."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Dashed-border disabled button styling preserved in screenshot-390x844-part2of3.png."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "trace/07.jpg",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png"
+  ]
+}

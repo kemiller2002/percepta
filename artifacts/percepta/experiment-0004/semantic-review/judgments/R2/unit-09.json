@@ -1,0 +1,171 @@
+{
+  "reviewUnit": "unit-09",
+  "candidate": "Candidate K",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "In 'Competing hypotheses' region, subsection 'Other hypothesis state reported' shows a card with badge 'FALSIFIED' and text 'Hypothesis is falsified \u2014 Predicate hypothesis-is-falsified \u2014 Retained in the record: it was considered and is now contradicted.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same FALSIFIED card visible unclipped below the three VIABLE \u2014 OPEN cards."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same FALSIFIED card visible unclipped in single-column layout."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "FALSIFIED card visible at top of tile 2 (screenshot-390x844-part2of3.png), full text readable."
+        }
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Status conveyed via bordered text badge reading 'FALSIFIED' (black outline box with letters), identical visual treatment style to 'VIABLE \u2014 OPEN' and 'UNKNOWN' badges except for the word itself \u2014 not color-only."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same text badge 'FALSIFIED' rendered as bordered label."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same text badge 'FALSIFIED' rendered as bordered label."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same text badge 'FALSIFIED' rendered as bordered label, legible."
+        }
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Unresolved unknowns (1 active)' region shows card with badge 'UNKNOWN' and text 'Blocking unknown exists \u2014 Predicate blocking-unknown-exists \u2014 Not established. May block actions that depend on it.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same UNKNOWN card visible, unclipped."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same UNKNOWN card visible in second tile, unclipped."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same UNKNOWN card visible in tile 2, unclipped."
+        }
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Actions region shows dashed-border button 'Unavailable: Confirm root cause'; aria-snapshot confirms 'button \"Unavailable: Confirm root cause\" [disabled]'."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same disabled 'Unavailable: Confirm root cause' control visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same disabled control visible in tile 2."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same disabled control visible in tile 3."
+        }
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Text under the button: 'Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it:' followed by list item 'Blocking unknown exists (unknowns)'."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same explanatory text and blocking-condition list visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same explanatory text and blocking-condition list visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same explanatory text and blocking-condition list visible across tiles 2-3."
+        }
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Link 'Blocking unknown exists' (href #pred-1-blocking-unknown-exists) sits directly under the unavailable button; operation-trace step 0 confirms click ok:true and after-click screenshot (trace/00.jpg) shows the 'Blocking unknown exists' unknown card highlighted/outlined and scrolled into view, with activeElement text matching that card."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same link present under the Actions unavailable explanation, in same page structure as tested viewport."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same link present under the Actions unavailable explanation."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same link present under the Actions unavailable explanation, underlined blue text, tappable size."
+        }
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The FALSIFIED hypothesis card and the UNKNOWN 'Blocking unknown exists' card are both fully and independently present with their own explanatory text; the Actions section still lists 'Blocking unknown exists (unknowns)' as the blocking condition, unaffected by the falsified hypothesis entry."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Both FALSIFIED and UNKNOWN cards and the Actions blocking list remain intact and independent."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Both FALSIFIED and UNKNOWN cards and the Actions blocking list remain intact and independent."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Both FALSIFIED and UNKNOWN cards and the Actions blocking list remain intact and independent across tiles."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of3.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png",
+    "trace/00.jpg"
+  ]
+}

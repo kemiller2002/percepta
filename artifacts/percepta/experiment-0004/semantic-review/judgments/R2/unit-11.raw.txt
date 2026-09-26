@@ -1,0 +1,46 @@
+{
+  "reviewUnit": "unit-11",
+  "candidate": "Candidate V",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Actions region shows an enabled button labeled 'Confirm Root Cause' with a status pill 'Available'; aria snapshot lists it as button (not disabled); operation-trace step 0 clicking it returns click.ok:true and moves focus to it (activeElement: 'Confirm Root Cause'), confirming it is genuinely operable."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'Confirm Root Cause' button with 'Available' pill fully visible and unclipped in Actions card."},
+        "820x1180": {"verdict": "PASS", "evidence": "Button and 'Available' pill visible together in Actions card, not overlapped."},
+        "390x844": {"verdict": "PASS", "evidence": "Button and 'Available' pill remain visible and legible at bottom of stacked single-column layout."}
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Contradictions card displays 'Hypothesis Is Falsified' with sub-label 'Active runtime predicate', a visible, non-empty entry distinct from the empty-state cards around it."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Contradictions card with 'Hypothesis Is Falsified' / 'Active runtime predicate' entry visible, unclipped."},
+        "820x1180": {"verdict": "PASS", "evidence": "Contradictions card with the same entry visible in the reflowed two-column grid."},
+        "390x844": {"verdict": "PASS", "evidence": "Contradictions card with 'Hypothesis Is Falsified' entry visible in single-column stacked layout."}
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "No blocking banner or disabled-state messaging anywhere on the page; Actions card shows 'Confirm Root Cause' enabled and tagged 'Available' alongside the falsified-hypothesis entry, indicating the investigation can still proceed."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same enabled Action button and 'Available' status shown with no blocking messaging."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same enabled Action button and 'Available' status shown with no blocking messaging."},
+        "390x844": {"verdict": "PASS", "evidence": "Same enabled Action button and 'Available' status shown with no blocking messaging in mobile layout."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "trace/00.jpg"
+  ]
+}

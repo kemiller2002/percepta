@@ -1,0 +1,58 @@
+{
+  "reviewUnit": "unit-05",
+  "candidate": "Candidate R",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Next actions region shows button 'Confirm root cause' rendered disabled (dashed outline) with adjacent badge 'x Unavailable'; aria snapshot confirms button \"Confirm root cause\" [disabled]. Header banner also states 'Confirm root cause: unavailable'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'Confirm root cause' disabled control with 'x Unavailable' badge visible in Next actions card, unclipped."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same disabled 'Confirm root cause' button with 'x Unavailable' badge visible in Next actions card in the reflowed two-column layout."},
+        "390x844": {"verdict": "PASS", "evidence": "Part3 tile: dashed disabled 'Confirm root cause' button with 'x Unavailable' badge (top of tile, partially cropped label but badge and 'Why unavailable' block fully visible); part2 tile shows the full button with 'Unavailable' badge stacked above it."}
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Why unavailable' box reads only: 'The current state marks this action as not permitted. No specific blocker was reported.' No specific named blocker (e.g. no fabricated missing-field or approval-pending reason) is asserted."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Identical 'Why unavailable' text present, no invented blocker."},
+        "820x1180": {"verdict": "PASS", "evidence": "Identical 'Why unavailable' text present, no invented blocker."},
+        "390x844": {"verdict": "PASS", "evidence": "Identical 'Why unavailable' text present in part3 tile, no invented blocker."}
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "With predicates:[] empty, the UI states generically 'The current state marks this action as not permitted' rather than citing any domain-specific cause (e.g. does not claim 'archive corrupted' or 'disk full' as the reason confirmation is blocked); hypotheses are explicitly labeled 'Under consideration' with 'No falsification is reported... This is not a confirmation.'"},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same generic non-domain-specific unavailability text, hypotheses still marked 'Under consideration' only."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same generic text, no domain-specific fabricated reason."},
+        "390x844": {"verdict": "PASS", "evidence": "Same generic text visible in part3 tile, no domain-specific fabricated reason."}
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Multiple consistent, visible signals: header 'Confirm root cause: unavailable', disabled button, 'x Unavailable' badge, and explanatory box — all agree the action is unavailable, matching the illegal capability; no control anywhere claims it is available or performs the confirmation (operation trace was not run on this disabled button, consistent with it being non-operable)."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same set of consistent unavailability signals present and legible."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same set of consistent unavailability signals present and legible."},
+        "390x844": {"verdict": "PASS", "evidence": "Same set of consistent unavailability signals present across part2/part3 tiles."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png"
+  ]
+}

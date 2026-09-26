@@ -1,0 +1,27 @@
+FAILURE INVESTIGATION
+Investigation Workspace
+
+What currently explains the observation, and what should be tested next?
+
+Investigation open · verification required
+Triggering observation
+Observed failure under investigation
+Source: recorded system observation. No additional domain facts have been supplied.
+Competing hypotheses
+ACTIVECandidate explanation
+Remains viable while evidence is gathered. Competing explanations are not collapsed into a single conclusion.
+Evidence
+Evidence record
+Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned.
+Unresolved unknowns
+UNKNOWNNo opposite fact is inferred from information that has not been supplied.
+Outstanding obligations
+VERIFYVerify corrective action
+A corrective action has not yet been verified, so the investigation remains unresolved.
+Actions
+Confirm root cause
+Unavailable: required verification remains outstanding.
+LEGALITYAvailability follows the supplied capability map, not UI inference.
+Persistence
+PENDINGRemote write pending
+Changes are not yet confirmed as persisted remotely.

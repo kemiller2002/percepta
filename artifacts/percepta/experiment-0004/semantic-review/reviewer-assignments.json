@@ -1,0 +1,242 @@
+[
+ {
+  "reviewer": "R1",
+  "unit": "unit-01",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-02",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-03",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-04",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-05",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-06",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-07",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-08",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-09",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-10",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-11",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-12",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-13",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-14",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-15",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-16",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-17",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-18",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-19",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R1",
+  "unit": "unit-20",
+  "reviewerModel": "session default (opus-class)",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-01",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-02",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-03",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-04",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-05",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-06",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-07",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-08",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-09",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-10",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-11",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-12",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-13",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-14",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-15",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-16",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-17",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-18",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-19",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ },
+ {
+  "reviewer": "R2",
+  "unit": "unit-20",
+  "reviewerModel": "sonnet",
+  "agentType": "general-purpose subagent, fresh context"
+ }
+]

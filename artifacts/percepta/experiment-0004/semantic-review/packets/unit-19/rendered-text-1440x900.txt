@@ -1,0 +1,31 @@
+FAILURE ANALYSIS
+Investigation Workspace
+
+2 active facts · 1 capability status
+
+RUNTIME STATE APPLIED
+Triggering observation
+
+No triggering observation predicate is active.
+
+Persistence
+
+Local work may not be remotely persisted.
+
+Github Write Is Pending
+Competing hypotheses
+No active hypotheses supplied.
+Contradictions
+No active contradictions supplied.
+Unresolved unknowns
+No active unknowns supplied.
+Outstanding obligations
+Github Write Is Pending
+Active runtime predicate
+Evidence & relationships
+Corrective Action Not Verified
+Active runtime predicate
+Actions
+Confirm Root Cause
+Unavailable
+Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.

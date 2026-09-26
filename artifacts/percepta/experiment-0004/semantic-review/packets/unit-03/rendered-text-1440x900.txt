@@ -1,0 +1,28 @@
+FAILURE ANALYSIS
+Investigation Workspace
+
+0 active facts · 1 capability status
+
+RUNTIME STATE APPLIED
+Triggering observation
+
+No triggering observation predicate is active.
+
+Persistence
+
+Persistence has not been established by the supplied predicates.
+
+Competing hypotheses
+No active hypotheses supplied.
+Contradictions
+No active contradictions supplied.
+Unresolved unknowns
+No active unknowns supplied.
+Outstanding obligations
+No active obligations supplied.
+Evidence & relationships
+No active evidence supplied.
+Actions
+Confirm Root Cause
+Unavailable
+Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.

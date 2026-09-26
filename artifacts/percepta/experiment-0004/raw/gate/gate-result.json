@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EX-PERCEPTA-2026-0004",
+  "gate_checked_at_utc": "2026-09-26T20:30:42Z",
+  "held_out_accessed_before_gate": false,
+  "baseline": "f474c449c2bc84da5707bb123c36500490875869",
+  "lane_output_rule_source": "research/experiments/EX-PERCEPTA-2026-0004/lanes/<lane>/AGENTS.md at baseline (each: 'Write exactly: lanes/<lane>/index.html and lanes/<lane>/NOTES.md')",
+  "conditions": {
+    "all_four_shas_exist": true,
+    "all_four_descend_from_baseline": true,
+    "each_candidate_adds_exactly_lane_index_and_notes": true,
+    "branches_resolve_to_registered_shas": true,
+    "frozen_inputs_unmodified_in_candidates": true
+  },
+  "frozen_input_blobs": {
+    "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md": "b74f0a475b99bca46fca1783099c467a361fa2bc",
+    "research/experiments/EX-PERCEPTA-2026-0004/frozen-product-brief.md": "f3a1571689702f7ffe26f0b02b2a9af7e4e28227",
+    "research/experiments/EX-PERCEPTA-2026-0004/frozen-runtime-protocol.md": "197038f2d1869d0eeb5cf5d9bfd2b8345d5d11ed",
+    "research/experiments/EX-PERCEPTA-2026-0004/held-out-semantic-cases.json": "b702a376bf5b8f3d33a9d348785c5b3b1c50e687",
+    ".percepta/contracts/indy-init-investigation-workspace.json": "2017a2eab551551cb59bc6ab525defd525024bbb",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/AGENTS.md": "708ea98a505312b3930c0de9b10428a69b98a1a3",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/AGENTS.md": "5c82866f99009237a093a1258a62abcf03a1c46b",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/AGENTS.md": "14403c03ed585d67b65e30104bcfa551cc88256b",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/AGENTS.md": "4bd99043ff0d5761160ee5714bd594c030460dac",
+    "research/hypotheses/HY-PERCEPTA-2026-0005--semantic-contract-held-out-generalization.md": "b8e4b9d8c6db25d0eaab37be5f17836224d8cf17"
+  },
+  "note": "Blob ids identical at baseline, at every candidate SHA, and at evaluation-branch start HEAD 172833c586313b2c87a6f4d4839c99f33f2a0118. openai-treatment-a has an intermediate commit 530dc4c (adds index.html only); net delta is exactly the two permitted files. experiment/percepta-0004-openai-control-b (9af43e658e45f99fc7930e687ca488b19927bbf2) is not a registered candidate and is excluded.",
+  "gate_passed": true
+}

@@ -1,0 +1,147 @@
+{
+  "reviewUnit": "unit-08",
+  "candidate": "Candidate V",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "All six active predicates appear as labeled facts in their own sections: 'Hypothesis Is Falsified' (Contradictions), 'Blocking Unknown Exists' (Unresolved unknowns), 'Github Write Is Pending' (Outstanding obligations + Persistence badge), 'Corrective Action Not Verified', 'Contradictions Present', 'Obligations Present' (Evidence & relationships). Header states '6 active facts \u00b7 1 capability status', matching the 6 predicates and 1 capability."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same 7-section grid reflows to 2 columns; all six facts and the Actions/capability section are fully visible in screenshot-1180x820.png."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "screenshot-820x1180.png shows all sections stacked 2-wide, all six fact cards and Actions card visible without clipping."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Single full-page screenshot-390x844.png and its two tiles show every section stacked vertically; all six facts and the Actions section are present and readable (scrolling required but nothing clipped)."
+        }
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Each predicate occupies its own card/section (Persistence, Contradictions, Unresolved unknowns, Outstanding obligations, Evidence & relationships) with no overwriting or merging of distinct facts into a single generic message."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same discrete cards retained in 2-column layout."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same discrete cards retained in 2-column layout."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same discrete cards retained, stacked single-column; none merged or hidden."
+        }
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Contradictions' region visibly shows 'Hypothesis Is Falsified' / 'Active runtime predicate' with red accent bar in screenshot-1440x900.png."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Contradictions card with 'Hypothesis Is Falsified' visible in screenshot-1180x820.png."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Contradictions card with 'Hypothesis Is Falsified' visible in screenshot-820x1180.png."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Contradictions card visible in screenshot-390x844-part1of2.png."
+        }
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Outstanding obligations' region shows 'Github Write Is Pending' / 'Active runtime predicate'; 'Evidence & relationships' also lists 'Obligations Present'."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Outstanding obligations card visible in screenshot-1180x820.png."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Outstanding obligations card visible in screenshot-820x1180.png."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Outstanding obligations card visible in screenshot-390x844-part1of2.png."
+        }
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Persistence is its own region: 'Local work may not be remotely persisted.' with 'Github Write Is Pending' badge, separate from the Contradictions/Unknowns/Actions sections. No text anywhere claims the investigation is resolved or that persistence equals resolution; the Actions card independently shows 'Confirm Root Cause' as Unavailable."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Persistence card remains its own distinct box, separate from other cards."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Persistence card remains its own distinct box, separate from other cards."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Persistence card remains its own distinct stacked box in screenshot-390x844-part1of2.png, not merged with resolution-related text."
+        }
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "primary_1440x900": {
+        "verdict": "FAIL",
+        "evidence": "The 'Confirm Root Cause' button is disabled with an 'Unavailable' tag and explanatory text: 'Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.' The explanation is present, but it is not navigable: operation-trace-1440x900.json is an empty array, meaning no clickable/operable link or control exists anywhere on the page (the button is disabled and there are no in-page links). The phrase 'Review active unknowns, contradictions...' names sections but provides no link or anchor to jump to them."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "FAIL",
+          "evidence": "Same disabled button and static explanatory text, no links; trace shows no operable elements at this state, so the same lack of navigability applies."
+        },
+        "820x1180": {
+          "verdict": "FAIL",
+          "evidence": "Same disabled button and static explanatory text, no links present in screenshot-820x1180.png."
+        },
+        "390x844": {
+          "verdict": "FAIL",
+          "evidence": "Same disabled button and static explanatory text in screenshot-390x844-part2of2.png, no links or navigation affordance."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "screenshot-390x844-part1of2.png",
+    "screenshot-390x844-part2of2.png",
+    "INSTRUCTIONS.md"
+  ]
+}

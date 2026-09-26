@@ -1,0 +1,51 @@
+{
+  "reviewUnit": "unit-01",
+  "candidate": "Candidate M",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The Actions card shows a filled, enabled 'Confirm root cause' button. The aria snapshot lists button \"Confirm root cause\" with no disabled flag. In trace step 0 the click returned ok:true and focus landed on the button. Under the button, the visible text 'LEGALITY Availability follows the supplied capability map, not UI inference.' ties its availability to the supplied authority. Caveat: the hypothesis card says 'actions requiring an active hypothesis are unavailable'. This muddies the message somewhat, but it does not disable the button."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The 'Confirm root cause' button is visible and enabled in the right column, with the LEGALITY note, and is not clipped."},
+        "820x1180": {"verdict": "PASS", "evidence": "The 'Confirm root cause' button is fully visible in the right-column Actions card, and the LEGALITY note wraps cleanly."},
+        "390x844": {"verdict": "PASS", "evidence": "In the single-column layout, the Actions card with the enabled-looking 'Confirm root cause' button is visible (part 1/2 bottom and part 2/2 top). It is not overlapped."}
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The 'Competing hypotheses' card shows a 'FALSIFIED' badge and 'Candidate explanation retained for history', with a red left rule and the text 'Evidence has falsified this hypothesis. It remains visible as a considered explanation'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The same FALSIFIED entry and explanation are fully visible in the left column."},
+        "820x1180": {"verdict": "PASS", "evidence": "The FALSIFIED entry is visible. The title wraps onto two lines and remains readable."},
+        "390x844": {"verdict": "PASS", "evidence": "The FALSIFIED entry, title and explanation are fully visible in the stacked layout (part 1/2)."}
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The header badge reads 'Investigation open'. The 'Confirm root cause' button stays enabled and operable (trace step 0 ok), and no global blocked banner appears. The falsified status is scoped to one hypothesis card. Caveat: that card's phrase 'actions requiring an active hypothesis are unavailable' adds an unscoped restriction, but no whole-investigation block is shown."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The 'Investigation open' badge and the enabled Confirm button are both visible, and there is no blocked indicator."},
+        "820x1180": {"verdict": "PASS", "evidence": "The 'Investigation open' badge sits under the subtitle and the Confirm button is visible."},
+        "390x844": {"verdict": "PASS", "evidence": "The 'Investigation open' badge is in the header and the Confirm button is visible further down. There is no blocked messaging."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [
+    {"category": "invented blockers", "evidence": "The hypothesis card text reads 'actions requiring an active hypothesis are unavailable'. No active predicate or illegal capability supports a restriction on actions, and the only listed capability (confirm-root-cause) is legal. A user may read this as contradicting the enabled 'Confirm root cause' button.", "viewports": ["1440x900", "1180x820", "820x1180", "390x844"]}
+  ],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "screenshot-390x844-part1of2.png",
+    "screenshot-390x844-part2of2.png",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "trace/00.jpg"
+  ]
+}

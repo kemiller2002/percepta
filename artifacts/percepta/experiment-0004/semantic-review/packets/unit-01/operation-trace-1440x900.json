@@ -1,0 +1,29 @@
+[
+  {
+    "step": 0,
+    "element": {
+      "tag": "button",
+      "role": null,
+      "visibleLabel": "Confirm root cause",
+      "href": null
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 0,
+      "hash": "",
+      "activeElement": {
+        "tag": "button",
+        "text": "Confirm root cause"
+      },
+      "hashTargetText": "",
+      "hashTargetInViewport": null
+    },
+    "viewportScreenshotAfterClick": "trace/00.jpg"
+  }
+]

@@ -1,0 +1,141 @@
+{
+  "reviewUnit": "unit-13",
+  "candidate": "Candidate K",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "primary_1440x900": {
+        "verdict": "FAIL",
+        "evidence": "The pending write shows up only as an obligation item, \"OPEN Github write is pending\" (Outstanding obligations), and as a blocker link in Actions. The page's own persistence indicators never say pending. The header reads \"Remote persistence: not reported\" and the Persistence status panel reads \"Remote persistence status has not been reported. Do not assume work is saved.\" That contradicts the active github-write-is-pending predicate, so the persistence state is ambiguous or contradictory rather than visibly pending."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "FAIL",
+          "evidence": "Same as desktop: the header says \"Remote persistence: not reported\", the Persistence panel says \"has not been reported\", and pending appears only in the obligations card."
+        },
+        "820x1180": {
+          "verdict": "FAIL",
+          "evidence": "Same contradiction: \"Remote persistence: not reported\" in the header and in the Persistence status panel."
+        },
+        "390x844": {
+          "verdict": "FAIL",
+          "evidence": "Same contradiction in the header and in the Persistence status panel (part 3)."
+        }
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "No success or saved claim appears anywhere. The Persistence panel says \"Remote persistence status has not been reported. Do not assume work is saved.\" and \"No local actions recorded in this page.\""
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same text, and no success claim."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same text, and no success claim."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same text, and no success claim (part 3)."
+        }
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "All three hypotheses are labelled \"VIABLE \u2014 OPEN\" with \"it has not been ruled in or out\". The Scope row says \"no cause has been established by this record\", and Confirm root cause is unavailable. One thing is inconsistent: the heading \"Competing hypotheses (0 active)\" sits above \"3 of 3 listed explanations remain viable\". Even so, nothing claims the investigation is resolved."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The same VIABLE \u2014 OPEN badges and scope text are visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The same VIABLE \u2014 OPEN badges and scope text are visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The VIABLE \u2014 OPEN badges and \"no cause has been established\" are visible in parts 1\u20132."
+        }
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Outstanding obligations (2 active) contains \"OPEN Corrective action not verified \u2014 Work still required.\" It is also listed as a blocker under Actions. Trace step 1 shows the blocker link scrolls to and focuses that obligation."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The obligation card and the Actions blocker list are both visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The obligation card and the Actions blocker list are both visible (part 2)."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "\"OPEN Corrective action not verified\" is visible in part 2, and the blocker link is visible in part 3."
+        }
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Actions shows \"0 available, 1 unavailable\" and a dashed button, \"Unavailable: Confirm root cause\". The ARIA snapshot marks the button [disabled], and it was not clickable in the trace. The text \"the runtime marks this action as not permitted\" matches the illegal capability."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The Unavailable: Confirm root cause button and its explanation are visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The Unavailable: Confirm root cause button and its explanation are visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The Unavailable: Confirm root cause button is visible in part 2, with the explanation continuing in part 3."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [
+    {
+      "category": "suppression or deletion of active or historical meaning",
+      "evidence": "The active github-write-is-pending state is not shown as pending persistence. Instead, the header shows \"Remote persistence: not reported\" and the Persistence status panel shows \"Remote persistence status has not been reported.\" The pending state appears only as an obligation item.",
+      "viewports": [
+        "1440x900",
+        "1180x820",
+        "820x1180",
+        "390x844"
+      ]
+    }
+  ],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of3.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png",
+    "trace/00.jpg"
+  ]
+}

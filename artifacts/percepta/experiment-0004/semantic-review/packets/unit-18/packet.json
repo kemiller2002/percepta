@@ -1,0 +1,55 @@
+{
+  "reviewUnit": "unit-18",
+  "candidate": "Candidate R",
+  "heldOutState": {
+    "name": "held-out-01",
+    "predicates": [
+      "hypothesis-is-falsified",
+      "blocking-unknown-exists"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "semanticObligations": [
+    "falsified hypothesis remains visibly represented",
+    "falsified status is non-color",
+    "blocking unknown is visible",
+    "confirmation is unavailable",
+    "unavailability has a visible reason",
+    "user can navigate from unavailable confirmation to blocking information",
+    "falsification does not erase unrelated blocker semantics"
+  ],
+  "screenshots": {
+    "1440x900": {
+      "fullPage": "screenshot-1440x900.png",
+      "tiles": [
+        "screenshot-1440x900-part1of2.png",
+        "screenshot-1440x900-part2of2.png"
+      ]
+    },
+    "1180x820": {
+      "fullPage": "screenshot-1180x820.png",
+      "tiles": [
+        "screenshot-1180x820-part1of2.png",
+        "screenshot-1180x820-part2of2.png"
+      ]
+    },
+    "820x1180": {
+      "fullPage": "screenshot-820x1180.png",
+      "tiles": [
+        "screenshot-820x1180-part1of2.png",
+        "screenshot-820x1180-part2of2.png"
+      ]
+    },
+    "390x844": {
+      "fullPage": "screenshot-390x844.png",
+      "tiles": [
+        "screenshot-390x844-part1of4.png",
+        "screenshot-390x844-part2of4.png",
+        "screenshot-390x844-part3of4.png",
+        "screenshot-390x844-part4of4.png"
+      ]
+    }
+  }
+}

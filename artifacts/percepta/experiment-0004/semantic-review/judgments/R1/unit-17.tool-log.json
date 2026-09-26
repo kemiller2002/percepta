@@ -1,0 +1,81 @@
+[
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/INSTRUCTIONS.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/packet.json"
+    }
+  },
+  {
+    "tool": "Glob",
+    "input": {
+      "pattern": "**/*",
+      "path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/screenshot-1440x900.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/rendered-text-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/aria-snapshot-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/operation-trace-1440x900.json"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/screenshot-1180x820.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/screenshot-820x1180.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/screenshot-390x844.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/screenshot-390x844-part1of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-17/screenshot-390x844-part2of2.png"
+    }
+  },
+  {
+    "tool": "SubagentHandback",
+    "input": {
+      "message": "{\"reviewUnit\":\"unit-17\",\"candidate\":\"Candidate M\",\"reviewer\":\"R1\",\"obligations\":[{\"obligation\":\"confirmation remains unavailable because capability authority is illegal\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"Actions card: 'Confirm root cause' button is visibly greyed and marked [disabled] in the aria snapshot. The operation trace is empty, so no enabled control could be clicked. Adjacent visible text: 'Unavailable: the supplied capability is illegal in the current domain state.'\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"The greyed 'Confirm root cause' button and the 'Unavailable: ... illegal ...' note are fully visible in the right column.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"The greyed button and the unavailability note are visible and not clipped in the right column.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"In the single-column layout, the Actions card shows the greyed button and the full note (part2 tile).\"}}},{\"obligation\":\"UI does not invent a blocking unknown that was not supplied\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"The 'Unresolved unknowns' card has only a generic 'UNKNOWN' tag with the text 'No opposite fact is inferred from information that has not been supplied.' It names no specific unknown and does not present anything as blocking confirmation. The only stated reason for unavailability is capability illegality.\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Same generic text. No blocking unknown is shown.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Same generic text. No blocking unknown is shown.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Same generic text. No blocking unknown is shown.\"}}},{\"obligation\":\"UI does not fabricate a domain-specific reason unsupported by active predicates\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"The reason is generic: 'the supplied capability is illegal in the current domain state'. No domain cause is invented. 'Source: recorded system observation. No additional domain facts have been supplied.'\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Same generic reason text.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Same generic reason text.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Same generic reason text.\"}}},{\"obligation\":\"unavailability is still communicated without overriding capability authority\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"Visible status note 'Unavailable: the supplied capability is illegal in the current domain state.' and the 'LEGALITY' line 'Availability follows the supplied capability map, not UI inference.' The button stays disabled, which is consistent with 'illegal'.\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Both notes are visible and legible.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Both notes are visible and legible.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Both notes are visible in the part2 tile. Nothing is clipped.\"}}}],\"forbiddenOrFabricatedMeaning\":[],\"filesExamined\":[\"INSTRUCTIONS.md\",\"packet.json\",\"screenshot-1440x900.png\",\"screenshot-1180x820.png\",\"screenshot-820x1180.png\",\"screenshot-390x844.png\",\"screenshot-390x844-part1of2.png\",\"screenshot-390x844-part2of2.png\",\"aria-snapshot-1440x900.txt\",\"rendered-text-1440x900.txt\",\"operation-trace-1440x900.json\"]}"
+    }
+  }
+]
