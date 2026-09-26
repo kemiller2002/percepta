@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kemiller2002/percepta/schemas/percepta-experiment-run.schema.json",
+  "title": "Percepta sealed experiment run record",
+  "description": "PCT-036 / DF-PERCEPTA-2026-0001. Who ran one lane, evaluator, or reviewer run of a Percepta experiment, and in which execution. Stored ONLY at artifacts/percepta/experiment-NNNN/runs/<run>.json, written after the first-pass freeze and sealed until the deterministic evidence has been hashed. Never placed in lane-visible inputs, lane outputs, or reviewer bundles. Self-reported provenance: it never changes evidence status, completion, or scoring, and it is never shown to blinded reviewers. The embedded record is the Praxis provenance interchange record, unchanged.",
+  "$comment": "The $defs actor, contribution and provenanceRecord are vendored from kemiller2002/praxis @ b32677d3d26b512f4816d9ba5662c9484d15fad2 (schemas/provenance-actor.schema.json, schemas/artifact-provenance.schema.json, schemas/provenance-record.schema.json), with cross-file $refs rewritten to local #/$defs pointers. Do not change their meaning here; re-vendor instead.",
+  "type": "object",
+  "required": ["contract", "version", "experiment", "run", "role", "sealing", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "contract": { "const": "percepta.experiment-run" },
+    "version": {
+      "description": "Semantic version of this Percepta run-record contract.",
+      "type": "string",
+      "pattern": "^1\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "experiment": { "type": "string", "pattern": "^EX-PERCEPTA-[0-9]{4}-[0-9]{4}$" },
+    "run": {
+      "description": "The run's name inside the experiment, e.g. lane-control-a, evaluator-deterministic, reviewer-1. Also the file name (<run>.json).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-][A-Za-z0-9._-]*$"
+    },
+    "role": { "enum": ["lane", "evaluator", "reviewer"] },
+    "sealing": {
+      "description": "Proof of ordering: the record was written after the first-pass freeze commit, and the deterministic evidence manifest named here was hashed before the record existed. The manifest never lists run records.",
+      "type": "object",
+      "required": ["firstPassFreezeCommit", "deterministicEvidenceManifest"],
+      "additionalProperties": false,
+      "properties": {
+        "firstPassFreezeCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "deterministicEvidenceManifest": {
+          "type": "object",
+          "required": ["path", "sha256"],
+          "additionalProperties": false,
+          "properties": {
+            "path": { "type": "string", "pattern": "^artifacts/percepta/experiment-[0-9]{4}/[^\\s]+$" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "description": "A Praxis provenance interchange record (major version 1) whose subject is percepta:<experiment>/runs/<run>, with exactly one contribution keyed by the run's execution: ROS_EXECUTION_ID when Praxis propagated one, else EXE-percepta.<run-key>.",
+      "allOf": [
+        { "$ref": "#/$defs/provenanceRecord" },
+        {
+          "type": "object",
+          "required": ["subject"],
+          "properties": {
+            "version": { "type": "string", "pattern": "^1\\." },
+            "contributions": { "type": "object", "propertyNames": { "pattern": "^EXE-[A-Za-z0-9._-]+$" } }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "actor": {
+      "$comment": "praxis schemas/provenance-actor.schema.json",
+      "type": "object",
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "type": "string", "pattern": "^(agent|human|automation|unknown|x-[a-z0-9][a-z0-9-]*)$" },
+        "id": { "type": "string", "minLength": 1 },
+        "provider": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "runtime": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "agent" } } },
+          "then": { "required": ["provider", "model", "runtime"] }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "contribution": {
+      "$comment": "praxis schemas/artifact-provenance.schema.json#/$defs/contribution",
+      "type": "object",
+      "required": ["operations", "at", "actor"],
+      "properties": {
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^(created|modified|reviewed|approved|superseded|migrated|x-[a-z0-9][a-z0-9-]*)$" }
+        },
+        "at": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,9})?Z$" },
+        "last": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,9})?Z$" },
+        "actor": { "$ref": "#/$defs/actor" },
+        "reason": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": true
+    },
+    "reference": {
+      "$comment": "praxis schemas/provenance-record.schema.json#/$defs/reference",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\s]+$"
+    },
+    "provenanceRecord": {
+      "$comment": "praxis schemas/provenance-record.schema.json",
+      "type": "object",
+      "required": ["contract", "version", "contributions"],
+      "properties": {
+        "contract": { "const": "praxis.provenance-record" },
+        "version": { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" },
+        "subject": { "$ref": "#/$defs/reference" },
+        "contributions": {
+          "type": "object",
+          "propertyNames": { "pattern": "^(EXE|CTB)-[A-Za-z0-9._-]+$" },
+          "additionalProperties": { "$ref": "#/$defs/contribution" }
+        },
+        "derivedFrom": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/reference" } },
+        "sources": {
+          "type": "object",
+          "propertyNames": { "$ref": "#/$defs/reference" },
+          "additionalProperties": { "$ref": "#/$defs/provenanceRecord" }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

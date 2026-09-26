@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "confidence": "medium",
+    "created": "2026-09-26",
+    "decision_type": "architecture",
+    "id": "DF-PERCEPTA-2026-0001",
+    "path": "research/decisions/DF-PERCEPTA-2026-0001--experiment-run-provenance.md",
+    "related_documents": [
+      "requirements/PERCEPTA-CONTRACTS.md",
+      "schemas/percepta-experiment-run.schema.json",
+      "docs/experiment-run-provenance.md"
+    ],
+    "research_area": "percepta-verification",
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "tags": [
+      "provenance",
+      "experiments",
+      "blinding"
+    ],
+    "title": "Future Percepta experiments record sealed run provenance outside every lane and reviewer view"
+  }
+]
