@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "os": "Ubuntu 24.04.4 LTS",
+  "kernel": "6.18.44-fc-v37",
+  "arch": "x86_64",
+  "dotnetSdk": "10.0.112 [/usr/lib/dotnet/sdk]",
+  "dotnetRuntimes": [
+    "Microsoft.AspNetCore.App 10.0.12 [/usr/lib/dotnet/shared/Microsoft.AspNetCore.App]",
+    "Microsoft.NETCore.App 8.0.31 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]",
+    "Microsoft.NETCore.App 10.0.12 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]"
+  ],
+  "dotnetSource": "Ubuntu archive packages dotnet-sdk-10.0 (10.0.112-0ubuntu1~24.04.1) and dotnet-runtime-8.0; Microsoft download hosts blocked by network policy",
+  "repoGlobalJsonPin": "10.0.401 rollForward latestPatch (unsatisfiable with available SDK; build run from a cwd outside the repo so global.json was not consulted; file not modified)",
+  "buildCommand": "cd $SCRATCH && dotnet build /home/user/percepta/src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --artifacts-path $SCRATCH/build",
+  "buildResult": "Build succeeded, 0 warnings, 0 errors (TreatWarningsAsErrors=true)",
+  "cliAssemblySha256": {
+    "FSharp.Core.dll": "39b0b7f06c11bedd93f94b6f101fffd645f1c4437a5a6d3ee79259f855aeb11a",
+    "Microsoft.Bcl.AsyncInterfaces.dll": "5705d245072d3eb78400547b32147dbb6e2c8b02ba8bda76729798f5efdeaecb",
+    "Microsoft.Playwright.dll": "7e55d0c8a1b76ecf1b94477acec749f89e84a1747b857624ea0e5e57b69b6947",
+    "Percepta.Adapter.Playwright.dll": "8dd46c25c41d7f3c691b56fcc2bd8f21d9ee4d8fb9a811407f11e99570955379",
+    "Percepta.Cli.dll": "1bf0dc3c6b4bcd085c5d6007899c937cb5671456ed060213ffc84852932ad24b",
+    "Percepta.Core.dll": "0eea70639e17239a3403c530f83148be6daaaa63f6111d600500309e8a2c72cb"
+  },
+  "microsoftPlaywrightNuGet": "1.63.0 (Directory.Packages.props)",
+  "playwrightExpectedBrowser": "chromium-headless-shell revision 1243 (Chrome for Testing 153.0.8010.12)",
+  "browserUsed": {
+    "path": "/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell",
+    "revision": "1194",
+    "version": "Chromium 141.0.7390.37",
+    "mechanism": "PLAYWRIGHT_BROWSERS_PATH=$SCRATCH/pw-browsers containing chromium_headless_shell-1243/chrome-headless-shell-linux64 as a symlink tree to the preinstalled revision-1194 headless shell"
+  },
+  "browserInstallAttempt": "dotnet Percepta.Cli.dll install-browser -> exit 1: Failed to download Chrome for Testing 153.0.8010.12 (network policy)",
+  "doctor": "Contract OK; Browser OK: Playwright Chromium launched successfully.",
+  "headless": true,
+  "servingMechanism": "verifier built-in file:// target (--url <absolute staged path>), same as EX-0002 workflow form",
+  "node": "v22.22.2",
+  "python": "3.11.15"
+}

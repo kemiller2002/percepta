@@ -1,0 +1,5 @@
+candidate	branch	provider	condition	exitCode	complete	requiredPassed	requiredTotal	contract-validation	structural	state-projection	interaction	accessibility	responsive	visual-regression	semantic-visual-review
+candidate-01	experiment/percepta-0003-openai-treatment-a	openai	treatment	0	true	6	6	Passed	Passed	Passed	Passed	Passed	Passed	Unavailable	Unavailable
+candidate-02	experiment/percepta-0003-openai-control-a	openai	control	0	true	6	6	Passed	Passed	Passed	Passed	Passed	Passed	Unavailable	Unavailable
+candidate-03	experiment/percepta-0003-claude-control-b	claude	control	0	true	6	6	Passed	Passed	Passed	Passed	Passed	Passed	Unavailable	Unavailable
+candidate-04	experiment/percepta-0003-claude-treatment-b	claude	treatment	0	true	6	6	Passed	Passed	Passed	Passed	Passed	Passed	Unavailable	Unavailable

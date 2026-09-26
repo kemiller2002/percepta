@@ -1,0 +1,31 @@
+{
+  "candidate": "candidate-02",
+  "stagedPath": "/tmp/claude-0/-home-user-percepta/ba0e27fe-1290-5974-9075-014ec1441ac7/scratchpad/staging/candidate-02/index.html",
+  "stagedSha256Before": "36783fdb584dd8a209ef873a2c5cf4000cb7778235907ec03763e43aa094bcf5",
+  "stagedSha256After": "36783fdb584dd8a209ef873a2c5cf4000cb7778235907ec03763e43aa094bcf5",
+  "sourceSha256": "36783fdb584dd8a209ef873a2c5cf4000cb7778235907ec03763e43aa094bcf5",
+  "byteIdenticalBefore": true,
+  "byteIdenticalAfter": true,
+  "command": [
+    "dotnet",
+    "$SCRATCH/build/bin/Percepta.Cli/release/Percepta.Cli.dll",
+    "verify",
+    "--contract",
+    ".percepta/contracts/indy-init-investigation-workspace.json",
+    "--url",
+    "$SCRATCH/staging/candidate-02/index.html",
+    "--fixture",
+    "tests/fixtures/indy-init/blocked.json",
+    "--fixture",
+    "tests/fixtures/indy-init/legal.json",
+    "--out",
+    "artifacts/percepta/experiment-0003/candidate-02/evidence.json",
+    "--screenshots",
+    "artifacts/percepta/experiment-0003/candidate-02/screenshots"
+  ],
+  "cwd": "<repo root at frozen baseline>",
+  "startedAtUtc": "2026-09-25T16:11:22.606436+00:00",
+  "finishedAtUtc": "2026-09-25T16:11:24.871707+00:00",
+  "exitCode": 0,
+  "complete": true
+}

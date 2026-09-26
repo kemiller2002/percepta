@@ -7,6 +7,7 @@ open Percepta.Core
 open Percepta.Core.Compilation
 open Percepta.Core.Evidence
 open Percepta.Adapter.Playwright
+open Aegis
 
 module Cli =
 
@@ -518,21 +519,54 @@ module Cli =
         printfn "  percepta doctor [--contract path]"
         printfn "  percepta install-browser"
 
-[<EntryPoint>]
-let main argv =
+let private execute argv =
     let root = Cli.findRepositoryRoot (Directory.GetCurrentDirectory())
     let args = argv |> Array.toList
 
-    try
-        match args with
-        | "compile" :: rest -> Cli.compileCommand root rest
-        | "verify" :: rest -> Cli.verifyCommand root rest |> fun task -> task.GetAwaiter().GetResult()
-        | "status" :: rest -> Cli.statusCommand root rest
-        | "doctor" :: rest -> Cli.doctorCommand root rest |> fun task -> task.GetAwaiter().GetResult()
-        | [ "install-browser" ] -> BrowserVerification.installChromium ()
-        | _ ->
-            Cli.usage ()
-            1
-    with ex ->
-        eprintfn "Percepta failed: %s" ex.Message
+    match args with
+    | "compile" :: rest -> Cli.compileCommand root rest
+    | "verify" :: rest -> Cli.verifyCommand root rest |> fun task -> task.GetAwaiter().GetResult()
+    | "status" :: rest -> Cli.statusCommand root rest
+    | "doctor" :: rest -> Cli.doctorCommand root rest |> fun task -> task.GetAwaiter().GetResult()
+    | [ "install-browser" ] -> BrowserVerification.installChromium ()
+    | _ ->
+        Cli.usage ()
+        1
+
+[<EntryPoint>]
+let main argv =
+    let version =
+        System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
+        |> Option.ofObj
+        |> Option.map string
+
+    let config = Aegis.configure "Percepta.Cli" version [ Sinks.console ]
+
+    match Bootstrap.validate None config with
+    | Result.Error problems ->
+        for problem in problems do
+            let _, message = Bootstrap.describe problem
+            eprintfn "Aegis configuration error: %s" message
+
         10
+    | Ok validated ->
+        let scope = Aegis.scope validated "Percepta.Cli.Main" Map.empty
+
+        let classify scope ex =
+            Aegis.faultOf
+                validated
+                scope
+                (FaultCode "PERCEPTA.CLI.UNHANDLED")
+                UnknownFailure
+                FaultSeverity.Error
+                DegradedApplication
+                RequiresIntervention
+                ManualIntervention
+                "Percepta encountered an unexpected operational failure."
+                ex
+
+        match Aegis.capture validated scope classify (fun () -> execute argv) with
+        | Ok exitCode -> exitCode
+        | Result.Error fault ->
+            eprintfn "%s Reference %s" fault.UserMessage fault.Id.Value
+            10

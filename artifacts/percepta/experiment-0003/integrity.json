@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "experiment": "EX-PERCEPTA-2026-0003",
+  "frozenBaselineSha": "ca2fdd3c5657a9617ebc5dff854fc0f362e07ced",
+  "frozenBaselineSubject": "EX-PERCEPTA-2026-0003 register replication",
+  "inputs": {
+    "canonicalContract": {
+      "path": ".percepta/contracts/indy-init-investigation-workspace.json",
+      "gitBlobSha": "2017a2eab551551cb59bc6ab525defd525024bbb",
+      "sha256": "265a8d05f6f7c3f14938819a18e3d3e6f239f03865b88b18784dab4af7b2516d"
+    },
+    "blockedFixture": {
+      "path": "tests/fixtures/indy-init/blocked.json",
+      "gitBlobSha": "73c98276f0d9ac7eb9b73a2f08246cd36964df3d",
+      "sha256": "690221af229b8e71cfe5e422a14b78dfd0f7b683134ed1de5d19f13a9438b6f9"
+    },
+    "legalFixture": {
+      "path": "tests/fixtures/indy-init/legal.json",
+      "gitBlobSha": "98623599a8c969f1264bd3afa7ef0d9c924ad2ba",
+      "sha256": "0f0972e56cfd1acd8d3d6e0da44517846d7ababe24e0e8c49a0828e5b7db22ec"
+    },
+    "runtimeProtocol": {
+      "path": "research/experiments/EX-PERCEPTA-2026-0003/frozen-runtime-protocol.md",
+      "gitBlobSha": "4f59375e795990d4d1e9554e533d5df3cecc1192",
+      "sha256": "4021436a3ec2b0d33d0b6199e17bdb6ff60241101e8e94626479faa58bc0d52a"
+    },
+    "productBrief": {
+      "path": "research/experiments/EX-PERCEPTA-2026-0003/frozen-product-brief.md",
+      "gitBlobSha": "451536ad2984c91eda409346cdfeb9b45ee2b33e",
+      "sha256": "5fdf30f96be45dcefedf7e5c314b6ab3d4ae3a7b9b8eaee3b09561fe0b77e3c0"
+    },
+    "preregistration": {
+      "path": "research/experiments/EX-PERCEPTA-2026-0003--runtime-protocol-controlled-replication.md",
+      "gitBlobSha": "b14a1208dc2f5eb779e08523b8d148eca86882c4",
+      "sha256": "0cded6715fb160d9004213dcf39d193f7b1b01bb2265af3c06514de9493fa354"
+    }
+  },
+  "evaluator": {
+    "sourceTrees": {
+      "src/Percepta.Core": "177dd2cca6b16eae16c8d255a2b9ccce8c64f14d",
+      "src/Percepta.Adapter.Playwright": "f0da65d470c85ea6a8888f7e0381c5dc2b28d84b",
+      "src/Percepta.Cli": "fac34afdfd3fa93e5bd6e59dfea3f43697ce47eb"
+    },
+    "files": {
+      "Directory.Packages.props": "805a787c7d9a5a121cf829b292a45f87c308a191",
+      "global.json": "f3e8020d097667b57900f47affb3440e22f9ad08"
+    },
+    "sourceCommit": "ca2fdd3c5657a9617ebc5dff854fc0f362e07ced"
+  },
+  "lanes": [
+    {
+      "branch": "experiment/percepta-0003-openai-control-a",
+      "lane": "control-a",
+      "headCommit": "32a4c42209f438f4c95764f92c307d4074a172e3",
+      "parentCommit": "ca2fdd3c5657a9617ebc5dff854fc0f362e07ced",
+      "commitsAheadOfBaseline": 1,
+      "commitsBehindBaseline": 0,
+      "commitSubject": "EX-PERCEPTA-2026-0003 OpenAI control A first-pass implementation",
+      "commitAuthor": "Claude <noreply@anthropic.com>",
+      "commitDate": "2026-09-25T04:44:06+00:00",
+      "changedFiles": [
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/NOTES.md"
+        },
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/index.html"
+        }
+      ],
+      "indexHtml": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/index.html",
+        "gitBlobSha": "e4b3eb41e37fd7f6df545cc67eaabdc3e67886bd",
+        "sha256": "36783fdb584dd8a209ef873a2c5cf4000cb7778235907ec03763e43aa094bcf5",
+        "bytes": 34236
+      },
+      "notesMd": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/NOTES.md",
+        "gitBlobSha": "0fc3d9d775c47083b355d7021142c1aaddfeee2d",
+        "sha256": "5d0a49cee41a98f5b3a50d58d24edaf1500a3b831402eadea81f6340f21d6881"
+      },
+      "checks": {
+        "exactlyOneCommitAhead": true,
+        "zeroCommitsBehind": true,
+        "parentIsBaseline": true,
+        "changesExactlyAssignedIndexAndNotes": true,
+        "experimentalInputsUnmodified": true
+      },
+      "integrityPassed": true
+    },
+    {
+      "branch": "experiment/percepta-0003-openai-treatment-a",
+      "lane": "treatment-a",
+      "headCommit": "bab9f6263dc23f289eb3dc8aeb3083b05aff0da5",
+      "parentCommit": "ca2fdd3c5657a9617ebc5dff854fc0f362e07ced",
+      "commitsAheadOfBaseline": 1,
+      "commitsBehindBaseline": 0,
+      "commitSubject": "EX-PERCEPTA-2026-0003 OpenAI treatment A first-pass implementation",
+      "commitAuthor": "Kevin Miller <kemiller2002@gmail.com>",
+      "commitDate": "2026-09-25T09:20:01+02:00",
+      "changedFiles": [
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/NOTES.md"
+        },
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/index.html"
+        }
+      ],
+      "indexHtml": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/index.html",
+        "gitBlobSha": "737bed94c6b6f2561fd9f80acf03d5a7b22cbc0a",
+        "sha256": "1cd8311afccb3be0ff5c491840106bc174155cd530fbe1bd290ed9a1ba0db1ec",
+        "bytes": 12202
+      },
+      "notesMd": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/NOTES.md",
+        "gitBlobSha": "82ee455862222f3f169d987e81b2a59fe95c4a70",
+        "sha256": "43bca5e6dafbd0c03211875ca282c0efe7749a664d6aecf1eff238ebe1d45ac4"
+      },
+      "checks": {
+        "exactlyOneCommitAhead": true,
+        "zeroCommitsBehind": true,
+        "parentIsBaseline": true,
+        "changesExactlyAssignedIndexAndNotes": true,
+        "experimentalInputsUnmodified": true
+      },
+      "integrityPassed": true
+    },
+    {
+      "branch": "experiment/percepta-0003-claude-control-b",
+      "lane": "control-b",
+      "headCommit": "6b9c1d669454e88d0a10e51098be8f3ac236d885",
+      "parentCommit": "ca2fdd3c5657a9617ebc5dff854fc0f362e07ced",
+      "commitsAheadOfBaseline": 1,
+      "commitsBehindBaseline": 0,
+      "commitSubject": "EX-PERCEPTA-2026-0003 Claude control B first-pass implementation",
+      "commitAuthor": "Claude <noreply@anthropic.com>",
+      "commitDate": "2026-09-25T07:28:03+00:00",
+      "changedFiles": [
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-b/NOTES.md"
+        },
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-b/index.html"
+        }
+      ],
+      "indexHtml": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-b/index.html",
+        "gitBlobSha": "e472b9794c90736b42252d3fa53e22240e10ec57",
+        "sha256": "4d79652f9e9efa751b6ef4874cd3d25eaff8dea7977dba1951db8b338a1b89ea",
+        "bytes": 36186
+      },
+      "notesMd": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-b/NOTES.md",
+        "gitBlobSha": "cacc0a030be3be68840b638c8ee9e99c95b610ad",
+        "sha256": "7908e1e2d6914a335a27af0833dbd4f360fd7b1a5bb4159eb05e76ebfe74579c"
+      },
+      "checks": {
+        "exactlyOneCommitAhead": true,
+        "zeroCommitsBehind": true,
+        "parentIsBaseline": true,
+        "changesExactlyAssignedIndexAndNotes": true,
+        "experimentalInputsUnmodified": true
+      },
+      "integrityPassed": true
+    },
+    {
+      "branch": "experiment/percepta-0003-claude-treatment-b",
+      "lane": "treatment-b",
+      "headCommit": "c33098c62404d6aca384e8b6411b390189dcf3da",
+      "parentCommit": "ca2fdd3c5657a9617ebc5dff854fc0f362e07ced",
+      "commitsAheadOfBaseline": 1,
+      "commitsBehindBaseline": 0,
+      "commitSubject": "EX-PERCEPTA-2026-0003 Claude treatment B first-pass implementation",
+      "commitAuthor": "Claude <noreply@anthropic.com>",
+      "commitDate": "2026-09-25T15:25:50+00:00",
+      "changedFiles": [
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/NOTES.md"
+        },
+        {
+          "status": "A",
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/index.html"
+        }
+      ],
+      "indexHtml": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/index.html",
+        "gitBlobSha": "63c05e3eb2dde8eaae04df6c8a6f2f7dc74d7a40",
+        "sha256": "797b28748f36f2e3ff4f885f98da0cd205f01fa6f4417d865f45a7e01824c779",
+        "bytes": 43157
+      },
+      "notesMd": {
+        "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/NOTES.md",
+        "gitBlobSha": "de8b6ab4c8730ffc9a296da927e121231407d306",
+        "sha256": "c30a8d96cf3cfbc75797d08aab56879bdf6cf593a24a78a0ca8a6f77bacb2c9d"
+      },
+      "checks": {
+        "exactlyOneCommitAhead": true,
+        "zeroCommitsBehind": true,
+        "parentIsBaseline": true,
+        "changesExactlyAssignedIndexAndNotes": true,
+        "experimentalInputsUnmodified": true
+      },
+      "integrityPassed": true
+    }
+  ],
+  "allLanesPassIntegrity": true
+}

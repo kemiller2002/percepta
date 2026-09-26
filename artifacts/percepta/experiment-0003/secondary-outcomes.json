@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "experiment": "EX-PERCEPTA-2026-0003",
+  "requiredFailedAndUnavailable": {
+    "candidate-01": {
+      "failed": 0,
+      "unavailable": 0
+    },
+    "candidate-02": {
+      "failed": 0,
+      "unavailable": 0
+    },
+    "candidate-03": {
+      "failed": 0,
+      "unavailable": 0
+    },
+    "candidate-04": {
+      "failed": 0,
+      "unavailable": 0
+    }
+  },
+  "perLaneRequiredPassCount": {
+    "candidate-01": "6/6",
+    "candidate-02": "6/6",
+    "candidate-03": "6/6",
+    "candidate-04": "6/6"
+  },
+  "stateProjectionFailures": {
+    "candidate-01": [],
+    "candidate-02": [],
+    "candidate-03": [],
+    "candidate-04": []
+  },
+  "interactionCapabilityFailures": {
+    "candidate-01": [],
+    "candidate-02": [],
+    "candidate-03": [],
+    "candidate-04": []
+  },
+  "responsiveFailures": {
+    "candidate-01": [],
+    "candidate-02": [],
+    "candidate-03": [],
+    "candidate-04": []
+  },
+  "optionalEvidence": {
+    "candidate-01": {
+      "visual-regression": {
+        "status": "Unavailable",
+        "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+      },
+      "semantic-visual-review": {
+        "status": "Unavailable",
+        "reason": "No semantic visual review evidence was supplied."
+      }
+    },
+    "candidate-02": {
+      "visual-regression": {
+        "status": "Unavailable",
+        "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+      },
+      "semantic-visual-review": {
+        "status": "Unavailable",
+        "reason": "No semantic visual review evidence was supplied."
+      }
+    },
+    "candidate-03": {
+      "visual-regression": {
+        "status": "Unavailable",
+        "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+      },
+      "semantic-visual-review": {
+        "status": "Unavailable",
+        "reason": "No semantic visual review evidence was supplied."
+      }
+    },
+    "candidate-04": {
+      "visual-regression": {
+        "status": "Unavailable",
+        "reason": "No baseline exists for 'ipad-portrait'. | No baseline exists for 'ipad-landscape'. | No baseline exists for 'narrow-phone'. | No baseline exists for 'desktop-reference'."
+      },
+      "semantic-visual-review": {
+        "status": "Unavailable",
+        "reason": "No semantic visual review evidence was supplied."
+      }
+    }
+  },
+  "changedFilesAndChurn": {
+    "candidate-01": {
+      "changedFileCount": 2,
+      "linesAdded": 68,
+      "linesDeleted": 0,
+      "files": [
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/NOTES.md",
+          "added": 35,
+          "deleted": 0
+        },
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-a/index.html",
+          "added": 33,
+          "deleted": 0
+        }
+      ]
+    },
+    "candidate-02": {
+      "changedFileCount": 2,
+      "linesAdded": 753,
+      "linesDeleted": 0,
+      "files": [
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/NOTES.md",
+          "added": 54,
+          "deleted": 0
+        },
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-a/index.html",
+          "added": 699,
+          "deleted": 0
+        }
+      ]
+    },
+    "candidate-03": {
+      "changedFileCount": 2,
+      "linesAdded": 759,
+      "linesDeleted": 0,
+      "files": [
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-b/NOTES.md",
+          "added": 77,
+          "deleted": 0
+        },
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/control-b/index.html",
+          "added": 682,
+          "deleted": 0
+        }
+      ]
+    },
+    "candidate-04": {
+      "changedFileCount": 2,
+      "linesAdded": 889,
+      "linesDeleted": 0,
+      "files": [
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/NOTES.md",
+          "added": 108,
+          "deleted": 0
+        },
+        {
+          "path": "research/experiments/EX-PERCEPTA-2026-0003/lanes/treatment-b/index.html",
+          "added": 781,
+          "deleted": 0
+        }
+      ]
+    }
+  },
+  "providerStratified": {
+    "openai": {
+      "control": {
+        "candidate": "candidate-02",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "treatment": {
+        "candidate": "candidate-01",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "descriptiveDifference": "no difference: both lanes complete with all required categories Passed"
+    },
+    "claude": {
+      "control": {
+        "candidate": "candidate-03",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "treatment": {
+        "candidate": "candidate-04",
+        "complete": true,
+        "requiredPassed": 6,
+        "requiredTotal": 6,
+        "exitCode": 0
+      },
+      "descriptiveDifference": "no difference: both lanes complete with all required categories Passed"
+    }
+  },
+  "implementationDiversity": {
+    "reviewPerformed": true,
+    "reviewInputs": "16 full-page screenshots (4 candidates x 4 viewports, blocked fixture state), relabeled Screen-W..Z with a second random key; no provider, condition, branch, pass/fail, NOTES.md or source given",
+    "reviewLabelToCandidate": {
+      "Screen-W": "candidate-03",
+      "Screen-X": "candidate-04",
+      "Screen-Y": "candidate-01",
+      "Screen-Z": "candidate-02"
+    },
+    "pairVerdicts": {
+      "W-X": "materially-different",
+      "W-Y": "materially-different",
+      "W-Z": "materially-different",
+      "X-Y": "not-materially-different",
+      "X-Z": "materially-different",
+      "Y-Z": "materially-different"
+    },
+    "treatmentPair": {
+      "labels": "X-Y",
+      "verdict": "not-materially-different"
+    },
+    "reviewerNotes": "Only the 16 PNGs were viewed. Each screen was judged at all four viewports. The X-Y verdict is the closest call: the desktop and landscape topology is essentially the same, and the differences show up in tablet-portrait and phone ordering and in per-hypothesis action buttons. A stricter reader could call X-Y materially different on those grounds. W and Z share a header pattern (summary line and chip nav) and a 3-column desktop grid, but their column-to-region mapping differs. None of the screens showed visibly sticky elements in these full-page captures. For W and Z no weakened hypothesis was visible (W's header says '0 weakened'). This is noted as visibility only, not graded. The four screens show different scenario content (different hypotheses and evidence text), which was ignored for the layout verdicts."
+  },
+  "correctiveIterationsAfterFreeze": 0
+}

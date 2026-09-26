@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="FSharp.Core" />
+    <PackageReference Include="EchelonFoundry.Aegis.Core" />
   </ItemGroup>
 
   <ItemGroup>
