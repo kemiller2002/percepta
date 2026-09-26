@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investigation Workspace</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --ink: #1b1f24;
+    --muted: #57606a;
+    --line: #d0d7de;
+    --accent: #0b5cad;
+    --warn-bg: #fff4d6;
+    --warn-line: #b7791f;
+    --bad-bg: #fde8e8;
+    --bad-line: #b42318;
+    --ok-bg: #e6f4ea;
+    --ok-line: #1e7a34;
+    --info-bg: #e8f1fb;
+    --info-line: #0b5cad;
+    --neutral-bg: #eef0f3;
+    --neutral-line: #6e7781;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    overflow-wrap: anywhere;
+  }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 8px; top: 8px; background: #fff; padding: 6px 10px; z-index: 10; }
+  header.top {
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 16px;
+  }
+  header.top h1 { margin: 0 0 4px; font-size: 1.3rem; }
+  header.top p { margin: 0; color: var(--muted); }
+  nav.jump { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: .9rem; }
+  nav.jump a { color: var(--accent); }
+  main {
+    display: grid;
+    gap: 12px;
+    padding: 12px 16px 32px;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  @media (min-width: 800px) {
+    main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .wide { grid-column: 1 / -1; }
+  }
+  @media (min-width: 1300px) {
+    main { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  section.region {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    min-width: 0;
+  }
+  section.region > h2 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
+  }
+  .count { font-size: .8rem; color: var(--muted); font-weight: normal; }
+  .hint { margin: 0 0 8px; color: var(--muted); font-size: .88rem; }
+  ul.items { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  ul.items > li {
+    border: 1px solid var(--line);
+    border-left-width: 5px;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: #fff;
+  }
+  li.tone-bad { border-left-color: var(--bad-line); background: var(--bad-bg); }
+  li.tone-warn { border-left-color: var(--warn-line); background: var(--warn-bg); }
+  li.tone-ok { border-left-color: var(--ok-line); background: var(--ok-bg); }
+  li.tone-info { border-left-color: var(--info-line); background: var(--info-bg); }
+  li.tone-neutral { border-left-color: var(--neutral-line); background: var(--neutral-bg); }
+  li.historical { opacity: .85; border-style: dashed; }
+  .badge {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 0 5px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .item-title { font-weight: 600; }
+  .item-meta { color: var(--muted); font-size: .85rem; margin-top: 2px; }
+  code { font-size: .85em; background: rgba(0,0,0,.05); padding: 0 3px; border-radius: 3px; }
+  .empty { color: var(--muted); font-style: italic; margin: 0; }
+  dl.facts { margin: 0; display: grid; grid-template-columns: minmax(0, max-content) minmax(0, 1fr); gap: 4px 12px; }
+  dl.facts dt { font-weight: 600; }
+  dl.facts dd { margin: 0; }
+  .action {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    display: grid;
+    gap: 6px;
+  }
+  .action button {
+    font: inherit;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    justify-self: start;
+    max-width: 100%;
+    text-align: left;
+  }
+  .action button[aria-disabled="true"] {
+    background: #fff;
+    color: var(--muted);
+    border: 1px dashed var(--neutral-line);
+    cursor: not-allowed;
+  }
+  .action button:focus-visible, a:focus-visible { outline: 3px solid #f0a500; outline-offset: 2px; }
+  .why { font-size: .88rem; }
+  .why ul { margin: 4px 0 0; padding-left: 18px; }
+  .persist-grid { display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 600px) { .persist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .persist-card { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; }
+  .persist-card h3 { margin: 0 0 4px; font-size: .95rem; }
+  .summary-strip { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0 0; padding: 0; list-style: none; font-size: .88rem; }
+  .flash { animation: flash 1.2s ease-out; }
+  @keyframes flash { from { box-shadow: 0 0 0 3px #f0a500; } to { box-shadow: 0 0 0 0 transparent; } }
+  @media (prefers-reduced-motion: reduce) { .flash { animation: none; outline: 3px solid #f0a500; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#region-legal-actions">Skip to actions</a>
+<header class="top">
+  <h1>Investigation Workspace</h1>
+  <p>Working record for an observed failure. Explanations stay open until evidence and verification settle them; nothing here is inferred beyond what the runtime reports.</p>
+  <ul class="summary-strip" id="summary-strip" aria-live="polite"></ul>
+  <nav class="jump" aria-label="Workspace areas">
+    <a href="#region-observation">Observation</a>
+    <a href="#region-hypotheses">Hypotheses</a>
+    <a href="#region-contradictions">Contradictions</a>
+    <a href="#region-unknowns">Unknowns</a>
+    <a href="#region-obligations">Obligations</a>
+    <a href="#region-evidence">Evidence</a>
+    <a href="#region-legal-actions">Actions</a>
+    <a href="#region-persistence-state">Persistence</a>
+  </nav>
+</header>
+<main id="workspace"></main>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------- Pure helpers ----------
+
+  const escapeHtml = (value) =>
+    String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  const humanize = (name) => {
+    const words = String(name).replace(/[_\-.:/]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").trim();
+    return words ? words.charAt(0).toUpperCase() + words.slice(1) : String(name);
+  };
+
+  const slug = (name) => String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "x";
+
+  const matches = (patterns) => (name) => patterns.some((p) => p.test(name));
+
+  const uniq = (xs) => xs.filter((x, i) => xs.indexOf(x) === i);
+
+  // ---------- Baseline case file (static facts of the scenario) ----------
+
+  const CASE = Object.freeze({
+    observation: Object.freeze({
+      summary: "Checkout requests intermittently fail with HTTP 502 responses.",
+      source: "Production alert: gateway error-rate monitor",
+      reportedBy: "On-call alerting pipeline",
+      scope: "Observed failure; no cause has been established by this record.",
+    }),
+    hypotheses: Object.freeze([
+      Object.freeze({ key: "h1", title: "Upstream payment service timeouts", note: "Gateway gives up waiting on the payment dependency." }),
+      Object.freeze({ key: "h2", title: "Connection pool exhaustion at the gateway", note: "Gateway cannot open new upstream connections under load." }),
+      Object.freeze({ key: "h3", title: "Faulty recent configuration deployment", note: "A config change altered routing or timeouts." }),
+    ]),
+  });
+
+  // ---------- Predicate classification (product interpretation of opaque names) ----------
+
+  const CATEGORY_RULES = Object.freeze([
+    ["persistence", [/persist/i, /\bsav(e|ed|ing)\b/i, /unsaved/i, /\bsync/i, /remote/i, /\blocal/i, /dirty/i, /draft/i, /upload/i, /stored/i, /write.?fail/i]],
+    ["contradictions", [/contradict/i, /conflict/i, /inconsisten/i, /disagree/i, /mismatch/i]],
+    ["unknowns", [/unknown/i, /missing/i, /uncertain/i, /unverified/i, /unconfirmed/i, /ambiguous/i, /\bgap/i, /undetermined/i, /insufficient/i, /incomplete/i]],
+    ["obligations", [/obligation/i, /verif/i, /\btodo\b/i, /required/i, /\bmust\b/i, /follow.?up/i, /remediat/i, /pending/i, /outstanding/i, /unresolved/i, /awaiting/i, /mitigat/i, /corrective/i, /fix/i]],
+    ["hypotheses", [/hypothes/i, /explanation/i, /cause/i, /candidate/i, /conver/i, /falsif/i, /refut/i, /weaken/i, /theory/i, /suspect/i]],
+    ["evidence", [/evidence/i, /\blog/i, /trace/i, /metric/i, /signal/i, /finding/i, /support/i, /corroborat/i]],
+    ["observation", [/trigger/i, /observ/i, /incident/i, /alert/i, /symptom/i, /report/i, /failure/i]],
+  ]);
+
+  const classify = (name) => {
+    const found = CATEGORY_RULES.find(([, patterns]) => matches(patterns)(name));
+    return found ? found[0] : "other";
+  };
+
+  // Status wording derived from the predicate's own words. Never numeric.
+  const STATUS_RULES = Object.freeze([
+    [[/falsif/i, /refut/i, /ruled.?out/i, /rejected/i, /eliminat/i, /disproven/i], { label: "Falsified", tone: "bad", note: "Retained in the record: it was considered and is now contradicted." }],
+    [[/weaken/i, /undermin/i, /doubt/i, /challeng/i], { label: "Weakened", tone: "warn", note: "Still viable, but evidence counts against it." }],
+    [[/contradict/i, /conflict/i, /inconsisten/i, /mismatch/i, /disagree/i], { label: "Conflict", tone: "bad", note: "Evidence or claims do not agree." }],
+    [[/unsaved/i, /dirty/i, /not.?persist/i, /unpersist/i, /local.?only/i, /fail/i, /error/i, /stale/i, /diverg/i, /draft/i], { label: "Attention", tone: "warn", note: "" }],
+    [[/unknown/i, /missing/i, /uncertain/i, /unverified/i, /unconfirmed/i, /ambiguous/i, /undetermined/i, /insufficient/i, /incomplete/i], { label: "Unknown", tone: "warn", note: "Not established. May block actions that depend on it." }],
+    [[/pending/i, /outstanding/i, /required/i, /awaiting/i, /unresolved/i, /open/i, /verif/i, /todo/i], { label: "Open", tone: "info", note: "Work still required." }],
+    [[/confirm/i, /support/i, /corroborat/i, /verified/i, /persisted/i, /saved/i, /synced/i, /resolved/i, /complete/i], { label: "Reported", tone: "ok", note: "" }],
+  ]);
+
+  const statusOf = (name) => {
+    const found = STATUS_RULES.find(([patterns]) => matches(patterns)(name));
+    return found ? found[1] : { label: "Active", tone: "neutral", note: "" };
+  };
+
+  // Which hypothesis (if any) does a predicate name reference?
+  const hypothesisRef = (name) => {
+    const m = /(?:^|[^a-z0-9])(?:h|hyp|hypothesis)[-_ ]?([0-9]+)(?![0-9])/i.exec(name);
+    return m ? "h" + m[1] : null;
+  };
+
+  // ---------- State normalization ----------
+
+  const normalizeState = (raw) => {
+    const obj = raw && typeof raw === "object" ? raw : {};
+    const predicates = Array.isArray(obj.predicates)
+      ? uniq(obj.predicates.filter((p) => typeof p === "string" && p.length > 0))
+      : [];
+    const capsIn = obj.capabilities && typeof obj.capabilities === "object" ? obj.capabilities : {};
+    const capabilities = Object.freeze(
+      Object.fromEntries(
+        Object.entries(capsIn).filter(([, v]) => v === "legal" || v === "illegal")
+      )
+    );
+    return Object.freeze({ predicates: Object.freeze(predicates), capabilities });
+  };
+
+  const predicateItem = (name, index, seenBefore) =>
+    Object.freeze({
+      name,
+      id: "pred-" + index + "-" + slug(name),
+      category: classify(name),
+      status: statusOf(name),
+      hypothesis: hypothesisRef(name),
+      active: true,
+      seenBefore,
+    });
+
+  const deriveModel = (state, history, localLog) => {
+    const items = state.predicates.map((p, i) => predicateItem(p, i, history.includes(p)));
+    const byCategory = (cat) => items.filter((it) => it.category === cat);
+    const historical = history
+      .filter((p) => !state.predicates.includes(p))
+      .map((p, i) =>
+        Object.freeze({ name: p, id: "hist-" + i + "-" + slug(p), category: classify(p), status: statusOf(p), hypothesis: hypothesisRef(p), active: false })
+      );
+    return Object.freeze({
+      state,
+      items,
+      historical,
+      localLog,
+      observation: byCategory("observation"),
+      hypotheses: byCategory("hypotheses"),
+      contradictions: byCategory("contradictions"),
+      unknowns: byCategory("unknowns"),
+      obligations: byCategory("obligations"),
+      evidence: byCategory("evidence"),
+      persistence: byCategory("persistence"),
+      other: byCategory("other"),
+    });
+  };
+
+  // ---------- View fragments (pure: model -> HTML string) ----------
+
+  const badge = (status) => `<span class="badge">${escapeHtml(status.label)}</span>`;
+
+  const itemHtml = (it) => `
+    <li id="${escapeHtml(it.id)}" class="tone-${it.active ? it.status.tone : "neutral"}${it.active ? "" : " historical"}" tabindex="-1">
+      ${it.active ? badge(it.status) : `<span class="badge">No longer active</span>`}
+      <span class="item-title">${escapeHtml(humanize(it.name))}</span>
+      <div class="item-meta">Predicate <code>${escapeHtml(it.name)}</code>${
+        it.active ? (it.status.note ? " — " + escapeHtml(it.status.note) : "") :
+        " — previously reported; kept for the historical record."
+      }</div>
+    </li>`;
+
+  const listOr = (items, emptyText) =>
+    items.length ? `<ul class="items">${items.map(itemHtml).join("")}</ul>` : `<p class="empty">${escapeHtml(emptyText)}</p>`;
+
+  const INSTRUMENTED = Object.freeze(["observation", "hypotheses", "contradictions", "unknowns", "obligations", "evidence", "legal-actions", "persistence-state"]);
+
+  const region = (key, title, body, opts = {}) => `
+    <section class="region${opts.wide ? " wide" : ""}" id="region-${key}"${INSTRUMENTED.includes(key) ? ` data-percepta-region="${key}"` : ""} aria-labelledby="h-${key}">
+      <h2 id="h-${key}">${escapeHtml(title)}${opts.count !== undefined ? ` <span class="count">(${opts.count} active)</span>` : ""}</h2>
+      ${opts.hint ? `<p class="hint">${escapeHtml(opts.hint)}</p>` : ""}
+      ${body}
+    </section>`;
+
+  const observationView = (m) =>
+    region("observation", "Triggering observation", `
+      <dl class="facts">
+        <dt>Observed</dt><dd>${escapeHtml(CASE.observation.summary)}</dd>
+        <dt>Source</dt><dd>${escapeHtml(CASE.observation.source)}</dd>
+        <dt>Reported by</dt><dd>${escapeHtml(CASE.observation.reportedBy)}</dd>
+        <dt>Scope</dt><dd>${escapeHtml(CASE.observation.scope)}</dd>
+      </dl>
+      ${m.observation.length ? `<h3 class="hint" style="margin-top:10px">Runtime-reported observation state</h3>${listOr(m.observation, "")}` : ""}
+    `, { wide: true });
+
+  const hypothesisStatusFor = (m, key) => {
+    const related = m.hypotheses.concat(m.contradictions, m.evidence).filter((it) => it.hypothesis === key);
+    const statuses = related.map((it) => it.status);
+    const pick = (label) => statuses.find((s) => s.label === label);
+    const status = pick("Falsified") || pick("Weakened") || pick("Conflict") || pick("Reported") || null;
+    return { related, status };
+  };
+
+  const hypothesesView = (m) => {
+    const unlinked = m.hypotheses.filter((it) => !it.hypothesis || !CASE.hypotheses.some((h) => h.key === it.hypothesis));
+    const hist = m.historical.filter((it) => it.category === "hypotheses");
+    const cards = CASE.hypotheses.map((h) => {
+      const { related, status } = hypothesisStatusFor(m, h.key);
+      const shown = status || { label: "Viable — open", tone: "neutral", note: "" };
+      return `
+        <li id="hyp-${h.key}" class="tone-${shown.tone}" tabindex="-1">
+          ${badge(shown)}<span class="item-title">${escapeHtml(h.key.toUpperCase())}: ${escapeHtml(h.title)}</span>
+          <div class="item-meta">${escapeHtml(h.note)}</div>
+          ${related.length ? `<div class="item-meta">Linked state: ${related.map((r) => `<a href="#${escapeHtml(r.id)}">${escapeHtml(humanize(r.name))}</a>`).join(", ")}</div>` : `<div class="item-meta">No runtime state references this explanation; it has not been ruled in or out.</div>`}
+        </li>`;
+    }).join("");
+    const viable = CASE.hypotheses.filter((h) => { const s = hypothesisStatusFor(m, h.key).status; return !s || s.label !== "Falsified"; }).length;
+    return region("hypotheses", "Competing hypotheses", `
+      <p class="hint">${viable} of ${CASE.hypotheses.length} listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned.</p>
+      <ul class="items">${cards}</ul>
+      ${unlinked.length ? `<h3 class="hint" style="margin-top:10px">Other hypothesis state reported</h3>${listOr(unlinked, "")}` : ""}
+      ${hist.length ? `<h3 class="hint" style="margin-top:10px">Previously reported hypothesis state</h3>${listOr(hist, "")}` : ""}
+    `, { count: m.hypotheses.length });
+  };
+
+  const simpleRegion = (key, title, hint, emptyText) => (m) => {
+    const hist = m.historical.filter((it) => it.category === key);
+    return region(key, title, `
+      ${listOr(m[key], emptyText)}
+      ${hist.length ? `<h3 class="hint" style="margin-top:10px">Previously reported</h3>${listOr(hist, "")}` : ""}
+    `, { hint, count: m[key].length });
+  };
+
+  const contradictionsView = simpleRegion("contradictions", "Contradictions",
+    "Evidence that conflicts with an explanation or with other evidence.", "No contradictions are reported as active.");
+  const unknownsView = simpleRegion("unknowns", "Unresolved unknowns",
+    "Information not yet established. Unknowns can block actions.", "No unknowns are reported as active.");
+  const obligationsView = simpleRegion("obligations", "Outstanding obligations",
+    "Work that must still be done, including verification after a corrective action.", "No obligations are reported as active.");
+
+  const evidenceView = (m) => {
+    const hist = m.historical.filter((it) => it.category === "evidence");
+    const rows = m.evidence.map((it) => {
+      const h = it.hypothesis && CASE.hypotheses.find((x) => x.key === it.hypothesis);
+      return Object.freeze({ ...it, link: h });
+    });
+    const body = rows.length
+      ? `<ul class="items">${rows.map((it) => `
+          <li id="${escapeHtml(it.id)}" class="tone-${it.status.tone}" tabindex="-1">
+            ${badge(it.status)}<span class="item-title">${escapeHtml(humanize(it.name))}</span>
+            <div class="item-meta">Predicate <code>${escapeHtml(it.name)}</code></div>
+            <div class="item-meta">Relates to: ${it.link ? `<a href="#hyp-${it.link.key}">${escapeHtml(it.link.key.toUpperCase())} ${escapeHtml(it.link.title)}</a>` : "no specific explanation identified"}</div>
+          </li>`).join("")}</ul>`
+      : `<p class="empty">No evidence state is reported as active.</p>`;
+    return region("evidence", "Evidence", `${body}
+      ${hist.length ? `<h3 class="hint" style="margin-top:10px">Previously reported</h3>${listOr(hist, "")}` : ""}`,
+      { hint: "Evidence and the explanation it bears on.", count: m.evidence.length });
+  };
+
+  const CAPABILITY_LABELS = Object.freeze({ "confirm-root-cause": "Confirm root cause" });
+  const capabilityLabel = (cap) => CAPABILITY_LABELS[cap] || humanize(cap);
+
+  const blockersFor = (m) => m.unknowns.concat(m.contradictions, m.obligations, m.persistence.filter((p) => p.status.tone !== "ok"));
+
+  const actionHtml = (m) => ([cap, legality], index) => {
+    const id = "act-" + index + "-" + slug(cap);
+    const label = capabilityLabel(cap);
+    const legal = legality === "legal";
+    const blockers = blockersFor(m);
+    const reason = legality === "illegal"
+      ? `<div class="why" id="${id}-why"><strong>Unavailable:</strong> the runtime marks this action as not permitted in the current state.
+          ${blockers.length
+            ? `Active conditions that may be blocking it:<ul>${blockers.map((b) => `<li><a href="#${escapeHtml(b.id)}" data-focus="${escapeHtml(b.id)}">${escapeHtml(humanize(b.name))}</a> (${escapeHtml(b.category)})</li>`).join("")}</ul>`
+            : " No specific blocking condition is reported."}
+        </div>`
+      : legality === "legal"
+        ? `<div class="why" id="${id}-why"><strong>Available</strong> in the current state.${cap === "confirm-root-cause" && blockers.length ? ` Note: ${blockers.length} open condition(s) remain; review them before confirming.` : ""}</div>`
+        : `<div class="why" id="${id}-why"><strong>Legality not supplied</strong> by the runtime; treated as unavailable until reported.</div>`;
+    return `
+      <div class="action">
+        <button type="button" id="${id}" data-percepta-capability="${escapeHtml(cap)}" data-cap="${escapeHtml(cap)}"
+          aria-disabled="${legal ? "false" : "true"}" aria-describedby="${id}-why">${legal ? "" : "Unavailable: "}${escapeHtml(label)}</button>
+        ${reason}
+      </div>`;
+  };
+
+  const actionsView = (m) => {
+    const entries = Object.entries(m.state.capabilities);
+    const withConfirm = entries.some(([c]) => c === "confirm-root-cause") ? entries : entries.concat([["confirm-root-cause", undefined]]);
+    const legalCount = entries.filter(([, v]) => v === "legal").length;
+    return region("legal-actions", "Actions", `
+      <p class="hint">${legalCount} available, ${withConfirm.length - legalCount} unavailable. Availability comes from the runtime and is not overridden here.</p>
+      <div style="display:grid;gap:8px">${withConfirm.map(actionHtml(m)).join("")}</div>
+    `, { wide: false });
+  };
+
+  const persistenceView = (m) => {
+    const local = m.localLog;
+    const hist = m.historical.filter((it) => it.category === "persistence");
+    return region("persistence-state", "Persistence status", `
+      <div class="persist-grid">
+        <div class="persist-card">
+          <h3>Local work in this page</h3>
+          ${local.length
+            ? `<p style="margin:0">${local.length} action(s) recorded locally in this browser session. <strong>Local only</strong> — recording here does not mean it was saved remotely.</p>
+               <ul>${local.map((e) => `<li>${escapeHtml(e)}</li>`).join("")}</ul>`
+            : `<p class="empty">No local actions recorded in this page.</p>`}
+        </div>
+        <div class="persist-card">
+          <h3>Remote persistence (runtime-reported)</h3>
+          ${m.persistence.length ? listOr(m.persistence, "") : `<p class="empty">Remote persistence status has not been reported. Do not assume work is saved.</p>`}
+        </div>
+      </div>
+      ${hist.length ? `<h3 class="hint" style="margin-top:10px">Previously reported</h3>${listOr(hist, "")}` : ""}
+    `, { wide: true });
+  };
+
+  const otherView = (m) =>
+    m.other.length
+      ? region("other-state", "Other reported state", listOr(m.other, ""), { hint: "Active predicates that do not map to a specific area.", count: m.other.length })
+      : "";
+
+  const summaryHtml = (m) => {
+    const viable = CASE.hypotheses.filter((h) => { const s = hypothesisStatusFor(m, h.key).status; return !s || s.label !== "Falsified"; }).length;
+    const legal = Object.values(m.state.capabilities).filter((v) => v === "legal").length;
+    return [
+      `Viable explanations: ${viable}`,
+      `Contradictions: ${m.contradictions.length}`,
+      `Unknowns: ${m.unknowns.length}`,
+      `Obligations: ${m.obligations.length}`,
+      `Actions available: ${legal}`,
+      `Remote persistence: ${m.persistence.length ? m.persistence.map((p) => humanize(p.name)).join("; ") : "not reported"}`,
+    ].map((t) => `<li>${escapeHtml(t)}</li>`).join("");
+  };
+
+  const workspaceHtml = (m) =>
+    [observationView, hypothesesView, contradictionsView, unknownsView, obligationsView, evidenceView, actionsView, persistenceView, otherView]
+      .map((view) => view(m))
+      .join("");
+
+  // ---------- Effects (single mutable cell + render) ----------
+
+  const store = { state: normalizeState({}), history: Object.freeze([]), localLog: Object.freeze([]) };
+
+  const render = () => {
+    const model = deriveModel(store.state, store.history, store.localLog);
+    document.getElementById("workspace").innerHTML = workspaceHtml(model);
+    document.getElementById("summary-strip").innerHTML = summaryHtml(model);
+  };
+
+  const setState = (raw) => {
+    const next = normalizeState(raw);
+    store.history = Object.freeze(uniq(store.history.concat(store.state.predicates)));
+    store.state = next;
+    render();
+    return true;
+  };
+
+  document.addEventListener("click", (ev) => {
+    const btn = ev.target.closest && ev.target.closest("button[data-cap]");
+    if (btn) {
+      const cap = btn.getAttribute("data-cap");
+      if (store.state.capabilities[cap] !== "legal") {
+        ev.preventDefault();
+        const why = document.getElementById(btn.getAttribute("aria-describedby"));
+        if (why) { why.classList.remove("flash"); void why.offsetWidth; why.classList.add("flash"); }
+        return;
+      }
+      store.localLog = Object.freeze(store.localLog.concat([capabilityLabel(cap) + " — requested locally (not confirmed persisted)"]));
+      render();
+      return;
+    }
+    const link = ev.target.closest && ev.target.closest("a[data-focus]");
+    if (link) {
+      const target = document.getElementById(link.getAttribute("data-focus"));
+      if (target) { ev.preventDefault(); target.scrollIntoView({ block: "center" }); target.focus(); target.classList.remove("flash"); void target.offsetWidth; target.classList.add("flash"); }
+    }
+  });
+
+  window.__perceptaSetState = setState;
+  render();
+})();
+</script>
+</body>
+</html>
