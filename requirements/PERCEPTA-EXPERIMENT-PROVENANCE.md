@@ -2,6 +2,7 @@
 id: PERCEPTA-EXPERIMENT-PROVENANCE
 title: Provenance and blinding for future Percepta experiments
 status: accepted
+version: 1.2.0
 created: 2026-09-26
 updated: 2026-09-26
 requirements: [PCT-036, PCT-037, PCT-038, PCT-039, PCT-040, PCT-041, PCT-042, PCT-043]
@@ -157,6 +158,13 @@ The check SHALL exclude the frozen experiments listed in PCT-041 by directory
 name before opening any file, so that it never reads frozen or held-out
 material, and SHALL ignore `sealed/**` and `evaluator/**`.
 
+A directory is a frozen experiment only when its name equals a frozen id
+exactly (ordinal, case-sensitive) or is a frozen id followed by the `--` slug
+separator (`EX-PERCEPTA-2026-0004--held-out-semantic-generalization`). A name
+that merely starts with a frozen id, such as
+`EX-PERCEPTA-2026-0003-replication` or `EX-PERCEPTA-2026-00031`, is a new
+experiment and SHALL be scanned.
+
 ## Repository policy and templates
 
 Percepta's `ros.json` declares `rosVersion` 3.4.0. That ROS release predates
@@ -187,6 +195,15 @@ ROS-managed files pinned by `.ros/installation.json`; editing them makes
 | PCT-038 | RQ-ROS-2026-A019, DF-ROS-2026-A037 | `tests/Percepta.Core.Tests/ExperimentBlinding.fs` | Percepta.Core.Tests: leakage checks on synthetic bundles and on future bundles on disk |
 | PCT-039 | RQ-ROS-2026-A010, RQ-ROS-2026-A019 | `templates/research/EXPERIMENT-PROVENANCE-CHECKLIST.md` | protocol review |
 | PCT-040 | DF-ROS-2026-A037 | `templates/research/EXPERIMENT-PROVENANCE-CHECKLIST.md` | freeze manifest review |
-| PCT-041 | DF-ROS-2026-A036 (legacy data) | `ExperimentBlinding.frozenExperiments` | Percepta.Core.Tests: frozen bundles excluded before any file is opened; `git diff --stat` on frozen paths |
+| PCT-041 | DF-ROS-2026-A036 (legacy data) | `ExperimentBlinding.frozenExperiments`, `ExperimentBlinding.isFrozen` | Percepta.Core.Tests: frozen bundles excluded before any file is opened; names that only share a frozen prefix are scanned; `git diff --stat` on frozen paths |
 | PCT-042 | RQ-ROS-2026-A004, RQ-ROS-2026-A005 | `templates/research/EXPERIMENT-PROVENANCE-CHECKLIST.md` | `ros provenance record` / `ros validate` |
 | PCT-043 | RQ-ROS-2026-A018 | `tests/Percepta.Core.Tests/ExperimentBlinding.fs`, `Program.fs` | `npm run test:core` |
+
+## Revision notes
+
+- **1.2.0** (2026-09-26, Praxis contract revision 1.2 review). PCT-043: the
+  frozen-bundle match was a case-insensitive `StartsWith` prefix, so a future
+  `EX-PERCEPTA-2026-0003-replication` would have been treated as frozen and
+  never scanned. It is now an exact ordinal match or a frozen id followed by
+  `--`. Regression checks cover prefix, suffix, case, and on-disk variants. No
+  frozen experiment material changed.

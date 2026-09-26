@@ -8,8 +8,9 @@ open System
 open System.IO
 open System.Text.RegularExpressions
 
-/// Existing experiments are frozen (PCT-041). Bundles whose directory name
-/// starts with one of these ids are excluded before any file is opened.
+/// Existing experiments are frozen (PCT-041). A bundle whose directory name is
+/// one of these ids, or one of them followed by the `--` slug separator, is
+/// excluded before any file is opened.
 let frozenExperiments =
     [ "EX-PERCEPTA-2026-0001"
       "EX-PERCEPTA-2026-0002"
@@ -27,9 +28,19 @@ type Leak = { Path: string; Signal: string }
 
 let private normalize (path: string) = path.Replace('\\', '/')
 
+/// Separator that joins an experiment id to a descriptive slug
+/// (`EX-PERCEPTA-2026-0004--held-out-semantic-generalization`).
+let slugSeparator = "--"
+
+/// True when the bundle is a frozen experiment: an exact, ordinal match of a
+/// frozen id, or a frozen id followed by `--` and a slug. A bare prefix is not
+/// enough, so `EX-PERCEPTA-2026-0003-replication` or `EX-PERCEPTA-2026-00031`
+/// is a new experiment and is scanned (PCT-041).
 let isFrozen (bundleName: string) =
     frozenExperiments
-    |> List.exists (fun id -> bundleName.StartsWith(id, StringComparison.OrdinalIgnoreCase))
+    |> List.exists (fun id ->
+        String.Equals(bundleName, id, StringComparison.Ordinal)
+        || bundleName.StartsWith(id + slugSeparator, StringComparison.Ordinal))
 
 /// Audience of a path relative to the bundle directory.
 let audience (bundleRelativePath: string) =

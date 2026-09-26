@@ -5,8 +5,11 @@ open Percepta.Core.Compilation
 open Percepta.Examples
 
 let mutable failures = []
+let mutable checks = 0
 
 let check name condition =
+    checks <- checks + 1
+
     if not condition then
         failures <- name :: failures
 
@@ -193,6 +196,25 @@ for frozen in ExperimentBlinding.frozenExperiments do
         (ExperimentBlinding.leaksInBundle frozen [ "lanes/treatment-b/AGENTS.md", neverRead $"{frozen}/lanes/treatment-b/AGENTS.md" ]
          |> List.isEmpty)
 
+for frozen in [ "EX-PERCEPTA-2026-0003"; "EX-PERCEPTA-2026-0004--held-out-semantic-generalization" ] do
+    check $"frozen bundle name {frozen} is frozen" (ExperimentBlinding.isFrozen frozen)
+
+for future in
+    [ "EX-PERCEPTA-2026-0003-replication"
+      "EX-PERCEPTA-2026-00031"
+      "EX-PERCEPTA-2026-0003_b"
+      "EX-PERCEPTA-2026-0003.v2"
+      "ex-percepta-2026-0003"
+      "EX-PERCEPTA-2026-0003-"
+      "EX-PERCEPTA-2026-000" ] do
+    check $"bundle {future} sharing a frozen prefix is not frozen" (not (ExperimentBlinding.isFrozen future))
+
+check
+    "a bundle sharing a frozen prefix is scanned"
+    (ExperimentBlinding.leaksInBundle "EX-PERCEPTA-2026-0003-replication" [ "review/packet.md", reader "Reviewed output from Anthropic." ]
+     |> List.isEmpty
+     |> not)
+
 let temporaryRoot =
     Path.Combine(Path.GetTempPath(), $"percepta-blinding-{Guid.NewGuid():N}")
 
@@ -206,16 +228,18 @@ try
     write "experiments/EX-PERCEPTA-2026-0100/lanes/lane-a/AGENTS.md" "# Lane A\n"
     write "experiments/EX-PERCEPTA-2026-0100/sealed/provenance-ledger.json" """{"schema":"praxis.provenance/1"}"""
     write "research/experiments/EX-PERCEPTA-2026-0101/review/packet.md" "Reviewed output from Anthropic."
+    write "experiments/EX-PERCEPTA-2026-0003-replication/review/packet.md" "Reviewed output from Anthropic."
+    write "experiments/EX-PERCEPTA-2026-0002--legacy-slug/lanes/claude/AGENTS.md" "provenance: frozen"
 
     let found = ExperimentBlinding.scanRepository temporaryRoot
 
     check
         "on-disk scan skips frozen bundle directories"
-        (ExperimentBlinding.futureBundles temporaryRoot |> List.map fst = [ "EX-PERCEPTA-2026-0100"; "EX-PERCEPTA-2026-0101" ])
+        (ExperimentBlinding.futureBundles temporaryRoot |> List.map fst = [ "EX-PERCEPTA-2026-0003-replication"; "EX-PERCEPTA-2026-0100"; "EX-PERCEPTA-2026-0101" ])
 
     check
         "on-disk scan reports only the leaking future bundle"
-        (found |> List.map (fun leak -> leak.Path) |> List.distinct = [ "EX-PERCEPTA-2026-0101/review/packet.md" ])
+        (found |> List.map (fun leak -> leak.Path) |> List.distinct = [ "EX-PERCEPTA-2026-0003-replication/review/packet.md"; "EX-PERCEPTA-2026-0101/review/packet.md" ])
 finally
     if Directory.Exists temporaryRoot then
         Directory.Delete(temporaryRoot, true)
@@ -230,7 +254,7 @@ with
         failures <- $"experiment identity leak in {leak.Path} ({leak.Signal})" :: failures
 
 if List.isEmpty failures then
-    printfn "Percepta.Core.Tests: all checks passed."
+    printfn "Percepta.Core.Tests: all %d checks passed." checks
 else
     eprintfn "Percepta.Core.Tests: %d failure(s)." failures.Length
 
