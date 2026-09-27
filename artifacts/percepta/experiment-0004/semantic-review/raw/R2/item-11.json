@@ -1,0 +1,44 @@
+{
+  "item": "item-11",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png Actions region: enabled button 'Confirm Root Cause' with badge 'Available'; rendered-evidence.json controls[0]: disabled=false, ariaDisabled='false', isConfirmRootCauseControl=true; operabilityProbes[0]: outcome='clicked', focus moved to the button after activation with no errors, matching capabilities.confirm-root-cause='legal'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "All four aria.txt files are byte-identical and each viewport screenshot shows the same enabled 'Confirm Root Cause' button with 'Available' badge (phone-390x844.full.png confirmed visually)."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png 'Contradictions' region: listitem with strong text 'Hypothesis Is Falsified' and caption 'Active runtime predicate', directly reflecting predicates=['hypothesis-is-falsified'] from state.json; also present verbatim in desktop-1440x900.aria.txt lines 16-21.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria tree and identical 'Contradictions' card content confirmed in phone-390x844.full.png."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Despite the active 'hypothesis-is-falsified' predicate, the 'Actions' region's 'Confirm Root Cause' control remains visible, enabled ('disabled': false, 'ariaDisabled': 'false') and labeled 'Available' (rendered-evidence.json confirmRootCauseControl, and desktop-1440x900.full.png), and the operability probe confirms it is actually clickable/focusable rather than merely displayed. No text anywhere in desktop-1440x900.aria.txt asserts the investigation is blocked or halted.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same enabled Actions control and absence of any 'blocked' language appear identically at every viewport."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "None: the packet's four viewport aria trees are identical, all sections referenced by the obligations have direct screenshot and accessibility-tree coverage, and the sole operability probe (for the only enabled control) is present with no errors."
+}

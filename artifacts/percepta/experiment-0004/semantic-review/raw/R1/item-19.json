@@ -1,0 +1,61 @@
+{
+  "item": "item-19",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Actions region (desktop full.png, lower right): enabled blue 'Confirm root cause' button, 'Available in the current state.', '1 available, 0 unavailable. Availability comes from the runtime and is not overridden here.' Control index 9 disabled=false, aria-disabled=false. Probe 9 (probe-009.viewport.png): click succeeded; aria diff adds 'Confirm root cause — requested locally (not confirmed persisted)'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility trees identical to desktop; phone screenshot shows the enabled button and 'Available' text."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Competing hypotheses card, 'Other hypothesis state reported' subsection: 'FALSIFIED Hypothesis is falsified — Predicate hypothesis-is-falsified — Retained in the record: it was considered and is now contradicted.' Intro text: 'Falsified explanations stay listed.' Status conveyed in text badge, not color alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same falsified entry visible in phone screenshot and in all aria trees."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Despite the FALSIFIED entry, the page shows 'Actions available: 1', 'Unknowns: 0', 'Obligations: 0', no blocker text, and the Confirm root cause button enabled and operable (probe 9). Other explanations remain shown as open; no statement that the investigation is halted.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria content at all viewports; no overflow."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "H1-H3 are labeled 'VIABLE — OPEN' and the header says 'Viable explanations: 3' / '3 of 3 listed explanations remain viable', even though the only supplied predicate is that a hypothesis is falsified and no predicate supplies viability. The page itself says 'No runtime state references this explanation', so asserting viability is unsupported; the falsified hypothesis is also detached from the listed explanations, so the count treats it as if it were not one of them.",
+      "evidence": "Header stats list and the Competing hypotheses intro paragraph plus H1-H3 badges (desktop full.png)"
+    },
+    {
+      "description": "Internal inconsistency: the heading 'Competing hypotheses (1 active)' conflicts with '3 of 3 listed explanations remain viable' and 'Viable explanations: 3'.",
+      "evidence": "Competing hypotheses heading vs intro paragraph, all viewports"
+    },
+    {
+      "description": "Minor tension: the falsified entry says it 'is now contradicted', while the Contradictions region reports '0 active'. The state supplies falsification, not a contradiction predicate.",
+      "evidence": "Falsified entry text vs Contradictions (0 active) region"
+    },
+    {
+      "description": "Specific domain content (the HTTP 502 checkout observation, alert source, H1-H3 titles and descriptions) is not in the supplied state; it appears to be fixture content.",
+      "evidence": "Triggering observation and hypothesis cards"
+    }
+  ],
+  "evidenceLimitations": "The 'Skip to actions' link was not clickable in probe 0 (timeout), probably because it is visually hidden until focused. Probes exist only for desktop. No other limitations."
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "os": "Ubuntu 24.04.4 LTS",
+  "kernel": "6.18.44-fc-v37",
+  "arch": "x86_64",
+  "dotnetSdk": "10.0.112 [/usr/lib/dotnet/sdk]",
+  "dotnetRuntimes": [
+    "Microsoft.AspNetCore.App 10.0.12 [/usr/lib/dotnet/shared/Microsoft.AspNetCore.App]",
+    "Microsoft.NETCore.App 8.0.31 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]",
+    "Microsoft.NETCore.App 10.0.12 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]"
+  ],
+  "dotnetSource": "Ubuntu archive packages dotnet-sdk-10.0 and dotnet-runtime-8.0 (same substitution as EX-0003); global.json pin 10.0.401 not satisfiable; build run from a cwd outside the repository; global.json not modified",
+  "verifierSource": "detached git worktree at f474c449c2bc84da5707bb123c36500490875869 (src/Percepta.Cli); main's later Program.fs changes deliberately NOT used",
+  "buildCommand": "cd $SCRATCH && dotnet build $SCRATCH/baseline/src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --artifacts-path $SCRATCH/build",
+  "buildResult": "Build succeeded, 0 warnings, 0 errors",
+  "cliAssemblySha256": {
+    "FSharp.Core.dll": "39b0b7f06c11bedd93f94b6f101fffd645f1c4437a5a6d3ee79259f855aeb11a",
+    "Microsoft.Playwright.dll": "7e55d0c8a1b76ecf1b94477acec749f89e84a1747b857624ea0e5e57b69b6947",
+    "Percepta.Adapter.Playwright.dll": "bc46309692d7397473cd1f17ff5c4bb83b24d443f229da1227419985345c8574",
+    "Percepta.Cli.dll": "8734eea8bf4f867293cbfd058b3166951f4bac59dd898f2b126b483017dd8692",
+    "Percepta.Core.dll": "bcb3c6445e8f3b3a76e483dc7bd2575d91245b8f815e8f9adc8afb055b025d11"
+  },
+  "verifierBrowser": {
+    "expected": "chromium-headless-shell revision 1243 (153.0.8010.12)",
+    "used": "/opt/pw-browsers/chromium_headless_shell-1194 (Chromium 141.0.7390.37) through a $SCRATCH/pw-browsers symlink tree named revision 1243",
+    "doctor": "Contract OK; Browser OK"
+  },
+  "captureRuntime": {
+    "node": "v22.22.2",
+    "playwrightNpm": "1.56.1 (global /opt/node22/lib/node_modules/playwright)",
+    "browser": "/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell",
+    "settleMsAfterSetState": 300
+  },
+  "python": "3.11.15",
+  "reviewers": {
+    "R1": "AI subagent, model alias 'opus' (Claude Opus family)",
+    "R2": "AI subagent, model alias 'sonnet' (Claude Sonnet family)",
+    "isolation": "one fresh subagent per reviewer x item; instructed to read only its packet directory"
+  }
+}

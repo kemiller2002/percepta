@@ -1,0 +1,105 @@
+{
+  "item": "item-04",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop full.png, Competing hypotheses column: H3 'Runner disk quota is exhausted during extraction' stays listed with badge '✕ Falsified — retained for the record' and text 'It stays listed so the reasoning history is preserved'. Nav link 'Hypotheses (1 falsified)'. Probe 15/18/20 land focus on H3.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility tree identical at all viewports; phone screenshot shows H3 card with falsified badge; no horizontal overflow."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Status is carried by text '✕ Falsified — retained for the record', by strikethrough of the H3 title, and by a dashed left border, not by color alone. The aria tree exposes the text 'Falsified'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same textual badge appears at every viewport."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The header badge reads '⛔ Blocked by unknown'. The 'Unresolved unknowns ⛔ Blocking' region shows the item '⛔ Blocking Which template archive digest did the failing job actually receive?' with 'Blocks: Confirm root cause'. It is visible in the first desktop viewport (tile-01).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The phone viewport shows the header badge above the fold and the blocker card further down."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Confirm root cause' button has disabled=true and aria-disabled=true (confirmRootCauseControl). It is visibly marked '✕ Unavailable', and the header reads 'Confirm root cause: unavailable'. This matches capability confirm-root-cause: illegal.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The aria tree shows the button [disabled] at all viewports."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "fail",
+      "failureType": "fabricated",
+      "evidence": "The 'Why unavailable:' box (desktop, Next actions) gives two reasons. The first, 'A blocking unknown is open: …', is supported by blocking-unknown-exists. The second, 'A hypothesis has been falsified; confirming a root cause needs an active hypothesis', and the description text 'Requires an active (not falsified) hypothesis' present falsification as a cause of illegality. The state does not supply that causal link. It also contradicts the page itself, which shows H1 and H2 as active ('Under consideration'). The reason set therefore contains a fabricated or contradictory blocker.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same reason list, including the fabricated second reason, appears at every viewport. The obligation fails for content, not layout."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Probe 14, 'Go to blocking unknown' (inside the Why unavailable box next to the disabled button): scrollY 0→261, and focus lands on the blocker li 'Blocking Which template archive digest…'. probe-014.viewport.png shows the blocker card focused with a highlight outline.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The link exists in the aria tree at all viewports and is visible in the phone screenshot."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The blocking unknown stays fully represented while H3 is falsified: the header badge 'Blocked by unknown', the region marked 'Blocking', 'Blocks: Confirm root cause', the nav label 'Unknowns (blocking)', and the first Why-unavailable reason. The falsification is presented as an additional (fabricated) reason next to the blocker and does not replace it.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical content at all viewports."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Invented blocker reason: falsification is presented as a reason confirmation is illegal ('confirming a root cause needs an active hypothesis'; 'Requires an active (not falsified) hypothesis'). The state gives no such causal link, and the claim contradicts the two hypotheses the page shows as active.",
+      "evidence": "Next actions > Why unavailable, second bullet, and the button description (desktop full.png; rendered-evidence confirmRootCauseControl.describedByText)."
+    },
+    {
+      "description": "Specific domain content not supplied by the state: three named hypotheses, evidence E1–E3 (e.g. '18 GB of a 44 GB quota'), attribution of the falsification to H3 via E3, and a second non-blocking unknown. The state only says that some hypothesis is falsified and that a blocking unknown exists.",
+      "evidence": "Competing hypotheses, Evidence and Unresolved unknowns regions (aria tree)."
+    },
+    {
+      "description": "H1 and H2 carry 'No falsification is reported in the current state'. This asserts per-hypothesis facts about which hypothesis is not falsified, which the state does not establish.",
+      "evidence": "H1/H2 cards, desktop full.png."
+    }
+  ],
+  "evidenceLimitations": "Only the desktop and phone full screenshots were viewed. The landscape and portrait judgments rely on accessibility trees identical to desktop and on no horizontal overflow. The skip link probe (0) timed out, which does not affect the obligations."
+}

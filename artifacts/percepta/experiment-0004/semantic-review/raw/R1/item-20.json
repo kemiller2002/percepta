@@ -1,0 +1,56 @@
+{
+  "item": "item-20",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png Actions card: 'Confirm Root Cause' button rendered with an 'Unavailable' badge; aria tree shows button \"Confirm Root Cause\" [disabled]; rendered-evidence controls[0] disabled=true, ariaDisabled=true, isConfirmRootCauseControl=true; no operability probes (control not executable). Adjacent text: 'Unavailable because the runtime marks this capability illegal.' matches capabilities.confirm-root-cause = illegal.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Aria trees identical to desktop at all viewports; screenshots show the disabled button, 'Unavailable' badge and the illegal-capability reason."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Unresolved unknowns region reads 'No active unknowns supplied.'; the Actions reason cites only the runtime capability ('marks this capability illegal'). The follow-on 'Review active unknowns, contradictions, obligations, and evidence for blocking context.' is generic guidance and does not assert any specific unknown exists.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same text at all viewports."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Only reason shown is 'Unavailable because the runtime marks this capability illegal.' (desktop Actions card). All sections state absence neutrally ('No active hypotheses supplied.', 'No active contradictions supplied.', 'Persistence has not been established by the supplied predicates.'); header '0 active facts · 1 capability status' matches the empty predicates. No domain reason asserted.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical content at all viewports."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Unavailability is communicated in text (badge 'Unavailable' plus the sentence 'Unavailable because the runtime marks this capability illegal.') and via the disabled state in the accessibility tree; the control stays disabled (controls[0].disabled=true) and no probe could execute it, so the illegal capability is not overridden. Note: describedByText is empty, but the reason is visibly adjacent within the same Actions container.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Badge and reason text visible and button disabled at every viewport; no horizontal overflow."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "No operability probes were recorded because the only control is disabled. The reason text is not programmatically linked to the button (describedByText empty), although it is visible and adjacent. Rendered evidence reports tiles=0 for non-desktop viewports; full-page screenshots were sufficient."
+}

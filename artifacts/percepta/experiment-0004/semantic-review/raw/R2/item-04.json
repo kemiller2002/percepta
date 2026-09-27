@@ -1,0 +1,92 @@
+{
+  "item": "item-04",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.tile-02.png: 'H3: Runner disk quota is exhausted during extraction' is shown with strikethrough title, badge 'Falsified — retained for the record', explanatory text 'Evidence E3 rules this out. It stays listed so the reasoning history is preserved; it is no longer an active candidate.', plus its Basis and Evidence lines. aria.txt line 75-87 confirms the same listitem/heading/paragraph structure is exposed to assistive tech.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "aria.txt is byte-identical across all four viewports (diff confirmed); phone-390x844.full.png shows H3 still rendered with strikethrough and the falsified badge in the stacked layout."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The H3 status is conveyed via a strikethrough heading, an explicit textual badge 'Falsified — retained for the record' (aria.txt line 77), an explanatory sentence, and a dashed border with a vertical bar treatment (desktop-1440x900.tile-02.png) -- all non-color channels in addition to any color tint.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same accessible text and strikethrough/dashed-border treatment present at phone width (phone-390x844.full.png)."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.tile-01.png shows 'Unresolved unknowns' region with a red 'Blocking' badge and a highlighted card: 'Blocking Which template archive digest did the failing job actually receive?' with explanatory text and 'Blocks: Confirm root cause'. Also surfaced in the top banner ('⛔ Blocked by unknown') and in the nav link 'Unknowns (blocking)' (aria.txt lines 6, 16, 88-97).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "phone-390x844.full.png shows the same 'Blocking' badge and card text in the stacked layout; aria.txt identical."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "confirmRootCauseControl in rendered-evidence.json: button 'Confirm root cause', disabled: true, ariaDisabled: 'true'. Visibly labeled 'Unavailable' with an x-circle icon (desktop-1440x900.tile-01.png, banner text also states 'Confirm root cause: unavailable', aria.txt line 6).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same disabled button and 'Unavailable' label rendered at phone width (phone-390x844.full.png); aria tree identical across viewports."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "describedByText on the disabled button (rendered-evidence.json controls[13]): 'Why unavailable: A blocking unknown is open: Which template archive digest did the failing job actually receive? Go to blocking unknown A hypothesis has been falsified; confirming a root cause needs an active hypothesis. Go to falsified hypothesis'. Visibly rendered as a 'Why unavailable:' list in the Next actions card (desktop-1440x900.tile-01.png).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same 'Why unavailable' list with both reasons visible in phone-390x844.full.png."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "operabilityProbes controlIndex 14 ('Go to blocking unknown', href #unknown-blocker): after click, focus lands on the li 'Blocking Which template archive digest did the failing job actually receive? ... Blocks: Confirm root cause' and hash becomes '#unknown-blocker' (probe-014.viewport.png shows the target card highlighted with a blue focus outline).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Probes are desktop-only evidence of operability per instructions; the same anchor link and target markup are present in the accessibility tree at every viewport (identical aria.txt), so the same in-page navigation is assumed to work."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The blocking unknown ('Which template archive digest...') is unrelated to H3's falsification (which was ruled out by E3 disk-usage evidence); it remains fully rendered, still labeled 'Blocking', with its own explanatory text and 'Blocks: Confirm root cause' link intact, independent of H3's falsified state (desktop-1440x900.tile-01.png; aria.txt lines 88-97). Falsifying H3 did not remove or alter the unknown's text, badge, or blocking link.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical text/structure for the unknown across all viewports per identical aria.txt files and phone screenshot."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "None material. The four per-viewport accessibility trees are byte-identical, which is corroborating (not limiting) evidence of layout preservation; visual screenshots for each viewport were also inspected to confirm the same content renders in a reflowed but complete layout."
+}

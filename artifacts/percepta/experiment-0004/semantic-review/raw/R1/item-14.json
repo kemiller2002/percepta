@@ -1,0 +1,81 @@
+{
+  "item": "item-14",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "fail",
+      "failureType": "contradictory",
+      "evidence": "State has the active predicate github-write-is-pending, but the page's dedicated persistence displays say the status is unknown. The header summary reads 'Remote persistence: not reported', and the 'Persistence status' region (desktop full.png bottom, 'Remote persistence (runtime-reported)') reads 'Remote persistence status has not been reported. Do not assume work is saved.' The only pending signal is an obligation item, 'OPEN Github write is pending — Work still required.', plus the blocker link in Actions. So the page both shows the write as pending and says remote persistence status was never reported.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "The accessibility tree is identical at every viewport. The same 'not reported' persistence text and summary appear in each screenshot, including the bottom of phone full.png."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Nothing on the page claims a save or a successful write. The Persistence region says 'Do not assume work is saved.' The obligation item 'Github write is pending' is shown as OPEN.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical accessibility tree and text at every viewport."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Scope reads 'Observed failure; no cause has been established by this record.' H1, H2 and H3 are each tagged 'VIABLE — OPEN' with the note 'it has not been ruled in or out'. There are 2 OPEN obligations, and 'Confirm root cause' is unavailable.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical accessibility tree and text at every viewport."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Outstanding obligations (2 active)' region lists 'OPEN Corrective action not verified — Predicate corrective-action-not-verified — Work still required.' It is also listed as a blocker link under Actions. Probe 11 (probe-011.viewport.png) shows that link moving focus to the obligation item.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Visible in the obligations region of every screenshot."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The button 'Unavailable: Confirm root cause' has aria-disabled=true and a dashed, muted style. Its description is 'the runtime marks this action as not permitted in the current state'. Probe 9 click timed out (not-clickable) and nothing changed. The Actions region says '0 available, 1 unavailable'. This matches confirm-root-cause: illegal.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same unavailable button and explanation appear at every viewport."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "The page says remote persistence status is 'not reported', but github-write-is-pending is an active predicate. The page presents a known pending state as unknown.",
+      "evidence": "Header summary 'Remote persistence: not reported'. Persistence status region: 'Remote persistence status has not been reported.'"
+    },
+    {
+      "description": "The hypothesis heading count contradicts its own content. The heading says '(0 active)' while the region lists 3 viable, open explanations. This is ambiguous and self-contradicting.",
+      "evidence": "Heading 'Competing hypotheses (0 active)' next to '3 of 3 listed explanations remain viable' (desktop full.png, left column)."
+    },
+    {
+      "description": "The UI links the two active predicates to the confirm action as possible blockers. It hedges this with 'may be blocking it'; the state supplies no causal link. This is a minor inferred association, not a firm claim.",
+      "evidence": "Actions region: 'Active conditions that may be blocking it: Github write is pending (obligations), Corrective action not verified (obligations)'."
+    }
+  ],
+  "evidenceLimitations": "Only hypotheses, observation and evidence content from the page itself was available, so I could not check whether the H1–H3 and observation text come from a fixture; state.json does not contain them. The 'Skip to actions' link was not clickable in probe 0. The confirm button uses aria-disabled rather than the native disabled attribute; the probe click timed out, which I took as evidence that it cannot be executed."
+}

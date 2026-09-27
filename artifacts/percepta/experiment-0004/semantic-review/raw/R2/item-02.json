@@ -1,0 +1,80 @@
+{
+  "item": "item-02",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: each of the 6 active predicates from state.json has a corresponding, labeled entry: hypothesis-is-falsified in 'Other hypothesis state reported' ('Falsified Hypothesis is falsified ... Retained in the record'), blocking-unknown-exists in 'Unresolved unknowns (1 active)', contradictions-present in 'Contradictions (1 active)', github-write-is-pending and corrective-action-not-verified and obligations-present in 'Outstanding obligations (3 active)'. desktop-1440x900.tile-01.png and tile-02.png show all of these simultaneously rendered on one page.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "aria.txt for all four viewports are byte-identical (diff shows no differences); only document height changes, confirming the same content is present at every viewport."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Actions' region (desktop-1440x900.tile-02.png) lists all five blocking conditions together in the disabled control's description without collapsing them into one: 'Blocking unknown exists (unknowns) Contradictions present (contradictions) Github write is pending (obligations) Corrective action not verified (obligations) Obligations present (obligations)' (rendered-evidence.json confirmRootCauseControl.describedByText). Each condition also keeps its own region/heading elsewhere on the page rather than being replaced by another.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria tree at all viewports means the same non-collapsed list of conditions is present."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt region 'Contradictions (1 active)' shows: 'Conflict Contradictions present Predicate contradictions-present — Evidence or claims do not agree.' Also visible in desktop-1440x900.tile-01.png. Probe 011 (operabilityProbes controlIndex 11) confirms the in-page anchor link for this predicate focuses the exact list item: 'CONFLICT Contradictions present Predicate contradictions-present — Evidence or claims do not agree.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same aria content at all viewports."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt region 'Outstanding obligations (3 active)' lists all three obligation-tagged predicates (github-write-is-pending, corrective-action-not-verified, obligations-present) with OPEN/ACTIVE badges and text; also visible in desktop-1440x900.tile-02.png. Probes 012-014 confirm each is independently navigable/focusable.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same aria content at all viewports."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt has a separate 'Persistence status' region with its own subheadings 'Local work in this page' ('No local actions recorded in this page.') and 'Remote persistence (runtime-reported)' ('Remote persistence status has not been reported. Do not assume work is saved.'). This is a distinct region from the investigation content (observation/hypotheses/contradictions/unknowns/obligations/actions) and does not claim resolution or success; visible in desktop-1440x900.tile-02.png bottom.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same aria content and same 'Persistence' nav link at all viewports."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Confirm root cause' button is aria-disabled ('ariaDisabled: true') and its operability probe (controlIndex 9) shows outcome 'not-clickable: locator.click: Timeout 2000ms exceeded', confirming it is truly unavailable, consistent with capabilities['confirm-root-cause']='illegal'. Its describedByText explains the reason and lists 5 linked blocking conditions. Probes 10-14 (controlIndex 10-14) each click one of these links and confirm focus actually lands on the named predicate's list item (e.g. probe-010: focused text 'UNKNOWN Blocking unknown exists ... Not established. May block actions that depend on it.'), demonstrating real navigation, not just a claim.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same button, same describedByText, and same anchor links present in all viewports' aria trees; probes are desktop-only evidence of operability per instructions, and the same controls are assumed to exist elsewhere given identical aria trees."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "The four viewport aria.txt files are byte-identical, so the only viewport-specific evidence available is document height/layout from the full-page screenshots; no independent per-viewport accessibility-tree check was possible beyond confirming they match desktop. Operability probes were only executed once (implicitly at the viewport used to record them, presumably desktop), so cross-viewport operability is inferred from the identical aria trees per the instructions rather than directly observed at each viewport."
+}

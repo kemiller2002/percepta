@@ -1,0 +1,85 @@
+{
+  "item": "item-13",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Header badge '⧗ GitHub write pending' (tile-01 top); nav link 'Persistence (pending)'; Persistence region (tile-02 right): 'GitHub: ⧗ Pending — Write to GitHub is pending. It has not been confirmed'. Status list 'GitHub write is pending github-write-is-pending'. Probe 7 (Persistence link) scrolls to scrollY 564 with Persistence heading in viewport. Pending is conveyed by text, not color alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Header badge, nav 'Persistence (pending)' and Persistence region visible in all full screenshots; aria trees identical to desktop."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Persistence region explicitly: 'It has not been confirmed; do not treat this work as saved remotely.' No text anywhere claims a saved/synced/successful remote write.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same text at all viewports; no success claim present."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Header badge '◌ Investigation open'; 'Investigation status ◌ Open' region with 'Not closed: ... The verification obligation remains outstanding.'; all three hypotheses 'Under consideration' with 'This is not a confirmation.'; 'Confirm root cause: unavailable'; unknown '? Open'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Open status text visible at all viewports."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Header badge '⧗ Verification outstanding'; nav 'Obligations (1)'; 'Outstanding obligations ⧗ 1 open' region with '☐ Verification required Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds.' (tile-02). Probe 13 'Go to verification obligation' lands focus on the obligation list item (scrollY 555); probe 5 'Obligations' scrolls to it.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Obligation card visible in all full screenshots; link present in aria trees."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Confirm root cause' button is disabled and aria-disabled=true (controls index 12), with visible '✕ Unavailable' label and header text 'Confirm root cause: unavailable'. Reason 'The corrective action is not yet verified' maps to predicate corrective-action-not-verified and capability confirm-root-cause=illegal. Not force-clicked by probes.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Disabled button with 'Unavailable' label and reason visible at all viewports; aria tree shows [disabled]."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Domain content not supplied by the state (predicates/capabilities only): the triggering observation (`indy init` exit 1, error log, CI source), three named hypotheses with bases, evidence items E1/E2 with support relationships, the unknown about the template cache, and the concrete verification instruction. These are presented as facts of this investigation without any state support.",
+      "evidence": "Triggering observation, Competing hypotheses, Evidence, Unresolved unknowns, Outstanding obligations regions (desktop tile-01/tile-02)."
+    },
+    {
+      "description": "Claim that a corrective action 'was applied' goes slightly beyond the predicate corrective-action-not-verified, which only asserts non-verification.",
+      "evidence": "Investigation status: 'a corrective action was applied but is not verified'; obligation note 'A corrective action has been applied but has not been verified.'"
+    },
+    {
+      "description": "Local persistence asserted without a supporting predicate.",
+      "evidence": "Persistence region: 'This device: ● Local working copy — Edits in this workspace exist locally.'"
+    },
+    {
+      "description": "Hypothesis statements 'No falsification is reported in the current state' are hedged correctly (absence does not establish the opposite); not a violation, noted only for completeness.",
+      "evidence": "H1-H3 cards."
+    }
+  ],
+  "evidenceLimitations": "'Skip to workspace' link probe was not clickable (timeout), which does not bear on any obligation. Desktop nav probes 1 (Observation) did not scroll because the target was already in view. Other viewports judged from screenshots and aria trees, which are identical to desktop."
+}

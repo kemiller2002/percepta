@@ -1,0 +1,10 @@
+{
+  "name": "held-out-02",
+  "predicates": [
+    "github-write-is-pending",
+    "corrective-action-not-verified"
+  ],
+  "capabilities": {
+    "confirm-root-cause": "illegal"
+  }
+}

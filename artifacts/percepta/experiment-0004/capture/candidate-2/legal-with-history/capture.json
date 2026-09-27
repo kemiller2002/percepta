@@ -1,0 +1,128 @@
+{
+  "candidate": "candidate-2",
+  "caseId": "legal-with-history",
+  "state": {
+    "name": "held-out-04",
+    "predicates": [
+      "hypothesis-is-falsified"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "legal"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "desktop-1440x900",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 900,
+      "horizontalOverflow": false,
+      "tiles": 1,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "landscape-1180x820",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 820,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "portrait-820x1180",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1180,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "phone-390x844",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1164,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    }
+  ],
+  "controls": [
+    {
+      "index": 0,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Confirm Root Cause",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": "false",
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": true
+    }
+  ],
+  "confirmControl": [
+    {
+      "tag": "button",
+      "visibleText": "Confirm Root Cause",
+      "ariaLabel": null,
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": "false",
+      "describedByText": "",
+      "enclosingContainerText": "Actions Confirm Root Cause Available"
+    }
+  ],
+  "probes": [
+    {
+      "controlIndex": 0,
+      "tag": "button",
+      "accessibleName": "Confirm Root Cause",
+      "isConfirmRootCauseControl": true,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Persistence",
+          "Competing hypotheses",
+          "Contradictions",
+          "Unresolved unknowns",
+          "Outstanding obligations",
+          "Evidence & relationships",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "focused": {
+          "tag": "button",
+          "text": "Confirm Root Cause"
+        },
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Persistence",
+          "Competing hypotheses",
+          "Contradictions",
+          "Unresolved unknowns",
+          "Outstanding obligations",
+          "Evidence & relationships",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": null,
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+- banner:
+  - text: Failure investigation
+  - heading "Investigation Workspace" [level=1]
+  - paragraph: What currently explains the observation, and what should be tested next?
+  - text: Investigation open
+- main:
+  - heading "Triggering observation" [level=2]
+  - strong: Observed failure under investigation
+  - text: "Source: recorded system observation. No additional domain facts have been supplied."
+  - heading "Competing hypotheses" [level=2]
+  - text: FALSIFIED
+  - strong: Candidate explanation retained for history
+  - text: Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable.
+  - heading "Evidence" [level=2]
+  - strong: Evidence record
+  - text: Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned.
+  - heading "Unresolved unknowns" [level=2]
+  - text: UNKNOWN No opposite fact is inferred from information that has not been supplied.
+  - heading "Actions" [level=2]
+  - button "Confirm root cause"
+  - text: LEGALITY Availability follows the supplied capability map, not UI inference.
+  - heading "Persistence" [level=2]
+  - text: LOCAL
+  - strong: Remote persistence not established
+  - text: No remote success is inferred from absent persistence information.

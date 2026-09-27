@@ -1,0 +1,61 @@
+{
+  "item": "item-12",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Desktop full.png Actions panel (bottom right): button 'Unavailable: Confirm root cause' in dashed styling; aria tree shows button [disabled]; rendered-evidence ariaDisabled='true'; probe index 9 outcome 'not-clickable' with no scroll/focus/aria change. Visible text: 'Unavailable: the runtime marks this action as not permitted in the current state.' ties unavailability to the runtime authority (capabilities confirm-root-cause: illegal). Summary '0 available, 1 unavailable' and banner 'Actions available: 0'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility trees identical to desktop; phone screenshot shows same disabled button and explanation."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Unknowns region: 'Unresolved unknowns (0 active)' / 'No unknowns are reported as active.'; banner 'Unknowns: 0'; action description explicitly says 'No specific blocking condition is reported.' No unknown is listed as a blocker anywhere.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria trees; phone screenshot shows same text."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The only reason given for unavailability is generic runtime authority: 'the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.' No contradiction, missing evidence, pending obligation, or other domain reason is cited; all such regions read 'No ... reported as active.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same text at all viewports."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Button remains visible with text 'Unavailable: Confirm root cause' plus bold 'Unavailable:' description (also exposed via aria-describedby); communicated by text, not color alone. Control is not operable (probe 9 not-clickable, aria-disabled=true). Panel states 'Availability comes from the runtime and is not overridden here.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "No horizontal overflow at any viewport; control and description visible on phone screenshot."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Hypotheses are asserted as 'Viable' ('Viable explanations: 3', '3 of 3 listed explanations remain viable', 'VIABLE — OPEN' badges) although the state has no predicates; absence of a falsification predicate is presented as a positive viability status. Mitigated by the per-hypothesis note 'No runtime state references this explanation; it has not been ruled in or out.' Also mildly inconsistent with heading 'Competing hypotheses (0 active)'.",
+      "evidence": "desktop-1440x900.full.png banner and Competing hypotheses panel; desktop aria tree"
+    }
+  ],
+  "evidenceLimitations": "Observation and hypothesis content (checkout HTTP 502, H1-H3) is not in state.json and appears to be fixed page content; not judged as fabricated. 'Skip to actions' link probe (index 0) timed out as not clickable (likely visually hidden until focus), which does not affect the obligations. Non-desktop viewports have only full-page screenshots (no tiles)."
+}

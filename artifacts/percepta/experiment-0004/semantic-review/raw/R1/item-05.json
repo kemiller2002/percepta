@@ -1,0 +1,105 @@
+{
+  "item": "item-05",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Desktop full.png, Competing hypotheses panel, sub-heading 'Other hypothesis state reported' with card 'FALSIFIED Hypothesis is falsified — Predicate hypothesis-is-falsified — Retained in the record: it was considered and is now contradicted.' Also present in desktop aria tree. Caveat: the card is not tied to any listed hypothesis, and the same panel says '3 of 3 listed explanations remain viable' (see fabricatedOrForbiddenMeaning).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The aria trees match desktop exactly. The phone screenshot shows the FALSIFIED card below H1-H3."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Text badge 'FALSIFIED', title 'Hypothesis is falsified', and explanatory text 'considered and is now contradicted'. The aria tree has 'Falsified Hypothesis is falsified'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The text badge appears at every viewport."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The Unresolved unknowns (1 active) panel has card 'UNKNOWN Blocking unknown exists — Predicate blocking-unknown-exists — Not established. May block actions that depend on it.' The header shows 'Unknowns: 1'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Visible on the phone screenshot. The aria trees are identical."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The button is labeled 'Unavailable: Confirm root cause' with aria-disabled='true' (native disabled=false) and has a dashed, muted style. Probe 9: the click timed out as not-clickable and the aria diff is empty. The Actions panel says '0 available, 1 unavailable'. The header says 'Actions available: 0'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same disabled button appears in every aria tree and on the phone screenshot."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Visible below the button: 'Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: • Blocking unknown exists (unknowns)'. This is also the button's describedBy text. The reason is hedged ('may be blocking') and matches the state (capability illegal, blocking-unknown-exists active).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The reason text is visible on phone."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The Actions panel has the link 'Blocking unknown exists' (#pred-1-blocking-unknown-exists). Probe 10 shows that after the click, focus moved to the li 'UNKNOWN Blocking unknown exists ... Not established. May block actions that depend on it.' probe-010.viewport.png shows that card with a focus outline in view.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The link is present in every aria tree. Operability was checked only by the desktop probe."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The falsified card and the blocking unknown appear together. The unknown keeps 'Blocking' plus 'May block actions', and it is still linked as the blocking condition on the unavailable confirm action. The falsified hypothesis is not given as the reason for the block.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Both items appear at every viewport."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Hypotheses H1-H3 are labeled 'VIABLE — OPEN', and the page claims 'Viable explanations: 3' and '3 of 3 listed explanations remain viable'. The state supplies no viability predicate for any named hypothesis, and it does report that a hypothesis is falsified. Each card also says 'No runtime state references this explanation', yet the runtime reports a falsification that is not assigned to any hypothesis. The viable labels therefore state as known something the state does not establish, and they may conflict with it.",
+      "evidence": "Desktop header list, and the Competing hypotheses panel intro and H1-H3 cards"
+    },
+    {
+      "description": "Counts are inconsistent. The heading says 'Competing hypotheses (1 active)', while the panel says 3 viable plus 1 falsified. The falsified card says 'it was considered and is now contradicted', yet the Contradictions panel reports 0 and the header says 'Contradictions: 0'.",
+      "evidence": "Competing hypotheses heading and falsified card vs. Contradictions (0 active) panel and header 'Contradictions: 0'"
+    },
+    {
+      "description": "The page invents incident content that the state does not supply: the observation (Checkout HTTP 502s, gateway monitor, on-call pipeline) and the hypothesis titles and descriptions. It does not claim the runtime supplied them, but none of it comes from the state.",
+      "evidence": "Triggering observation panel; H1-H3 cards"
+    }
+  ],
+  "evidenceLimitations": "Probe 0 ('Skip to actions') was not clickable, probably because the link is visually hidden. Only desktop has probes. The confirm control uses aria-disabled rather than native disabled. Its unavailability is inferred from the click timeout, the empty aria diff and the 'Unavailable' label."
+}

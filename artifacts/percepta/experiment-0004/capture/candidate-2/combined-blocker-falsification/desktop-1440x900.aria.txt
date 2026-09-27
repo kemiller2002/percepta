@@ -1,0 +1,39 @@
+- main:
+  - text: Failure analysis
+  - heading "Investigation Workspace" [level=1]
+  - paragraph: 2 active facts · 1 capability status
+  - text: Runtime state applied
+  - region "Triggering observation":
+    - heading "Triggering observation" [level=2]
+    - paragraph: No triggering observation predicate is active.
+  - region "Persistence":
+    - heading "Persistence" [level=2]
+    - paragraph: Persistence has not been established by the supplied predicates.
+  - region "Competing hypotheses":
+    - heading "Competing hypotheses" [level=2]
+    - list:
+      - listitem: No active hypotheses supplied.
+  - region "Contradictions":
+    - heading "Contradictions" [level=2]
+    - list:
+      - listitem:
+        - strong: Hypothesis Is Falsified
+        - text: Active runtime predicate
+  - region "Unresolved unknowns":
+    - heading "Unresolved unknowns" [level=2]
+    - list:
+      - listitem:
+        - strong: Blocking Unknown Exists
+        - text: Active runtime predicate
+  - region "Outstanding obligations":
+    - heading "Outstanding obligations" [level=2]
+    - list:
+      - listitem: No active obligations supplied.
+  - region "Evidence & relationships":
+    - heading "Evidence & relationships" [level=2]
+    - list:
+      - listitem: No active evidence supplied.
+  - region "Actions":
+    - heading "Actions" [level=2]
+    - button "Confirm Root Cause" [disabled]
+    - text: Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.

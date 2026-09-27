@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "experiment": "EX-PERCEPTA-2026-0004",
+  "baseline": "f474c449c2bc84da5707bb123c36500490875869",
+  "baselineSubject": "EX-PERCEPTA-2026-0004 register experiment",
+  "gateVerifiedAtUtc": "2026-09-27T05:03:14Z",
+  "gateVerifiedBeforeHeldOutAccess": true,
+  "frozenInputBlobs": {
+    "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md": "b74f0a475b99bca46fca1783099c467a361fa2bc",
+    "research/experiments/EX-PERCEPTA-2026-0004/frozen-product-brief.md": "f3a1571689702f7ffe26f0b02b2a9af7e4e28227",
+    "research/experiments/EX-PERCEPTA-2026-0004/frozen-runtime-protocol.md": "197038f2d1869d0eeb5cf5d9bfd2b8345d5d11ed",
+    "research/experiments/EX-PERCEPTA-2026-0004/held-out-semantic-cases.json": "b702a376bf5b8f3d33a9d348785c5b3b1c50e687",
+    ".percepta/contracts/indy-init-investigation-workspace.json": "2017a2eab551551cb59bc6ab525defd525024bbb",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/AGENTS.md": "708ea98a505312b3930c0de9b10428a69b98a1a3",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/AGENTS.md": "14403c03ed585d67b65e30104bcfa551cc88256b",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/AGENTS.md": "5c82866f99009237a093a1258a62abcf03a1c46b",
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/AGENTS.md": "4bd99043ff0d5761160ee5714bd594c030460dac"
+  },
+  "lanes": [
+    {
+      "branch": "experiment/percepta-0004-openai-control-a",
+      "lane": "control-a",
+      "provider": "openai",
+      "condition": "control",
+      "frozenCommit": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+      "commitExists": true,
+      "descendsFromBaseline": true,
+      "branchHeadAtGate": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+      "frozenCommitEqualsBranchHead": true,
+      "commitsSinceBaseline": 1,
+      "commitChain": [
+        "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1"
+      ],
+      "changedFiles": [
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/NOTES.md",
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/index.html"
+      ],
+      "changesExactlyLaneOutputs": true,
+      "indexHtmlBlob": "1e72e83747f0a95215820d3675a78c31bdc0fe63",
+      "indexHtmlSha256": "b8ea011008d4079bafd358b437cb954ed197aa1557ad4d635c0a4d3c8b481045",
+      "notesMdBlob": "e2abb5c3e082513bb2d767689edfad441195fb6b",
+      "frozenInputsBlobIdenticalToBaseline": true
+    },
+    {
+      "branch": "experiment/percepta-0004-openai-treatment-a",
+      "lane": "treatment-a",
+      "provider": "openai",
+      "condition": "treatment",
+      "frozenCommit": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+      "commitExists": true,
+      "descendsFromBaseline": true,
+      "branchHeadAtGate": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+      "frozenCommitEqualsBranchHead": true,
+      "commitsSinceBaseline": 2,
+      "commitChain": [
+        "530dc4c13bca9292e10181eff36ecf3c573e7fca",
+        "d104371f69ae4b184769e85296fd7d4c1cd85c76"
+      ],
+      "changedFiles": [
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/NOTES.md",
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/index.html"
+      ],
+      "changesExactlyLaneOutputs": true,
+      "indexHtmlBlob": "03da6c1a4283413260453e86db088fbfaf3cbb9f",
+      "indexHtmlSha256": "190736abd66a86f2248d0bed32bd202f48c98bd7a6fc2bafb5a143c0f834a4ef",
+      "notesMdBlob": "dc368958bdfcc9dec22c0b0f015721732637827d",
+      "frozenInputsBlobIdenticalToBaseline": true
+    },
+    {
+      "branch": "experiment/percepta-0004-claude-control-b",
+      "lane": "control-b",
+      "provider": "claude",
+      "condition": "control",
+      "frozenCommit": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+      "commitExists": true,
+      "descendsFromBaseline": true,
+      "branchHeadAtGate": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+      "frozenCommitEqualsBranchHead": true,
+      "commitsSinceBaseline": 1,
+      "commitChain": [
+        "6b3ef30b75aaab4812919b7f56e8085dbb0fe442"
+      ],
+      "changedFiles": [
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/NOTES.md",
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/index.html"
+      ],
+      "changesExactlyLaneOutputs": true,
+      "indexHtmlBlob": "029af4c1a053de0408478d30a495ed11d849119e",
+      "indexHtmlSha256": "51daaabb59f3988eed5180b2ea731d2c202b6ae44b3bc807f8670e4d5944b416",
+      "notesMdBlob": "1d6292c3b67645ca90b10ae1631ef1eabff1df4b",
+      "frozenInputsBlobIdenticalToBaseline": true
+    },
+    {
+      "branch": "experiment/percepta-0004-claude-treatment-b",
+      "lane": "treatment-b",
+      "provider": "claude",
+      "condition": "treatment",
+      "frozenCommit": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+      "commitExists": true,
+      "descendsFromBaseline": true,
+      "branchHeadAtGate": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+      "frozenCommitEqualsBranchHead": true,
+      "commitsSinceBaseline": 1,
+      "commitChain": [
+        "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b"
+      ],
+      "changedFiles": [
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/NOTES.md",
+        "A\tresearch/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/index.html"
+      ],
+      "changesExactlyLaneOutputs": true,
+      "indexHtmlBlob": "a2aeaedd111302c971d1bfb9a9f0b849bff60d7f",
+      "indexHtmlSha256": "d0223ea8137b4bee96dcad036a761f68b380f8bd9756f1bcc7da34c95c487bc9",
+      "notesMdBlob": "f90a71a4510ab93e257499dd207fe6e48623901a",
+      "frozenInputsBlobIdenticalToBaseline": true
+    }
+  ],
+  "excludedBranches": [
+    {
+      "branch": "experiment/percepta-0004-openai-control-b",
+      "headAtGate": "9af43e658e45f99fc7930e687ca488b19927bbf2",
+      "reason": "not one of the four preregistered candidates; excluded from all evaluation"
+    }
+  ],
+  "gatePassed": true
+}

@@ -1,0 +1,92 @@
+{
+  "item": "item-05",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.tile-02.png / aria.txt: a separate 'Other hypothesis state reported' list under the Hypotheses region contains a badge 'FALSIFIED' with text 'Hypothesis is falsified — Predicate hypothesis-is-falsified — Retained in the record: it was considered and is now contradicted.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "All four viewport aria.txt files are byte-identical to desktop, so the falsified-state text is present at every viewport."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.tile-02.png: the badge reads the literal word 'FALSIFIED' in a bordered text tag, and the accessible name/aria text also spells out 'Falsified Hypothesis is falsified', so the status is conveyed by text, not by color alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Text label is present in the identical aria tree at all viewports."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.tile-01.png / aria.txt region 'Unresolved unknowns (1 active)': badge 'UNKNOWN' with text 'Blocking unknown exists — Predicate blocking-unknown-exists — Not established. May block actions that depend on it.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria content at all viewports."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json controls[9]/confirmRootCauseControl: button 'Unavailable: Confirm root cause', ariaDisabled: 'true'; operabilityProbes controlIndex 9 outcome 'not-clickable: locator.click: Timeout 2000ms exceeded.', confirming the button is not operable. Matches capabilities.confirm-root-cause: 'illegal' in state.json.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same button and aria-disabled state present identically at all viewports."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "confirmRootCauseControl.describedByText: 'Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Blocking unknown exists (unknowns)' — visible text in the Actions region (desktop-1440x900.tile-02.png), tied to the actual active predicate blocking-unknown-exists.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical description text present at all viewports."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The Actions region's blocking-reason list contains link 'Blocking unknown exists' (href #pred-1-blocking-unknown-exists, control index 10). operabilityProbes controlIndex 10: outcome 'clicked', after.focused = {tag: 'li', text: 'UNKNOWN Blocking unknown exists Predicate blocking-unknown-exists — Not established. May block actions that depend on it.'}, i.e. focus actually lands on the unknown's list item (probe-010.viewport.png).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same link and target anchor exist identically in every viewport's aria tree; operability was probed only at desktop per instructions, but the control's presence is assumed unchanged."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Both the falsified-hypothesis entry (Other hypothesis state reported, tile-02.png) and the blocking-unknown entry (Unresolved unknowns, tile-01.png) are simultaneously present and independently described; the Actions section's blocking reason cites only 'Blocking unknown exists (unknowns)', not the falsified hypothesis, showing the two predicates are tracked separately without one overwriting the other.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria content at all viewports keeps both semantics distinct and present."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "operabilityProbes only exercised controls at desktop-1440x900; operability at the other three viewports is inferred from their identical accessibility trees rather than directly probed, per the scoring instructions. No probe screenshot is provided for controls 0 and 9 since they were not clickable (anchor jump had no visible target in view / disabled button), which is consistent with their expected states."
+}

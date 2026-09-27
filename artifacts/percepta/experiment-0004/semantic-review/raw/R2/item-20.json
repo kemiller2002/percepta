@@ -1,0 +1,56 @@
+{
+  "item": "item-20",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: button \"Confirm Root Cause\" [disabled]; rendered-evidence.json confirmRootCauseControl.disabled=true, ariaDisabled=\"true\"; enclosingContainerText: \"Confirm Root Cause Unavailable Unavailable because the runtime marks this capability illegal.\" This matches state.json capabilities.confirm-root-cause: \"illegal\".",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "All four aria.txt files show identical disabled button and identical 'Unavailable' text."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt region 'Unresolved unknowns': listitem 'No active unknowns supplied.' Matches state.json predicates: [] (no unknowns active). The stated unavailability reason cites only the supplied illegal capability, not any unknown.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical 'No active unknowns supplied.' text at all viewports."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "confirmRootCauseControl.describedByText is empty and enclosingContainerText gives only a generic capability-based reason: 'Unavailable because the runtime marks this capability illegal.' No triggering observation, persistence claim, hypothesis, contradiction, or evidence-based domain reason is asserted; all corresponding regions read 'No active ... supplied.' consistent with predicates: [].",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same generic, non-domain-specific reason text and same 'No active ... supplied.' placeholders at every viewport."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The button is rendered disabled (disabled=true, ariaDisabled=\"true\") with visible text 'Unavailable' and explanatory text referencing the illegal capability, matching state.json's capabilities.confirm-root-cause: \"illegal\" exactly; the UI neither enables the control nor claims a contrary legal status.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Disabled state and unavailability text identical across all aria trees; no viewport shows the control enabled or re-labeled as legal."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "operabilityProbes is empty because the sole visible control (Confirm Root Cause) is disabled and therefore was not force-clicked, per the packet's own protocol; this is expected given capabilities.confirm-root-cause: illegal and does not limit judgment of the stated obligations. No screenshots were separately inspected beyond aria trees and rendered-evidence.json since all text content needed for judgment was present verbatim in those files."
+}

@@ -1,0 +1,4 @@
+candidate-1 {"now":{"observations":[],"reasonFor":0,"blockerLink":0},"laterSame":true,"later":{"observations":[],"reasonFor":0,"blockerLink":0}}
+candidate-2 {"now":{"observations":[],"reasonFor":0,"blockerLink":0},"laterSame":true,"later":{"observations":[],"reasonFor":0,"blockerLink":0}}
+candidate-3 {"now":{"observations":[["blocker-visible",true],["unavailable-reason-visible",true],["blocker-navigation-available",true]],"reasonFor":1,"blockerLink":1},"laterSame":true,"later":{"observations":[["blocker-visible",true],["unavailable-reason-visible",true],["blocker-navigation-available",true]],"reasonFor":1,"blockerLink":1}}
+candidate-4 {"now":{"observations":[],"reasonFor":0,"blockerLink":0},"laterSame":true,"later":{"observations":[],"reasonFor":0,"blockerLink":0}}

@@ -1,0 +1,32 @@
+{
+  "subject": "candidate-3",
+  "run": "legal-with-history",
+  "fixtures": [
+    "legal-with-history"
+  ],
+  "stagedSha256Before": "d0223ea8137b4bee96dcad036a761f68b380f8bd9756f1bcc7da34c95c487bc9",
+  "stagedSha256After": "d0223ea8137b4bee96dcad036a761f68b380f8bd9756f1bcc7da34c95c487bc9",
+  "expectedSha256": "d0223ea8137b4bee96dcad036a761f68b380f8bd9756f1bcc7da34c95c487bc9",
+  "byteIdentical": true,
+  "command": [
+    "dotnet",
+    "$SCRATCH/build/bin/Percepta.Cli/release/Percepta.Cli.dll",
+    "verify",
+    "--contract",
+    ".percepta/contracts/indy-init-investigation-workspace.json",
+    "--url",
+    "$SCRATCH/staging/candidate-3/index.html",
+    "--fixture",
+    "$REPO/artifacts/percepta/experiment-0004/held-out-fixtures/legal-with-history.json",
+    "--out",
+    "$REPO/artifacts/percepta/experiment-0004/deterministic/candidate-3/legal-with-history/evidence.json",
+    "--screenshots",
+    "$REPO/artifacts/percepta/experiment-0004/deterministic/candidate-3/legal-with-history/screenshots"
+  ],
+  "cwd": "$SCRATCH/baseline (detached worktree at f474c449)",
+  "startedAtUtc": "2026-09-27T05:08:04.483144+00:00",
+  "finishedAtUtc": "2026-09-27T05:08:06.401108+00:00",
+  "exitCode": 3,
+  "evidencePresent": true,
+  "complete": false
+}

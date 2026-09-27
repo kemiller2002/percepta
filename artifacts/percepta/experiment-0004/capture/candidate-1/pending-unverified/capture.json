@@ -1,0 +1,93 @@
+{
+  "candidate": "candidate-1",
+  "caseId": "pending-unverified",
+  "state": {
+    "name": "held-out-02",
+    "predicates": [
+      "github-write-is-pending",
+      "corrective-action-not-verified"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "desktop-1440x900",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 924,
+      "horizontalOverflow": false,
+      "tiles": 2,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "landscape-1180x820",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 993,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "portrait-820x1180",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1180,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "phone-390x844",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1618,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    }
+  ],
+  "controls": [
+    {
+      "index": 0,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Confirm root cause",
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": true
+    },
+    {
+      "index": 1,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Go to blocking unknown",
+      "visible": false,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    }
+  ],
+  "confirmControl": [
+    {
+      "tag": "button",
+      "visibleText": "Confirm root cause",
+      "ariaLabel": null,
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "describedByText": "",
+      "enclosingContainerText": "Actions Confirm root cause Unavailable: required verification remains outstanding. LEGALITYAvailability follows the supplied capability map, not UI inference."
+    }
+  ],
+  "probes": []
+}

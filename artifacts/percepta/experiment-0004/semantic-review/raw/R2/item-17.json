@@ -1,0 +1,56 @@
+{
+  "item": "item-17",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json confirmRootCauseControl: button 'Confirm root cause' disabled=true, ariaDisabled='true'; desktop-1440x900.aria.txt line 6: 'Confirm root cause: unavailable' and line 86: button \"Confirm root cause\" [disabled]. state.json capabilities['confirm-root-cause']='illegal'. The button was not force-clicked (operabilityProbes lists no probe for controlIndex 11), consistent with it being disabled/inaccessible, matching the illegal capability.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical disabled button and 'unavailable' text present verbatim in all four .aria.txt files (line 6 and lines 86-91 in each)."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt line 91: 'The current state marks this action as not permitted. No specific blocker was reported.' No unknown/blocker entity is named; state.json predicates is an empty array, so no supplied blocker exists to reference, and none is fabricated.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same 'No specific blocker was reported' text appears verbatim in all four aria trees."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The explanation text is generic and procedural: 'The current state marks this action as not permitted.' It does not cite any domain-specific cause (e.g., a specific hypothesis being confirmed/falsified, or a named remote failure). state.json predicates=[] (no active predicates), and the copy makes no claim that references a predicate.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical generic explanation text across all viewports; no viewport adds a domain-specific reason."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt line 6 states 'Confirm root cause: unavailable' and the button itself is rendered disabled (line 86, ariaDisabled='true' in rendered-evidence.json). The enclosingContainerText in confirmRootCauseControl explicitly states: 'Availability comes from the application state; this workspace does not override it.' This communicates unavailability while deferring to (not overriding) the illegal capability from state.json.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The disabled state and unavailability text are present identically in all four aria trees."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "No probe entry exists for controlIndex 11 (the disabled 'Confirm root cause' button itself), consistent with the stated rule that disabled controls were not force-clicked; this is expected, not a gap. Screenshot images were not independently rendered by the reviewer beyond the metadata/aria text already captured, but the accessibility tree text, disabled state, and describedByText fields are congruent and sufficient to judge each obligation directly."
+}

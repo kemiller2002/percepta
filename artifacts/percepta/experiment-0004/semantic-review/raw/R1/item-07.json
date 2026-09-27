@@ -1,0 +1,97 @@
+{
+  "item": "item-07",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, middle row, 'Contradictions' card: 'Hypothesis Is Falsified' / 'Active runtime predicate' (aria: region 'Contradictions' > listitem strong 'Hypothesis Is Falsified'). Borderline: the 'Competing hypotheses' card says 'No active hypotheses supplied.', so the falsified hypothesis is shown only as a predicate label under Contradictions rather than as an entry in the hypothesis list. Still, it is visibly represented as text.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same 'Hypothesis Is Falsified' item is visible in the Contradictions card, and the aria trees are identical."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The status is conveyed by the text 'Hypothesis Is Falsified' and its placement under the 'Contradictions' heading. The red left border is supplementary.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same text label appears at every viewport."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Unresolved unknowns' card: 'Blocking Unknown Exists' / 'Active runtime predicate' (aria region 'Unresolved unknowns').",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Visible in each screenshot."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Confirm Root Cause' button is disabled (rendered-evidence controls[0]: disabled true, aria-disabled 'true'), with an adjacent 'Unavailable' badge in the Actions card. No probe was run because the control is disabled. This matches capabilities.confirm-root-cause = illegal.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The aria tree shows the button [disabled] and the 'Unavailable' badge at every viewport."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Visible text under the button in the Actions card: 'Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.' The capability map supports this reason. Note: describedByText is empty, so the reason is not programmatically associated with the button, but it is visible and sits in the same container.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The reason text is visible at all viewports and wraps on the smaller ones."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "fail",
+      "failureType": "inaccessible-operation",
+      "evidence": "The only control is the disabled 'Confirm Root Cause' button. There is no link or other control that leads to the 'Unresolved unknowns' card, and operabilityProbes is empty. The reason text only tells the user to 'Review active unknowns...'. It is not an operable navigation, so no probe shows scroll or focus reaching the blocking information.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "No navigation control exists at any viewport. On phone, the blocker card is about 350px above the Actions card and can be reached only by manual scrolling."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Hypothesis Is Falsified' (Contradictions) and 'Blocking Unknown Exists' (Unresolved unknowns) are shown together as separate, independent items, and the confirmation remains unavailable.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Both items are visible at every viewport."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Possible collapse or deletion of the falsified explanation: the 'Competing hypotheses' section says 'No active hypotheses supplied.' while a falsified hypothesis is active, so the hypothesis appears only as a predicate label under Contradictions. This is not strictly fabricated, but it could read as the hypothesis having been removed from the hypothesis list.",
+      "evidence": "desktop-1440x900.full.png, 'Competing hypotheses' card vs. 'Contradictions' card"
+    }
+  ],
+  "evidenceLimitations": "There were no operability probes because the only control is disabled. The confirm control has an empty describedByText, so the association between the reason and the button rests on visual proximity only. The desktop capture has a single tile covering the full page."
+}

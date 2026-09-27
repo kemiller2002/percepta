@@ -1,0 +1,500 @@
+{
+  "schemaVersion": 1,
+  "experiment": "EX-PERCEPTA-2026-0004",
+  "hypothesis": "HY-PERCEPTA-2026-0005",
+  "baseline": "f474c449c2bc84da5707bb123c36500490875869",
+  "heldOutCases": 5,
+  "obligationsPerCandidate": 25,
+  "scoringRule": "obligation Passed iff both R1 and R2 judge pass (EVALUATION-PROTOCOL.md)",
+  "primaryOutcome": {
+    "perCandidate": [
+      {
+        "candidate": "candidate-1",
+        "lane": "treatment-a",
+        "provider": "openai",
+        "condition": "treatment",
+        "frozenCommit": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+        "fullyCorrectCases": 5,
+        "cases": 5
+      },
+      {
+        "candidate": "candidate-2",
+        "lane": "control-a",
+        "provider": "openai",
+        "condition": "control",
+        "frozenCommit": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+        "fullyCorrectCases": 3,
+        "cases": 5
+      },
+      {
+        "candidate": "candidate-3",
+        "lane": "treatment-b",
+        "provider": "claude",
+        "condition": "treatment",
+        "frozenCommit": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+        "fullyCorrectCases": 3,
+        "cases": 5
+      },
+      {
+        "candidate": "candidate-4",
+        "lane": "control-b",
+        "provider": "claude",
+        "condition": "control",
+        "frozenCommit": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+        "fullyCorrectCases": 3,
+        "cases": 5
+      }
+    ],
+    "perCondition": {
+      "treatment": {
+        "candidates": [
+          "treatment-a",
+          "treatment-b"
+        ],
+        "fullyCorrectCases": 8,
+        "cases": 10,
+        "fullyCorrectRate": 0.8
+      },
+      "control": {
+        "candidates": [
+          "control-a",
+          "control-b"
+        ],
+        "fullyCorrectCases": 6,
+        "cases": 10,
+        "fullyCorrectRate": 0.6
+      }
+    },
+    "treatmentRate": 0.8,
+    "controlRate": 0.6,
+    "descriptiveSupport": true,
+    "criterion": "descriptive support iff treatment fully-correct held-out-case rate > control rate (preregistered)",
+    "statisticalClaim": "none; small descriptive pilot, not statistically conclusive"
+  },
+  "sensitivityByReviewer": {
+    "R1": {
+      "treatmentRate": 0.8,
+      "controlRate": 0.6,
+      "treatmentHigher": true
+    },
+    "R2": {
+      "treatmentRate": 1.0,
+      "controlRate": 0.8,
+      "treatmentHigher": true
+    }
+  },
+  "secondaryOutcomes": {
+    "obligationsPassedByCondition": {
+      "treatment": {
+        "passed": 48,
+        "evaluated": 50
+      },
+      "control": {
+        "passed": 45,
+        "evaluated": 50
+      }
+    },
+    "deterministicRequiredCategoriesByCondition": {
+      "treatment": {
+        "passed": 9,
+        "evaluated": 12
+      },
+      "control": {
+        "passed": 8,
+        "evaluated": 12
+      }
+    },
+    "responsiveFullyPreservedCasesByCondition": {
+      "treatment": 8,
+      "control": 6
+    },
+    "fabricatedOrContradictoryObligationFailuresByCondition": {
+      "treatment": 2,
+      "control": 3
+    },
+    "providerStratified": {
+      "openai": {
+        "treatment": {
+          "candidates": [
+            "treatment-a"
+          ],
+          "fullyCorrectCases": 5,
+          "cases": 5,
+          "obligationsPassed": 25,
+          "obligationsEvaluated": 25,
+          "byReviewer": {
+            "R1": 5,
+            "R2": 5
+          },
+          "requiredCategoriesPassed": 4,
+          "requiredCategoriesEvaluated": 6,
+          "responsiveFullyPreservedCases": 5,
+          "fabricatedOrContradictoryObligationFailures": 0,
+          "fullyCorrectRate": 1.0,
+          "fullyCorrectRateByReviewer": {
+            "R1": 1.0,
+            "R2": 1.0
+          }
+        },
+        "control": {
+          "candidates": [
+            "control-a"
+          ],
+          "fullyCorrectCases": 3,
+          "cases": 5,
+          "obligationsPassed": 23,
+          "obligationsEvaluated": 25,
+          "byReviewer": {
+            "R1": 3,
+            "R2": 3
+          },
+          "requiredCategoriesPassed": 4,
+          "requiredCategoriesEvaluated": 6,
+          "responsiveFullyPreservedCases": 3,
+          "fabricatedOrContradictoryObligationFailures": 0,
+          "fullyCorrectRate": 0.6,
+          "fullyCorrectRateByReviewer": {
+            "R1": 0.6,
+            "R2": 0.6
+          }
+        }
+      },
+      "claude": {
+        "treatment": {
+          "candidates": [
+            "treatment-b"
+          ],
+          "fullyCorrectCases": 3,
+          "cases": 5,
+          "obligationsPassed": 23,
+          "obligationsEvaluated": 25,
+          "byReviewer": {
+            "R1": 3,
+            "R2": 5
+          },
+          "requiredCategoriesPassed": 5,
+          "requiredCategoriesEvaluated": 6,
+          "responsiveFullyPreservedCases": 3,
+          "fabricatedOrContradictoryObligationFailures": 2,
+          "fullyCorrectRate": 0.6,
+          "fullyCorrectRateByReviewer": {
+            "R1": 0.6,
+            "R2": 1.0
+          }
+        },
+        "control": {
+          "candidates": [
+            "control-b"
+          ],
+          "fullyCorrectCases": 3,
+          "cases": 5,
+          "obligationsPassed": 22,
+          "obligationsEvaluated": 25,
+          "byReviewer": {
+            "R1": 3,
+            "R2": 5
+          },
+          "requiredCategoriesPassed": 4,
+          "requiredCategoriesEvaluated": 6,
+          "responsiveFullyPreservedCases": 3,
+          "fabricatedOrContradictoryObligationFailures": 3,
+          "fullyCorrectRate": 0.6,
+          "fullyCorrectRateByReviewer": {
+            "R1": 0.6,
+            "R2": 1.0
+          }
+        }
+      }
+    },
+    "failuresByObligation": [
+      {
+        "caseId": "combined-blocker-falsification",
+        "obligation": "unavailability has a visible reason",
+        "failedCandidates": [
+          "treatment-b"
+        ],
+        "failures": 1
+      },
+      {
+        "caseId": "combined-blocker-falsification",
+        "obligation": "user can navigate from unavailable confirmation to blocking information",
+        "failedCandidates": [
+          "control-a"
+        ],
+        "failures": 1
+      },
+      {
+        "caseId": "pending-unverified",
+        "obligation": "persistence is visibly pending",
+        "failedCandidates": [
+          "control-b"
+        ],
+        "failures": 1
+      },
+      {
+        "caseId": "all-constraints",
+        "obligation": "blocked action remains explained and navigable",
+        "failedCandidates": [
+          "control-a",
+          "treatment-b"
+        ],
+        "failures": 2
+      },
+      {
+        "caseId": "all-constraints",
+        "obligation": "no active meaning suppresses another active meaning",
+        "failedCandidates": [
+          "control-b"
+        ],
+        "failures": 1
+      },
+      {
+        "caseId": "all-constraints",
+        "obligation": "pending persistence remains distinct from investigation resolution",
+        "failedCandidates": [
+          "control-b"
+        ],
+        "failures": 1
+      }
+    ],
+    "perCandidate": [
+      {
+        "candidate": "candidate-1",
+        "lane": "treatment-a",
+        "provider": "openai",
+        "condition": "treatment",
+        "obligationsPassed": 25,
+        "obligationsEvaluated": 25,
+        "obligationsPassedByReviewer": {
+          "R1": 25,
+          "R2": 25
+        },
+        "fullyCorrectCasesByReviewer": {
+          "R1": 5,
+          "R2": 5
+        },
+        "disagreements": 0,
+        "responsiveFullyPreservedCases": 5,
+        "responsivePreservedObligations": 25,
+        "fabricatedOrContradictoryObligationFailures": 0,
+        "reviewerReportedFabricatedOrForbidden": {
+          "R1": 8,
+          "R2": 0
+        },
+        "churn": {
+          "commitsSinceBaseline": 2,
+          "filesChanged": 2,
+          "linesAdded": 48,
+          "linesDeleted": 0,
+          "indexHtmlLines": 26,
+          "correctiveIterations": 0
+        },
+        "deterministic": {
+          "complete": false,
+          "requiredCategoriesPassed": 4,
+          "requiredCategoriesEvaluated": 6,
+          "categories": {
+            "contract-validation": "Passed",
+            "structural": "Passed",
+            "state-projection": "Failed",
+            "interaction": "Failed",
+            "accessibility": "Passed",
+            "responsive": "Passed"
+          }
+        }
+      },
+      {
+        "candidate": "candidate-2",
+        "lane": "control-a",
+        "provider": "openai",
+        "condition": "control",
+        "obligationsPassed": 23,
+        "obligationsEvaluated": 25,
+        "obligationsPassedByReviewer": {
+          "R1": 23,
+          "R2": 23
+        },
+        "fullyCorrectCasesByReviewer": {
+          "R1": 3,
+          "R2": 3
+        },
+        "disagreements": 0,
+        "responsiveFullyPreservedCases": 3,
+        "responsivePreservedObligations": 23,
+        "fabricatedOrContradictoryObligationFailures": 0,
+        "reviewerReportedFabricatedOrForbidden": {
+          "R1": 3,
+          "R2": 1
+        },
+        "churn": {
+          "commitsSinceBaseline": 1,
+          "filesChanged": 2,
+          "linesAdded": 120,
+          "linesDeleted": 0,
+          "indexHtmlLines": 95,
+          "correctiveIterations": 0
+        },
+        "deterministic": {
+          "complete": false,
+          "requiredCategoriesPassed": 4,
+          "requiredCategoriesEvaluated": 6,
+          "categories": {
+            "contract-validation": "Passed",
+            "structural": "Passed",
+            "state-projection": "Failed",
+            "interaction": "Failed",
+            "accessibility": "Passed",
+            "responsive": "Passed"
+          }
+        }
+      },
+      {
+        "candidate": "candidate-3",
+        "lane": "treatment-b",
+        "provider": "claude",
+        "condition": "treatment",
+        "obligationsPassed": 23,
+        "obligationsEvaluated": 25,
+        "obligationsPassedByReviewer": {
+          "R1": 23,
+          "R2": 25
+        },
+        "fullyCorrectCasesByReviewer": {
+          "R1": 3,
+          "R2": 5
+        },
+        "disagreements": 2,
+        "responsiveFullyPreservedCases": 3,
+        "responsivePreservedObligations": 23,
+        "fabricatedOrContradictoryObligationFailures": 2,
+        "reviewerReportedFabricatedOrForbidden": {
+          "R1": 13,
+          "R2": 0
+        },
+        "churn": {
+          "commitsSinceBaseline": 1,
+          "filesChanged": 2,
+          "linesAdded": 615,
+          "linesDeleted": 0,
+          "indexHtmlLines": 532,
+          "correctiveIterations": 0
+        },
+        "deterministic": {
+          "complete": false,
+          "requiredCategoriesPassed": 5,
+          "requiredCategoriesEvaluated": 6,
+          "categories": {
+            "contract-validation": "Passed",
+            "structural": "Passed",
+            "state-projection": "Failed",
+            "interaction": "Passed",
+            "accessibility": "Passed",
+            "responsive": "Passed"
+          }
+        }
+      },
+      {
+        "candidate": "candidate-4",
+        "lane": "control-b",
+        "provider": "claude",
+        "condition": "control",
+        "obligationsPassed": 22,
+        "obligationsEvaluated": 25,
+        "obligationsPassedByReviewer": {
+          "R1": 22,
+          "R2": 25
+        },
+        "fullyCorrectCasesByReviewer": {
+          "R1": 3,
+          "R2": 5
+        },
+        "disagreements": 3,
+        "responsiveFullyPreservedCases": 3,
+        "responsivePreservedObligations": 22,
+        "fabricatedOrContradictoryObligationFailures": 3,
+        "reviewerReportedFabricatedOrForbidden": {
+          "R1": 15,
+          "R2": 0
+        },
+        "churn": {
+          "commitsSinceBaseline": 1,
+          "filesChanged": 2,
+          "linesAdded": 567,
+          "linesDeleted": 0,
+          "indexHtmlLines": 516,
+          "correctiveIterations": 0
+        },
+        "deterministic": {
+          "complete": false,
+          "requiredCategoriesPassed": 4,
+          "requiredCategoriesEvaluated": 6,
+          "categories": {
+            "contract-validation": "Passed",
+            "structural": "Passed",
+            "state-projection": "Failed",
+            "interaction": "Failed",
+            "accessibility": "Passed",
+            "responsive": "Passed"
+          }
+        }
+      }
+    ]
+  },
+  "reviewerDisagreements": [
+    {
+      "lane": "treatment-b",
+      "candidate": "candidate-3",
+      "caseId": "combined-blocker-falsification",
+      "obligation": "unavailability has a visible reason",
+      "R1": "fail",
+      "R2": "pass"
+    },
+    {
+      "lane": "treatment-b",
+      "candidate": "candidate-3",
+      "caseId": "all-constraints",
+      "obligation": "blocked action remains explained and navigable",
+      "R1": "fail",
+      "R2": "pass"
+    },
+    {
+      "lane": "control-b",
+      "candidate": "candidate-4",
+      "caseId": "pending-unverified",
+      "obligation": "persistence is visibly pending",
+      "R1": "fail",
+      "R2": "pass"
+    },
+    {
+      "lane": "control-b",
+      "candidate": "candidate-4",
+      "caseId": "all-constraints",
+      "obligation": "no active meaning suppresses another active meaning",
+      "R1": "fail",
+      "R2": "pass"
+    },
+    {
+      "lane": "control-b",
+      "candidate": "candidate-4",
+      "caseId": "all-constraints",
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "R1": "fail",
+      "R2": "pass"
+    }
+  ],
+  "excludedBranches": [
+    "experiment/percepta-0004-openai-control-b"
+  ],
+  "rawEvidence": {
+    "integrity": "integrity.json",
+    "protocol": "EVALUATION-PROTOCOL.md",
+    "deterministic": "deterministic/<candidate>/<run>/",
+    "capture": "capture/<candidate>/<case>/",
+    "reviewerPrompt": "semantic-review/REVIEWER-PROMPT.md",
+    "reviews": "semantic-review/raw/<R1|R2>/<item>.json",
+    "itemKey": "semantic-review/item-key.json",
+    "blindScores": "semantic-review/scores.blind.json",
+    "mapping": "candidate-mapping.json",
+    "manifest": "raw-evidence.SHA256SUMS"
+  }
+}

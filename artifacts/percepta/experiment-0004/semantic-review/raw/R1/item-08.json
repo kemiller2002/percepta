@@ -1,0 +1,80 @@
+{
+  "item": "item-08",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop full.png and aria tree show a separate labelled section for every active predicate: 'FALSIFIED Candidate explanation retained for history' (hypothesis-is-falsified); 'BLOCKER Required information is unresolved' (blocking-unknown-exists); 'PENDING Remote write pending' (github-write-is-pending); 'VERIFY Verify corrective action ... has not yet been verified' (corrective-action-not-verified); 'CONFLICT Conflicting evidence is present' (contradictions-present); 'Outstanding obligations REQUIRED' (obligations-present); and 'Confirm root cause' disabled (confirm-root-cause illegal). Persistence sits below the 900px fold on desktop (docHeight 1119) and is reachable by normal scrolling.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The accessibility trees are identical across all viewports. All sections show in each full screenshot with no horizontal overflow."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Every meaning keeps its own card and badge at the same time. The falsified hypothesis is kept ('remains visible as a considered explanation'). The blocker, obligations, contradiction, pending write and disabled action all show together, and none collapses or hides another (desktop full.png, aria tree).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The layout changes to a single column on phone. All cards are still present."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Contradictions' h2 card reads 'CONFLICT Conflicting evidence is present. Evidence conflicts with a current explanation. Review the evidence relationship before converging.' It is visible in the first desktop viewport, and the text badge means the state is not shown by color alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Present in every screenshot and aria tree."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Outstanding obligations' h2 card reads 'REQUIRED Work remains before legal progress can continue.' and 'VERIFY Verify corrective action'. It is visible in the first desktop viewport (right column).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Present in every screenshot and aria tree."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "A separate 'Persistence' h2 card reads 'PENDING Remote write pending — Changes are not yet confirmed as persisted remotely.' Investigation status is conveyed separately by the header pill 'Investigation open · verification required' and the obligation text 'investigation remains unresolved'. There is no claim of remote success, and pending persistence is never presented as resolution.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The Persistence card and the header status pill stay separate at every viewport."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Confirm root cause' is disabled (disabled=true, aria-disabled=true) in line with confirm-root-cause: illegal. An adjacent visible status explains it: 'Unavailable: unresolved information is blocking progress.' This is supported by blocking-unknown-exists. Probe 001 on 'Go to blocking unknown' moved focus onto the 'Unresolved unknowns' section (after.focused = section 'Unresolved unknowns ... BLOCKER Required information is unresolved'). No scroll was needed because the section was already in the viewport (probe-001.viewport.png).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The disabled button, reason text and 'Go to blocking unknown' button appear in every aria tree and screenshot. Operability was verified by the probe at desktop only."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "The explanation is a visible adjacent status, not programmatically tied to the button (describedByText is empty), but the rules do not require that link. Probe 001 moved focus without changing scroll, so landing was confirmed by focus alone, and no visible focus indicator is apparent in probe-001.viewport.png. There were no probes at non-desktop viewports. The copy stays generic ('a current explanation', 'Remote write'), which fits the predicates without adding domain facts."
+}

@@ -1,0 +1,5 @@
+candidate	lane	provider	condition	fullyCorrectCases	cases	R1FullyCorrect	R2FullyCorrect	obligationsPassed	obligationsEvaluated	disagreements	detRequiredPassed	responsiveFullCases	fabContraFailures	linesAdded
+candidate-1	treatment-a	openai	treatment	5	5	5	5	25	25	0	4/6	5	0	48
+candidate-2	control-a	openai	control	3	5	3	3	23	25	0	4/6	3	0	120
+candidate-3	treatment-b	claude	treatment	3	5	3	5	23	25	2	5/6	3	2	615
+candidate-4	control-b	claude	control	3	5	3	5	22	25	3	4/6	3	3	567
