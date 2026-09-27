@@ -1,0 +1,60 @@
+{
+  "reviewUnit": "unit-03",
+  "candidate": "Candidate V",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Actions section: button \"Confirm Root Cause\" rendered disabled, tagged \"Unavailable\", with adjacent text \"Unavailable because the runtime marks this capability illegal.\" This matches capabilities.confirm-root-cause = illegal; aria snapshot confirms button [disabled]."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Identical Actions block: \"Confirm Root Cause\" button with \"Unavailable\" pill and same illegal-capability sentence, fully visible."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same Actions card with disabled-styled button, \"Unavailable\" pill, and illegal-capability sentence intact and legible."},
+        "390x844": {"verdict": "PASS", "evidence": "Actions card at bottom of stacked layout shows \"Confirm Root Cause\", \"Unavailable\" pill, and the illegal-capability sentence wrapped but fully readable."}
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "primary_1440x900": {"verdict": "FAIL", "evidence": "The \"Unresolved unknowns\" card states \"No active unknowns supplied,\" yet the Actions helper text instructs: \"Review active unknowns, contradictions, obligations, and evidence for blocking context,\" implying unknowns are a relevant blocking factor even though none are active."},
+      "responsive": {
+        "1180x820": {"verdict": "FAIL", "evidence": "Same contradictory pairing visible: \"No active unknowns supplied\" card alongside Actions text telling the user to review unknowns for blocking context."},
+        "820x1180": {"verdict": "FAIL", "evidence": "\"Unresolved unknowns\" card (\"No active unknowns supplied.\") and Actions card's \"Review active unknowns ... for blocking context\" both visible together in the two-column stack."},
+        "390x844": {"verdict": "FAIL", "evidence": "Same two blocks stacked vertically show the same contradiction: empty unknowns list plus instruction to review unknowns for blocking context."}
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "primary_1440x900": {"verdict": "FAIL", "evidence": "Beyond the accurate \"capability illegal\" reason, the Actions text adds \"Review active unknowns, contradictions, obligations, and evidence for blocking context,\" implying domain-specific blocking content in those categories, while every corresponding card explicitly reads \"No active ... supplied,\" i.e. no predicates support such a reason."},
+      "responsive": {
+        "1180x820": {"verdict": "FAIL", "evidence": "Same helper sentence present under \"Confirm Root Cause\" / \"Unavailable\", referencing contradictions/obligations/evidence as blocking context despite all four related cards reading \"No active ... supplied.\""},
+        "820x1180": {"verdict": "FAIL", "evidence": "Same sentence visible in Actions card; all referenced categories (Contradictions, Outstanding obligations, Evidence & relationships) show \"No active ... supplied\" directly above it."},
+        "390x844": {"verdict": "FAIL", "evidence": "Same sentence visible at bottom of stack; all referenced empty-state cards are visible above it in the single column, showing no supporting predicates."}
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Button is disabled (aria: \"button 'Confirm Root Cause' [disabled]\") and labeled \"Unavailable\"; no path in the operation trace re-enables or invokes it (operation-trace-1440x900.json is empty, recording no operable click path), consistent with capabilities.confirm-root-cause = illegal not being overridden."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Button remains visibly disabled/greyed with \"Unavailable\" pill; no enabled affordance shown."},
+        "820x1180": {"verdict": "PASS", "evidence": "Button remains visibly disabled/greyed with \"Unavailable\" pill; no enabled affordance shown."},
+        "390x844": {"verdict": "PASS", "evidence": "Button remains visibly disabled/greyed with \"Unavailable\" pill; no enabled affordance shown."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [
+    {
+      "category": "invented domain-specific explanations not supported by active predicates",
+      "evidence": "Actions helper text: \"Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.\" — the second sentence implies unknowns/contradictions/obligations/evidence are relevant blocking factors, but every corresponding card states \"No active ... supplied.\"",
+      "viewports": ["1440x900", "1180x820", "820x1180", "390x844"]
+    }
+  ],
+  "filesExamined": [
+    "packet.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json"
+  ]
+}

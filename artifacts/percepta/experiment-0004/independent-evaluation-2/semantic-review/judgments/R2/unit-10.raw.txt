@@ -1,0 +1,82 @@
+{
+  "reviewUnit": "unit-10",
+  "candidate": "Candidate V",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Contradictions\" card shows \"Hypothesis Is Falsified\" / \"Active runtime predicate\", visible in screenshot-1440x900.png."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same \"Hypothesis Is Falsified\" card visible, unclipped, in screenshot-1180x820.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "\"Hypothesis Is Falsified\" card visible in the reflowed 2-column layout in screenshot-820x1180.png."},
+        "390x844": {"verdict": "PASS", "evidence": "\"Hypothesis Is Falsified\" card visible in single-column stacked layout in screenshot-390x844.png."}
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Meaning is carried by text \"Hypothesis Is Falsified\" and label \"Active runtime predicate\", not by the accent bar color alone."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same textual label \"Hypothesis Is Falsified\" present, independent of the colored border."},
+        "820x1180": {"verdict": "PASS", "evidence": "Textual label \"Hypothesis Is Falsified\" present."},
+        "390x844": {"verdict": "PASS", "evidence": "Textual label \"Hypothesis Is Falsified\" present."}
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Unresolved unknowns\" card shows \"Blocking Unknown Exists\" / \"Active runtime predicate\", visible in screenshot-1440x900.png."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "\"Blocking Unknown Exists\" card visible in screenshot-1180x820.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "\"Blocking Unknown Exists\" card visible in screenshot-820x1180.png."},
+        "390x844": {"verdict": "PASS", "evidence": "\"Blocking Unknown Exists\" card visible in screenshot-390x844.png."}
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Confirm Root Cause\" button rendered disabled with adjacent \"Unavailable\" badge; aria-snapshot confirms button \"[disabled]\"."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Disabled \"Confirm Root Cause\" button with \"Unavailable\" badge visible in screenshot-1180x820.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "Disabled button with \"Unavailable\" badge visible in screenshot-820x1180.png."},
+        "390x844": {"verdict": "PASS", "evidence": "Disabled button with \"Unavailable\" badge visible in screenshot-390x844.png."}
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Visible text: \"Unavailable because the runtime marks this capability illegal.\" directly under the Actions button."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same reason text visible, unclipped, in screenshot-1180x820.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same reason text visible in screenshot-820x1180.png."},
+        "390x844": {"verdict": "PASS", "evidence": "Same reason text visible, wrapped but readable, in screenshot-390x844.png."}
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "primary_1440x900": {"verdict": "FAIL", "evidence": "The Actions card only contains static text (\"Review active unknowns, contradictions, obligations, and evidence for blocking context.\") with no link, anchor, or button to the blocking sections. operation-trace-1440x900.json, which clicked every visible/enabled control and in-page link, is an empty array ([]), confirming no operable navigation control exists connecting the unavailable confirmation to the blocking-information sections; the Confirm Root Cause button itself is disabled."},
+      "responsive": {
+        "1180x820": {"verdict": "FAIL", "evidence": "Same static, non-interactive reason text with no link/anchor in screenshot-1180x820.png; no navigation control present."},
+        "820x1180": {"verdict": "FAIL", "evidence": "Same static, non-interactive reason text with no link/anchor in screenshot-820x1180.png."},
+        "390x844": {"verdict": "FAIL", "evidence": "Same static, non-interactive reason text with no link/anchor in screenshot-390x844.png."}
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Both \"Hypothesis Is Falsified\" (Contradictions) and \"Blocking Unknown Exists\" (Unresolved unknowns) are shown simultaneously as separate, undiminished cards; neither replaces or suppresses the other."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Both cards present and undiminished in screenshot-1180x820.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "Both cards present and undiminished in screenshot-820x1180.png."},
+        "390x844": {"verdict": "PASS", "evidence": "Both cards present and undiminished in screenshot-390x844.png."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png"
+  ]
+}

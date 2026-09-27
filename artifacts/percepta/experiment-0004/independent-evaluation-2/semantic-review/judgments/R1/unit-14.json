@@ -1,0 +1,108 @@
+{
+  "reviewUnit": "unit-14",
+  "candidate": "Candidate K",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Actions panel shows the dashed button 'Unavailable: Confirm root cause' (aria: button [disabled]), with 'Unavailable: the runtime marks this action as not permitted in the current state.' The header reads 'Actions available: 0' and the panel reads '0 available, 1 unavailable.' The trace clicked only links, and the disabled button has no enabled path."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The same disabled 'Unavailable: Confirm root cause' button and runtime-not-permitted text are fully visible in the Actions panel (right column)."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The same disabled button and explanation are visible and unclipped in the Actions panel."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "In the single column (part 2 of 3), the Actions card shows the disabled button and the 'not permitted in the current state' text, with nothing clipped."
+        }
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Unresolved unknowns '(0 active)' with 'No unknowns are reported as active.' The header reads 'Unknowns: 0'. The Actions panel says 'No specific blocking condition is reported.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Unknowns card reads 'No unknowns are reported as active.' The Actions panel carries the same 'No specific blocking condition' text."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same text is visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same text is visible in the stacked cards."
+        }
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The reason given is generic, citing only runtime authority: 'the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.' It gives no domain cause such as missing evidence or contradictions. The hypotheses say 'No runtime state references this explanation; it has not been ruled in or out.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same generic reason is shown."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same generic reason is shown."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same generic reason is shown."
+        }
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The visible label is prefixed 'Unavailable:' and the button has a dashed disabled style. The panel says 'Availability comes from the runtime and is not overridden here.' The aria snapshot shows the button as [disabled]. No enabled confirm control exists."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The Unavailable label, the disabled styling and the 'not overridden here' text are all visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same, and visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same, and visible without clipping."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "screenshot-1440x900.png",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1180x820.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png",
+    "trace/07.jpg"
+  ]
+}

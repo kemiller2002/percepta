@@ -1,0 +1,132 @@
+{
+  "reviewUnit": "unit-20",
+  "candidate": "Candidate R",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Header badge 'GitHub write pending'. Nav link 'Persistence (pending)'. Persistence panel: 'GitHub: Pending' badge with 'Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.' Trace step 8 scrolls to and focuses this panel (trace/08.jpg)."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Header badge 'GitHub write pending' and the Persistence panel's 'Pending' badge and text are fully visible (part1/part2)."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Header badge and the Persistence panel's 'GitHub: Pending' with its explanatory text are visible, with no clipping."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Header badges are stacked, including 'GitHub write pending'. Nav shows 'Persistence (pending)'. Persistence card in part4 shows 'Pending' and the full text."
+        }
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "No saved or synced claim. Persistence says 'It has not been confirmed; do not treat this work as saved remotely.' 'This device: Local working copy' refers only to the local copy."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same disclaimer text is visible. No success claim."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same disclaimer text is visible. No success claim."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same disclaimer text is visible in part4. No success claim."
+        }
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Header badge 'Investigation open'. 'Investigation status: Open' with 'Not closed: a corrective action was applied but is not verified.' All three hypotheses read 'Under consideration ... This is not a confirmation.' Unknown is marked 'Open'."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Open status, 'Not closed' text and 'Under consideration' hypotheses are visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Open status, 'Not closed' text and 'Under consideration' hypotheses are visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "'Investigation open' badge and 'Investigation status: Open / Not closed' are visible in part1. Hypotheses are shown 'Under consideration' in part2."
+        }
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Header badge 'Verification outstanding'. 'Outstanding obligations: 1 open' with a 'Verification required' item: 'Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds.' The 'Go to verification obligation' link (trace step 0) scrolls to and focuses the item (trace/00.jpg). Nav 'Obligations (1)' also works (step 6)."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The Outstanding obligations card with 'Verification required' is visible in part2."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The Outstanding obligations card with 'Verification required' is visible in part2, and the header badge is visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The obligations card with 'Verification required' is visible in part3, and the 'Verification outstanding' badge is in the header."
+        }
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The 'Confirm root cause' button is disabled (aria: [disabled]) and has a dashed muted style. It carries a '\u2715 Unavailable' badge and a 'Why unavailable' box. Header reads 'Confirm root cause: unavailable'. The trace did not click it because it is not enabled, which is consistent with the illegal capability."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Disabled button, 'Unavailable' badge and reason box are visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Disabled button, 'Unavailable' badge below it, and reason box are visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Part3 shows the disabled 'Confirm root cause' button, the '\u2715 Unavailable' badge and 'Why unavailable'. Header shows 'Confirm root cause: unavailable'."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of4.png",
+    "screenshot-390x844-part2of4.png",
+    "screenshot-390x844-part3of4.png",
+    "screenshot-390x844-part4of4.png",
+    "trace/00.jpg",
+    "trace/08.jpg"
+  ]
+}

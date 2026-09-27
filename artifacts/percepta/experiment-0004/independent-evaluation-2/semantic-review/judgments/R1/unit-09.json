@@ -1,0 +1,181 @@
+{
+  "reviewUnit": "unit-09",
+  "candidate": "Candidate K",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "In the Competing hypotheses card, under the subheading 'Other hypothesis state reported', a card reads 'FALSIFIED Hypothesis is falsified \u2014 Retained in the record: it was considered and is now contradicted.' The intro text says 'Falsified explanations stay listed.' Caveat: the falsified item is generic and not tied to H1\u2013H3. The same card says '3 of 3 listed explanations remain viable' under the heading '(1 active)', so the representation is present but its framing is somewhat inconsistent."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The FALSIFIED card is visible below H3 in the hypotheses card."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The FALSIFIED card is visible at the bottom of the hypotheses card."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The FALSIFIED card is visible in tile part2of3 under 'Other hypothesis state reported'."
+        }
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The status is shown as the outlined text badge 'FALSIFIED', with the text 'Hypothesis is falsified' and 'now contradicted'. The meaning is carried by words, not by color."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The text badge 'FALSIFIED' is visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The text badge 'FALSIFIED' is visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The text badge 'FALSIFIED' is visible."
+        }
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The 'Unresolved unknowns (1 active)' card shows 'UNKNOWN Blocking unknown exists \u2014 Not established. May block actions that depend on it.' The header summary shows 'Unknowns: 1', and the Actions area lists 'Blocking unknown exists (unknowns)'."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The unknowns card and its item are visible in the second row."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The unknowns card and its item are visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The unknowns card and its item are visible in tile part2of3."
+        }
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The button 'Unavailable: Confirm root cause' is [disabled] in the aria snapshot and drawn with a dashed, greyed style. The page also shows 'Actions available: 0' and '0 available, 1 unavailable.' It matches the capability confirm-root-cause=illegal."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The dashed 'Unavailable: Confirm root cause' control is visible in the Actions card."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The dashed 'Unavailable: Confirm root cause' control is visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The dashed 'Unavailable: Confirm root cause' control is visible in tiles part2 and part3."
+        }
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Directly under the button: 'Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it:' followed by the bullet 'Blocking unknown exists (unknowns)'."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The reason text and bullet are visible under the button."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The reason text and bullet are visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The reason text and bullet are visible in tile part3of3."
+        }
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The link 'Blocking unknown exists' (href #pred-1-blocking-unknown-exists) sits under the unavailable button. In trace step 0 the click succeeded and focus moved to the li 'UNKNOWN Blocking unknown exists ... Not established'. trace/00.jpg shows that item highlighted with a focus outline and in view."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The link 'Blocking unknown exists' is visible and underlined under the button. Only the 1440 run was traced; the same link is present here."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The link is visible under the button."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The link is visible and not clipped in tile part3of3."
+        }
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Alongside the FALSIFIED card, the blocking unknown stays active: 'Unresolved unknowns (1 active)', header 'Unknowns: 1', and 'Blocking unknown exists' is still listed as the blocking condition for Confirm root cause."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Both the FALSIFIED card and the blocking unknown plus action blocker are visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Both are visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Both are visible across tiles part2 and part3."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [
+    {
+      "category": "opposite facts asserted from absent predicates",
+      "evidence": "The page asserts that every named hypothesis is viable even though hypothesis-is-falsified is active: 'Viable explanations: 3' in the header summary, '3 of 3 listed explanations remain viable', and each of H1\u2013H3 badged 'VIABLE \u2014 OPEN'. The falsified hypothesis is shown only as a separate generic item. The heading count 'Competing hypotheses (1 active)' also conflicts with the '3 viable' claims, which makes the hypothesis status ambiguous.",
+      "viewports": [
+        "1440x900",
+        "1180x820",
+        "820x1180",
+        "390x844"
+      ]
+    }
+  ],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "trace/00.jpg",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844-part1of3.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png"
+  ]
+}

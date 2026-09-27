@@ -1,0 +1,72 @@
+{
+  "reviewUnit": "unit-07",
+  "candidate": "Candidate M",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "All six active predicates surface as distinct, simultaneously visible cards: 'FALSIFIED — Candidate explanation retained for history' (Competing hypotheses), 'CONFLICT — Conflicting evidence is present' (Contradictions), 'BLOCKER — Required information is unresolved' (Unresolved unknowns), 'REQUIRED'/'VERIFY — Verify corrective action' (Outstanding obligations), and 'PENDING — Remote write pending' (Persistence); none are behind tabs, accordions, or additional clicks."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same two-column layout, all cards present unchanged."},
+        "820x1180": {"verdict": "PASS", "evidence": "Two-column layout reflows narrower but all six cards remain visible without truncation."},
+        "390x844": {"verdict": "PASS", "evidence": "Single-column stack; all sections (Triggering observation, Competing hypotheses, Contradictions, Evidence, Unresolved unknowns, Outstanding obligations, Actions, Persistence) render in full, just taller page."}
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Falsified hypothesis is explicitly kept visible ('It remains visible as a considered explanation') alongside contradiction, unknown, obligation, and persistence cards rather than being replaced or hidden by any of them."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "All cards remain independently visible, none overlapping or clipped."},
+        "820x1180": {"verdict": "PASS", "evidence": "All cards stacked/columned but each fully readable, none overlaps another."},
+        "390x844": {"verdict": "PASS", "evidence": "Single column stack shows every card in sequence with no overlap or clipping."}
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Dedicated 'Contradictions' heading with 'CONFLICT — Conflicting evidence is present: Evidence conflicts with a current explanation. Review the evidence relationship before converging.'"},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Contradictions card unchanged and visible."},
+        "820x1180": {"verdict": "PASS", "evidence": "Contradictions card visible in right column."},
+        "390x844": {"verdict": "PASS", "evidence": "Contradictions card visible as third stacked section."}
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Outstanding obligations' heading shows 'REQUIRED — Work remains before legal progress can continue.' and 'VERIFY — Verify corrective action: A corrective action has not yet been verified, so the investigation remains unresolved.'"},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Outstanding obligations card unchanged."},
+        "820x1180": {"verdict": "PASS", "evidence": "Outstanding obligations card visible, text wraps but intact."},
+        "390x844": {"verdict": "PASS", "evidence": "Outstanding obligations card visible in stacked layout."}
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Persistence is its own bottom card, separately labeled 'PENDING — Remote write pending: Changes are not yet confirmed as persisted remotely,' distinct from the 'Investigation open · verification required' banner status and the Outstanding obligations/Actions cards; no text merges 'pending write' with 'investigation resolved'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Persistence card remains a separate, clearly labeled section at the bottom."},
+        "820x1180": {"verdict": "PASS", "evidence": "Persistence card still separate and clearly labeled, below Actions."},
+        "390x844": {"verdict": "PASS", "evidence": "Persistence card is the final distinct stacked section, still separately labeled 'PENDING — Remote write pending'."}
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Disabled button 'Confirm root cause' (aria-snapshot: button ... [disabled]) is paired with status text 'Unavailable: unresolved information is blocking progress.' and an operable link/button 'Go to blocking unknown', which the operation trace confirms is clickable (step 0: click ok, moves focus to the 'Unresolved unknowns' section)."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same disabled 'Confirm root cause' button, explanatory text, and 'Go to blocking unknown' link all visible in Actions card."},
+        "820x1180": {"verdict": "PASS", "evidence": "Actions card with disabled button, explanation, and 'Go to blocking unknown' link fully visible, unclipped."},
+        "390x844": {"verdict": "PASS", "evidence": "Actions card at narrow width still shows disabled button, 'Unavailable: unresolved information is blocking progress.' text, and underlined 'Go to blocking unknown' link, unclipped."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png"
+  ]
+}

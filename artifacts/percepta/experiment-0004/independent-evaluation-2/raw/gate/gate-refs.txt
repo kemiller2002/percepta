@@ -1,0 +1,8 @@
+gate_evaluated_at_utc: 2026-09-26T20:30:25Z
+baseline: f474c449c2bc84da5707bb123c36500490875869
+git ls-remote origin refs/heads/experiment/percepta-0004-*:
+6b3ef30b75aaab4812919b7f56e8085dbb0fe442	refs/heads/experiment/percepta-0004-claude-control-b
+ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b	refs/heads/experiment/percepta-0004-claude-treatment-b
+c99950ba1cf79a8f590e0f050b3b4efadecc0ad1	refs/heads/experiment/percepta-0004-openai-control-a
+9af43e658e45f99fc7930e687ca488b19927bbf2	refs/heads/experiment/percepta-0004-openai-control-b
+d104371f69ae4b184769e85296fd7d4c1cd85c76	refs/heads/experiment/percepta-0004-openai-treatment-a

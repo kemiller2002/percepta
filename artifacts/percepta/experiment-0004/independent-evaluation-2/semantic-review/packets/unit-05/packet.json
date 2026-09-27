@@ -1,0 +1,48 @@
+{
+  "reviewUnit": "unit-05",
+  "candidate": "Candidate R",
+  "heldOutState": {
+    "name": "held-out-05",
+    "predicates": [],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "semanticObligations": [
+    "confirmation remains unavailable because capability authority is illegal",
+    "UI does not invent a blocking unknown that was not supplied",
+    "UI does not fabricate a domain-specific reason unsupported by active predicates",
+    "unavailability is still communicated without overriding capability authority"
+  ],
+  "screenshots": {
+    "1440x900": {
+      "fullPage": "screenshot-1440x900.png",
+      "tiles": [
+        "screenshot-1440x900-part1of2.png",
+        "screenshot-1440x900-part2of2.png"
+      ]
+    },
+    "1180x820": {
+      "fullPage": "screenshot-1180x820.png",
+      "tiles": [
+        "screenshot-1180x820-part1of2.png",
+        "screenshot-1180x820-part2of2.png"
+      ]
+    },
+    "820x1180": {
+      "fullPage": "screenshot-820x1180.png",
+      "tiles": [
+        "screenshot-820x1180-part1of2.png",
+        "screenshot-820x1180-part2of2.png"
+      ]
+    },
+    "390x844": {
+      "fullPage": "screenshot-390x844.png",
+      "tiles": [
+        "screenshot-390x844-part1of3.png",
+        "screenshot-390x844-part2of3.png",
+        "screenshot-390x844-part3of3.png"
+      ]
+    }
+  }
+}

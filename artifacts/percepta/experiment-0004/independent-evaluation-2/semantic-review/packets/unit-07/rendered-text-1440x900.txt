@@ -1,0 +1,34 @@
+FAILURE INVESTIGATION
+Investigation Workspace
+
+What currently explains the observation, and what should be tested next?
+
+Investigation open · verification required
+Triggering observation
+Observed failure under investigation
+Source: recorded system observation. No additional domain facts have been supplied.
+Competing hypotheses
+FALSIFIEDCandidate explanation retained for history
+Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable.
+Contradictions
+CONFLICTConflicting evidence is present
+Evidence conflicts with a current explanation. Review the evidence relationship before converging.
+Evidence
+Evidence record
+Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned.
+Unresolved unknowns
+UNKNOWNNo opposite fact is inferred from information that has not been supplied.
+BLOCKERRequired information is unresolved
+This unknown blocks dependent progress until it is resolved.
+Outstanding obligations
+REQUIREDWork remains before legal progress can continue.
+VERIFYVerify corrective action
+A corrective action has not yet been verified, so the investigation remains unresolved.
+Actions
+Confirm root cause
+Unavailable: unresolved information is blocking progress.
+Go to blocking unknown
+LEGALITYAvailability follows the supplied capability map, not UI inference.
+Persistence
+PENDINGRemote write pending
+Changes are not yet confirmed as persisted remotely.

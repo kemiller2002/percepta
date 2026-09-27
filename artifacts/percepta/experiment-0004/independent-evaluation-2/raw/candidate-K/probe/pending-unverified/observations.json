@@ -1,0 +1,1131 @@
+{
+  "caseId": "pending-unverified",
+  "suppliedState": {
+    "name": "held-out-02",
+    "predicates": [
+      "github-write-is-pending",
+      "corrective-action-not-verified"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "probedAtUtc": "2026-09-26T20:36:25.040Z",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "390x844",
+        "width": 390,
+        "height": 844,
+        "contractBreakpoint": "narrow-phone"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 322,
+                "width": 358,
+                "height": 264
+              }
+            ],
+            "textSample": "Triggering observation Observed Checkout requests intermittently fail with HTTP 502 responses. Source Production alert: gateway error-rate monitor Reported by On-call alerting pipeline Scope Observed failure; no cause has been established by this record."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 598,
+                "width": 358,
+                "height": 555
+              }
+            ],
+            "textSample": "Competing hypotheses (0 active) 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned. VIABLE — OPENH1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out. VIABLE — OPENH2: Connection pool exhaustion at the gateway Gateway cannot"
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1165,
+                "width": 358,
+                "height": 127
+              }
+            ],
+            "textSample": "Contradictions (0 active) Evidence that conflicts with an explanation or with other evidence. No contradictions are reported as active."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1304,
+                "width": 358,
+                "height": 127
+              }
+            ],
+            "textSample": "Unresolved unknowns (0 active) Information not yet established. Unknowns can block actions. No unknowns are reported as active."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1443,
+                "width": 358,
+                "height": 297
+              }
+            ],
+            "textSample": "Outstanding obligations (2 active) Work that must still be done, including verification after a corrective action. OPEN Github write is pending Predicate github-write-is-pending — Work still required. OPEN Corrective action not verified Predicate corrective-action-not-verified — Work still required."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1752,
+                "width": 358,
+                "height": 107
+              }
+            ],
+            "textSample": "Evidence (0 active) Evidence and the explanation it bears on. No evidence state is reported as active."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1870,
+                "width": 358,
+                "height": 316
+              }
+            ],
+            "textSample": "Actions 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here. Unavailable: Confirm root cause Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Github write is pending (obligations) Corrective action not verified (obligations)"
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 2198,
+                "width": 358,
+                "height": 240
+              }
+            ],
+            "textSample": "Persistence status Local work in this page No local actions recorded in this page. Remote persistence (runtime-reported) Remote persistence status has not been reported. Do not assume work is saved."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": false,
+          "ariaDisabled": "true",
+          "text": "Unavailable: Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": "act-0-confirm-root-cause-why",
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "horizontalOverflow": false,
+          "scrollHeight": 2470
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "390x844.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "820x1180",
+        "width": 820,
+        "height": 1180,
+        "contractBreakpoint": "ipad-portrait"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 198,
+                "width": 788,
+                "height": 155
+              }
+            ],
+            "textSample": "Triggering observation Observed Checkout requests intermittently fail with HTTP 502 responses. Source Production alert: gateway error-rate monitor Reported by On-call alerting pipeline Scope Observed failure; no cause has been established by this record."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 366,
+                "width": 388,
+                "height": 555
+              }
+            ],
+            "textSample": "Competing hypotheses (0 active) 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned. VIABLE — OPENH1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out. VIABLE — OPENH2: Connection pool exhaustion at the gateway Gateway cannot"
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 416,
+                "y": 366,
+                "width": 388,
+                "height": 555
+              }
+            ],
+            "textSample": "Contradictions (0 active) Evidence that conflicts with an explanation or with other evidence. No contradictions are reported as active."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 932,
+                "width": 388,
+                "height": 275
+              }
+            ],
+            "textSample": "Unresolved unknowns (0 active) Information not yet established. Unknowns can block actions. No unknowns are reported as active."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 416,
+                "y": 932,
+                "width": 388,
+                "height": 275
+              }
+            ],
+            "textSample": "Outstanding obligations (2 active) Work that must still be done, including verification after a corrective action. OPEN Github write is pending Predicate github-write-is-pending — Work still required. OPEN Corrective action not verified Predicate corrective-action-not-verified — Work still required."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1220,
+                "width": 388,
+                "height": 275
+              }
+            ],
+            "textSample": "Evidence (0 active) Evidence and the explanation it bears on. No evidence state is reported as active."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 416,
+                "y": 1220,
+                "width": 388,
+                "height": 275
+              }
+            ],
+            "textSample": "Actions 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here. Unavailable: Confirm root cause Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Github write is pending (obligations) Corrective action not verified (obligations)"
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1507,
+                "width": 788,
+                "height": 144
+              }
+            ],
+            "textSample": "Persistence status Local work in this page No local actions recorded in this page. Remote persistence (runtime-reported) Remote persistence status has not been reported. Do not assume work is saved."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": false,
+          "ariaDisabled": "true",
+          "text": "Unavailable: Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": "act-0-confirm-root-cause-why",
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 820,
+          "clientWidth": 820,
+          "horizontalOverflow": false,
+          "scrollHeight": 1683
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "820x1180.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "1180x820",
+        "width": 1180,
+        "height": 820,
+        "contractBreakpoint": "ipad-landscape"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 172,
+                "width": 1148,
+                "height": 155
+              }
+            ],
+            "textSample": "Triggering observation Observed Checkout requests intermittently fail with HTTP 502 responses. Source Production alert: gateway error-rate monitor Reported by On-call alerting pipeline Scope Observed failure; no cause has been established by this record."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 339,
+                "width": 568,
+                "height": 451
+              }
+            ],
+            "textSample": "Competing hypotheses (0 active) 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned. VIABLE — OPENH1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out. VIABLE — OPENH2: Connection pool exhaustion at the gateway Gateway cannot"
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 596,
+                "y": 339,
+                "width": 568,
+                "height": 451
+              }
+            ],
+            "textSample": "Contradictions (0 active) Evidence that conflicts with an explanation or with other evidence. No contradictions are reported as active."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 803,
+                "width": 568,
+                "height": 216
+              }
+            ],
+            "textSample": "Unresolved unknowns (0 active) Information not yet established. Unknowns can block actions. No unknowns are reported as active."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 596,
+                "y": 803,
+                "width": 568,
+                "height": 216
+              }
+            ],
+            "textSample": "Outstanding obligations (2 active) Work that must still be done, including verification after a corrective action. OPEN Github write is pending Predicate github-write-is-pending — Work still required. OPEN Corrective action not verified Predicate corrective-action-not-verified — Work still required."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1030,
+                "width": 568,
+                "height": 255
+              }
+            ],
+            "textSample": "Evidence (0 active) Evidence and the explanation it bears on. No evidence state is reported as active."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 596,
+                "y": 1030,
+                "width": 568,
+                "height": 255
+              }
+            ],
+            "textSample": "Actions 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here. Unavailable: Confirm root cause Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Github write is pending (obligations) Corrective action not verified (obligations)"
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 1297,
+                "width": 1148,
+                "height": 144
+              }
+            ],
+            "textSample": "Persistence status Local work in this page No local actions recorded in this page. Remote persistence (runtime-reported) Remote persistence status has not been reported. Do not assume work is saved."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": false,
+          "ariaDisabled": "true",
+          "text": "Unavailable: Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": "act-0-confirm-root-cause-why",
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 1180,
+          "clientWidth": 1180,
+          "horizontalOverflow": false,
+          "scrollHeight": 1473
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "1180x820.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "1440x900",
+        "width": 1440,
+        "height": 900,
+        "contractBreakpoint": "desktop-reference"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 36,
+                "y": 150,
+                "width": 1368,
+                "height": 155
+              }
+            ],
+            "textSample": "Triggering observation Observed Checkout requests intermittently fail with HTTP 502 responses. Source Production alert: gateway error-rate monitor Reported by On-call alerting pipeline Scope Observed failure; no cause has been established by this record."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 36,
+                "y": 318,
+                "width": 448,
+                "height": 535
+              }
+            ],
+            "textSample": "Competing hypotheses (0 active) 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned. VIABLE — OPENH1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out. VIABLE — OPENH2: Connection pool exhaustion at the gateway Gateway cannot"
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 496,
+                "y": 318,
+                "width": 448,
+                "height": 535
+              }
+            ],
+            "textSample": "Contradictions (0 active) Evidence that conflicts with an explanation or with other evidence. No contradictions are reported as active."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 956,
+                "y": 318,
+                "width": 448,
+                "height": 535
+              }
+            ],
+            "textSample": "Unresolved unknowns (0 active) Information not yet established. Unknowns can block actions. No unknowns are reported as active."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 36,
+                "y": 865,
+                "width": 448,
+                "height": 275
+              }
+            ],
+            "textSample": "Outstanding obligations (2 active) Work that must still be done, including verification after a corrective action. OPEN Github write is pending Predicate github-write-is-pending — Work still required. OPEN Corrective action not verified Predicate corrective-action-not-verified — Work still required."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 496,
+                "y": 865,
+                "width": 448,
+                "height": 275
+              }
+            ],
+            "textSample": "Evidence (0 active) Evidence and the explanation it bears on. No evidence state is reported as active."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 956,
+                "y": 865,
+                "width": 448,
+                "height": 275
+              }
+            ],
+            "textSample": "Actions 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here. Unavailable: Confirm root cause Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Github write is pending (obligations) Corrective action not verified (obligations)"
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 36,
+                "y": 1152,
+                "width": 1368,
+                "height": 122
+              }
+            ],
+            "textSample": "Persistence status Local work in this page No local actions recorded in this page. Remote persistence (runtime-reported) Remote persistence status has not been reported. Do not assume work is saved."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": false,
+          "ariaDisabled": "true",
+          "text": "Unavailable: Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": "act-0-confirm-root-cause-why",
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "horizontalOverflow": false,
+          "scrollHeight": 1306
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "observation",
+            "visible": true
+          },
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "1440x900.png",
+      "ariaSnapshot": "- link \"Skip to actions\":\n  - /url: \"#region-legal-actions\"\n- banner:\n  - heading \"Investigation Workspace\" [level=1]\n  - paragraph: Working record for an observed failure. Explanations stay open until evidence and verification settle them; nothing here is inferred beyond what the runtime reports.\n  - list:\n    - listitem: \"Viable explanations: 3\"\n    - listitem: \"Contradictions: 0\"\n    - listitem: \"Unknowns: 0\"\n    - listitem: \"Obligations: 2\"\n    - listitem: \"Actions available: 0\"\n    - listitem: \"Remote persistence: not reported\"\n  - navigation \"Workspace areas\":\n    - link \"Observation\":\n      - /url: \"#region-observation\"\n    - link \"Hypotheses\":\n      - /url: \"#region-hypotheses\"\n    - link \"Contradictions\":\n      - /url: \"#region-contradictions\"\n    - link \"Unknowns\":\n      - /url: \"#region-unknowns\"\n    - link \"Obligations\":\n      - /url: \"#region-obligations\"\n    - link \"Evidence\":\n      - /url: \"#region-evidence\"\n    - link \"Actions\":\n      - /url: \"#region-legal-actions\"\n    - link \"Persistence\":\n      - /url: \"#region-persistence-state\"\n- main:\n  - region \"Triggering observation\":\n    - heading \"Triggering observation\" [level=2]\n    - term: Observed\n    - definition: Checkout requests intermittently fail with HTTP 502 responses.\n    - term: Source\n    - definition: \"Production alert: gateway error-rate monitor\"\n    - term: Reported by\n    - definition: On-call alerting pipeline\n    - term: Scope\n    - definition: Observed failure; no cause has been established by this record.\n  - region \"Competing hypotheses (0 active)\":\n    - heading \"Competing hypotheses (0 active)\" [level=2]\n    - paragraph: 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned.\n    - list:\n      - listitem: \"Viable — open H1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out.\"\n      - listitem: \"Viable — open H2: Connection pool exhaustion at the gateway Gateway cannot open new upstream connections under load. No runtime state references this explanation; it has not been ruled in or out.\"\n      - listitem: \"Viable — open H3: Faulty recent configuration deployment A config change altered routing or timeouts. No runtime state references this explanation; it has not been ruled in or out.\"\n  - region \"Contradictions (0 active)\":\n    - heading \"Contradictions (0 active)\" [level=2]\n    - paragraph: Evidence that conflicts with an explanation or with other evidence.\n    - paragraph: No contradictions are reported as active.\n  - region \"Unresolved unknowns (0 active)\":\n    - heading \"Unresolved unknowns (0 active)\" [level=2]\n    - paragraph: Information not yet established. Unknowns can block actions.\n    - paragraph: No unknowns are reported as active.\n  - region \"Outstanding obligations (2 active)\":\n    - heading \"Outstanding obligations (2 active)\" [level=2]\n    - paragraph: Work that must still be done, including verification after a corrective action.\n    - list:\n      - listitem:\n        - text: Open Github write is pending Predicate\n        - code: github-write-is-pending\n        - text: — Work still required.\n      - listitem:\n        - text: Open Corrective action not verified Predicate\n        - code: corrective-action-not-verified\n        - text: — Work still required.\n  - region \"Evidence (0 active)\":\n    - heading \"Evidence (0 active)\" [level=2]\n    - paragraph: Evidence and the explanation it bears on.\n    - paragraph: No evidence state is reported as active.\n  - region \"Actions\":\n    - heading \"Actions\" [level=2]\n    - paragraph: 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here.\n    - 'button \"Unavailable: Confirm root cause\" [disabled]'\n    - strong: \"Unavailable:\"\n    - text: \"the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it:\"\n    - list:\n      - listitem:\n        - link \"Github write is pending\":\n          - /url: \"#pred-0-github-write-is-pending\"\n        - text: (obligations)\n      - listitem:\n        - link \"Corrective action not verified\":\n          - /url: \"#pred-1-corrective-action-not-verified\"\n        - text: (obligations)\n  - region \"Persistence status\":\n    - heading \"Persistence status\" [level=2]\n    - heading \"Local work in this page\" [level=3]\n    - paragraph: No local actions recorded in this page.\n    - heading \"Remote persistence (runtime-reported)\" [level=3]\n    - paragraph: Remote persistence status has not been reported. Do not assume work is saved.",
+      "innerText": "Skip to actions\nInvestigation Workspace\n\nWorking record for an observed failure. Explanations stay open until evidence and verification settle them; nothing here is inferred beyond what the runtime reports.\n\nViable explanations: 3\nContradictions: 0\nUnknowns: 0\nObligations: 2\nActions available: 0\nRemote persistence: not reported\nObservation\nHypotheses\nContradictions\nUnknowns\nObligations\nEvidence\nActions\nPersistence\nTriggering observation\nObserved\nCheckout requests intermittently fail with HTTP 502 responses.\nSource\nProduction alert: gateway error-rate monitor\nReported by\nOn-call alerting pipeline\nScope\nObserved failure; no cause has been established by this record.\nCompeting hypotheses\n(0 active)\n\n3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned.\n\nVIABLE — OPENH1: Upstream payment service timeouts\nGateway gives up waiting on the payment dependency.\nNo runtime state references this explanation; it has not been ruled in or out.\nVIABLE — OPENH2: Connection pool exhaustion at the gateway\nGateway cannot open new upstream connections under load.\nNo runtime state references this explanation; it has not been ruled in or out.\nVIABLE — OPENH3: Faulty recent configuration deployment\nA config change altered routing or timeouts.\nNo runtime state references this explanation; it has not been ruled in or out.\nContradictions\n(0 active)\n\nEvidence that conflicts with an explanation or with other evidence.\n\nNo contradictions are reported as active.\n\nUnresolved unknowns\n(0 active)\n\nInformation not yet established. Unknowns can block actions.\n\nNo unknowns are reported as active.\n\nOutstanding obligations\n(2 active)\n\nWork that must still be done, including verification after a corrective action.\n\nOPEN Github write is pending\nPredicate github-write-is-pending — Work still required.\nOPEN Corrective action not verified\nPredicate corrective-action-not-verified — Work still required.\nEvidence\n(0 active)\n\nEvidence and the explanation it bears on.\n\nNo evidence state is reported as active.\n\nActions\n\n0 available, 1 unavailable. Availability comes from the runtime and is not overridden here.\n\nUnavailable: Confirm root cause\nUnavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it:\nGithub write is pending (obligations)\nCorrective action not verified (obligations)\nPersistence status\nLocal work in this page\n\nNo local actions recorded in this page.\n\nRemote persistence (runtime-reported)\n\nRemote persistence status has not been reported. Do not assume work is saved.",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    }
+  ],
+  "operationTrace": [
+    {
+      "target": {
+        "index": 0,
+        "domIndex": 99,
+        "tag": "a",
+        "role": null,
+        "label": "Github write is pending",
+        "href": "#pred-0-github-write-is-pending",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 406,
+        "hash": "",
+        "activeElement": {
+          "tag": "li",
+          "text": "OPEN Github write is pending Predicate github-write-is-pending — Work still required."
+        },
+        "hashTargetText": "",
+        "hashTargetInViewport": null
+      },
+      "screenshot": "trace/00.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 1,
+        "domIndex": 101,
+        "tag": "a",
+        "role": null,
+        "label": "Corrective action not verified",
+        "href": "#pred-1-corrective-action-not-verified",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 406,
+        "hash": "",
+        "activeElement": {
+          "tag": "li",
+          "text": "OPEN Corrective action not verified Predicate corrective-action-not-verified — Work still required."
+        },
+        "hashTargetText": "",
+        "hashTargetInViewport": null
+      },
+      "screenshot": "trace/01.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 2,
+        "domIndex": 7,
+        "tag": "a",
+        "role": null,
+        "label": "Skip to actions",
+        "href": "#region-legal-actions",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": false,
+        "error": "TimeoutError: elementHandle.click: Timeout 3000ms exceeded."
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "hash": "",
+        "activeElement": null,
+        "hashTargetText": "",
+        "hashTargetInViewport": null
+      },
+      "screenshot": "trace/02.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 3,
+        "domIndex": 19,
+        "tag": "a",
+        "role": null,
+        "label": "Observation",
+        "href": "#region-observation",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 150,
+        "hash": "#region-observation",
+        "activeElement": null,
+        "hashTargetText": "Triggering observation Observed Checkout requests intermittently fail with HTTP 502 responses. Source Production alert: gateway error-rate monitor Reported by On-call alerting pipeline Scope Observed failure; no cause has been established by this record.",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/03.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 4,
+        "domIndex": 20,
+        "tag": "a",
+        "role": null,
+        "label": "Hypotheses",
+        "href": "#region-hypotheses",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 318,
+        "hash": "#region-hypotheses",
+        "activeElement": null,
+        "hashTargetText": "Competing hypotheses (0 active) 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned. VIABLE — OPENH1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out. VIABLE — OPENH2: Connection pool exhaustion at the gateway Gateway cannot",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/04.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 5,
+        "domIndex": 21,
+        "tag": "a",
+        "role": null,
+        "label": "Contradictions",
+        "href": "#region-contradictions",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 318,
+        "hash": "#region-contradictions",
+        "activeElement": null,
+        "hashTargetText": "Contradictions (0 active) Evidence that conflicts with an explanation or with other evidence. No contradictions are reported as active.",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/05.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 6,
+        "domIndex": 22,
+        "tag": "a",
+        "role": null,
+        "label": "Unknowns",
+        "href": "#region-unknowns",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 318,
+        "hash": "#region-unknowns",
+        "activeElement": null,
+        "hashTargetText": "Unresolved unknowns (0 active) Information not yet established. Unknowns can block actions. No unknowns are reported as active.",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/06.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 7,
+        "domIndex": 23,
+        "tag": "a",
+        "role": null,
+        "label": "Obligations",
+        "href": "#region-obligations",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 406,
+        "hash": "#region-obligations",
+        "activeElement": null,
+        "hashTargetText": "Outstanding obligations (2 active) Work that must still be done, including verification after a corrective action. OPEN Github write is pending Predicate github-write-is-pending — Work still required. OPEN Corrective action not verified Predicate corrective-action-not-verified — Work still required.",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/07.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 8,
+        "domIndex": 24,
+        "tag": "a",
+        "role": null,
+        "label": "Evidence",
+        "href": "#region-evidence",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 406,
+        "hash": "#region-evidence",
+        "activeElement": null,
+        "hashTargetText": "Evidence (0 active) Evidence and the explanation it bears on. No evidence state is reported as active.",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/08.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 9,
+        "domIndex": 25,
+        "tag": "a",
+        "role": null,
+        "label": "Actions",
+        "href": "#region-legal-actions",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 406,
+        "hash": "#region-legal-actions",
+        "activeElement": null,
+        "hashTargetText": "Actions 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here. Unavailable: Confirm root cause Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Github write is pending (obligations) Corrective action not verified (obligations)",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/09.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "target": {
+        "index": 10,
+        "domIndex": 26,
+        "tag": "a",
+        "role": null,
+        "label": "Persistence",
+        "href": "#region-persistence-state",
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 406,
+        "hash": "#region-persistence-state",
+        "activeElement": null,
+        "hashTargetText": "Persistence status Local work in this page No local actions recorded in this page. Remote persistence (runtime-reported) Remote persistence status has not been reported. Do not assume work is saved.",
+        "hashTargetInViewport": true
+      },
+      "screenshot": "trace/10.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    }
+  ]
+}

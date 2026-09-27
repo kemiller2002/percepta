@@ -1,0 +1,21 @@
+candidate_branch: experiment/percepta-0004-openai-treatment-a
+registered_sha: d104371f69ae4b184769e85296fd7d4c1cd85c76
+object_type: commit
+remote_branch_sha: d104371f69ae4b184769e85296fd7d4c1cd85c76
+descends_from_baseline: true
+commits baseline..candidate:
+  d104371f69ae4b184769e85296fd7d4c1cd85c76 530dc4c13bca9292e10181eff36ecf3c573e7fca | Document Treatment A implementation
+  530dc4c13bca9292e10181eff36ecf3c573e7fca f474c449c2bc84da5707bb123c36500490875869 | Implement Treatment A investigation workspace
+git diff --name-status baseline candidate:
+A	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/NOTES.md
+A	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/index.html
+git diff --numstat baseline candidate:
+22	0	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/NOTES.md
+26	0	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/index.html
+blobs:
+100644 blob 708ea98a505312b3930c0de9b10428a69b98a1a3	research/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/AGENTS.md
+100644 blob 5c82866f99009237a093a1258a62abcf03a1c46b	research/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/AGENTS.md
+100644 blob 14403c03ed585d67b65e30104bcfa551cc88256b	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/AGENTS.md
+100644 blob dc368958bdfcc9dec22c0b0f015721732637827d	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/NOTES.md
+100644 blob 03da6c1a4283413260453e86db088fbfaf3cbb9f	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/index.html
+100644 blob 4bd99043ff0d5761160ee5714bd594c030460dac	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/AGENTS.md

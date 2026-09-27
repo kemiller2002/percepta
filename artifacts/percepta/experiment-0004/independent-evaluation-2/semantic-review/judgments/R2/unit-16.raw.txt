@@ -1,0 +1,51 @@
+{
+  "reviewUnit": "unit-16",
+  "candidate": "Candidate R",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "In 'Next actions', the 'Confirm root cause' button is rendered enabled (not disabled/greyed) with a '✓ Available' badge next to it; aria snapshot shows 'button \"Confirm root cause\"' with no disabled attribute. Operation trace step 0 clicks it with click.ok:true and trace/00.jpg shows a confirmation message appended: 'Request recorded locally. The outcome depends on the application state; nothing has been saved remotely by this click.' confirming the click was accepted/executed."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'Confirm root cause' button with '✓ Available' badge visible and styled as enabled in screenshot-1180x820-part1of2.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "Button and '✓ Available' badge visible, unclipped, in the 'Next actions' card in screenshot-820x1180-part1of2.png."},
+        "390x844": {"verdict": "PASS", "evidence": "Button and '✓ Available' badge visible at bottom of screenshot-390x844-part2of3.png, not overlapped or cut off."}
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "H3 'Runner disk quota is exhausted during extraction' is shown with strikethrough heading and a badge '✕ Falsified — retained for the record', plus text 'Evidence E3 rules this out. It stays listed so the reasoning history is preserved; it is no longer an active candidate.' visible in screenshot-1440x900-part2of2.png. It remains in the Competing hypotheses list and is separately reachable/highlighted via the 'H3' evidence link (operation trace step 15/17, trace/15.jpg, trace/17.jpg)."},
+        "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "H3 with strikethrough and 'Falsified — retained for the record' badge visible in screenshot-1180x820-part2of2.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "H3 with strikethrough and 'Falsified — retained for the record' badge visible in screenshot-820x1180-part2of2.png."},
+        "390x844": {"verdict": "PASS", "evidence": "H3 with strikethrough and 'Falsified — retained for the record' badge visible in screenshot-390x844-part2of3.png."}
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Investigation status' badge reads 'Open' (not 'Blocked'/'Closed'), and the 'Next actions' panel shows 'Confirm root cause' as enabled with '✓ Available', with explanatory text 'Availability comes from the application state; this workspace does not override it.' H1 and H2 remain 'Under consideration' (not blocked) alongside the falsified H3. No visible blocker or warning ties the falsification of H3 to a block on the investigation or on confirmation."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "'Investigation open' badge and enabled 'Confirm root cause'/'Available' both visible together in screenshot-1180x820-part1of2.png."},
+        "820x1180": {"verdict": "PASS", "evidence": "'Investigation open' badge and enabled 'Confirm root cause'/'Available' both visible together in screenshot-820x1180-part1of2.png."},
+        "390x844": {"verdict": "PASS", "evidence": "'Investigation open' badge visible in screenshot-390x844-part1of3.png; enabled 'Confirm root cause'/'Available' visible in screenshot-390x844-part2of3.png, same page, no contradicting blocked state shown."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "trace/00.jpg",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of3.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png"
+  ]
+}

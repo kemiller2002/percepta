@@ -1,0 +1,170 @@
+{
+  "reviewUnit": "unit-18",
+  "candidate": "Candidate R",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "H3 'Runner disk quota is exhausted during extraction' is fully visible in the Competing hypotheses list with strikethrough title and badge 'Falsified \u2014 retained for the record', plus explanatory text 'It stays listed so the reasoning history is preserved; it is no longer an active candidate.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "H3 card visible at bottom of tile 1 / top of tile 2 with same strikethrough + 'Falsified \u2014 retained for the record' badge."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "H3 card fully visible in part2 with strikethrough heading and badge."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "H3 card visible in part2 of screenshot-390x844, strikethrough heading and 'Falsified \u2014 retained for the record' badge intact."
+        }
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "H3's falsified state is marked by an '\u2715' icon plus text label 'Falsified \u2014 retained for the record' and strikethrough typography on the heading, not by color alone."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same '\u2715 Falsified \u2014 retained for the record' text badge and strikethrough heading present."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same '\u2715 Falsified \u2014 retained for the record' text badge and strikethrough heading present."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same '\u2715 Falsified \u2014 retained for the record' text badge and strikethrough heading present."
+        }
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Unresolved unknowns' region header badge '\u26d4 Blocking', and list item '\u26d4 Blocking Which template archive digest did the failing job actually receive?' with explanatory text and 'Blocks: Confirm root cause' link."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same blocking unknown text and '\u26d4 Blocking' badge visible in right column."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same blocking unknown text and badge visible in part2."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same blocking unknown text and badge visible, stacked below hypotheses in part2."
+        }
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Confirm root cause' button rendered dashed/disabled style with adjacent badge '\u2715 Unavailable'; aria-snapshot confirms button \"Confirm root cause\" [disabled]. Operation trace step 14 click on the 'Confirm root cause' nav link only scrolls to the section, no state change or action performed."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same disabled-style button with '\u2715 Unavailable' badge visible in Next actions panel."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same disabled-style button with '\u2715 Unavailable' badge visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same disabled-style button with '\u2715 Unavailable' badge visible in part3."
+        }
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Why unavailable:' list states 'A blocking unknown is open: ...' and 'A hypothesis has been falsified; confirming a root cause needs an active hypothesis.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same 'Why unavailable:' list with both reasons visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same 'Why unavailable:' list with both reasons visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Same 'Why unavailable:' list with both reasons visible in part3."
+        }
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Link 'Go to blocking unknown' next to the blocking-unknown reason; operation trace step 0 confirms click navigates to #unknown-blocker and scrolls the blocking unknown item into viewport."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "'Go to blocking unknown' link visible and styled as link text in the 'Why unavailable' box."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "'Go to blocking unknown' link visible in the 'Why unavailable' box."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "'Go to blocking unknown' link visible in the 'Why unavailable' box, part3."
+        }
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Blocking unknown ('Which template archive digest...') and its 'Blocks: Confirm root cause' relationship remain fully present and separately reasoned from the falsified H3, and 'Why unavailable' lists both the blocking unknown and the falsified hypothesis as two distinct, independent reasons rather than merging or dropping either."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Both blocking unknown and falsified hypothesis reasons remain distinct and present."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Both blocking unknown and falsified hypothesis reasons remain distinct and present."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Both blocking unknown and falsified hypothesis reasons remain distinct and present."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of4.png",
+    "screenshot-390x844-part2of4.png",
+    "screenshot-390x844-part3of4.png",
+    "screenshot-390x844-part4of4.png",
+    "operation-trace-1440x900.json"
+  ]
+}

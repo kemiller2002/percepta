@@ -1,0 +1,88 @@
+Skip to actions
+Investigation Workspace
+
+Working record for an observed failure. Explanations stay open until evidence and verification settle them; nothing here is inferred beyond what the runtime reports.
+
+Viable explanations: 3
+Contradictions: 0
+Unknowns: 1
+Obligations: 0
+Actions available: 0
+Remote persistence: not reported
+Observation
+Hypotheses
+Contradictions
+Unknowns
+Obligations
+Evidence
+Actions
+Persistence
+Triggering observation
+Observed
+Checkout requests intermittently fail with HTTP 502 responses.
+Source
+Production alert: gateway error-rate monitor
+Reported by
+On-call alerting pipeline
+Scope
+Observed failure; no cause has been established by this record.
+Competing hypotheses
+(1 active)
+
+3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned.
+
+VIABLE — OPENH1: Upstream payment service timeouts
+Gateway gives up waiting on the payment dependency.
+No runtime state references this explanation; it has not been ruled in or out.
+VIABLE — OPENH2: Connection pool exhaustion at the gateway
+Gateway cannot open new upstream connections under load.
+No runtime state references this explanation; it has not been ruled in or out.
+VIABLE — OPENH3: Faulty recent configuration deployment
+A config change altered routing or timeouts.
+No runtime state references this explanation; it has not been ruled in or out.
+Other hypothesis state reported
+FALSIFIED Hypothesis is falsified
+Predicate hypothesis-is-falsified — Retained in the record: it was considered and is now contradicted.
+Contradictions
+(0 active)
+
+Evidence that conflicts with an explanation or with other evidence.
+
+No contradictions are reported as active.
+
+Unresolved unknowns
+(1 active)
+
+Information not yet established. Unknowns can block actions.
+
+UNKNOWN Blocking unknown exists
+Predicate blocking-unknown-exists — Not established. May block actions that depend on it.
+Outstanding obligations
+(0 active)
+
+Work that must still be done, including verification after a corrective action.
+
+No obligations are reported as active.
+
+Evidence
+(0 active)
+
+Evidence and the explanation it bears on.
+
+No evidence state is reported as active.
+
+Actions
+
+0 available, 1 unavailable. Availability comes from the runtime and is not overridden here.
+
+Unavailable: Confirm root cause
+Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it:
+Blocking unknown exists (unknowns)
+Persistence status
+Local work in this page
+
+No local actions recorded in this page.
+
+Remote persistence (runtime-reported)
+
+Remote persistence status has not been reported. Do not assume work is saved.

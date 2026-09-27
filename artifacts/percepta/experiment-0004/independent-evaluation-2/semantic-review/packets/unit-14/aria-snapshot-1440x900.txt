@@ -1,0 +1,75 @@
+- link "Skip to actions":
+  - /url: "#region-legal-actions"
+- banner:
+  - heading "Investigation Workspace" [level=1]
+  - paragraph: Working record for an observed failure. Explanations stay open until evidence and verification settle them; nothing here is inferred beyond what the runtime reports.
+  - list:
+    - listitem: "Viable explanations: 3"
+    - listitem: "Contradictions: 0"
+    - listitem: "Unknowns: 0"
+    - listitem: "Obligations: 0"
+    - listitem: "Actions available: 0"
+    - listitem: "Remote persistence: not reported"
+  - navigation "Workspace areas":
+    - link "Observation":
+      - /url: "#region-observation"
+    - link "Hypotheses":
+      - /url: "#region-hypotheses"
+    - link "Contradictions":
+      - /url: "#region-contradictions"
+    - link "Unknowns":
+      - /url: "#region-unknowns"
+    - link "Obligations":
+      - /url: "#region-obligations"
+    - link "Evidence":
+      - /url: "#region-evidence"
+    - link "Actions":
+      - /url: "#region-legal-actions"
+    - link "Persistence":
+      - /url: "#region-persistence-state"
+- main:
+  - region "Triggering observation":
+    - heading "Triggering observation" [level=2]
+    - term: Observed
+    - definition: Checkout requests intermittently fail with HTTP 502 responses.
+    - term: Source
+    - definition: "Production alert: gateway error-rate monitor"
+    - term: Reported by
+    - definition: On-call alerting pipeline
+    - term: Scope
+    - definition: Observed failure; no cause has been established by this record.
+  - region "Competing hypotheses (0 active)":
+    - heading "Competing hypotheses (0 active)" [level=2]
+    - paragraph: 3 of 3 listed explanations remain viable. Falsified explanations stay listed. No numeric confidence is assigned.
+    - list:
+      - listitem: "Viable — open H1: Upstream payment service timeouts Gateway gives up waiting on the payment dependency. No runtime state references this explanation; it has not been ruled in or out."
+      - listitem: "Viable — open H2: Connection pool exhaustion at the gateway Gateway cannot open new upstream connections under load. No runtime state references this explanation; it has not been ruled in or out."
+      - listitem: "Viable — open H3: Faulty recent configuration deployment A config change altered routing or timeouts. No runtime state references this explanation; it has not been ruled in or out."
+  - region "Contradictions (0 active)":
+    - heading "Contradictions (0 active)" [level=2]
+    - paragraph: Evidence that conflicts with an explanation or with other evidence.
+    - paragraph: No contradictions are reported as active.
+  - region "Unresolved unknowns (0 active)":
+    - heading "Unresolved unknowns (0 active)" [level=2]
+    - paragraph: Information not yet established. Unknowns can block actions.
+    - paragraph: No unknowns are reported as active.
+  - region "Outstanding obligations (0 active)":
+    - heading "Outstanding obligations (0 active)" [level=2]
+    - paragraph: Work that must still be done, including verification after a corrective action.
+    - paragraph: No obligations are reported as active.
+  - region "Evidence (0 active)":
+    - heading "Evidence (0 active)" [level=2]
+    - paragraph: Evidence and the explanation it bears on.
+    - paragraph: No evidence state is reported as active.
+  - region "Actions":
+    - heading "Actions" [level=2]
+    - paragraph: 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here.
+    - 'button "Unavailable: Confirm root cause" [disabled]'
+    - strong: "Unavailable:"
+    - text: the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.
+  - region "Persistence status":
+    - heading "Persistence status" [level=2]
+    - heading "Local work in this page" [level=3]
+    - paragraph: No local actions recorded in this page.
+    - heading "Remote persistence (runtime-reported)" [level=3]
+    - paragraph: Remote persistence status has not been reported. Do not assume work is saved.

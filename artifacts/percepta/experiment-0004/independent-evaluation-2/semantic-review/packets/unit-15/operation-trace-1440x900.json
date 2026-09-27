@@ -1,0 +1,29 @@
+[
+  {
+    "step": 0,
+    "element": {
+      "tag": "button",
+      "role": null,
+      "visibleLabel": "Go to blocking unknown",
+      "href": null
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 0,
+      "hash": "",
+      "activeElement": {
+        "tag": "section",
+        "text": "Unresolved unknowns UNKNOWNNo opposite fact is inferred from information that has not been supplied. BLOCKERRequired information is unresolved This unknown blocks dependent progress until it is resolved."
+      },
+      "hashTargetText": "",
+      "hashTargetInViewport": null
+    },
+    "viewportScreenshotAfterClick": "trace/00.jpg"
+  }
+]

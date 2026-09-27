@@ -1,0 +1,791 @@
+{
+  "caseId": "combined-blocker-falsification",
+  "suppliedState": {
+    "name": "held-out-01",
+    "predicates": [
+      "hypothesis-is-falsified",
+      "blocking-unknown-exists"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "probedAtUtc": "2026-09-26T20:37:27.239Z",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "390x844",
+        "width": 390,
+        "height": 844,
+        "contractBreakpoint": "narrow-phone"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 11,
+                "y": 194,
+                "width": 368,
+                "height": 178
+              }
+            ],
+            "textSample": "Triggering observation Observed failure under investigation Source: recorded system observation. No additional domain facts have been supplied."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 11,
+                "y": 388,
+                "width": 368,
+                "height": 227
+              }
+            ],
+            "textSample": "Competing hypotheses FALSIFIEDCandidate explanation retained for history Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "ContradictionsCONFLICTConflicting evidence is presentEvidence conflicts with a current explanation. Review the evidence relationship before converging."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 11,
+                "y": 825,
+                "width": 368,
+                "height": 274
+              }
+            ],
+            "textSample": "Unresolved unknowns UNKNOWNNo opposite fact is inferred from information that has not been supplied. BLOCKERRequired information is unresolved This unknown blocks dependent progress until it is resolved."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "Outstanding obligationsREQUIREDWork remains before legal progress can continue.VERIFYVerify corrective actionA corrective action has not yet been verified, so the investigation remains unresolved."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 11,
+                "y": 631,
+                "width": 368,
+                "height": 178
+              }
+            ],
+            "textSample": "Evidence Evidence record Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 11,
+                "y": 1116,
+                "width": 368,
+                "height": 317
+              }
+            ],
+            "textSample": "Actions Confirm root cause Unavailable: unresolved information is blocking progress. Go to blocking unknown LEGALITYAvailability follows the supplied capability map, not UI inference."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 11,
+                "y": 1448,
+                "width": 368,
+                "height": 180
+              }
+            ],
+            "textSample": "Persistence LOCALRemote persistence not established No remote success is inferred from absent persistence information."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "horizontalOverflow": false,
+          "scrollHeight": 1639
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "390x844.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "820x1180",
+        "width": 820,
+        "height": 1180,
+        "contractBreakpoint": "ipad-portrait"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 176,
+                "width": 500,
+                "height": 160
+              }
+            ],
+            "textSample": "Triggering observation Observed failure under investigation Source: recorded system observation. No additional domain facts have been supplied."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 352,
+                "width": 500,
+                "height": 209
+              }
+            ],
+            "textSample": "Competing hypotheses FALSIFIEDCandidate explanation retained for history Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "ContradictionsCONFLICTConflicting evidence is presentEvidence conflicts with a current explanation. Review the evidence relationship before converging."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 532,
+                "y": 176,
+                "width": 272,
+                "height": 326
+              }
+            ],
+            "textSample": "Unresolved unknowns UNKNOWNNo opposite fact is inferred from information that has not been supplied. BLOCKERRequired information is unresolved This unknown blocks dependent progress until it is resolved."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "Outstanding obligationsREQUIREDWork remains before legal progress can continue.VERIFYVerify corrective actionA corrective action has not yet been verified, so the investigation remains unresolved."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 576,
+                "width": 500,
+                "height": 160
+              }
+            ],
+            "textSample": "Evidence Evidence record Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 532,
+                "y": 518,
+                "width": 272,
+                "height": 368
+              }
+            ],
+            "textSample": "Actions Confirm root cause Unavailable: unresolved information is blocking progress. Go to blocking unknown LEGALITYAvailability follows the supplied capability map, not UI inference."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 532,
+                "y": 901,
+                "width": 272,
+                "height": 231
+              }
+            ],
+            "textSample": "Persistence LOCALRemote persistence not established No remote success is inferred from absent persistence information."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 820,
+          "clientWidth": 820,
+          "horizontalOverflow": false,
+          "scrollHeight": 1180
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "820x1180.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "1180x820",
+        "width": 1180,
+        "height": 820,
+        "contractBreakpoint": "ipad-landscape"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 129,
+                "width": 747,
+                "height": 136
+              }
+            ],
+            "textSample": "Triggering observation Observed failure under investigation Source: recorded system observation. No additional domain facts have been supplied."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 282,
+                "width": 747,
+                "height": 162
+              }
+            ],
+            "textSample": "Competing hypotheses FALSIFIEDCandidate explanation retained for history Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "ContradictionsCONFLICTConflicting evidence is presentEvidence conflicts with a current explanation. Review the evidence relationship before converging."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 779,
+                "y": 129,
+                "width": 385,
+                "height": 279
+              }
+            ],
+            "textSample": "Unresolved unknowns UNKNOWNNo opposite fact is inferred from information that has not been supplied. BLOCKERRequired information is unresolved This unknown blocks dependent progress until it is resolved."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "Outstanding obligationsREQUIREDWork remains before legal progress can continue.VERIFYVerify corrective actionA corrective action has not yet been verified, so the investigation remains unresolved."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 460,
+                "width": 747,
+                "height": 160
+              }
+            ],
+            "textSample": "Evidence Evidence record Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 779,
+                "y": 425,
+                "width": 385,
+                "height": 321
+              }
+            ],
+            "textSample": "Actions Confirm root cause Unavailable: unresolved information is blocking progress. Go to blocking unknown LEGALITYAvailability follows the supplied capability map, not UI inference."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 779,
+                "y": 762,
+                "width": 385,
+                "height": 185
+              }
+            ],
+            "textSample": "Persistence LOCALRemote persistence not established No remote success is inferred from absent persistence information."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 1180,
+          "clientWidth": 1180,
+          "horizontalOverflow": false,
+          "scrollHeight": 963
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "1180x820.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "1440x900",
+        "width": 1440,
+        "height": 900,
+        "contractBreakpoint": "desktop-reference"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 129,
+                "width": 918,
+                "height": 136
+              }
+            ],
+            "textSample": "Triggering observation Observed failure under investigation Source: recorded system observation. No additional domain facts have been supplied."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 282,
+                "width": 918,
+                "height": 162
+              }
+            ],
+            "textSample": "Competing hypotheses FALSIFIEDCandidate explanation retained for history Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "ContradictionsCONFLICTConflicting evidence is presentEvidence conflicts with a current explanation. Review the evidence relationship before converging."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 950,
+                "y": 129,
+                "width": 474,
+                "height": 233
+              }
+            ],
+            "textSample": "Unresolved unknowns UNKNOWNNo opposite fact is inferred from information that has not been supplied. BLOCKERRequired information is unresolved This unknown blocks dependent progress until it is resolved."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 0,
+            "visible": false,
+            "clippedHorizontally": false,
+            "boxes": [],
+            "textSample": "Outstanding obligationsREQUIREDWork remains before legal progress can continue.VERIFYVerify corrective actionA corrective action has not yet been verified, so the investigation remains unresolved."
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 16,
+                "y": 460,
+                "width": 918,
+                "height": 136
+              }
+            ],
+            "textSample": "Evidence Evidence record Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned."
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 950,
+                "y": 378,
+                "width": 474,
+                "height": 321
+              }
+            ],
+            "textSample": "Actions Confirm root cause Unavailable: unresolved information is blocking progress. Go to blocking unknown LEGALITYAvailability follows the supplied capability map, not UI inference."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 950,
+                "y": 716,
+                "width": 474,
+                "height": 161
+              }
+            ],
+            "textSample": "Persistence LOCALRemote persistence not established No remote success is inferred from absent persistence information."
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm root cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "horizontalOverflow": false,
+          "scrollHeight": 900
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "observation",
+            "visible": true
+          },
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "1440x900.png",
+      "ariaSnapshot": "- banner:\n  - text: Failure investigation\n  - heading \"Investigation Workspace\" [level=1]\n  - paragraph: What currently explains the observation, and what should be tested next?\n  - text: Investigation open\n- main:\n  - heading \"Triggering observation\" [level=2]\n  - strong: Observed failure under investigation\n  - text: \"Source: recorded system observation. No additional domain facts have been supplied.\"\n  - heading \"Competing hypotheses\" [level=2]\n  - text: FALSIFIED\n  - strong: Candidate explanation retained for history\n  - text: Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable.\n  - heading \"Evidence\" [level=2]\n  - strong: Evidence record\n  - text: Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned.\n  - heading \"Unresolved unknowns\" [level=2]\n  - text: UNKNOWN No opposite fact is inferred from information that has not been supplied. BLOCKER\n  - strong: Required information is unresolved\n  - text: This unknown blocks dependent progress until it is resolved.\n  - heading \"Actions\" [level=2]\n  - button \"Confirm root cause\" [disabled]\n  - status: \"Unavailable: unresolved information is blocking progress.\"\n  - button \"Go to blocking unknown\"\n  - text: LEGALITY Availability follows the supplied capability map, not UI inference.\n  - heading \"Persistence\" [level=2]\n  - text: LOCAL\n  - strong: Remote persistence not established\n  - text: No remote success is inferred from absent persistence information.",
+      "innerText": "FAILURE INVESTIGATION\nInvestigation Workspace\n\nWhat currently explains the observation, and what should be tested next?\n\nInvestigation open\nTriggering observation\nObserved failure under investigation\nSource: recorded system observation. No additional domain facts have been supplied.\nCompeting hypotheses\nFALSIFIEDCandidate explanation retained for history\nEvidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable.\nEvidence\nEvidence record\nEvidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned.\nUnresolved unknowns\nUNKNOWNNo opposite fact is inferred from information that has not been supplied.\nBLOCKERRequired information is unresolved\nThis unknown blocks dependent progress until it is resolved.\nActions\nConfirm root cause\nUnavailable: unresolved information is blocking progress.\nGo to blocking unknown\nLEGALITYAvailability follows the supplied capability map, not UI inference.\nPersistence\nLOCALRemote persistence not established\nNo remote success is inferred from absent persistence information.",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    }
+  ],
+  "operationTrace": [
+    {
+      "target": {
+        "index": 0,
+        "domIndex": 64,
+        "tag": "button",
+        "role": null,
+        "label": "Go to blocking unknown",
+        "href": null,
+        "isConfirmCapability": false
+      },
+      "click": {
+        "ok": true
+      },
+      "before": {
+        "scrollY": 0,
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "hash": "",
+        "activeElement": {
+          "tag": "section",
+          "text": "Unresolved unknowns UNKNOWNNo opposite fact is inferred from information that has not been supplied. BLOCKERRequired information is unresolved This unknown blocks dependent progress until it is resolved."
+        },
+        "hashTargetText": "",
+        "hashTargetInViewport": null
+      },
+      "screenshot": "trace/00.jpg",
+      "pageErrors": [],
+      "consoleErrors": []
+    }
+  ]
+}

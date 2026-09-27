@@ -1,0 +1,68 @@
+{
+  "reviewUnit": "unit-13",
+  "candidate": "Candidate K",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Outstanding obligations panel lists 'OPEN Github write is pending — Predicate github-write-is-pending — Work still required.'; header stat line reads 'Obligations: 2'; Persistence status section states 'Remote persistence status has not been reported. Do not assume work is saved.'"},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'OPEN Github write is pending' card visible in Outstanding obligations panel; Persistence section unchanged."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same 'OPEN Github write is pending' card visible, stacked layout, fully readable."},
+        "390x844": {"verdict": "PASS", "evidence": "Tile 2 shows 'OPEN Github write is pending — Predicate github-write-is-pending — Work still required.' un-clipped."}
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Persistence status region: 'Remote persistence (runtime-reported) — Remote persistence status has not been reported. Do not assume work is saved.' Header stat also reads 'Remote persistence: not reported'. No success or saved-state wording anywhere."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same text present at bottom of part2: 'Remote persistence status has not been reported. Do not assume work is saved.'"},
+        "820x1180": {"verdict": "PASS", "evidence": "Same text visible in part2, Persistence status card."},
+        "390x844": {"verdict": "PASS", "evidence": "Tile 3 shows 'Remote persistence (runtime-reported) — Remote persistence status has not been reported. Do not assume work is saved.'"}
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Competing hypotheses region: 'VIABLE — OPEN' badge on all three H1/H2/H3 cards; text '3 of 3 listed explanations remain viable'; Scope field: 'Observed failure; no cause has been established by this record.' Confirm root cause action is disabled."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'VIABLE — OPEN' hypothesis cards and '3 of 3 listed explanations remain viable' text visible unclipped."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same hypothesis cards with 'VIABLE — OPEN' badges visible, stacked but legible."},
+        "390x844": {"verdict": "PASS", "evidence": "Tile 1/2 show 'VIABLE — OPEN' badges on H1-H3 and '3 of 3 listed explanations remain viable' text."}
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Outstanding obligations panel: 'OPEN Corrective action not verified — Predicate corrective-action-not-verified — Work still required.'; panel intro text: 'Work that must still be done, including verification after a corrective action.'"},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'OPEN Corrective action not verified' card visible in Outstanding obligations panel."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same card visible at top of part2 screenshot: 'OPEN Corrective action not verified — Predicate corrective-action-not-verified — Work still required.'"},
+        "390x844": {"verdict": "PASS", "evidence": "Tile 2 shows 'OPEN Corrective action not verified' card with predicate and 'Work still required.'"}
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Actions region: disabled button 'Unavailable: Confirm root cause' (aria snapshot confirms [disabled]); explanatory text 'the runtime marks this action as not permitted in the current state' lists both active predicates as blocking conditions, matching capabilities map confirm-root-cause: illegal."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same disabled 'Unavailable: Confirm root cause' button and blocking-conditions list visible in part2 screenshot."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same disabled button and blocking list visible in part2, stacked layout."},
+        "390x844": {"verdict": "PASS", "evidence": "Tile 2/3 show disabled 'Unavailable: Confirm root cause' button and blocking-condition list ('Github write is pending', 'Corrective action not verified')."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of3.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png"
+  ]
+}

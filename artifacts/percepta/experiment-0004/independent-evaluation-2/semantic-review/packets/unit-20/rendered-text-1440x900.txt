@@ -1,0 +1,118 @@
+Skip to workspace
+Investigation Workspace
+
+What currently explains the observation, and what should be tested next?
+
+Investigation open
+Verification outstanding
+GitHub write pending
+Confirm root cause: unavailable
+Observation
+Hypotheses
+Unknowns
+Actions
+Obligations
+Evidence
+Persistence
+Triggering observation
+Preserved
+
+`indy init` exits with status 1 while scaffolding a new workspace on the CI runner.
+
+error: failed to materialize template "service-basic"
+  cause: unexpected end of archive (read 0 of 4096 bytes)
+exit status 1
+Source
+CI job log — pipeline “nightly-scaffold”, runner linux-x64-03
+Reported by
+Automated nightly check
+
+Preserved verbatim. Later findings annotate this observation; they do not replace it.
+
+Investigation status
+Open
+
+Not closed: a corrective action was applied but is not verified. The verification obligation remains outstanding.
+
+Active state facts:
+
+GitHub write is pending github-write-is-pending
+Corrective action is not verified corrective-action-not-verified
+Competing hypotheses
+
+Explanations are listed side by side, not ranked. No numeric confidence is shown because none is supplied.
+
+H1: Template archive is truncated when fetched from the registry mirror
+
+Under consideration
+
+No falsification is reported in the current state. This is not a confirmation.
+
+Basis: The error reports an unexpected end of archive while materializing a template.
+
+Evidence: E1 supportsE2 neutral
+
+H2: Stale local template cache on the runner serves a partial archive
+
+Under consideration
+
+No falsification is reported in the current state. This is not a confirmation.
+
+Basis: The runner reuses a cache directory between jobs.
+
+Evidence: E1 supports
+
+H3: Runner disk quota is exhausted during extraction
+
+Under consideration
+
+No falsification is reported in the current state. This is not a confirmation.
+
+Basis: Extraction failures can surface as short reads when writes fail.
+
+Evidence: E1 consistent with
+
+Unresolved unknowns
+
+Open When was the runner template cache last cleared?
+
+Next actions
+
+Availability comes from the application state; this workspace does not override it.
+
+Confirm root cause
+Unavailable
+
+Record the explanation that accounts for the observation. Requires an active (not falsified) hypothesis.
+
+Why unavailable:
+The corrective action is not yet verified. Go to verification obligation
+
+Outstanding obligations
+1 open
+
+Verification required Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds.
+
+A corrective action has been applied but has not been verified. The investigation stays open until verification is complete.
+
+Evidence
+
+E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction.
+
+Source: CI job log
+
+Relationship: supports H1supports H2consistent with H3
+
+E2 The registry mirror returned HTTP 200 with a Content-Length for the template archive.
+
+Source: Mirror access log
+
+Relationship: neutral H1
+
+Persistence
+This device:
+Local working copy
+Edits in this workspace exist locally.
+GitHub:
+Pending
+Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.

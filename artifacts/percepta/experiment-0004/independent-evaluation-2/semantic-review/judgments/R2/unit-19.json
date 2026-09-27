@@ -1,0 +1,123 @@
+{
+  "reviewUnit": "unit-19",
+  "candidate": "Candidate V",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Persistence card shows bold amber text 'Local work may not be remotely persisted.' with badge 'Github Write Is Pending' directly beneath it."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same 'Local work may not be remotely persisted.' text and 'Github Write Is Pending' badge visible unclipped in Persistence card."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Persistence card retains identical wording and badge, fully visible in stacked two-column layout."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Persistence card visible in single-column stack (tile part1of2) with full text and badge, not clipped."
+        }
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "No text anywhere claims successful remote save; Persistence card only states persistence may not have occurred."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "No success/confirmation language present at this viewport either."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "No success/confirmation language present."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "No success/confirmation language present in either tile."
+        }
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Outstanding obligations card lists 'Github Write Is Pending' as an active runtime predicate; Evidence card lists 'Corrective Action Not Verified'; no 'resolved'/'complete' language anywhere."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same 'Outstanding obligations' and 'Evidence & relationships' cards visible, no resolution claim."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same cards visible unclipped, no resolution claim."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Cards visible in stacked tiles, no resolution claim."
+        }
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Evidence & relationships' card: 'Corrective Action Not Verified' / 'Active runtime predicate', clearly displayed as an open item."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "'Corrective Action Not Verified' entry visible unclipped in Evidence & relationships card."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "'Corrective Action Not Verified' entry visible unclipped."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "'Corrective Action Not Verified' visible in second tile of stacked layout."
+        }
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Actions card: 'Confirm Root Cause' button rendered disabled (aria snapshot: button \"Confirm Root Cause\" [disabled]) next to badge 'Unavailable', with explanatory text 'Unavailable because the runtime marks this capability illegal.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Disabled 'Confirm Root Cause' button and 'Unavailable' badge/explanation visible unclipped."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Disabled button and 'Unavailable' explanation visible unclipped in Actions card."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Disabled button, 'Unavailable' badge, and explanation visible in second tile, not clipped."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png"
+  ]
+}

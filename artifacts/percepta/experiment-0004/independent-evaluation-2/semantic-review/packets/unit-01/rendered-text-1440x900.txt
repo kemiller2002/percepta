@@ -1,0 +1,23 @@
+FAILURE INVESTIGATION
+Investigation Workspace
+
+What currently explains the observation, and what should be tested next?
+
+Investigation open
+Triggering observation
+Observed failure under investigation
+Source: recorded system observation. No additional domain facts have been supplied.
+Competing hypotheses
+FALSIFIEDCandidate explanation retained for history
+Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable.
+Evidence
+Evidence record
+Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned.
+Unresolved unknowns
+UNKNOWNNo opposite fact is inferred from information that has not been supplied.
+Actions
+Confirm root cause
+LEGALITYAvailability follows the supplied capability map, not UI inference.
+Persistence
+LOCALRemote persistence not established
+No remote success is inferred from absent persistence information.

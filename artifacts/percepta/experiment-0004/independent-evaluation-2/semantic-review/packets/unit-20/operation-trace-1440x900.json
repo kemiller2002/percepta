@@ -1,0 +1,459 @@
+[
+  {
+    "step": 0,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Go to verification obligation",
+      "href": "#obligation-verify"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 682,
+      "hash": "#obligation-verify",
+      "activeElement": {
+        "tag": "li",
+        "text": "Verification required Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds. A corrective action has been applied but has not been verified. The investigation stays open until verification is complete."
+      },
+      "hashTargetText": "Verification required Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds. A corrective action has been applied but has not been verified. The investigation stays open until verification is complete.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/00.jpg"
+  },
+  {
+    "step": 1,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Skip to workspace",
+      "href": "#workspace"
+    },
+    "click": {
+      "ok": false,
+      "error": "TimeoutError: elementHandle.click: Timeout 3000ms exceeded."
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 0,
+      "hash": "",
+      "activeElement": null,
+      "hashTargetText": "",
+      "hashTargetInViewport": null
+    },
+    "viewportScreenshotAfterClick": "trace/01.jpg"
+  },
+  {
+    "step": 2,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Observation",
+      "href": "#region-observation"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 0,
+      "hash": "#region-observation",
+      "activeElement": {
+        "tag": "a",
+        "text": "Observation"
+      },
+      "hashTargetText": "Triggering observation Preserved `indy init` exits with status 1 while scaffolding a new workspace on the CI runner. error: failed to materialize template \"service-basic\" cause: unexpected end of archive (read 0 of 4096 bytes) exit status 1 Source CI job log \u2014 pipeline \u201cnightly-scaffold\u201d, runner linux-x64-03 Reported by Automated nightly check Preserved verbatim. Later findings annotate this obser",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/02.jpg"
+  },
+  {
+    "step": 3,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Hypotheses",
+      "href": "#region-hypotheses"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 511,
+      "hash": "#region-hypotheses",
+      "activeElement": {
+        "tag": "a",
+        "text": "Hypotheses"
+      },
+      "hashTargetText": "Competing hypotheses Explanations are listed side by side, not ranked. No numeric confidence is shown because none is supplied. H1: Template archive is truncated when fetched from the registry mirror Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The error reports an unexpected end of archive while materializing a template. Evidence: E1 su",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/03.jpg"
+  },
+  {
+    "step": 4,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Unknowns",
+      "href": "#region-unknowns"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 220,
+      "hash": "#region-unknowns",
+      "activeElement": {
+        "tag": "a",
+        "text": "Unknowns"
+      },
+      "hashTargetText": "Unresolved unknowns Open When was the runner template cache last cleared?",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/04.jpg"
+  },
+  {
+    "step": 5,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Actions",
+      "href": "#region-legal-actions"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 327,
+      "hash": "#region-legal-actions",
+      "activeElement": {
+        "tag": "a",
+        "text": "Actions"
+      },
+      "hashTargetText": "Next actions Availability comes from the application state; this workspace does not override it. Confirm root cause Unavailable Record the explanation that accounts for the observation. Requires an active (not falsified) hypothesis. Why unavailable: The corrective action is not yet verified. Go to verification obligation",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/05.jpg"
+  },
+  {
+    "step": 6,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Obligations",
+      "href": "#region-obligations"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 670,
+      "hash": "#region-obligations",
+      "activeElement": {
+        "tag": "a",
+        "text": "Obligations"
+      },
+      "hashTargetText": "Outstanding obligations 1 open Verification required Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds. A corrective action has been applied but has not been verified. The investigation stays open until verification is complete.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/06.jpg"
+  },
+  {
+    "step": 7,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Evidence",
+      "href": "#region-evidence"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 705,
+      "hash": "#region-evidence",
+      "activeElement": {
+        "tag": "a",
+        "text": "Evidence"
+      },
+      "hashTargetText": "Evidence E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3 E2 The registry mirror returned HTTP 200 with a Content-Length for the template archive. Source: Mirror access log Relationship: neutral H1",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/07.jpg"
+  },
+  {
+    "step": 8,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "Persistence",
+      "href": "#region-persistence-state"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 705,
+      "hash": "#region-persistence-state",
+      "activeElement": {
+        "tag": "a",
+        "text": "Persistence"
+      },
+      "hashTargetText": "Persistence This device: Local working copy Edits in this workspace exist locally. GitHub: Pending Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/08.jpg"
+  },
+  {
+    "step": 9,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "E1",
+      "href": "#ev-1"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 705,
+      "hash": "#ev-1",
+      "activeElement": {
+        "tag": "li",
+        "text": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3"
+      },
+      "hashTargetText": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/09.jpg"
+  },
+  {
+    "step": 10,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "E2",
+      "href": "#ev-2"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 705,
+      "hash": "#ev-2",
+      "activeElement": {
+        "tag": "li",
+        "text": "E2 The registry mirror returned HTTP 200 with a Content-Length for the template archive. Source: Mirror access log Relationship: neutral H1"
+      },
+      "hashTargetText": "E2 The registry mirror returned HTTP 200 with a Content-Length for the template archive. Source: Mirror access log Relationship: neutral H1",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/10.jpg"
+  },
+  {
+    "step": 11,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "E1",
+      "href": "#ev-1"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 741,
+      "hash": "#ev-1",
+      "activeElement": {
+        "tag": "li",
+        "text": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3"
+      },
+      "hashTargetText": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/11.jpg"
+  },
+  {
+    "step": 12,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "E1",
+      "href": "#ev-1"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 741,
+      "hash": "#ev-1",
+      "activeElement": {
+        "tag": "li",
+        "text": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3"
+      },
+      "hashTargetText": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/12.jpg"
+  },
+  {
+    "step": 13,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "H1",
+      "href": "#hyp-h-registry"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 355,
+      "hash": "#hyp-h-registry",
+      "activeElement": {
+        "tag": "li",
+        "text": "H1: Template archive is truncated when fetched from the registry mirror Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The error reports an unexpected end of archive while materializing a template. Evidence: E1 supportsE2 neutral"
+      },
+      "hashTargetText": "H1: Template archive is truncated when fetched from the registry mirror Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The error reports an unexpected end of archive while materializing a template. Evidence: E1 supportsE2 neutral",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/13.jpg"
+  },
+  {
+    "step": 14,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "H2",
+      "href": "#hyp-h-cache"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 572,
+      "hash": "#hyp-h-cache",
+      "activeElement": {
+        "tag": "li",
+        "text": "H2: Stale local template cache on the runner serves a partial archive Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The runner reuses a cache directory between jobs. Evidence: E1 supports"
+      },
+      "hashTargetText": "H2: Stale local template cache on the runner serves a partial archive Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The runner reuses a cache directory between jobs. Evidence: E1 supports",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/14.jpg"
+  },
+  {
+    "step": 15,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "H3",
+      "href": "#hyp-h-disk"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 741,
+      "hash": "#hyp-h-disk",
+      "activeElement": {
+        "tag": "li",
+        "text": "H3: Runner disk quota is exhausted during extraction Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: Extraction failures can surface as short reads when writes fail. Evidence: E1 consistent with"
+      },
+      "hashTargetText": "H3: Runner disk quota is exhausted during extraction Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: Extraction failures can surface as short reads when writes fail. Evidence: E1 consistent with",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/15.jpg"
+  },
+  {
+    "step": 16,
+    "element": {
+      "tag": "a",
+      "role": null,
+      "visibleLabel": "H1",
+      "href": "#hyp-h-registry"
+    },
+    "click": {
+      "ok": true
+    },
+    "before": {
+      "scrollY": 0,
+      "hash": ""
+    },
+    "after": {
+      "scrollY": 355,
+      "hash": "#hyp-h-registry",
+      "activeElement": {
+        "tag": "li",
+        "text": "H1: Template archive is truncated when fetched from the registry mirror Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The error reports an unexpected end of archive while materializing a template. Evidence: E1 supportsE2 neutral"
+      },
+      "hashTargetText": "H1: Template archive is truncated when fetched from the registry mirror Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The error reports an unexpected end of archive while materializing a template. Evidence: E1 supportsE2 neutral",
+      "hashTargetInViewport": true
+    },
+    "viewportScreenshotAfterClick": "trace/16.jpg"
+  }
+]

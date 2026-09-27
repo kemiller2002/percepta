@@ -1,0 +1,61 @@
+{
+  "checkedAtUtc": "2026-09-26T20:48:50Z",
+  "candidatesEvaluatedAtRegisteredSha": {
+    "openai-control-a": {
+      "registered": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+      "mappingSha": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+      "stagedBytesEqualGitBlobAtSha": true
+    },
+    "openai-treatment-a": {
+      "registered": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+      "mappingSha": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+      "stagedBytesEqualGitBlobAtSha": true
+    },
+    "claude-control-b": {
+      "registered": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+      "mappingSha": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+      "stagedBytesEqualGitBlobAtSha": true
+    },
+    "claude-treatment-b": {
+      "registered": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+      "mappingSha": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+      "stagedBytesEqualGitBlobAtSha": true
+    }
+  },
+  "candidateBranchesUnchanged": {
+    "openai-control-a": true,
+    "openai-treatment-a": true,
+    "claude-control-b": true,
+    "claude-treatment-b": true
+  },
+  "openaiControlB": {
+    "branchHead": "9af43e658e45f99fc7930e687ca488b19927bbf2",
+    "stagedOrEvaluated": false,
+    "stagingDirs": [
+      "K",
+      "M",
+      "R",
+      "V"
+    ]
+  },
+  "frozenInputsUnchangedAtEvaluationHead": {
+    "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md": true,
+    "research/experiments/EX-PERCEPTA-2026-0004/frozen-product-brief.md": true,
+    "research/experiments/EX-PERCEPTA-2026-0004/frozen-runtime-protocol.md": true,
+    "research/experiments/EX-PERCEPTA-2026-0004/held-out-semantic-cases.json": true,
+    ".percepta/contracts/indy-init-investigation-workspace.json": true,
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/AGENTS.md": true,
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/AGENTS.md": true,
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/AGENTS.md": true,
+    "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/AGENTS.md": true
+  },
+  "heldOutBlobVerified": true,
+  "judgmentsFrozenBeforeUnblinding": {
+    "frozenAt": "2026-09-26T20:46:48Z",
+    "unblindedAt": "2026-09-26T20:46:52Z",
+    "frozenManifestSha256": "aba737767c9ca56b3adcddf2f0adfb3becad4e766bde8c4ede31da5ff8887ee3",
+    "manifestStillVerifies": true,
+    "orderOk": true
+  },
+  "aggregatesReconstructed": true
+}
