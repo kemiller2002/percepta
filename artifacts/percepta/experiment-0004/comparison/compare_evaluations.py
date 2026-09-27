@@ -129,7 +129,7 @@ def render(report, show_evidence):
         f"  obligation: {d['obligation']}",
         f"  Eval 1: {verdict(d['evaluation1'])}",
         f"  Eval 2: {verdict(d['evaluation2'])}",
-        *((f"    Eval {n} {r}: {clip(d[k]['evidence'])}" for n, k in (("1", "evaluation1"), ("2", "evaluation2")) for r in REVIEWERS)
+        *((f"    Eval {n} {r}: {clip(d[k]['evidence'][r])}" for n, k in (("1", "evaluation1"), ("2", "evaluation2")) for r in REVIEWERS)
           if show_evidence else ()),
     ]
     return "\n".join(lines + [l for d in report["disagreements"] for l in detail(d)])
