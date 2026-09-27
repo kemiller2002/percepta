@@ -1,0 +1,83 @@
+{
+  "reviewUnit": "unit-06",
+  "candidate": "Candidate R",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Header badges show all six active predicates via 'Investigation open', 'Blocked by unknown', 'Verification outstanding', 'GitHub write pending', and 'Confirm root cause: unavailable'; the 'Investigation status' region lists all six as an 'Active state facts' bullet list with predicate codes (contradictions-present, obligations-present, hypothesis-is-falsified, blocking-unknown-exists, github-write-is-pending, corrective-action-not-verified), each also elaborated in its own region (Hypotheses, Unknowns, Contradictions, Obligations, Persistence)."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same badge row and Active state facts list fully visible, reflowed but unclipped (screenshot-1180x820-part1of3.png)."},
+        "820x1180": {"verdict": "PASS", "evidence": "Badges wrap to two lines, all six state facts still listed in full (screenshot-820x1180-part1of3.png)."},
+        "390x844": {"verdict": "PASS", "evidence": "Badges stack vertically, all six Active state facts bullets present and readable (screenshot-390x844-part1of5/2of5.png)."}
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "H1 remains listed as 'Under consideration — contradicted' rather than removed after E4 conflict; H3 remains listed as 'Falsified — retained for the record' with strikethrough rather than deleted; obligations, contradictions, and pending persistence are all shown concurrently in separate regions without one hiding another."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "H1 and H3 both still shown with their status labels and rationale intact (screenshot-1180x820-part1of3/2of3.png)."},
+        "820x1180": {"verdict": "PASS", "evidence": "H1 'contradicted' and H3 'Falsified — retained' both visible together (screenshot-820x1180-part1of3/2of3.png)."},
+        "390x844": {"verdict": "PASS", "evidence": "H1 and H3 statuses both visible in sequence, neither suppressed (screenshot-390x844-part2of5/3of5.png)."}
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Dedicated 'Contradictions — Present' region states 'E4 conflicts with H1... The same archive digest fetched from the mirror by a second runner at the same time extracted successfully. H1 is weakened, not removed.' Also surfaced in header badge count is absent but is listed among Active state facts ('Evidence conflicts with an explanation contradictions-present') and in H1's card ('Under consideration — contradicted')."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Contradictions region with full E4/H1 text visible (screenshot-1180x820-part2of3.png)."},
+        "820x1180": {"verdict": "PASS", "evidence": "Contradictions region with full text visible (screenshot-820x1180-part2of3.png)."},
+        "390x844": {"verdict": "PASS", "evidence": "Contradictions region fully visible with E4/H1 text (screenshot-390x844-part4of5.png)."}
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Outstanding obligations — 2 open' region lists 'Verification required: Verify the corrective action...' and 'Required: Outstanding required work must be completed before progress can continue.' Also reflected in nav link 'Obligations (2)' and Active state facts 'obligations-present'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Both obligation cards visible (screenshot-1180x820-part2of3.png)."},
+        "820x1180": {"verdict": "PASS", "evidence": "Both obligation cards visible (screenshot-820x1180-part2of3/3of3.png)."},
+        "390x844": {"verdict": "PASS", "evidence": "Both obligation cards visible (screenshot-390x844-part4of5.png)."}
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Persistence region is separate from Investigation status region; it reads 'GitHub: Pending — Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely,' distinct from 'Investigation status: Open — Not closed: a corrective action was applied but is not verified.' No text conflates save-state with investigation being resolved."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Persistence card with 'GitHub: Pending... do not treat this work as saved remotely' separate from Investigation status card (screenshot-1180x820-part2of3.png / part1of3.png)."},
+        "820x1180": {"verdict": "PASS", "evidence": "Persistence card distinct and visible at bottom of page (screenshot-820x1180-part3of3.png)."},
+        "390x844": {"verdict": "PASS", "evidence": "Persistence card visible as its own region at page end, distinct from Investigation status near top (screenshot-390x844-part5of5.png, part1of5.png)."}
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Next actions' region shows disabled button 'Confirm root cause' (aria-snapshot confirms button is [disabled]) labeled 'Unavailable', with a 'Why unavailable:' list of five reasons each carrying a working jump link (e.g. 'Go to blocking unknown' -> #unknown-blocker). Operation trace step 0-4 confirm these links scroll to and focus the correct target sections (trace/00.jpg-04.jpg), and step 20 confirms clicking 'Confirm root cause' itself scrolls to the same explanatory block rather than performing an action."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Disabled 'Confirm root cause' button with 'Unavailable' badge and full 'Why unavailable' list with links visible (screenshot-1180x820-part1of3.png)."},
+        "820x1180": {"verdict": "PASS", "evidence": "Disabled button and full reasons list with links visible (screenshot-820x1180-part1of3/2of3.png)."},
+        "390x844": {"verdict": "PASS", "evidence": "Disabled button, 'Unavailable' badge, and reasons list with links visible (screenshot-390x844-part3of5/4of5.png)."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "trace/00.jpg through trace/27.jpg (referenced via operation-trace-1440x900.json)",
+    "screenshot-1440x900-part1of3.png",
+    "screenshot-1440x900-part2of3.png",
+    "screenshot-1440x900-part3of3.png",
+    "screenshot-1180x820-part1of3.png",
+    "screenshot-1180x820-part2of3.png",
+    "screenshot-1180x820-part3of3.png",
+    "screenshot-820x1180-part1of3.png",
+    "screenshot-820x1180-part2of3.png",
+    "screenshot-820x1180-part3of3.png",
+    "screenshot-390x844-part1of5.png",
+    "screenshot-390x844-part2of5.png",
+    "screenshot-390x844-part3of5.png",
+    "screenshot-390x844-part4of5.png",
+    "screenshot-390x844-part5of5.png"
+  ]
+}

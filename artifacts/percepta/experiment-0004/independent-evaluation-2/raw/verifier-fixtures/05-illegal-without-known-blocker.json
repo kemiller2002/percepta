@@ -1,0 +1,7 @@
+{
+  "name": "held-out-05",
+  "predicates": [],
+  "capabilities": {
+    "confirm-root-cause": "illegal"
+  }
+}

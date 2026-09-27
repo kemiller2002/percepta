@@ -1,0 +1,36 @@
+{
+  "reviewUnit": "unit-11",
+  "candidate": "Candidate V",
+  "heldOutState": {
+    "name": "held-out-04",
+    "predicates": [
+      "hypothesis-is-falsified"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "legal"
+    }
+  },
+  "semanticObligations": [
+    "confirmation is executable because supplied capability authority is legal",
+    "falsified historical hypothesis remains represented",
+    "one falsified hypothesis does not imply the whole investigation is blocked"
+  ],
+  "screenshots": {
+    "1440x900": {
+      "fullPage": "screenshot-1440x900.png",
+      "tiles": []
+    },
+    "1180x820": {
+      "fullPage": "screenshot-1180x820.png",
+      "tiles": []
+    },
+    "820x1180": {
+      "fullPage": "screenshot-820x1180.png",
+      "tiles": []
+    },
+    "390x844": {
+      "fullPage": "screenshot-390x844.png",
+      "tiles": []
+    }
+  }
+}

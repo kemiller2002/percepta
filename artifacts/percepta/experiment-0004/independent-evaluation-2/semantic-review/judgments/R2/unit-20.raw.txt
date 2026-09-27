@@ -1,0 +1,69 @@
+{
+  "reviewUnit": "unit-20",
+  "candidate": "Candidate R",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Persistence region shows 'GitHub: ⧗ Pending — Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.' Also header badge 'GitHub write pending'. Nav link reads 'Persistence (pending)'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'GitHub: Pending' text visible in Persistence card (part2 screenshot)."},
+        "820x1180": {"verdict": "PASS", "evidence": "Persistence card visible with 'GitHub: Pending' and full explanatory sentence (part2 screenshot)."},
+        "390x844": {"verdict": "PASS", "evidence": "Persistence card at bottom shows 'GitHub: Pending' with full text (part4 screenshot)."}
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Persistence text explicitly states 'It has not been confirmed; do not treat this work as saved remotely.' No success language anywhere for GitHub write."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Identical disclaimer text visible in Persistence card."},
+        "820x1180": {"verdict": "PASS", "evidence": "Identical disclaimer text visible in Persistence card."},
+        "390x844": {"verdict": "PASS", "evidence": "Identical disclaimer text visible in Persistence card (part4)."}
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Investigation status ◌ Open' region states 'Not closed: a corrective action was applied but is not verified. The verification obligation remains outstanding.' Header badge also reads 'Investigation open'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same 'Investigation status Open' / 'Not closed:' text visible."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same 'Investigation status Open' / 'Not closed:' text visible."},
+        "390x844": {"verdict": "PASS", "evidence": "Same 'Investigation status Open' / 'Not closed:' text visible in first tile."}
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Outstanding obligations ⧗ 1 open' region shows 'Verification required — Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds.' Also cross-linked from Next actions via 'Go to verification obligation' (trace step 0 confirms it scrolls to and highlights this item)."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Outstanding obligations card with 'Verification required' item visible in part2 screenshot."},
+        "820x1180": {"verdict": "PASS", "evidence": "Outstanding obligations card with 'Verification required' item visible in part2 screenshot."},
+        "390x844": {"verdict": "PASS", "evidence": "Outstanding obligations card with 'Verification required' item visible in part3 screenshot."}
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "'Next actions' region shows dashed/disabled-styled 'Confirm root cause' button labeled '✕ Unavailable', with 'Why unavailable: The corrective action is not yet verified.' Accessibility tree confirms button is [disabled]."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same disabled 'Confirm root cause' / 'Unavailable' block visible in part1 screenshot."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same disabled 'Confirm root cause' / 'Unavailable' block visible in part1 screenshot."},
+        "390x844": {"verdict": "PASS", "evidence": "Same disabled 'Confirm root cause' / 'Unavailable' block visible in part3 screenshot."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of4.png",
+    "screenshot-390x844-part2of4.png",
+    "screenshot-390x844-part3of4.png",
+    "screenshot-390x844-part4of4.png"
+  ]
+}

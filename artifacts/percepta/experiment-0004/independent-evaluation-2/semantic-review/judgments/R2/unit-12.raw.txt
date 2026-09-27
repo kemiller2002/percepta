@@ -1,0 +1,65 @@
+{
+  "reviewUnit": "unit-12",
+  "candidate": "Candidate M",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Persistence\" section shows badge \"PENDING\" with heading \"Remote write pending\" and text \"Changes are not yet confirmed as persisted remotely.\""},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same \"PENDING Remote write pending\" card visible unclipped in right column."},
+        "820x1180": {"verdict": "PASS", "evidence": "\"PENDING Remote write pending\" card visible at bottom of stacked single-column layout."},
+        "390x844": {"verdict": "PASS", "evidence": "Visible in tile part2of2: \"PENDING Remote write pending / Changes are not yet confirmed as persisted remotely.\""}
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "No success/confirmation language anywhere; Persistence section explicitly states changes are 'not yet confirmed as persisted remotely'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same text present, no success claim."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same text present, no success claim."},
+        "390x844": {"verdict": "PASS", "evidence": "Same text present in tile part2of2, no success claim."}
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Header badge \"Investigation open · verification required\"; Outstanding obligations text \"...the investigation remains unresolved.\""},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same header badge and \"investigation remains unresolved\" text visible."},
+        "820x1180": {"verdict": "PASS", "evidence": "Header badge \"Investigation open · verification required\" visible; \"remains unresolved\" text visible in Outstanding obligations card."},
+        "390x844": {"verdict": "PASS", "evidence": "Header badge visible in tile part1of2; \"investigation remains unresolved\" visible spanning part1/part2 of tiles."}
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Outstanding obligations\" card with badge \"VERIFY\" and heading \"Verify corrective action\" is visible on the page."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "\"VERIFY Verify corrective action\" card visible in right column."},
+        "820x1180": {"verdict": "PASS", "evidence": "\"VERIFY Verify corrective action\" card visible in stacked layout."},
+        "390x844": {"verdict": "PASS", "evidence": "\"VERIFY Verify corrective action\" heading visible at bottom of tile part1of2 and top of part2of2."}
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Actions\" section shows disabled button \"Confirm root cause\" (aria: [disabled]) with status text \"Unavailable: required verification remains outstanding.\" and \"LEGALITY Availability follows the supplied capability map, not UI inference.\" No operable path found (operation-trace-1440x900.json is empty array, i.e., no enabled clickable controls recorded)."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Disabled \"Confirm root cause\" button with same unavailable status text visible."},
+        "820x1180": {"verdict": "PASS", "evidence": "Disabled \"Confirm root cause\" button with same unavailable status text visible, not overlapped."},
+        "390x844": {"verdict": "PASS", "evidence": "Disabled \"Confirm root cause\" button and \"Unavailable: required verification remains outstanding.\" visible in tile part2of2."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "screenshot-390x844-part1of2.png",
+    "screenshot-390x844-part2of2.png"
+  ]
+}

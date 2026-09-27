@@ -1,0 +1,10 @@
+{
+  "name": "held-out-01",
+  "predicates": [
+    "hypothesis-is-falsified",
+    "blocking-unknown-exists"
+  ],
+  "capabilities": {
+    "confirm-root-cause": "illegal"
+  }
+}

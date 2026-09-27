@@ -1,0 +1,29 @@
+{
+  "os": "\"Ubuntu 24.04.4 LTS\"",
+  "kernel": "6.18.44-fc-v37",
+  "node": "v22.22.2",
+  "python": "Python 3.11.15",
+  "playwrightNode": "1.56.1",
+  "probeBrowser": "141.0.7390.37 (/opt/pw-browsers/chromium-1194, headless)",
+  "pillow": "12.3.0",
+  "dotnetSdk": "10.0.112 [/usr/lib/dotnet/sdk]",
+  "dotnetRuntimes": [
+    "Microsoft.AspNetCore.App 10.0.12 [/usr/lib/dotnet/shared/Microsoft.AspNetCore.App]",
+    "Microsoft.NETCore.App 8.0.31 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]",
+    "Microsoft.NETCore.App 10.0.12 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]"
+  ],
+  "verifierBuild": "dotnet build <baseline worktree>/src/Percepta.Cli/Percepta.Cli.fsproj -c Release --artifacts-path $SCRATCH/build (cwd outside repo; global.json 10.0.401 pin unsatisfiable, file not modified)",
+  "verifierAssemblySha256": {
+    "Percepta.Core.dll": "f3df0766a936134e81a78325f00686ed9fbbaebc1a1765f6470650e18a2bba97",
+    "Microsoft.Playwright.dll": "7e55d0c8a1b76ecf1b94477acec749f89e84a1747b857624ea0e5e57b69b6947",
+    "FSharp.Core.dll": "39b0b7f06c11bedd93f94b6f101fffd645f1c4437a5a6d3ee79259f855aeb11a",
+    "Percepta.Adapter.Playwright.dll": "a65921dacbd0195c996d8b12659d3cb29a05511c5ccec5eb92ffa6a95267491c",
+    "Percepta.Cli.dll": "e72eada4330478266eba8b84475fdf9214acf46e1d104a0ca7cb0495f1bd630d"
+  },
+  "verifierBrowser": "Microsoft.Playwright 1.63 expects chromium-headless-shell r1243; PLAYWRIGHT_BROWSERS_PATH=$SCRATCH/pw-browsers symlink tree to preinstalled r1194 headless_shell (Chromium 141.0.7390.37); same substitution as EX-0003",
+  "serving": "python3 -m http.server 8404 --bind 127.0.0.1 over scratch staging dir; URL http://127.0.0.1:8404/<blindId>/index.html",
+  "reviewers": {
+    "R1": "fresh general-purpose subagent, session default model",
+    "R2": "fresh general-purpose subagent, model=sonnet"
+  }
+}

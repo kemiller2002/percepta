@@ -1,0 +1,45 @@
+{
+  "url": "http://127.0.0.1:8404/M/index.html",
+  "browserVersion": "141.0.7390.37",
+  "playwrightVersion": "1.56.1",
+  "finishedAtUtc": "2026-09-26T20:37:43.135Z",
+  "initialLoad": {
+    "nav": {
+      "ok": true,
+      "status": 200
+    },
+    "entryPoint": true,
+    "errors": {
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    }
+  },
+  "cases": [
+    {
+      "caseId": "combined-blocker-falsification",
+      "viewports": 4,
+      "traceSteps": 1
+    },
+    {
+      "caseId": "pending-unverified",
+      "viewports": 4,
+      "traceSteps": 0
+    },
+    {
+      "caseId": "all-constraints",
+      "viewports": 4,
+      "traceSteps": 1
+    },
+    {
+      "caseId": "legal-with-history",
+      "viewports": 4,
+      "traceSteps": 1
+    },
+    {
+      "caseId": "illegal-without-known-blocker",
+      "viewports": 4,
+      "traceSteps": 0
+    }
+  ]
+}

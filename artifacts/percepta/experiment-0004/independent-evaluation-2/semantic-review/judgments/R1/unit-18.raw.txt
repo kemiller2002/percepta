@@ -1,0 +1,94 @@
+{
+  "reviewUnit": "unit-18",
+  "candidate": "Candidate R",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "H3 'Runner disk quota is exhausted during extraction' is still listed in Competing hypotheses with its basis and evidence (E1 consistent with, E3 falsifies), along with the text 'It stays listed so the reasoning history is preserved'. The nav tab reads 'Hypotheses (1 falsified)'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The H3 card is fully visible in the left column (part2)."},
+        "820x1180": {"verdict": "PASS", "evidence": "The H3 card is visible with its title wrapped and the badge readable (part2)."},
+        "390x844": {"verdict": "PASS", "evidence": "The H3 card is visible in the single-column stack (part2of4)."}
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The status is carried by the text badge '× Falsified — retained for the record', a strikethrough title, a dashed left border and a dashed badge outline, not only by color."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The same text badge and strikethrough appear."},
+        "820x1180": {"verdict": "PASS", "evidence": "The same text badge and strikethrough appear."},
+        "390x844": {"verdict": "PASS", "evidence": "The same text badge and strikethrough appear."}
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The header badge reads '⛔ Blocked by unknown'. The Unresolved unknowns card shows '⛔ Blocking Which template archive digest did the failing job actually receive?' with 'Blocks: Confirm root cause'. The nav reads 'Unknowns (blocking)' and the status facts include 'A blocking unknown is open'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The blocking unknown card is visible in the right column below Next actions."},
+        "820x1180": {"verdict": "PASS", "evidence": "The blocking unknown card is visible in the right column (part2), and the header badge is visible."},
+        "390x844": {"verdict": "PASS", "evidence": "The header badge is visible and the blocking unknown card appears in the stack (part2of4/part3of4)."}
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The accessibility tree shows button 'Confirm root cause' [disabled]. The button has a dashed, greyed style with a '× Unavailable' badge beside it, and the header reads 'Confirm root cause: unavailable'."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The dashed button and the 'Unavailable' badge are visible."},
+        "820x1180": {"verdict": "PASS", "evidence": "The dashed button and the 'Unavailable' badge are visible, with the badge below the button."},
+        "390x844": {"verdict": "PASS", "evidence": "The dashed button and the 'Unavailable' badge are visible (part3of4)."}
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The 'Why unavailable:' box lists 'A blocking unknown is open: Which template archive digest did the failing job actually receive?'. Caveat: a second listed reason, 'A hypothesis has been falsified; confirming a root cause needs an active hypothesis', is not supported, because H1 and H2 are visibly 'Under consideration' (see forbidden meaning)."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The 'Why unavailable' box is visible with the blocking-unknown reason."},
+        "820x1180": {"verdict": "PASS", "evidence": "The 'Why unavailable' box is visible with the blocking-unknown reason."},
+        "390x844": {"verdict": "PASS", "evidence": "The 'Why unavailable' box is visible with the blocking-unknown reason (part3of4)."}
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "In trace step 0, 'Go to blocking unknown' (#unknown-blocker) scrolled to the blocking-unknown item, focused it (blue outline in trace/00.jpg), and the target was in the viewport. The reverse link 'Blocks: Confirm root cause' also works (step 14)."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The 'Go to blocking unknown' link is visible and unclipped in the Why unavailable box."},
+        "820x1180": {"verdict": "PASS", "evidence": "The 'Go to blocking unknown' link is visible."},
+        "390x844": {"verdict": "PASS", "evidence": "The 'Go to blocking unknown' link is visible (part3of4)."}
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The blocking unknown stays fully shown alongside the falsified H3: the header badge, the Unknowns card with 'Blocks: Confirm root cause', and the first Why-unavailable reason. The falsification is added as a separate item and does not replace the blocker."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "The blocker and the falsified H3 are both visible."},
+        "820x1180": {"verdict": "PASS", "evidence": "The blocker and the falsified H3 are both visible."},
+        "390x844": {"verdict": "PASS", "evidence": "The blocker and the falsified H3 are both visible."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [
+    {"category": "invented blockers", "evidence": "Next actions > Why unavailable lists a second blocker: 'A hypothesis has been falsified; confirming a root cause needs an active hypothesis. Go to falsified hypothesis', and the action description says 'Requires an active (not falsified) hypothesis.' No active predicate says that falsification blocks confirmation, and the claim contradicts the visible H1 and H2 'Under consideration' (active) hypotheses.", "viewports": ["1440x900", "1180x820", "820x1180", "390x844"]}
+  ],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844-part1of4.png",
+    "screenshot-390x844-part2of4.png",
+    "screenshot-390x844-part3of4.png",
+    "screenshot-390x844-part4of4.png",
+    "trace/00.jpg",
+    "trace/01.jpg",
+    "trace/02.jpg",
+    "trace/14.jpg"
+  ]
+}

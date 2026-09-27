@@ -1,0 +1,20 @@
+candidate_branch: experiment/percepta-0004-claude-treatment-b
+registered_sha: ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b
+object_type: commit
+remote_branch_sha: ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b
+descends_from_baseline: true
+commits baseline..candidate:
+  ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b f474c449c2bc84da5707bb123c36500490875869 | EX-PERCEPTA-2026-0004 treatment-b: first-pass investigation workspace
+git diff --name-status baseline candidate:
+A	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/NOTES.md
+A	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/index.html
+git diff --numstat baseline candidate:
+83	0	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/NOTES.md
+532	0	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/index.html
+blobs:
+100644 blob 708ea98a505312b3930c0de9b10428a69b98a1a3	research/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/AGENTS.md
+100644 blob 5c82866f99009237a093a1258a62abcf03a1c46b	research/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/AGENTS.md
+100644 blob 14403c03ed585d67b65e30104bcfa551cc88256b	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/AGENTS.md
+100644 blob 4bd99043ff0d5761160ee5714bd594c030460dac	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/AGENTS.md
+100644 blob f90a71a4510ab93e257499dd207fe6e48623901a	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/NOTES.md
+100644 blob a2aeaedd111302c971d1bfb9a9f0b849bff60d7f	research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/index.html

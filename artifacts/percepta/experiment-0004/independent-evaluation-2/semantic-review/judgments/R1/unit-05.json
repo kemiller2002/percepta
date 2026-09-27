@@ -1,0 +1,114 @@
+{
+  "reviewUnit": "unit-05",
+  "candidate": "Candidate R",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The Next actions panel shows the 'Confirm root cause' button with a dashed, greyed style next to a red '\u2715 Unavailable' badge. The aria snapshot marks it: button \"Confirm root cause\" [disabled]. The header summary also reads 'Confirm root cause: unavailable'. The operation trace has no step for this button, so it was not clickable. The stated reason is authority: 'The current state marks this action as not permitted.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The Next actions panel is in the right column. It shows the disabled 'Confirm root cause', the '\u2715 Unavailable' badge and 'Why unavailable', all visible and not clipped. The header also reads 'Confirm root cause: unavailable'."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The Next actions panel is in the right column. The '\u2715 Unavailable' badge sits below the button, and the 'Why unavailable' box is fully readable."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The panels stack into one column. Next actions shows the dashed 'Confirm root cause', the '\u2715 Unavailable' badge and 'Why unavailable', all readable. The header line 'Confirm root cause: unavailable' wraps below the status badge."
+        }
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "'Why unavailable' says 'No specific blocker was reported.' The 'Unresolved unknowns' panel lists one item, '? Open When was the runner template cache last cleared?'. That item is not labelled as blocking and is not linked to the confirm action."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The text is the same. The unknown appears in a separate panel below Next actions, with no blocking label."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The text is the same. The unknown panel is separate and has no blocking label."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The text is the same. The unknown is marked only 'Open', and the Why unavailable text says no specific blocker was reported."
+        }
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The only reason given is generic: 'The current state marks this action as not permitted. No specific blocker was reported.' The status panel says 'The current state reports no contract-recognised facts. Nothing is inferred from their absence.' The static action description 'Requires an active (not falsified) hypothesis' is a general precondition. It is not given as the cause, and all three hypotheses show 'Under consideration'."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "The generic reason text is the same and visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "The generic reason text is the same and visible."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "The generic reason text is the same and visible."
+        }
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Unavailability appears in several places: the red '\u2715 Unavailable' badge, the disabled button, the header line 'Confirm root cause: unavailable' and the 'Why unavailable:' callout. The panel says 'Availability comes from the application state; this workspace does not override it.' No enabled path to confirm exists. The trace shows only navigation links as enabled."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "All the unavailability cues are visible, and the button stays disabled."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "All the unavailability cues are visible, and the button stays disabled."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "All the unavailability cues are visible in the stacked layout."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "rendered-text-1440x900.txt",
+    "aria-snapshot-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1440x900-part1of2.png",
+    "screenshot-1440x900-part2of2.png",
+    "screenshot-1180x820.png",
+    "screenshot-1180x820-part1of2.png",
+    "screenshot-1180x820-part2of2.png",
+    "screenshot-820x1180.png",
+    "screenshot-820x1180-part1of2.png",
+    "screenshot-820x1180-part2of2.png",
+    "screenshot-390x844.png",
+    "screenshot-390x844-part1of3.png",
+    "screenshot-390x844-part2of3.png",
+    "screenshot-390x844-part3of3.png",
+    "trace/00.jpg",
+    "trace/04.jpg"
+  ]
+}

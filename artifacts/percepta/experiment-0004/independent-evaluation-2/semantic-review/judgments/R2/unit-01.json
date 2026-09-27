@@ -1,0 +1,84 @@
+{
+  "reviewUnit": "unit-01",
+  "candidate": "Candidate M",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The \"Confirm root cause\" button in the Actions panel renders as a solid, non-greyed button (not marked disabled in the aria snapshot: `button \"Confirm root cause\"` with no disabled flag). Operation trace step 0 clicked it with `click.ok: true` and the active element after click was the button itself, confirming it is truly operable. Adjacent caption text reads \"LEGALITY Availability follows the supplied capability map, not UI inference,\" tying the enabled state to the supplied `confirm-root-cause: legal` capability."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Same solid-styled \"Confirm root cause\" button and LEGALITY caption visible unclipped in Actions card."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Button and LEGALITY text fully visible in reflowed right-column-turned-stacked Actions card."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Tile part2of2 shows the same enabled-styled \"Confirm root cause\" button and LEGALITY caption fully visible, not clipped."
+        }
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "\"Competing hypotheses\" card shows a \"FALSIFIED\" badge next to \"Candidate explanation retained for history,\" with body text \"Evidence has falsified this hypothesis. It remains visible as a considered explanation...\" \u2014 visibly present, not removed."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "FALSIFIED badge and \"Candidate explanation retained for history\" text visible unclipped."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Same FALSIFIED badge and retained-for-history text visible in stacked layout."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Tile part1of2 shows FALSIFIED badge and full hypothesis text readable, not truncated."
+        }
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "Header status badge reads \"Investigation open\" (not closed/blocked), and the Actions card still offers an enabled \"Confirm root cause\" button (trace confirms clickable), demonstrating the investigation continues to function despite the one falsified hypothesis."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "\"Investigation open\" badge in header and enabled Actions button both visible."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "\"Investigation open\" badge and functioning Actions button both visible in stacked layout."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Part1of2 shows \"Investigation open\" badge in header; part2of2 shows the enabled \"Confirm root cause\" button, both visible without clipping."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "screenshot-390x844-part1of2.png",
+    "screenshot-390x844-part2of2.png",
+    "trace/00.jpg"
+  ]
+}

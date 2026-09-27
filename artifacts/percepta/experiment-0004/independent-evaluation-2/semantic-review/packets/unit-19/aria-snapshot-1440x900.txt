@@ -1,0 +1,40 @@
+- main:
+  - text: Failure analysis
+  - heading "Investigation Workspace" [level=1]
+  - paragraph: 2 active facts · 1 capability status
+  - text: Runtime state applied
+  - region "Triggering observation":
+    - heading "Triggering observation" [level=2]
+    - paragraph: No triggering observation predicate is active.
+  - region "Persistence":
+    - heading "Persistence" [level=2]
+    - paragraph: Local work may not be remotely persisted.
+    - text: Github Write Is Pending
+  - region "Competing hypotheses":
+    - heading "Competing hypotheses" [level=2]
+    - list:
+      - listitem: No active hypotheses supplied.
+  - region "Contradictions":
+    - heading "Contradictions" [level=2]
+    - list:
+      - listitem: No active contradictions supplied.
+  - region "Unresolved unknowns":
+    - heading "Unresolved unknowns" [level=2]
+    - list:
+      - listitem: No active unknowns supplied.
+  - region "Outstanding obligations":
+    - heading "Outstanding obligations" [level=2]
+    - list:
+      - listitem:
+        - strong: Github Write Is Pending
+        - text: Active runtime predicate
+  - region "Evidence & relationships":
+    - heading "Evidence & relationships" [level=2]
+    - list:
+      - listitem:
+        - strong: Corrective Action Not Verified
+        - text: Active runtime predicate
+  - region "Actions":
+    - heading "Actions" [level=2]
+    - button "Confirm Root Cause" [disabled]
+    - text: Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.

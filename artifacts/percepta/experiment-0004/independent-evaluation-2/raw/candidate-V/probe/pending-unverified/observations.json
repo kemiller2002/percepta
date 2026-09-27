@@ -1,0 +1,815 @@
+{
+  "caseId": "pending-unverified",
+  "suppliedState": {
+    "name": "held-out-02",
+    "predicates": [
+      "github-write-is-pending",
+      "corrective-action-not-verified"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "probedAtUtc": "2026-09-26T20:40:15.723Z",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "390x844",
+        "width": 390,
+        "height": 844,
+        "contractBreakpoint": "narrow-phone"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 197,
+                "width": 362,
+                "height": 122
+              }
+            ],
+            "textSample": "Triggering observation No triggering observation predicate is active."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 489,
+                "width": 362,
+                "height": 94
+              }
+            ],
+            "textSample": "Competing hypotheses No active hypotheses supplied."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 593,
+                "width": 362,
+                "height": 94
+              }
+            ],
+            "textSample": "Contradictions No active contradictions supplied."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 697,
+                "width": 362,
+                "height": 94
+              }
+            ],
+            "textSample": "Unresolved unknowns No active unknowns supplied."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 801,
+                "width": 362,
+                "height": 133
+              }
+            ],
+            "textSample": "Outstanding obligations Github Write Is Pending Active runtime predicate"
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 944,
+                "width": 362,
+                "height": 133
+              }
+            ],
+            "textSample": "Evidence & relationships Corrective Action Not Verified Active runtime predicate"
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 1086,
+                "width": 362,
+                "height": 216
+              }
+            ],
+            "textSample": "Actions Confirm Root Cause Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 14,
+                "y": 329,
+                "width": 362,
+                "height": 150
+              }
+            ],
+            "textSample": "Persistence Local work may not be remotely persisted. Github Write Is Pending"
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm Root Cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "horizontalOverflow": false,
+          "scrollHeight": 1316
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "390x844.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "820x1180",
+        "width": 820,
+        "height": 1180,
+        "contractBreakpoint": "ipad-portrait"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 25,
+                "y": 150,
+                "width": 378,
+                "height": 150
+              }
+            ],
+            "textSample": "Triggering observation No triggering observation predicate is active."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 25,
+                "y": 314,
+                "width": 378,
+                "height": 94
+              }
+            ],
+            "textSample": "Competing hypotheses No active hypotheses supplied."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 417,
+                "y": 314,
+                "width": 378,
+                "height": 94
+              }
+            ],
+            "textSample": "Contradictions No active contradictions supplied."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 25,
+                "y": 422,
+                "width": 378,
+                "height": 133
+              }
+            ],
+            "textSample": "Unresolved unknowns No active unknowns supplied."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 417,
+                "y": 422,
+                "width": 378,
+                "height": 133
+              }
+            ],
+            "textSample": "Outstanding obligations Github Write Is Pending Active runtime predicate"
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 25,
+                "y": 568,
+                "width": 378,
+                "height": 216
+              }
+            ],
+            "textSample": "Evidence & relationships Corrective Action Not Verified Active runtime predicate"
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 417,
+                "y": 568,
+                "width": 378,
+                "height": 216
+              }
+            ],
+            "textSample": "Actions Confirm Root Cause Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 417,
+                "y": 150,
+                "width": 378,
+                "height": 150
+              }
+            ],
+            "textSample": "Persistence Local work may not be remotely persisted. Github Write Is Pending"
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm Root Cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 820,
+          "clientWidth": 820,
+          "horizontalOverflow": false,
+          "scrollHeight": 1180
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "820x1180.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "1180x820",
+        "width": 1180,
+        "height": 820,
+        "contractBreakpoint": "ipad-landscape"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 35,
+                "y": 170,
+                "width": 735,
+                "height": 150
+              }
+            ],
+            "textSample": "Triggering observation No triggering observation predicate is active."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 35,
+                "y": 334,
+                "width": 360,
+                "height": 94
+              }
+            ],
+            "textSample": "Competing hypotheses No active hypotheses supplied."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 410,
+                "y": 334,
+                "width": 360,
+                "height": 94
+              }
+            ],
+            "textSample": "Contradictions No active contradictions supplied."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 784,
+                "y": 334,
+                "width": 360,
+                "height": 94
+              }
+            ],
+            "textSample": "Unresolved unknowns No active unknowns supplied."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 35,
+                "y": 442,
+                "width": 360,
+                "height": 133
+              }
+            ],
+            "textSample": "Outstanding obligations Github Write Is Pending Active runtime predicate"
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 410,
+                "y": 442,
+                "width": 735,
+                "height": 133
+              }
+            ],
+            "textSample": "Evidence & relationships Corrective Action Not Verified Active runtime predicate"
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 35,
+                "y": 589,
+                "width": 1109,
+                "height": 158
+              }
+            ],
+            "textSample": "Actions Confirm Root Cause Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 784,
+                "y": 170,
+                "width": 360,
+                "height": 150
+              }
+            ],
+            "textSample": "Persistence Local work may not be remotely persisted. Github Write Is Pending"
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm Root Cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 1180,
+          "clientWidth": 1180,
+          "horizontalOverflow": false,
+          "scrollHeight": 820
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "1180x820.png",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    },
+    {
+      "viewport": {
+        "name": "1440x900",
+        "width": 1440,
+        "height": 900,
+        "contractBreakpoint": "desktop-reference"
+      },
+      "nav": {
+        "ok": true,
+        "status": 200
+      },
+      "setState": {
+        "attempted": true,
+        "entryPoint": true,
+        "threw": false,
+        "returnedPromise": false
+      },
+      "infrastructureFailure": false,
+      "observations": {
+        "entryPoint": true,
+        "regions": {
+          "observation": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 56,
+                "y": 171,
+                "width": 881,
+                "height": 128
+              }
+            ],
+            "textSample": "Triggering observation No triggering observation predicate is active."
+          },
+          "hypotheses": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 56,
+                "y": 312,
+                "width": 433,
+                "height": 94
+              }
+            ],
+            "textSample": "Competing hypotheses No active hypotheses supplied."
+          },
+          "contradictions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 503,
+                "y": 312,
+                "width": 433,
+                "height": 94
+              }
+            ],
+            "textSample": "Contradictions No active contradictions supplied."
+          },
+          "unknowns": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 951,
+                "y": 312,
+                "width": 433,
+                "height": 94
+              }
+            ],
+            "textSample": "Unresolved unknowns No active unknowns supplied."
+          },
+          "obligations": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 56,
+                "y": 420,
+                "width": 433,
+                "height": 133
+              }
+            ],
+            "textSample": "Outstanding obligations Github Write Is Pending Active runtime predicate"
+          },
+          "evidence": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 503,
+                "y": 420,
+                "width": 881,
+                "height": 133
+              }
+            ],
+            "textSample": "Evidence & relationships Corrective Action Not Verified Active runtime predicate"
+          },
+          "legal-actions": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 56,
+                "y": 567,
+                "width": 1328,
+                "height": 158
+              }
+            ],
+            "textSample": "Actions Confirm Root Cause Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context."
+          },
+          "persistence-state": {
+            "count": 1,
+            "visibleCount": 1,
+            "visible": true,
+            "clippedHorizontally": false,
+            "boxes": [
+              {
+                "x": 951,
+                "y": 171,
+                "width": 433,
+                "height": 128
+              }
+            ],
+            "textSample": "Persistence Local work may not be remotely persisted. Github Write Is Pending"
+          }
+        },
+        "capability": {
+          "count": 1,
+          "visible": true,
+          "tag": "button",
+          "disabledProperty": true,
+          "ariaDisabled": "true",
+          "text": "Confirm Root Cause",
+          "ariaLabel": null,
+          "describedBy": null,
+          "inLegalActionsRegion": true
+        },
+        "unavailableReason": [],
+        "blockerLinks": [],
+        "visibleObservationHooks": [],
+        "accessibility": {
+          "lang": "en",
+          "mainCount": 1,
+          "h1Count": 1,
+          "h1Text": [
+            "Investigation Workspace"
+          ],
+          "duplicateIds": [],
+          "imagesMissingAlt": 0,
+          "unnamedControls": [],
+          "stateElements": 0,
+          "colorOnlyStateElements": 0
+        },
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "horizontalOverflow": false,
+          "scrollHeight": 900
+        },
+        "breakpointRequiredRegions": [
+          {
+            "region": "observation",
+            "visible": true
+          },
+          {
+            "region": "hypotheses",
+            "visible": true
+          },
+          {
+            "region": "unknowns",
+            "visible": true
+          },
+          {
+            "region": "legal-actions",
+            "visible": true
+          }
+        ],
+        "breakpointRequiredRegionsAllVisible": true
+      },
+      "screenshot": "1440x900.png",
+      "ariaSnapshot": "- main:\n  - text: Failure analysis\n  - heading \"Investigation Workspace\" [level=1]\n  - paragraph: 2 active facts · 1 capability status\n  - text: Runtime state applied\n  - region \"Triggering observation\":\n    - heading \"Triggering observation\" [level=2]\n    - paragraph: No triggering observation predicate is active.\n  - region \"Persistence\":\n    - heading \"Persistence\" [level=2]\n    - paragraph: Local work may not be remotely persisted.\n    - text: Github Write Is Pending\n  - region \"Competing hypotheses\":\n    - heading \"Competing hypotheses\" [level=2]\n    - list:\n      - listitem: No active hypotheses supplied.\n  - region \"Contradictions\":\n    - heading \"Contradictions\" [level=2]\n    - list:\n      - listitem: No active contradictions supplied.\n  - region \"Unresolved unknowns\":\n    - heading \"Unresolved unknowns\" [level=2]\n    - list:\n      - listitem: No active unknowns supplied.\n  - region \"Outstanding obligations\":\n    - heading \"Outstanding obligations\" [level=2]\n    - list:\n      - listitem:\n        - strong: Github Write Is Pending\n        - text: Active runtime predicate\n  - region \"Evidence & relationships\":\n    - heading \"Evidence & relationships\" [level=2]\n    - list:\n      - listitem:\n        - strong: Corrective Action Not Verified\n        - text: Active runtime predicate\n  - region \"Actions\":\n    - heading \"Actions\" [level=2]\n    - button \"Confirm Root Cause\" [disabled]\n    - text: Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.",
+      "innerText": "FAILURE ANALYSIS\nInvestigation Workspace\n\n2 active facts · 1 capability status\n\nRUNTIME STATE APPLIED\nTriggering observation\n\nNo triggering observation predicate is active.\n\nPersistence\n\nLocal work may not be remotely persisted.\n\nGithub Write Is Pending\nCompeting hypotheses\nNo active hypotheses supplied.\nContradictions\nNo active contradictions supplied.\nUnresolved unknowns\nNo active unknowns supplied.\nOutstanding obligations\nGithub Write Is Pending\nActive runtime predicate\nEvidence & relationships\nCorrective Action Not Verified\nActive runtime predicate\nActions\nConfirm Root Cause\nUnavailable\nUnavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.",
+      "errors": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": []
+      }
+    }
+  ],
+  "operationTrace": []
+}

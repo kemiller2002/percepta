@@ -1,0 +1,99 @@
+[
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/INSTRUCTIONS.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/packet.json"
+    }
+  },
+  {
+    "tool": "Glob",
+    "input": {
+      "pattern": "**/*",
+      "path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-1440x900.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/rendered-text-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/aria-snapshot-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/operation-trace-1440x900.json"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/trace/00.jpg"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-1180x820.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-820x1180.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-820x1180-part1of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-820x1180-part2of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-390x844.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-390x844-part1of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-07/screenshot-390x844-part2of2.png"
+    }
+  },
+  {
+    "tool": "SubagentHandback",
+    "input": {
+      "message": "{\"reviewUnit\":\"unit-07\",\"candidate\":\"Candidate M\",\"reviewer\":\"R1\",\"obligations\":[{\"obligation\":\"all simultaneously active meanings remain discoverable\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"All six active predicates are visible on screen. Falsified: 'FALSIFIED Candidate explanation retained for history' (Competing hypotheses). Blocking unknown: 'BLOCKER Required information is unresolved' (Unresolved unknowns). Pending write: 'PENDING Remote write pending' (Persistence). Corrective action not verified: 'VERIFY Verify corrective action ... has not yet been verified' (Outstanding obligations). Contradictions: 'CONFLICT Conflicting evidence is present'. Obligations: 'Outstanding obligations' card with a REQUIRED badge.\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Two-column layout. All cards are visible and nothing is clipped.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Two-column layout. All cards are present across part1/part2 and none is overlapped.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Single column. Every card is stacked and readable in both tiles.\"}}},{\"obligation\":\"no active meaning suppresses another active meaning\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"Every meaning has its own card with its own badge. The falsified hypothesis is kept ('It remains visible as a considered explanation'). The blocker, the verify obligation, the conflict and the pending persistence all appear at the same time, and none replaces another.\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Same cards are present.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Same cards are present.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Same cards are present, stacked.\"}}},{\"obligation\":\"contradictions remain visible\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"The 'Contradictions' card shows 'CONFLICT Conflicting evidence is present' with a red accent bar in the left column.\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Contradictions card is visible in the left column.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Contradictions card is visible in the part1 tile.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Contradictions card is visible in the part1 tile.\"}}},{\"obligation\":\"obligations remain visible\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"The 'Outstanding obligations' card shows 'REQUIRED Work remains before legal progress can continue.' and 'VERIFY Verify corrective action'.\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Obligations card is visible in the right column.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Obligations card is visible in the right column of part1.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Obligations card is visible in the part2 tile.\"}}},{\"obligation\":\"pending persistence remains distinct from investigation resolution\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"A separate 'Persistence' card reads 'PENDING Remote write pending / Changes are not yet confirmed as persisted remotely.' Resolution is stated separately: the header pill says 'Investigation open \u00b7 verification required' and the VERIFY item says 'the investigation remains unresolved'. No success claim is shown.\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Persistence card is separate at the bottom of the right column.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Persistence card is separate in part2.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Persistence card is separate, the last card in part2.\"}}},{\"obligation\":\"blocked action remains explained and navigable\",\"primary_1440x900\":{\"verdict\":\"PASS\",\"evidence\":\"'Confirm root cause' is disabled (aria: [disabled]), matching the illegal capability. A visible reason reads 'Unavailable: unresolved information is blocking progress.' The trace step 0 click on 'Go to blocking unknown' moved focus to the 'Unresolved unknowns' section, which is in the viewport (trace/00.jpg).\"},\"responsive\":{\"1180x820\":{\"verdict\":\"PASS\",\"evidence\":\"Disabled button, the reason and the 'Go to blocking unknown' control are all visible. Operation was traced only at 1440x900.\"},\"820x1180\":{\"verdict\":\"PASS\",\"evidence\":\"Disabled button, the reason and the link are visible across part1/part2. Operation was traced only at 1440x900.\"},\"390x844\":{\"verdict\":\"PASS\",\"evidence\":\"Disabled button, the reason and the link are visible in part2. Operation was traced only at 1440x900.\"}}}],\"forbiddenOrFabricatedMeaning\":[],\"filesExamined\":[\"INSTRUCTIONS.md\",\"packet.json\",\"screenshot-1440x900.png\",\"screenshot-1180x820.png\",\"screenshot-820x1180.png\",\"screenshot-820x1180-part1of2.png\",\"screenshot-820x1180-part2of2.png\",\"screenshot-390x844.png\",\"screenshot-390x844-part1of2.png\",\"screenshot-390x844-part2of2.png\",\"aria-snapshot-1440x900.txt\",\"rendered-text-1440x900.txt\",\"operation-trace-1440x900.json\",\"trace/00.jpg\"]}"
+    }
+  }
+]

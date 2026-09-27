@@ -1,0 +1,84 @@
+{
+  "reviewUnit": "unit-15",
+  "candidate": "Candidate M",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Competing hypotheses\" card shows badge \"FALSIFIED\" next to \"Candidate explanation retained for history\" with body text \"Evidence has falsified this hypothesis. It remains visible as a considered explanation...\""},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same FALSIFIED card fully visible, unclipped, in left column."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same FALSIFIED card fully visible in reflowed single/two-column layout."},
+        "390x844": {"verdict": "PASS", "evidence": "FALSIFIED card visible in stacked layout in both the full-page screenshot and part1of2 tile."}
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Status is conveyed by an explicit text badge reading \"FALSIFIED\" (plus a red left border as secondary accent), not by color alone."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Text badge \"FALSIFIED\" still rendered as text at this width."},
+        "820x1180": {"verdict": "PASS", "evidence": "Text badge \"FALSIFIED\" still rendered as text."},
+        "390x844": {"verdict": "PASS", "evidence": "Text badge \"FALSIFIED\" still rendered as text in stacked layout."}
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Unresolved unknowns\" card shows \"UNKNOWN\" and \"BLOCKER\" badges with text \"Required information is unresolved\" and \"This unknown blocks dependent progress until it is resolved.\""},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same card fully visible in right column, unclipped."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same card fully visible."},
+        "390x844": {"verdict": "PASS", "evidence": "Card visible in stacked layout, shown across the full-page screenshot and part2of2 tile."}
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "\"Confirm root cause\" button is rendered grayed-out/disabled; aria snapshot confirms button \"Confirm root cause\" [disabled]."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Grayed-out \"Confirm root cause\" button visible in Actions card."},
+        "820x1180": {"verdict": "PASS", "evidence": "Grayed-out \"Confirm root cause\" button visible in Actions card."},
+        "390x844": {"verdict": "PASS", "evidence": "Grayed-out \"Confirm root cause\" button visible in Actions card (part2of2 tile)."}
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Directly beneath the disabled button: \"Unavailable: unresolved information is blocking progress.\""},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Same reason text visible beneath button."},
+        "820x1180": {"verdict": "PASS", "evidence": "Same reason text visible beneath button."},
+        "390x844": {"verdict": "PASS", "evidence": "Same reason text visible beneath button in stacked layout."}
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "Enabled link \"Go to blocking unknown\" appears directly under the unavailable-reason text in Actions; operation trace step 0 shows clicking it moves focus (activeElement) to the \"Unresolved unknowns\" section containing the BLOCKER text, confirming it is operable and navigates to the blocking information."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "\"Go to blocking unknown\" link visible and styled as an active link in Actions card."},
+        "820x1180": {"verdict": "PASS", "evidence": "\"Go to blocking unknown\" link visible and styled as an active link in Actions card."},
+        "390x844": {"verdict": "PASS", "evidence": "\"Go to blocking unknown\" link visible in Actions card (part2of2 tile), unclipped and tappable."}
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "primary_1440x900": {"verdict": "PASS", "evidence": "The \"Unresolved unknowns\" card with UNKNOWN/BLOCKER text remains fully present and unmodified alongside the separate FALSIFIED hypothesis card; blocker semantics are not suppressed by the falsification state."},
+      "responsive": {
+        "1180x820": {"verdict": "PASS", "evidence": "Both FALSIFIED and BLOCKER cards present simultaneously, unrelated content not erased."},
+        "820x1180": {"verdict": "PASS", "evidence": "Both FALSIFIED and BLOCKER cards present simultaneously, unrelated content not erased."},
+        "390x844": {"verdict": "PASS", "evidence": "Both FALSIFIED and BLOCKER cards present in stacked layout, unrelated content not erased."}
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "packet.json",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "trace/00.jpg",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "screenshot-390x844-part1of2.png",
+    "screenshot-390x844-part2of2.png"
+  ]
+}

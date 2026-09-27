@@ -1,0 +1,83 @@
+{
+  "reviewUnit": "unit-11",
+  "candidate": "Candidate V",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The Actions card shows an enabled 'Confirm Root Cause' button with an 'Available' badge. The aria snapshot lists it as button \"Confirm Root Cause\" with no disabled flag. In trace step 0 the click returned ok and the button took focus (trace/00.jpg). No visible outcome after the click, but the control is operable."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "'Confirm Root Cause' button and 'Available' badge are fully visible in the Actions card at the bottom."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Actions card sits in the right column with 'Confirm Root Cause' and 'Available' visible and not clipped."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Actions card is last in a single column. 'Confirm Root Cause' and 'Available' are visible and not clipped."
+        }
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The Contradictions card lists 'Hypothesis Is Falsified' with the subtext 'Active runtime predicate' and a red accent. The falsified hypothesis is visibly kept, not removed. Weakness: it is not framed as a historical hypothesis, and 'Competing hypotheses' reads 'No active hypotheses supplied.'"
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "Contradictions card shows 'Hypothesis Is Falsified'."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "Contradictions card in the right column shows 'Hypothesis Is Falsified'."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "Contradictions card in the single column shows 'Hypothesis Is Falsified', readable."
+        }
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "primary_1440x900": {
+        "verdict": "PASS",
+        "evidence": "The page has no 'blocked' banner or blocking message. 'Outstanding obligations' reads 'No active obligations supplied.' The 'Confirm Root Cause' action stays enabled and marked 'Available' next to the falsified-hypothesis item."
+      },
+      "responsive": {
+        "1180x820": {
+          "verdict": "PASS",
+          "evidence": "No blocker text. The action is shown as Available."
+        },
+        "820x1180": {
+          "verdict": "PASS",
+          "evidence": "No blocker text. The action is shown as Available."
+        },
+        "390x844": {
+          "verdict": "PASS",
+          "evidence": "No blocker text. The action is shown as Available."
+        }
+      }
+    }
+  ],
+  "forbiddenOrFabricatedMeaning": [],
+  "filesExamined": [
+    "INSTRUCTIONS.md",
+    "packet.json",
+    "screenshot-1440x900.png",
+    "screenshot-1180x820.png",
+    "screenshot-820x1180.png",
+    "screenshot-390x844.png",
+    "aria-snapshot-1440x900.txt",
+    "rendered-text-1440x900.txt",
+    "operation-trace-1440x900.json",
+    "trace/00.jpg"
+  ]
+}

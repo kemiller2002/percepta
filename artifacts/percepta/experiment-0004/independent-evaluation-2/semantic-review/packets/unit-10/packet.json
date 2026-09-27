@@ -1,0 +1,41 @@
+{
+  "reviewUnit": "unit-10",
+  "candidate": "Candidate V",
+  "heldOutState": {
+    "name": "held-out-01",
+    "predicates": [
+      "hypothesis-is-falsified",
+      "blocking-unknown-exists"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "semanticObligations": [
+    "falsified hypothesis remains visibly represented",
+    "falsified status is non-color",
+    "blocking unknown is visible",
+    "confirmation is unavailable",
+    "unavailability has a visible reason",
+    "user can navigate from unavailable confirmation to blocking information",
+    "falsification does not erase unrelated blocker semantics"
+  ],
+  "screenshots": {
+    "1440x900": {
+      "fullPage": "screenshot-1440x900.png",
+      "tiles": []
+    },
+    "1180x820": {
+      "fullPage": "screenshot-1180x820.png",
+      "tiles": []
+    },
+    "820x1180": {
+      "fullPage": "screenshot-820x1180.png",
+      "tiles": []
+    },
+    "390x844": {
+      "fullPage": "screenshot-390x844.png",
+      "tiles": []
+    }
+  }
+}

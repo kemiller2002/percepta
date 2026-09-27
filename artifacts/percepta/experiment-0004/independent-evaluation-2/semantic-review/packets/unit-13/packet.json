@@ -1,0 +1,52 @@
+{
+  "reviewUnit": "unit-13",
+  "candidate": "Candidate K",
+  "heldOutState": {
+    "name": "held-out-02",
+    "predicates": [
+      "github-write-is-pending",
+      "corrective-action-not-verified"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "semanticObligations": [
+    "persistence is visibly pending",
+    "remote success is not claimed",
+    "investigation is not represented as resolved",
+    "verification work remains visible",
+    "confirmation remains unavailable"
+  ],
+  "screenshots": {
+    "1440x900": {
+      "fullPage": "screenshot-1440x900.png",
+      "tiles": [
+        "screenshot-1440x900-part1of2.png",
+        "screenshot-1440x900-part2of2.png"
+      ]
+    },
+    "1180x820": {
+      "fullPage": "screenshot-1180x820.png",
+      "tiles": [
+        "screenshot-1180x820-part1of2.png",
+        "screenshot-1180x820-part2of2.png"
+      ]
+    },
+    "820x1180": {
+      "fullPage": "screenshot-820x1180.png",
+      "tiles": [
+        "screenshot-820x1180-part1of2.png",
+        "screenshot-820x1180-part2of2.png"
+      ]
+    },
+    "390x844": {
+      "fullPage": "screenshot-390x844.png",
+      "tiles": [
+        "screenshot-390x844-part1of3.png",
+        "screenshot-390x844-part2of3.png",
+        "screenshot-390x844-part3of3.png"
+      ]
+    }
+  }
+}

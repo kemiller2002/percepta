@@ -1,0 +1,104 @@
+[
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/INSTRUCTIONS.md"
+    }
+  },
+  {
+    "tool": "Glob",
+    "input": {
+      "pattern": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/**"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/packet.json"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/rendered-text-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/aria-snapshot-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/operation-trace-1440x900.json"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-1440x900-part1of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-1440x900-part2of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-1180x820-part1of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-1180x820-part2of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-820x1180-part1of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-820x1180-part2of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-390x844-part1of4.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-390x844-part2of4.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-390x844-part3of4.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-20/screenshot-390x844-part4of4.png"
+    }
+  },
+  {
+    "tool": "SubagentHandback",
+    "input": {
+      "message": "{\n  \"reviewUnit\": \"unit-20\",\n  \"candidate\": \"Candidate R\",\n  \"reviewer\": \"R2\",\n  \"obligations\": [\n    {\n      \"obligation\": \"persistence is visibly pending\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"Persistence region shows 'GitHub: \u29d7 Pending \u2014 Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.' Also header badge 'GitHub write pending'. Nav link reads 'Persistence (pending)'.\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Same 'GitHub: Pending' text visible in Persistence card (part2 screenshot).\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"Persistence card visible with 'GitHub: Pending' and full explanatory sentence (part2 screenshot).\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"Persistence card at bottom shows 'GitHub: Pending' with full text (part4 screenshot).\"}\n      }\n    },\n    {\n      \"obligation\": \"remote success is not claimed\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"Persistence text explicitly states 'It has not been confirmed; do not treat this work as saved remotely.' No success language anywhere for GitHub write.\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Identical disclaimer text visible in Persistence card.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"Identical disclaimer text visible in Persistence card.\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"Identical disclaimer text visible in Persistence card (part4).\"}\n      }\n    },\n    {\n      \"obligation\": \"investigation is not represented as resolved\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"'Investigation status \u25cc Open' region states 'Not closed: a corrective action was applied but is not verified. The verification obligation remains outstanding.' Header badge also reads 'Investigation open'.\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Same 'Investigation status Open' / 'Not closed:' text visible.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"Same 'Investigation status Open' / 'Not closed:' text visible.\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"Same 'Investigation status Open' / 'Not closed:' text visible in first tile.\"}\n      }\n    },\n    {\n      \"obligation\": \"verification work remains visible\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"'Outstanding obligations \u29d7 1 open' region shows 'Verification required \u2014 Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds.' Also cross-linked from Next actions via 'Go to verification obligation' (trace step 0 confirms it scrolls to and highlights this item).\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Outstanding obligations card with 'Verification required' item visible in part2 screenshot.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"Outstanding obligations card with 'Verification required' item visible in part2 screenshot.\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"Outstanding obligations card with 'Verification required' item visible in part3 screenshot.\"}\n      }\n    },\n    {\n      \"obligation\": \"confirmation remains unavailable\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"'Next actions' region shows dashed/disabled-styled 'Confirm root cause' button labeled '\u2715 Unavailable', with 'Why unavailable: The corrective action is not yet verified.' Accessibility tree confirms button is [disabled].\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Same disabled 'Confirm root cause' / 'Unavailable' block visible in part1 screenshot.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"Same disabled 'Confirm root cause' / 'Unavailable' block visible in part1 screenshot.\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"Same disabled 'Confirm root cause' / 'Unavailable' block visible in part3 screenshot.\"}\n      }\n    }\n  ],\n  \"forbiddenOrFabricatedMeaning\": [],\n  \"filesExamined\": [\n    \"packet.json\",\n    \"rendered-text-1440x900.txt\",\n    \"aria-snapshot-1440x900.txt\",\n    \"operation-trace-1440x900.json\",\n    \"screenshot-1440x900-part1of2.png\",\n    \"screenshot-1440x900-part2of2.png\",\n    \"screenshot-1180x820-part1of2.png\",\n    \"screenshot-1180x820-part2of2.png\",\n    \"screenshot-820x1180-part1of2.png\",\n    \"screenshot-820x1180-part2of2.png\",\n    \"screenshot-390x844-part1of4.png\",\n    \"screenshot-390x844-part2of4.png\",\n    \"screenshot-390x844-part3of4.png\",\n    \"screenshot-390x844-part4of4.png\"\n  ]\n}"
+    }
+  }
+]

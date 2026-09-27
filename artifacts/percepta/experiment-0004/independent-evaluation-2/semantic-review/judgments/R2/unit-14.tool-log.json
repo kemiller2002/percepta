@@ -1,0 +1,81 @@
+[
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/INSTRUCTIONS.md"
+    }
+  },
+  {
+    "tool": "Glob",
+    "input": {
+      "pattern": "**/*",
+      "path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/packet.json"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/rendered-text-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/aria-snapshot-1440x900.txt"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/operation-trace-1440x900.json"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/screenshot-1440x900.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/trace/07.jpg"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/screenshot-1180x820-part2of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/screenshot-820x1180-part2of2.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/screenshot-390x844-part3of3.png"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "/tmp/claude-0/-home-user-percepta/79340605-f2ae-58bc-bd8f-3dee2c48830f/scratchpad/review/packets/unit-14/screenshot-390x844-part2of3.png"
+    }
+  },
+  {
+    "tool": "SubagentHandback",
+    "input": {
+      "message": "{\n  \"reviewUnit\": \"unit-14\",\n  \"candidate\": \"Candidate K\",\n  \"reviewer\": \"R2\",\n  \"obligations\": [\n    {\n      \"obligation\": \"confirmation remains unavailable because capability authority is illegal\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"Actions region shows a disabled-styled button 'Unavailable: Confirm root cause' (aria-snapshot confirms button is [disabled]) with text '0 available, 1 unavailable. Availability comes from the runtime and is not overridden here.'\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"screenshot-1180x820-part2of2.png shows same 'Unavailable: Confirm root cause' button and explanatory text unclipped.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"screenshot-820x1180-part2of2.png shows the Actions card with 'Unavailable: Confirm root cause' button and text intact.\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"screenshot-390x844-part2of3.png shows the Actions card with 'Unavailable: Confirm root cause' button, stacked but fully visible and readable.\"}\n      }\n    },\n    {\n      \"obligation\": \"UI does not invent a blocking unknown that was not supplied\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"Unknowns section states 'No unknowns are reported as active' (0 active); Actions explanation text reads 'No specific blocking condition is reported' rather than citing an unknown.\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Unresolved unknowns card visible with 'No unknowns are reported as active.' in screenshot-1180x820 full page.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"screenshot-820x1180-part2of2.png top shows 'No unknowns are reported as active.'\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"screenshot-390x844-part2of3.png shows 'Unresolved unknowns (0 active)' with 'No unknowns are reported as active.'\"}\n      }\n    },\n    {\n      \"obligation\": \"UI does not fabricate a domain-specific reason unsupported by active predicates\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"The unavailability text is generic: 'the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.' No hypothesis (H1/H2/H3) or domain cause is asserted as the reason for unavailability; hypotheses remain separately labeled VIABLE \u2014 OPEN with 'has not been ruled in or out.'\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Same generic unavailability text visible in screenshot-1180x820-part2of2.png; no domain-specific reason tied to it.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"Same generic text visible in screenshot-820x1180-part2of2.png.\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"Same generic text visible in screenshot-390x844-part2of3.png.\"}\n      }\n    },\n    {\n      \"obligation\": \"unavailability is still communicated without overriding capability authority\",\n      \"primary_1440x900\": {\"verdict\": \"PASS\", \"evidence\": \"Button is rendered disabled (aria-snapshot: 'button \\\"Unavailable: Confirm root cause\\\" [disabled]') and operation trace was not run against it (only enabled controls were clicked in trace steps 0-8, confirming it is not operable), consistent with the illegal capability; UI communicates unavailability via label/text rather than granting the action.\"},\n      \"responsive\": {\n        \"1180x820\": {\"verdict\": \"PASS\", \"evidence\": \"Dashed-border disabled button styling for 'Unavailable: Confirm root cause' preserved in screenshot-1180x820-part2of2.png.\"},\n        \"820x1180\": {\"verdict\": \"PASS\", \"evidence\": \"Dashed-border disabled button styling preserved in screenshot-820x1180-part2of2.png.\"},\n        \"390x844\": {\"verdict\": \"PASS\", \"evidence\": \"Dashed-border disabled button styling preserved in screenshot-390x844-part2of3.png.\"}\n      }\n    }\n  ],\n  \"forbiddenOrFabricatedMeaning\": [],\n  \"filesExamined\": [\n    \"packet.json\",\n    \"rendered-text-1440x900.txt\",\n    \"aria-snapshot-1440x900.txt\",\n    \"operation-trace-1440x900.json\",\n    \"screenshot-1440x900.png\",\n    \"trace/07.jpg\",\n    \"screenshot-1180x820-part2of2.png\",\n    \"screenshot-820x1180-part2of2.png\",\n    \"screenshot-390x844-part2of3.png\",\n    \"screenshot-390x844-part3of3.png\"\n  ]\n}"
+    }
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "createdAtUtc": "2026-09-26T20:33:48.907308Z",
+  "method": "secrets.SystemRandom().shuffle over ['K','M','R','V']",
+  "mapping": [
+    {
+      "blindId": "Candidate V",
+      "dir": "V",
+      "branch": "experiment/percepta-0004-openai-control-a",
+      "sha": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+      "lane": "control-a",
+      "provider": "OpenAI",
+      "condition": "control",
+      "indexPath": "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-a/index.html",
+      "indexBlob": "1e72e83747f0a95215820d3675a78c31bdc0fe63",
+      "indexSha256": "b8ea011008d4079bafd358b437cb954ed197aa1557ad4d635c0a4d3c8b481045",
+      "bytes": 9315
+    },
+    {
+      "blindId": "Candidate M",
+      "dir": "M",
+      "branch": "experiment/percepta-0004-openai-treatment-a",
+      "sha": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+      "lane": "treatment-a",
+      "provider": "OpenAI",
+      "condition": "treatment",
+      "indexPath": "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-a/index.html",
+      "indexBlob": "03da6c1a4283413260453e86db088fbfaf3cbb9f",
+      "indexSha256": "190736abd66a86f2248d0bed32bd202f48c98bd7a6fc2bafb5a143c0f834a4ef",
+      "bytes": 8205
+    },
+    {
+      "blindId": "Candidate K",
+      "dir": "K",
+      "branch": "experiment/percepta-0004-claude-control-b",
+      "sha": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+      "lane": "control-b",
+      "provider": "Claude",
+      "condition": "control",
+      "indexPath": "research/experiments/EX-PERCEPTA-2026-0004/lanes/control-b/index.html",
+      "indexBlob": "029af4c1a053de0408478d30a495ed11d849119e",
+      "indexSha256": "51daaabb59f3988eed5180b2ea731d2c202b6ae44b3bc807f8670e4d5944b416",
+      "bytes": 25388
+    },
+    {
+      "blindId": "Candidate R",
+      "dir": "R",
+      "branch": "experiment/percepta-0004-claude-treatment-b",
+      "sha": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+      "lane": "treatment-b",
+      "provider": "Claude",
+      "condition": "treatment",
+      "indexPath": "research/experiments/EX-PERCEPTA-2026-0004/lanes/treatment-b/index.html",
+      "indexBlob": "a2aeaedd111302c971d1bfb9a9f0b849bff60d7f",
+      "indexSha256": "d0223ea8137b4bee96dcad036a761f68b380f8bd9756f1bcc7da34c95c487bc9",
+      "bytes": 30351
+    }
+  ]
+}
