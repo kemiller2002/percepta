@@ -1,0 +1,89 @@
+{
+  "item": "item-06",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png and aria tree show all six active predicates as visible text: 'Hypothesis Is Falsified' (Contradictions), 'Blocking Unknown Exists' (Unresolved unknowns), 'Github Write Is Pending' (Persistence chip and Outstanding obligations), 'Corrective Action Not Verified', 'Contradictions Present', 'Obligations Present' (Evidence & relationships), plus the illegal capability as disabled 'Confirm Root Cause' with 'Unavailable' badge. Header states '6 active facts · 1 capability status'. Everything fits in ~937px document with no overflow.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility trees are identical at all viewports; portrait and phone screenshots show all items stacked without clipping or overflow."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Every active predicate is rendered as its own list item/chip at the same prominence; none is hidden, collapsed, or replaced. The falsified hypothesis does not remove other items; blocked action coexists with unknowns, contradictions and obligations (desktop full screenshot, aria tree).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same content in all aria trees; no collapsed regions at narrow widths."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Region 'Contradictions' is visible with item 'Hypothesis Is Falsified — Active runtime predicate'; 'Contradictions Present — Active runtime predicate' is visible under 'Evidence & relationships'. Note: the contradictions-present predicate is filed outside the Contradictions section, and the section instead holds the falsified hypothesis, which is a questionable mapping, but the active contradiction meaning is visible.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Both items visible at each viewport."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Region 'Outstanding obligations' is visible (listing 'Github Write Is Pending'), and 'Obligations Present — Active runtime predicate' is visible under 'Evidence & relationships'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Visible at all viewports."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Dedicated 'Persistence' region: 'Local work may not be remotely persisted.' with chip 'Github Write Is Pending'. Nothing on the page claims the investigation is resolved or that the write succeeded; the root-cause action is shown as unavailable and unknowns/contradictions remain open. Caveat: the same pending write is also listed under 'Outstanding obligations', mixing a persistence status into the investigation obligations list, but it is not presented as resolution.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Persistence panel is distinct at all viewports."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "fail",
+      "failureType": "inaccessible-operation",
+      "evidence": "Explanation is present: disabled 'Confirm Root Cause' button, 'Unavailable' badge, and the text 'Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.' However, that text is plain prose with no links or controls. rendered-evidence.json lists only one control (the disabled button, describedByText empty), and operabilityProbes is empty, so there is no user-operable control that takes the user to the blocking information. Not navigable per rule 5.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "Same plain-text explanation and no navigation controls at every viewport. The explanation is also not tied to the button via aria-describedby."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "The 'hypothesis-is-falsified' predicate is shown as the entry in the 'Contradictions' section. The state does not say the falsified hypothesis is a contradiction, so this is a domain classification the state does not supply. Meanwhile the actual 'contradictions-present' predicate is placed under 'Evidence & relationships'.",
+      "evidence": "desktop-1440x900.full.png, Contradictions and Evidence & relationships panels; aria tree regions 'Contradictions' and 'Evidence & relationships'"
+    },
+    {
+      "description": "'github-write-is-pending' is shown as the 'Outstanding obligation', which asserts that the pending write is what the obligations are. The state supplies only 'obligations-present' and gives no content for the obligations.",
+      "evidence": "desktop-1440x900.full.png, Outstanding obligations panel"
+    }
+  ],
+  "evidenceLimitations": "No operability probes were recorded because the only control is disabled, so navigability could be judged only by the absence of controls. The landscape screenshot was not visually inspected; its accessibility tree is identical to the desktop tree, and there is no horizontal overflow."
+}

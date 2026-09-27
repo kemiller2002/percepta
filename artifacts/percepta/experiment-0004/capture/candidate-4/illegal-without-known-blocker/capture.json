@@ -1,0 +1,619 @@
+{
+  "candidate": "candidate-4",
+  "caseId": "illegal-without-known-blocker",
+  "state": {
+    "name": "held-out-05",
+    "predicates": [],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "desktop-1440x900",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1261,
+      "horizontalOverflow": false,
+      "tiles": 2,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "landscape-1180x820",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1319,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "portrait-820x1180",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1489,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "phone-390x844",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 2234,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    }
+  ],
+  "controls": [
+    {
+      "index": 0,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Skip to actions",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-legal-actions",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 1,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Observation",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-observation",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 2,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Hypotheses",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-hypotheses",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 3,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Contradictions",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-contradictions",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 4,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Unknowns",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-unknowns",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 5,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Obligations",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-obligations",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 6,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Evidence",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-evidence",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 7,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Actions",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-legal-actions",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 8,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Persistence",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-persistence-state",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 9,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Unavailable: Confirm root cause",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": "true",
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "Unavailable: the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.",
+      "isConfirmRootCauseControl": true
+    }
+  ],
+  "confirmControl": [
+    {
+      "tag": "button",
+      "visibleText": "Unavailable: Confirm root cause",
+      "ariaLabel": null,
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": "true",
+      "describedByText": "Unavailable: the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.",
+      "enclosingContainerText": "Actions 0 available, 1 unavailable. Availability comes from the runtime and is not overridden here. Unavailable: Confirm root cause Unavailable: the runtime marks this action as not permitted in the current state. No specific blocking condition is reported."
+    }
+  ],
+  "probes": [
+    {
+      "controlIndex": 0,
+      "tag": "a",
+      "accessibleName": "Skip to actions",
+      "isConfirmRootCauseControl": false,
+      "outcome": "not-clickable: locator.click: Timeout 2000ms exceeded.",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": null,
+      "errors": []
+    },
+    {
+      "controlIndex": 1,
+      "tag": "a",
+      "accessibleName": "Observation",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 150,
+        "focused": null,
+        "headingsInViewport": [
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": "#region-observation"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-001.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 2,
+      "tag": "a",
+      "accessibleName": "Hypotheses",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 318,
+        "focused": null,
+        "headingsInViewport": [
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions",
+          "Persistence status",
+          "Local work in this page",
+          "Remote persistence (runtime-reported)"
+        ],
+        "hash": "#region-hypotheses"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-002.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 3,
+      "tag": "a",
+      "accessibleName": "Contradictions",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 318,
+        "focused": null,
+        "headingsInViewport": [
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions",
+          "Persistence status",
+          "Local work in this page",
+          "Remote persistence (runtime-reported)"
+        ],
+        "hash": "#region-contradictions"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-003.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 4,
+      "tag": "a",
+      "accessibleName": "Unknowns",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 318,
+        "focused": null,
+        "headingsInViewport": [
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions",
+          "Persistence status",
+          "Local work in this page",
+          "Remote persistence (runtime-reported)"
+        ],
+        "hash": "#region-unknowns"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-004.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 5,
+      "tag": "a",
+      "accessibleName": "Obligations",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 361,
+        "focused": null,
+        "headingsInViewport": [
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions",
+          "Persistence status",
+          "Local work in this page",
+          "Remote persistence (runtime-reported)"
+        ],
+        "hash": "#region-obligations"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-005.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 6,
+      "tag": "a",
+      "accessibleName": "Evidence",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 361,
+        "focused": null,
+        "headingsInViewport": [
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions",
+          "Persistence status",
+          "Local work in this page",
+          "Remote persistence (runtime-reported)"
+        ],
+        "hash": "#region-evidence"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-006.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 7,
+      "tag": "a",
+      "accessibleName": "Actions",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 361,
+        "focused": null,
+        "headingsInViewport": [
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions",
+          "Persistence status",
+          "Local work in this page",
+          "Remote persistence (runtime-reported)"
+        ],
+        "hash": "#region-legal-actions"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-007.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 8,
+      "tag": "a",
+      "accessibleName": "Persistence",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 361,
+        "focused": null,
+        "headingsInViewport": [
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions",
+          "Persistence status",
+          "Local work in this page",
+          "Remote persistence (runtime-reported)"
+        ],
+        "hash": "#region-persistence-state"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-008.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 9,
+      "tag": "button",
+      "accessibleName": "Unavailable: Confirm root cause",
+      "isConfirmRootCauseControl": true,
+      "outcome": "not-clickable: locator.click: Timeout 2000ms exceeded.",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses (0 active)",
+          "Contradictions (0 active)",
+          "Unresolved unknowns (0 active)",
+          "Outstanding obligations (0 active)",
+          "Evidence (0 active)",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": null,
+      "errors": []
+    }
+  ]
+}

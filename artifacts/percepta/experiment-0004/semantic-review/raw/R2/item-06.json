@@ -1,0 +1,85 @@
+{
+  "item": "item-06",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: each of the 6 active predicates has a distinct visible line - 'Hypothesis Is Falsified' under 'Contradictions', 'Blocking Unknown Exists' under 'Unresolved unknowns', 'Github Write Is Pending' under both 'Persistence' and 'Outstanding obligations', and 'Corrective Action Not Verified', 'Contradictions Present', 'Obligations Present' under 'Evidence & relationships'. The paragraph '6 active facts · 1 capability status' confirms the full count is surfaced.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "All four viewport aria trees are structurally identical; the same 6 predicate lines appear in the same regions in each."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: each predicate occupies its own listitem in its own region (Contradictions, Unresolved unknowns, Persistence/Outstanding obligations, Evidence & relationships); none of the regions overwrite or omit another's content, and the absent 'Triggering observation' and 'Competing hypotheses' are stated as inactive rather than blank or repurposed to hide other content.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical region set and predicate placement at every viewport; no region is dropped or merged."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: region 'Contradictions' heading with listitem 'Hypothesis Is Falsified' / 'Active runtime predicate'; also echoed as 'Contradictions Present' under 'Evidence & relationships'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same 'Contradictions' region and listitem text present at all viewports."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: region 'Outstanding obligations' heading with listitem 'Github Write Is Pending' / 'Active runtime predicate'; also echoed as 'Obligations Present' under 'Evidence & relationships'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same 'Outstanding obligations' region and listitem text present at all viewports."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: 'Persistence' region ('Local work may not be remotely persisted.' / 'Github Write Is Pending') is a separate region from 'Actions' (the 'Confirm Root Cause' control and its 'Unavailable' explanation). The two meanings are never combined into one statement; persistence pending is not represented as, or folded into, the root-cause confirmation control's state.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Persistence and Actions remain separate regions at every viewport."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "fail",
+      "failureType": "inaccessible-operation",
+      "evidence": "rendered-evidence.json: confirmRootCauseControl shows the button disabled with describedByText '' and enclosingContainerText ending in 'Review active unknowns, contradictions, obligations, and evidence for blocking context.' That sentence is plain text inside the Actions region, not a link/button; controls[] lists only the disabled 'Confirm Root Cause' button as a control on the page, and operabilityProbes is an empty array, so no operable control exists that was shown to scroll or focus to the unknowns/contradictions/obligations/evidence sections. The action is explained (reason: 'runtime marks this capability illegal') but not demonstrated navigable per the rule that navigation requires a user-operable control with probe evidence of scroll/focus landing or revealed information.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "Same lack of an operable navigation control at every viewport; the explanation text is unchanged and remains non-interactive throughout."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "The 'Review active unknowns, contradictions, obligations, and evidence for blocking context.' sentence reads as an instruction to navigate/act, but no operable link or control backs it - it functions as inert text rather than the navigable pointer it implies.",
+      "evidence": "rendered-evidence.json: confirmRootCauseControl.enclosingContainerText; controls[] contains no such link, and operabilityProbes is empty."
+    }
+  ],
+  "evidenceLimitations": "operabilityProbes is empty, so there is no probe-based evidence (scroll/focus/added-removed aria lines or screenshots) for any operable behavior in this state beyond the single disabled control; judgments on navigability rely on the absence of any listed operable control rather than a failed probe attempt."
+}

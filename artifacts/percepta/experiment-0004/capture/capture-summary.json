@@ -1,0 +1,142 @@
+[
+  {
+    "candidate": "candidate-1",
+    "caseId": "combined-blocker-falsification",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 1
+  },
+  {
+    "candidate": "candidate-1",
+    "caseId": "pending-unverified",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 0
+  },
+  {
+    "candidate": "candidate-1",
+    "caseId": "all-constraints",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 1
+  },
+  {
+    "candidate": "candidate-1",
+    "caseId": "legal-with-history",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 1
+  },
+  {
+    "candidate": "candidate-1",
+    "caseId": "illegal-without-known-blocker",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 0
+  },
+  {
+    "candidate": "candidate-2",
+    "caseId": "combined-blocker-falsification",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 0
+  },
+  {
+    "candidate": "candidate-2",
+    "caseId": "pending-unverified",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 0
+  },
+  {
+    "candidate": "candidate-2",
+    "caseId": "all-constraints",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 0
+  },
+  {
+    "candidate": "candidate-2",
+    "caseId": "legal-with-history",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 1
+  },
+  {
+    "candidate": "candidate-2",
+    "caseId": "illegal-without-known-blocker",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 0
+  },
+  {
+    "candidate": "candidate-3",
+    "caseId": "combined-blocker-falsification",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 20
+  },
+  {
+    "candidate": "candidate-3",
+    "caseId": "pending-unverified",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 17
+  },
+  {
+    "candidate": "candidate-3",
+    "caseId": "all-constraints",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 28
+  },
+  {
+    "candidate": "candidate-3",
+    "caseId": "legal-with-history",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 18
+  },
+  {
+    "candidate": "candidate-3",
+    "caseId": "illegal-without-known-blocker",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 15
+  },
+  {
+    "candidate": "candidate-4",
+    "caseId": "combined-blocker-falsification",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 11
+  },
+  {
+    "candidate": "candidate-4",
+    "caseId": "pending-unverified",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 12
+  },
+  {
+    "candidate": "candidate-4",
+    "caseId": "all-constraints",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 15
+  },
+  {
+    "candidate": "candidate-4",
+    "caseId": "legal-with-history",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 10
+  },
+  {
+    "candidate": "candidate-4",
+    "caseId": "illegal-without-known-blocker",
+    "status": "captured",
+    "protocol": "called",
+    "probes": 10
+  }
+]

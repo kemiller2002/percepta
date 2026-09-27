@@ -1,0 +1,68 @@
+{
+  "item": "item-18",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png / aria.txt: 'Persistence' section shows a 'PENDING' badge with heading 'Remote write pending' and text 'Changes are not yet confirmed as persisted remotely.' This directly matches the active predicate 'github-write-is-pending'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical 'PENDING · Remote write pending' text appears verbatim in all four viewport aria trees."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Persistence section states 'Changes are not yet confirmed as persisted remotely' rather than any success claim; no text elsewhere (banner, actions) asserts a remote write succeeded.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same text present unchanged across all viewport aria trees."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Banner status reads 'Investigation open · verification required'; 'Outstanding obligations' section states 'A corrective action has not yet been verified, so the investigation remains unresolved.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Banner status text and outstanding-obligations text are identical in all four aria trees."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Outstanding obligations' heading with 'VERIFY' badge and 'Verify corrective action' text is present and visible in the main content on desktop (desktop-1440x900.full.png, top-right card), not hidden or collapsed.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The 'Outstanding obligations'/'VERIFY'/'Verify corrective action' block appears identically in every viewport's aria tree."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json confirmRootCauseControl: button 'Confirm root cause' has disabled=true, ariaDisabled='true', enclosing container text 'Unavailable: required verification remains outstanding.' This matches capabilities.confirm-root-cause = 'illegal'. No enabled control performs the confirm action (operabilityProbes is empty; the only other control, 'Go to blocking unknown', is not visible so was not probed).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The disabled 'Confirm root cause' button and its 'Unavailable' status text appear identically in all four viewport aria trees."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "operabilityProbes is empty (only visible enabled control set is empty since 'Confirm root cause' is disabled and 'Go to blocking unknown' is not visible), so no probe screenshots exist; this does not affect judgment since no enabled control claims to act on these obligations. Only .full.png screenshots were reviewed for non-desktop viewports (no tile images were provided for those, consistent with their tiles:0 metadata)."
+}

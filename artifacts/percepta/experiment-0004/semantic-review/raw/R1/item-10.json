@@ -1,0 +1,105 @@
+{
+  "item": "item-10",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Competing hypotheses' card (left column): 'FALSIFIED Candidate explanation retained for history' with text 'Evidence has falsified this hypothesis. It remains visible as a considered explanation...'. Also in aria tree under heading 'Competing hypotheses'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same card and text visible in all screenshots; aria trees identical to desktop."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Status conveyed by the text badge 'FALSIFIED' and the sentence 'Evidence has falsified this hypothesis.' in addition to the red left border (desktop full.png, Competing hypotheses card; aria 'text: FALSIFIED').",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Text badge and sentence present at every viewport."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop full.png, right column 'Unresolved unknowns' card: 'BLOCKER Required information is unresolved - This unknown blocks dependent progress until it is resolved.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Blocker item visible in all viewports (on phone it appears in the stacked column above Actions)."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence controls[0] 'Confirm root cause' disabled=true, aria-disabled=true; aria 'button \"Confirm root cause\" [disabled]'; greyed button in Actions card of desktop full.png. Consistent with capability confirm-root-cause: illegal.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Button shown disabled at all viewports; aria trees identical."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Directly beneath the disabled button (desktop Actions card): status text 'Unavailable: unresolved information is blocking progress.' Supported by predicate blocking-unknown-exists. Note: not programmatically linked (describedByText empty), but it is visible and exposed as a status region adjacent to the control.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Reason text shown under the button at all viewports."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Go to blocking unknown' button in the Actions card, enabled. Probe (controlIndex 1, probe-001.viewport.png): focus moved from null to the section 'Unresolved unknowns ... BLOCKER Required information is unresolved ...'; the section was already in the viewport, so scrollY stayed 0.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Control present in all aria trees and screenshots; operability judged from the desktop probe only. No visible focus indicator is discernible in probe-001, but focus landing on the section is recorded."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The falsified hypothesis and the BLOCKER unknown are shown as separate items in separate cards, and the disabled-confirm reason cites the blocker ('unresolved information is blocking progress'), not falsification. The blocker remains with 'This unknown blocks dependent progress until it is resolved.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Both remain present and distinct at all viewports."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Header status chip 'Investigation open' asserts an investigation lifecycle state that no predicate supplies.",
+      "evidence": "desktop full.png header, top right; aria banner 'text: Investigation open'."
+    },
+    {
+      "description": "Triggering observation content ('Observed failure under investigation', 'Source: recorded system observation') and a generic 'Evidence record' are presented without any supplied observation or evidence predicate. They are generic placeholders, but they assert a source/provenance the state does not provide.",
+      "evidence": "desktop full.png 'Triggering observation' and 'Evidence' cards."
+    },
+    {
+      "description": "Borderline: the 'LOCAL' badge in the Persistence card may read as asserting local-only persistence, which the state does not supply. The accompanying text ('Remote persistence not established. No remote success is inferred...') does frame it as unknown rather than as a known fact.",
+      "evidence": "desktop full.png 'Persistence' card."
+    }
+  ],
+  "evidenceLimitations": "The desktop page fits in one viewport, so the navigation probe shows focus moving to the Unresolved unknowns section with no scroll change. No visible focus ring is discernible in probe-001.viewport.png. Operability at non-desktop viewports (where the blocker sits above Actions on phone) was not probed. The disabled button has no aria-describedby link to its reason text."
+}

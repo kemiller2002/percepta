@@ -1,0 +1,53 @@
+{
+  "item": "item-01",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Desktop full.png Actions card (right column): 'Confirm root cause' button rendered enabled, with note 'LEGALITY Availability follows the supplied capability map, not UI inference.' rendered-evidence controls[0]: disabled=false, aria-disabled=false, isConfirmRootCauseControl=true. Probe 0 outcome 'clicked', focus landed on the button, no errors. State capability confirm-root-cause=legal, so the enabled control matches the authority. Caveat: the note ties availability to the capability map in general terms and does not explicitly say 'legal'; clicking produced no visible aria change.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Enabled button and legality note visible in every viewport; aria trees are identical to desktop."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Desktop 'Competing hypotheses' card: 'FALSIFIED' text badge plus 'Candidate explanation retained for history' and 'Evidence has falsified this hypothesis. It remains visible as a considered explanation'. Status is conveyed in text, not only by the red left border.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The hypothesis entry with its FALSIFIED badge is visible in all viewports."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Header badge 'Investigation open'. The 'Confirm root cause' button stays enabled and operable (probe 0). No blocker or 'blocked' message is shown; the 'Go to blocking unknown' control is hidden (visible=false). The falsification text limits unavailability to 'actions requiring an active hypothesis' and does not describe the whole investigation as blocked.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same content in all viewports: 'Investigation open' badge and an enabled Confirm control."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Minor: the hypothesis says 'actions requiring an active hypothesis are unavailable', which the state does not support. The capability map lists only confirm-root-cause=legal, and no such unavailable actions are shown. This is an unsupported generic claim that sits next to an enabled Confirm action, but it names no specific blocked action.",
+      "evidence": "Desktop 'Competing hypotheses' card body text"
+    },
+    {
+      "description": "Minor: the 'LOCAL' persistence badge and the header badge 'Investigation open' assert status that no predicate supplies. The accompanying text correctly declines to claim remote success.",
+      "evidence": "Desktop 'Persistence' card ('LOCAL Remote persistence not established') and header pill"
+    }
+  ],
+  "evidenceLimitations": "The Confirm probe showed only a focus change and no aria diff, so what the action does cannot be observed. It is operable, but it gives no visible feedback. No probe screenshot was captured. The desktop page fits in one tile."
+}

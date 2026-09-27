@@ -1,0 +1,92 @@
+{
+  "item": "item-10",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Competing hypotheses' card: badge 'FALSIFIED' with heading 'Candidate explanation retained for history' and text 'Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical accessibility-tree text for 'Competing hypotheses' section at all four viewports."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png shows a text badge reading 'FALSIFIED' plus explanatory prose ('Evidence has falsified this hypothesis...'); desktop-1440x900.aria.txt line 11-13 carries the same text through the accessibility tree, so the status is conveyed by text/labels, not by color alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same textual badge and sentence present in all viewport aria trees."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Unresolved unknowns' card: badge 'UNKNOWN' with text 'No opposite fact is inferred from information that has not been supplied.' and badge 'BLOCKER' with heading 'Required information is unresolved' and text 'This unknown blocks dependent progress until it is resolved.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical 'Unresolved unknowns' section text at all four viewports."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json controls[0]/confirmRootCauseControl: 'Confirm root cause' button has disabled: true, ariaDisabled: 'true'; matches capabilities.confirm-root-cause = 'illegal' in state.json. desktop-1440x900.aria.txt line 22: 'button \"Confirm root cause\" [disabled]'. Not force-clicked per operabilityProbes (only 'Go to blocking unknown' at index 1 was probed).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Aria tree shows the same disabled button at every viewport."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json confirmRootCauseControl.enclosingContainerText includes 'Confirm root cause Unavailable: unresolved information is blocking progress.'; desktop-1440x900.full.png shows this status text directly beneath the disabled button.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same status text present in the Actions section of every viewport's aria tree."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "operabilityProbes[0]: control 'Go to blocking unknown' (index 1, enabled) was clicked; after-state focused element is the 'Unresolved unknowns' section itself ('Unresolved unknowns UNKNOWN...BLOCKER...This unknown blocks dependent progress until it is resolved.'), confirming focus actually lands on the blocking information.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The 'Go to blocking unknown' control and the 'Unresolved unknowns' section both appear identically in every viewport's aria tree; probes are desktop-only evidence of operability but the same control is present elsewhere."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The falsified-hypothesis card ('Competing hypotheses') and the unrelated blocker card ('Unresolved unknowns' / BLOCKER) are both fully present and worded independently in desktop-1440x900.aria.txt (lines 10-13 and 17-20); the blocker's text ('Required information is unresolved... blocks dependent progress until it is resolved') is unchanged by and unrelated to the falsification wording.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Both sections co-occur unmodified in every viewport's aria tree."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "Only one operability probe was recorded (for 'Go to blocking unknown'); the disabled 'Confirm root cause' control was correctly not force-clicked, so its unavailability rests on disabled/aria-disabled state and visible reason text rather than an attempted-click probe. Non-desktop viewports are judged from screenshots/aria text only, without their own operability probes, per the scoring rules."
+}

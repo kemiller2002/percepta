@@ -1,0 +1,102 @@
+[
+  {
+    "item": "item-01",
+    "candidate": "candidate-1",
+    "caseId": "legal-with-history"
+  },
+  {
+    "item": "item-02",
+    "candidate": "candidate-4",
+    "caseId": "all-constraints"
+  },
+  {
+    "item": "item-03",
+    "candidate": "candidate-3",
+    "caseId": "all-constraints"
+  },
+  {
+    "item": "item-04",
+    "candidate": "candidate-3",
+    "caseId": "combined-blocker-falsification"
+  },
+  {
+    "item": "item-05",
+    "candidate": "candidate-4",
+    "caseId": "combined-blocker-falsification"
+  },
+  {
+    "item": "item-06",
+    "candidate": "candidate-2",
+    "caseId": "all-constraints"
+  },
+  {
+    "item": "item-07",
+    "candidate": "candidate-2",
+    "caseId": "combined-blocker-falsification"
+  },
+  {
+    "item": "item-08",
+    "candidate": "candidate-1",
+    "caseId": "all-constraints"
+  },
+  {
+    "item": "item-09",
+    "candidate": "candidate-2",
+    "caseId": "pending-unverified"
+  },
+  {
+    "item": "item-10",
+    "candidate": "candidate-1",
+    "caseId": "combined-blocker-falsification"
+  },
+  {
+    "item": "item-11",
+    "candidate": "candidate-2",
+    "caseId": "legal-with-history"
+  },
+  {
+    "item": "item-12",
+    "candidate": "candidate-4",
+    "caseId": "illegal-without-known-blocker"
+  },
+  {
+    "item": "item-13",
+    "candidate": "candidate-3",
+    "caseId": "pending-unverified"
+  },
+  {
+    "item": "item-14",
+    "candidate": "candidate-4",
+    "caseId": "pending-unverified"
+  },
+  {
+    "item": "item-15",
+    "candidate": "candidate-1",
+    "caseId": "illegal-without-known-blocker"
+  },
+  {
+    "item": "item-16",
+    "candidate": "candidate-3",
+    "caseId": "legal-with-history"
+  },
+  {
+    "item": "item-17",
+    "candidate": "candidate-3",
+    "caseId": "illegal-without-known-blocker"
+  },
+  {
+    "item": "item-18",
+    "candidate": "candidate-1",
+    "caseId": "pending-unverified"
+  },
+  {
+    "item": "item-19",
+    "candidate": "candidate-4",
+    "caseId": "legal-with-history"
+  },
+  {
+    "item": "item-20",
+    "candidate": "candidate-2",
+    "caseId": "illegal-without-known-blocker"
+  }
+]

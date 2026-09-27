@@ -1,0 +1,30 @@
+- banner:
+  - text: Failure investigation
+  - heading "Investigation Workspace" [level=1]
+  - paragraph: What currently explains the observation, and what should be tested next?
+  - text: Investigation open · verification required
+- main:
+  - heading "Triggering observation" [level=2]
+  - strong: Observed failure under investigation
+  - text: "Source: recorded system observation. No additional domain facts have been supplied."
+  - heading "Competing hypotheses" [level=2]
+  - text: ACTIVE
+  - strong: Candidate explanation
+  - text: Remains viable while evidence is gathered. Competing explanations are not collapsed into a single conclusion.
+  - heading "Evidence" [level=2]
+  - strong: Evidence record
+  - text: Evidence is interpreted in relation to hypotheses; no unsupported confidence score is assigned.
+  - heading "Unresolved unknowns" [level=2]
+  - text: UNKNOWN No opposite fact is inferred from information that has not been supplied.
+  - heading "Outstanding obligations" [level=2]
+  - text: VERIFY
+  - strong: Verify corrective action
+  - text: A corrective action has not yet been verified, so the investigation remains unresolved.
+  - heading "Actions" [level=2]
+  - button "Confirm root cause" [disabled]
+  - status: "Unavailable: required verification remains outstanding."
+  - text: LEGALITY Availability follows the supplied capability map, not UI inference.
+  - heading "Persistence" [level=2]
+  - text: PENDING
+  - strong: Remote write pending
+  - text: Changes are not yet confirmed as persisted remotely.

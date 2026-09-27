@@ -1,0 +1,77 @@
+{
+  "candidate": "candidate-2",
+  "caseId": "illegal-without-known-blocker",
+  "state": {
+    "name": "held-out-05",
+    "predicates": [],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "desktop-1440x900",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 900,
+      "horizontalOverflow": false,
+      "tiles": 1,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "landscape-1180x820",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 820,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "portrait-820x1180",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1180,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "phone-390x844",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1211,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    }
+  ],
+  "controls": [
+    {
+      "index": 0,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Confirm Root Cause",
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": true
+    }
+  ],
+  "confirmControl": [
+    {
+      "tag": "button",
+      "visibleText": "Confirm Root Cause",
+      "ariaLabel": null,
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "describedByText": "",
+      "enclosingContainerText": "Actions Confirm Root Cause Unavailable Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context."
+    }
+  ],
+  "probes": []
+}

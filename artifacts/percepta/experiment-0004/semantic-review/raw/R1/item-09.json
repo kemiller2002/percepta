@@ -1,0 +1,68 @@
+{
+  "item": "item-09",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png top-right 'Persistence' card: amber text 'Local work may not be remotely persisted.' plus chip 'Github Write Is Pending'; also 'Outstanding obligations' lists 'Github Write Is Pending — Active runtime predicate' (aria: region 'Persistence', region 'Outstanding obligations'). Meaning is carried by text, not color alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Aria trees identical to desktop; Persistence card and chip visible in every screenshot."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "No text anywhere claims a successful push/sync/save. The only persistence statement is 'Local work may not be remotely persisted.' with 'Github Write Is Pending' (desktop screenshot, aria tree). 'Runtime state applied' refers to local state application, not remote persistence.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same content at all viewports."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "No 'resolved', 'root cause confirmed' or completion language. Confirm Root Cause button is disabled with 'Unavailable'; outstanding obligation 'Github Write Is Pending' and 'Corrective Action Not Verified' are shown as active. Empty sections are phrased as 'No active ... supplied' rather than asserting that nothing remains.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria trees; same cards visible."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Evidence & relationships' card shows 'Corrective Action Not Verified — Active runtime predicate' (desktop screenshot middle-right, aria region 'Evidence & relationships'). This directly states that verification is outstanding. Weakness: the item appears under Evidence, not under 'Outstanding obligations', and is labeled only as a humanized predicate with no guidance on the next step.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Visible in all viewport screenshots."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json controls[0]: 'Confirm Root Cause' disabled=true, aria-disabled=true, isConfirmRootCauseControl=true; the probe list is empty (the disabled control was not clicked). Visible 'Unavailable' badge and the text 'Unavailable because the runtime marks this capability illegal.' This matches capabilities.confirm-root-cause = illegal. Note: describedByText is empty, so the reason is not programmatically tied to the button.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Aria shows button [disabled] at every viewport."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "No operability probes exist because the only control is disabled. The disabled reason is visible but not linked via aria-describedby. 'Corrective Action Not Verified' is categorized under Evidence rather than as an outstanding obligation; this was judged non-fabricating. Its blocking-context sentence points to unknowns and contradictions, which are empty here, but it does not invent a specific blocker."
+}

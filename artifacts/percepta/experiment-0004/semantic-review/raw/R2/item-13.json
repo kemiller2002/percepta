@@ -1,0 +1,68 @@
+{
+  "item": "item-13",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt region 'Persistence': 'GitHub: ✧ Pending Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.' Also shown in the top status strip: '✧ GitHub write pending'. Matches predicate github-write-is-pending in state.json. Visible in desktop-1440x900.tile-02.png Persistence card.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility tree text is byte-identical across all four viewports (diffed); layout reflows but the Persistence region and its pending text remain present."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Persistence region states only 'Pending' for GitHub and explicitly instructs 'do not treat this work as saved remotely'; no success, checkmark, or 'saved to GitHub' text appears anywhere in desktop-1440x900.aria.txt or the top status strip, which instead reads '✧ GitHub write pending'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical text across viewports per aria-tree diff; no viewport introduces a success claim."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt region 'Investigation status ◌ Open': 'Not closed: a corrective action was applied but is not verified. The verification obligation remains outstanding.' Top strip shows '◌ Investigation open'. Outstanding obligations region shows '1 open'. No 'resolved' or 'closed' state is asserted anywhere.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical text across viewports per aria-tree diff."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt region 'Outstanding obligations ✧ 1 open' lists '☐ Verification required Verify the corrective action: re-run the nightly scaffold on a clean runner and confirm `indy init` succeeds.' The 'Go to verification obligation' control (index 13) was probed and navigated successfully: after click, hash became '#obligation-verify' and focus/scroll landed on the li text 'Verification required Verify the corrective action...' (probe-013.viewport.png), confirming the control is executable and navigates.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Obligations region and its content are identical across viewports per aria-tree diff; probe evidence is desktop-only per scoring rules but the same anchor/control is present in every viewport's tree."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json confirmRootCauseControl: button 'Confirm root cause' disabled=true, ariaDisabled='true', describedByText 'Why unavailable: The corrective action is not yet verified. Go to verification obligation'. This was not force-clicked (disabled control not activated per probe protocol). Matches capabilities.confirm-root-cause = 'illegal' in state.json exactly — no override.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Button disabled state and 'Why unavailable' text are identical across viewports per aria-tree diff."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "Operability probes and probe screenshots are only provided for desktop-1440x900, consistent with the packet's stated scope; other viewports were judged from their screenshots and accessibility trees only, which is sufficient here because the accessibility-tree text is identical across all four viewports."
+}

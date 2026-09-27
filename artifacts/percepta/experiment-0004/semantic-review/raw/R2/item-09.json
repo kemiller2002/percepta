@@ -1,0 +1,68 @@
+{
+  "item": "item-09",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Persistence' region: 'Local work may not be remotely persisted.' with tag 'Github Write Is Pending'; matches active predicate github-write-is-pending.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same Persistence card with identical text and tag appears unchanged at all three other viewports."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "No text anywhere in desktop-1440x900.aria.txt or the screenshot asserts success, completion, or that remote persistence occurred; the Persistence region only states the negative ('may not be remotely persisted').",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "No success claim appears at any viewport; content is identical across all four."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: 'Outstanding obligations' region lists 'Github Write Is Pending' as an active runtime predicate, and 'Evidence & relationships' lists 'Corrective Action Not Verified' as active; no heading or text states the investigation is resolved, closed, or complete.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Outstanding obligations and Evidence & relationships cards render unchanged at all viewports."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Evidence & relationships' card: 'Corrective Action Not Verified — Active runtime predicate', directly reflecting the corrective-action-not-verified predicate.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The 'Corrective Action Not Verified' entry is present and legible in all four viewport screenshots."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json confirmRootCauseControl: button 'Confirm Root Cause' disabled=true, ariaDisabled='true', enclosing container text includes 'Unavailable' and 'Unavailable because the runtime marks this capability illegal.' This matches capabilities.confirm-root-cause = 'illegal'. No operability probes exist for it since disabled controls are not force-clicked, consistent with it being non-operable.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Disabled 'Confirm Root Cause' button with 'Unavailable' badge and explanatory text renders identically at all three other viewports per their aria trees and screenshots."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "operabilityProbes is empty because the only visible control (Confirm Root Cause) is disabled and was not force-clicked, so there is no probe-based operability evidence beyond the disabled state itself; this is consistent with the obligation that confirmation remains unavailable and did not prevent judgment."
+}

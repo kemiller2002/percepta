@@ -1,0 +1,56 @@
+{
+  "item": "item-15",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png Actions panel: button \"Confirm root cause\" rendered disabled/greyed; rendered-evidence.json controls[0]: disabled=true, ariaDisabled=\"true\"; status text \"Unavailable: the supplied capability is illegal in the current domain state.\" matches state.json capabilities.confirm-root-cause=\"illegal\"; operabilityProbes is empty, confirming the disabled control was not force-clicked and no path to execute it exists.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "All three aria.txt files and phone-390x844.full.png show the identical disabled 'Confirm root cause' button and status text; layout stacks but content and disabled state are unchanged."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "state.json predicates is an empty array (no active predicates, including no blocking-unknown predicate). The 'Unresolved unknowns' section reads only \"UNKNOWN No opposite fact is inferred from information that has not been supplied\" -- a generic disclaimer, not a specific named blocking unknown. The 'Go to blocking unknown' control (rendered-evidence.json controls[1]) is visible:false, and no visible text names a specific blocking-unknown reason for the Confirm root cause disablement (the stated reason is only the illegal capability).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical 'Unresolved unknowns' text and absence of a named blocking unknown across all viewport aria trees."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "With predicates: [] in state.json, no domain-specific claim appears anywhere in the rendered text. The disablement reason given is generic and capability-grounded: \"Unavailable: the supplied capability is illegal in the current domain state\" plus \"LEGALITY Availability follows the supplied capability map, not UI inference.\" No specific domain fact (e.g., a named root cause, a named blocker) is asserted.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same generic, non-domain-specific legality text present verbatim in every viewport's aria tree."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The status text \"Unavailable: the supplied capability is illegal in the current domain state.\" directly communicates unavailability to the user (visible in desktop-1440x900.full.png Actions panel and in the aria tree as role 'status'), and it attributes that unavailability explicitly to the supplied capability map (\"LEGALITY Availability follows the supplied capability map, not UI inference\") rather than asserting an independent UI-invented justification that could override or contradict the illegal capability.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Status text and LEGALITY caption identical in all four viewport aria trees and confirmed visually on phone screenshot."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "operabilityProbes is empty because the only enabled interactive control set was empty (Confirm root cause is disabled, the 'Go to blocking unknown' control is not visible), so no probe evidence of navigation/operability exists to corroborate beyond the static disabled state; this does not affect the obligations since none require an executable action to be demonstrated."
+}

@@ -1,0 +1,80 @@
+{
+  "item": "item-03",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt banner: '◌ Investigation open ⛔ Blocked by unknown ⧗ Verification outstanding ⧗ GitHub write pending Confirm root cause: unavailable'; region 'Investigation status ◌ Open' lists all six active-state facts with their predicate codes verbatim: contradictions-present, obligations-present, hypothesis-is-falsified, blocking-unknown-exists, github-write-is-pending, corrective-action-not-verified (desktop-1440x900.tile-01.png shows the same as a labeled list).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility tree is identical across all four viewports; the banner badges and the full 'Active state facts' list appear verbatim in each .aria.txt."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Each active fact keeps its own listitem in 'Investigation status' (lines 50-68 of desktop-1440x900.aria.txt) rather than being merged into a single summary; the disabled 'Confirm root cause' control's 'Why unavailable' list separately states all five blocking reasons (blocking unknown, falsified hypothesis, unverified corrective action, outstanding obligation, contradiction) each with its own 'Go to ...' link, none collapsed into a generic reason.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same itemized lists present verbatim at every viewport."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "region 'Contradictions ! Present' states 'E4 conflicts with H1 ... The same archive digest fetched from the mirror by a second runner at the same time extracted successfully. H1 is weakened, not removed.' Also surfaced in the nav link 'Contradictions', in H1's own listing ('Under consideration — contradicted'), and in the Confirm-root-cause block reason list with a working 'Go to contradiction' link (probe-021 lands scroll/focus on the E4/H1 contradiction listitem, hash #contradiction-1).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Contradictions region and text identical in all four .aria.txt files."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "region 'Outstanding obligations ⧗ 2 open' lists 'Verification required' (re-run nightly scaffold, confirm indy init succeeds) and 'Required' (outstanding required work); nav link reads 'Obligations (2)'; the Confirm-root-cause block also links to both via 'Go to verification obligation' (probe-019, lands on #obligation-verify) and 'Go to outstanding obligation' (probe-020, lands on #obligation-required).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Obligations region and nav label identical at every viewport."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Persistence' region is a separate region from 'Investigation status': 'This device: ● Local working copy ... GitHub: ⧗ Pending Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.' This is not conflated with the investigation-open/closed language in the 'Investigation status ◌ Open' region, and the banner keeps 'Investigation open' and 'GitHub write pending' as two separate badges rather than one combined status.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Persistence region text and nav link 'Persistence (pending)' identical across viewports."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Button 'Confirm root cause' is disabled with ariaDisabled=true and describedByText enumerating all 5 reasons (rendered-evidence.json confirmRootCauseControl); each reason carries a working link probed live: probe-017 (Go to blocking unknown -> #unknown-blocker, focus lands on the blocking-unknown listitem), probe-018 (Go to falsified hypothesis -> #hyp-h-disk, lands on H3 falsified listitem), probe-019 (Go to verification obligation -> #obligation-verify), probe-020 (Go to outstanding obligation -> #obligation-required), probe-021 (Go to contradiction -> #contradiction-1). All five probes show focus/scroll actually landing on the named content, satisfying 'navigate'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Disabled button and identical 'Why unavailable' list with the same five links appear in every viewport's accessibility tree; operability was only probed at desktop, per scoring rule 5, but the same controls are assumed present since the tree shows them."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "operabilityProbes only exist for desktop-1440x900; the other three viewports are judged for obligation preservation using their screenshots and accessibility trees only, as instructed, and their accessibility trees are byte-for-byte identical to desktop's, giving high confidence the same controls and links exist there. Probe-016 (index 16, disabled 'Confirm root cause' button) is absent from the probe list as expected because a disabled control is not force-clicked."
+}

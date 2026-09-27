@@ -1,0 +1,97 @@
+{
+  "item": "item-03",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "All six predicates appear together. The desktop tile-01 header badges read 'Investigation open', 'Blocked by unknown', 'Verification outstanding' and 'GitHub write pending', followed by 'Confirm root cause: unavailable'. The 'Investigation status' region lists 'Active state facts' with each predicate code: contradictions-present, obligations-present, hypothesis-is-falsified, blocking-unknown-exists, github-write-is-pending and corrective-action-not-verified. Each meaning also has its own region: H3 'Falsified — retained for the record', 'Unresolved unknowns ⛔ Blocking', 'Contradictions ! Present', 'Outstanding obligations ⧗ 2 open' and 'Persistence' with 'GitHub: ⧗ Pending'. The nav links reached each region (probes 2-8).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The accessibility tree is identical at every viewport, and each full screenshot shows all regions and badges with no horizontal overflow."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The falsified H3 is kept on the page and struck through, next to H1 and H2 that are still under consideration. The contradiction does not remove H1: 'H1 is weakened, not removed.' The pending GitHub write is shown next to the open investigation, the blocker and the obligations. The 'Why unavailable' list names the unknown, the falsification, the verification, the required work and the contradiction together (desktop tile-02, top right).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same content is shown at every viewport."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Contradictions ! Present' region (desktop tile-02, middle) reads 'E4 conflicts with H1 …'. H1 carries the badge 'Under consideration — contradicted', and the header lists 'Evidence conflicts with an explanation contradictions-present'. The nav link and 'Go to contradiction' reach the region (probe 5 scrolled to scrollY 612 with the heading 'Contradictions Present' in view; probe 20 focused the li contradiction-1).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The Contradictions region is visible in every full screenshot."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The 'Outstanding obligations ⧗ 2 open' region (desktop tile-02, right) contains 'Verification required' and 'Required Outstanding required work must be completed…'. The nav link 'Obligations (2)' reaches it (probe 6), and probes 18 and 19 focus each obligation.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The region is visible at every viewport."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The separate 'Persistence' region reads 'GitHub: ⧗ Pending Write to GitHub is pending. It has not been confirmed; do not treat this work as saved remotely.' The investigation status is shown on its own as '◌ Open' / 'Not closed: … not verified'. The header has separate badges: 'GitHub write pending' and 'Investigation open'. Nothing on the page ties the pending write to resolving the investigation.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The Persistence region and the status region stay separate at every viewport."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "fail",
+      "failureType": "contradictory",
+      "evidence": "The 'Confirm root cause' button is disabled and marked '✕ Unavailable', which matches the capability 'illegal'. It has a 'Why unavailable' list whose 'Go to …' links work: probe 16 went to the blocking unknown, 17 to H3, 18 and 19 to the obligations and 20 to the contradiction. The 'Blocks: Confirm root cause' link returns to the control (probe 15). However, one stated reason is 'A hypothesis has been falsified; confirming a root cause needs an active hypothesis.' The same page shows H1 and H2 as still 'Under consideration', i.e. active, and H2 is described as 'No falsification is reported'. So this reason contradicts the displayed state. The page also presents each active predicate as a cause of the illegality, but the state supplies only the legality and no causal mapping.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "The same 'Why unavailable' list, including the contradictory falsified-hypothesis reason, appears at every viewport. Navigation is otherwise intact."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "The page gives an unsupported and self-contradictory blocking reason: confirmation is unavailable because a hypothesis was falsified and an active hypothesis is needed. Yet H1 and H2 are shown as active.",
+      "evidence": "The 'Why unavailable' list, second item (desktop tile-02, top right; describedByText of the Confirm root cause control)."
+    },
+    {
+      "description": "The page states which predicates cause the illegal capability (unverified corrective action, outstanding work, contradiction, falsification). The state supplies only 'illegal' and no causal link.",
+      "evidence": "The 'Why unavailable' list in Next actions."
+    },
+    {
+      "description": "The page claims a local save that no predicate supports.",
+      "evidence": "The Persistence region reads 'This device: ● Local working copy Edits in this workspace exist locally.'"
+    },
+    {
+      "description": "The page shows an obligation count of 2, although the state supplies no count. The count comes from splitting corrective-action-not-verified and obligations-present into two obligations.",
+      "evidence": "The nav link 'Obligations (2)' and the heading 'Outstanding obligations ⧗ 2 open'."
+    }
+  ],
+  "evidenceLimitations": "The hypotheses, evidence items and observation text (H1-H3, E1-E4, indy init error) are domain content that the state does not supply. They appear to be fixture content, so I did not judge them fabricated except where they conflict with the predicates. The 'Skip to workspace' link could not be probed (click timeout, probe 0)."
+}

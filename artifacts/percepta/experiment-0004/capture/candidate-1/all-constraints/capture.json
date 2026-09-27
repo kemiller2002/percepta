@@ -1,0 +1,144 @@
+{
+  "candidate": "candidate-1",
+  "caseId": "all-constraints",
+  "state": {
+    "name": "held-out-03",
+    "predicates": [
+      "hypothesis-is-falsified",
+      "blocking-unknown-exists",
+      "github-write-is-pending",
+      "corrective-action-not-verified",
+      "contradictions-present",
+      "obligations-present"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "desktop-1440x900",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1119,
+      "horizontalOverflow": false,
+      "tiles": 2,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "landscape-1180x820",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1211,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "portrait-820x1180",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1467,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "phone-390x844",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 2102,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    }
+  ],
+  "controls": [
+    {
+      "index": 0,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Confirm root cause",
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": true
+    },
+    {
+      "index": 1,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Go to blocking unknown",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    }
+  ],
+  "confirmControl": [
+    {
+      "tag": "button",
+      "visibleText": "Confirm root cause",
+      "ariaLabel": null,
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "describedByText": "",
+      "enclosingContainerText": "Actions Confirm root cause Unavailable: unresolved information is blocking progress. Go to blocking unknown LEGALITYAvailability follows the supplied capability map, not UI inference."
+    }
+  ],
+  "probes": [
+    {
+      "controlIndex": 1,
+      "tag": "button",
+      "accessibleName": "Go to blocking unknown",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses",
+          "Contradictions",
+          "Evidence",
+          "Unresolved unknowns",
+          "Outstanding obligations",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "focused": {
+          "tag": "section",
+          "text": "Unresolved unknowns UNKNOWNNo opposite fact is inferred from information that has not been supplied. BLOCKERRequired information is unresolved This unknown blocks dependent progress until it is resolved."
+        },
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses",
+          "Contradictions",
+          "Evidence",
+          "Unresolved unknowns",
+          "Outstanding obligations",
+          "Actions"
+        ],
+        "hash": ""
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-001.viewport.png",
+      "errors": []
+    }
+  ]
+}

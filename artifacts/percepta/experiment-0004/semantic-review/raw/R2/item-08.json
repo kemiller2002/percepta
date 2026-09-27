@@ -1,0 +1,80 @@
+{
+  "item": "item-08",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt shows a distinct section for each active predicate: 'Competing hypotheses'/FALSIFIED for hypothesis-is-falsified, 'Contradictions'/CONFLICT for contradictions-present, 'Unresolved unknowns'/UNKNOWN+BLOCKER for blocking-unknown-exists, 'Outstanding obligations'/REQUIRED+VERIFY for corrective-action-not-verified and obligations-present, and 'Persistence'/PENDING for github-write-is-pending. All six are rendered in desktop-1440x900.tile-01.png and tile-02.png without needing any interaction.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "landscape-1180x820.aria.txt, portrait-820x1180.aria.txt and phone-390x844.aria.txt are line-for-line identical to the desktop tree; phone-390x844.full.png shows every section stacked vertically with no content dropped."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Each section (Triggering observation, Competing hypotheses, Contradictions, Evidence, Unresolved unknowns, Outstanding obligations, Actions, Persistence) is rendered as its own card in desktop-1440x900.full.png / tiles, none overwriting or hiding another; the falsified hypothesis text explicitly says it 'remains visible as a considered explanation' rather than being removed once falsified.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical aria trees at all viewports confirm no section is dropped when layout reflows to single column."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "heading 'Contradictions' [level=2] with text 'CONFLICT' and 'Conflicting evidence is present' / 'Evidence conflicts with a current explanation. Review the evidence relationship before converging.' visible in desktop-1440x900.aria.txt and desktop-1440x900.tile-01.png.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same 'Contradictions'/CONFLICT block present verbatim in all three other aria.txt files and visible in phone-390x844.full.png."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "heading 'Outstanding obligations' [level=2] with 'REQUIRED Work remains before legal progress can continue.' and 'VERIFY Verify corrective action' / 'A corrective action has not yet been verified, so the investigation remains unresolved.' visible in desktop-1440x900.aria.txt and desktop-1440x900.tile-01.png.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same block present verbatim in all three other aria.txt files and visible in phone-390x844.full.png."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "A separate heading 'Persistence' [level=2] with 'PENDING Remote write pending' / 'Changes are not yet confirmed as persisted remotely.' is rendered as its own card below 'Actions' (desktop-1440x900.tile-02.png), distinct from the 'Outstanding obligations' card that carries the investigation's REQUIRED/VERIFY resolution state; the two are never merged into one statement.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "phone-390x844.full.png shows 'Persistence' as the final, separate card after 'Actions', still distinct from 'Outstanding obligations'."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json confirmRootCauseControl shows button 'Confirm root cause' disabled=true, ariaDisabled='true', enclosed by text 'Unavailable: unresolved information is blocking progress.'; the sibling control 'Go to blocking unknown' is enabled, and operabilityProbes[0] shows clicking it moves focus to the section with text 'Unresolved unknowns UNKNOWN... BLOCKER Required information is unresolved This unknown blocks dependent progress until it is resolved.', i.e. focus actually lands on the blocking information.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same disabled 'Confirm root cause' button, its explanatory status text, and enabled 'Go to blocking unknown' button appear identically in all three other aria.txt files; probe evidence is desktop-only per instructions but the same control is assumed present."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "Only one operability probe (index 1, 'Go to blocking unknown') was recorded; 'Confirm root cause' was correctly not force-clicked since it is disabled. No screenshots exist for landscape/portrait beyond their .full.png files, but their accessibility trees are identical to desktop, so this did not prevent judgment."
+}

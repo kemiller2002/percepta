@@ -1,0 +1,97 @@
+{
+  "item": "item-02",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "all simultaneously active meanings remain discoverable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "All six active predicates are rendered as labelled items at desktop: 'FALSIFIED Hypothesis is falsified' (hypotheses panel, tile-01 bottom/tile-02 top), 'CONFLICT Contradictions present', 'UNKNOWN Blocking unknown exists' (tile-01), 'OPEN Github write is pending', 'OPEN Corrective action not verified', 'ACTIVE Obligations present' (tile-02 obligations panel). The illegal confirm-root-cause capability is shown as 'Unavailable: Confirm root cause' (aria-disabled). Header nav links reach each region (probes 1-8).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility trees identical across viewports; phone full screenshot shows all items stacked, no horizontal overflow."
+      }
+    },
+    {
+      "obligation": "no active meaning suppresses another active meaning",
+      "judgment": "fail",
+      "failureType": "contradictory",
+      "evidence": "The falsified-hypothesis meaning is overridden in the summaries: header 'Viable explanations: 3' and hypotheses panel '3 of 3 listed explanations remain viable' while hypothesis-is-falsified is active; heading 'Competing hypotheses (1 active)' conflicts with '3 of 3 ... viable'. Also the pending GitHub write is contradicted by header 'Remote persistence: not reported' and the Persistence panel 'Remote persistence status has not been reported', so the pending-write meaning is suppressed in the persistence area.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "Same text at all viewports (identical aria trees); the same conflicts persist."
+      }
+    },
+    {
+      "obligation": "contradictions remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Contradictions (1 active)' panel with 'CONFLICT Contradictions present — Evidence or claims do not agree.' (tile-01 center); header count 'Contradictions: 1'; linked from the Actions blocker list (probe 11 focuses the item).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Visible in all full screenshots and aria trees."
+      }
+    },
+    {
+      "obligation": "obligations remain visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Outstanding obligations (3 active)' panel (tile-02 left) lists 'Github write is pending', 'Corrective action not verified', 'Obligations present'; header 'Obligations: 3'; nav link 'Obligations' scrolls to it (probe 5, scrollY 586).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Visible in all viewports."
+      }
+    },
+    {
+      "obligation": "pending persistence remains distinct from investigation resolution",
+      "judgment": "fail",
+      "failureType": "contradictory",
+      "evidence": "github-write-is-pending is filed only as an investigation obligation ('OPEN Github write is pending — Work still required.') alongside corrective-action verification, not as persistence state. The dedicated 'Persistence status' panel states 'Remote persistence status has not been reported' and header says 'Remote persistence: not reported', which contradicts the active pending-write predicate. Pending persistence is thus merged into investigation work and denied in the persistence area.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "Identical text at all viewports."
+      }
+    },
+    {
+      "obligation": "blocked action remains explained and navigable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Unavailable: Confirm root cause' button is aria-disabled (not clickable, probe 9) with described-by text 'the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it:' followed by links to each active condition. Probes 10-14 show each link moving focus to the corresponding predicate item (e.g., probe 12 scrolls to 586 and focuses 'OPEN Github write is pending'). Explanation is hedged ('may be blocking'), not an invented cause.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same button, explanation and links in all aria trees; phone screenshot shows the full blocker list."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Claim that all hypotheses remain viable ('Viable explanations: 3', '3 of 3 listed explanations remain viable', each H1-H3 badged 'VIABLE — OPEN') while hypothesis-is-falsified is active; the falsified hypothesis is detached from any listed explanation, and '(1 active)' heading conflicts with the count.",
+      "evidence": "Header list and Competing hypotheses panel, desktop tile-01."
+    },
+    {
+      "description": "Remote persistence asserted as 'not reported' although github-write-is-pending is an active predicate.",
+      "evidence": "Header 'Remote persistence: not reported'; Persistence status panel, desktop tile-02."
+    },
+    {
+      "description": "Domain content not supplied by the state: specific triggering observation (HTTP 502 checkout failures, gateway error-rate monitor, on-call pipeline) and three named hypotheses H1-H3.",
+      "evidence": "Triggering observation and Competing hypotheses panels, desktop tile-01."
+    },
+    {
+      "description": "'Skip to actions' link is present in the accessibility tree but not clickable (probe 0 timeout).",
+      "evidence": "rendered-evidence.json operabilityProbes[0]."
+    }
+  ],
+  "evidenceLimitations": "No viewport tiles for non-desktop sizes (only full-page screenshots); responsive judgments rely on those plus identical aria trees. Probes exist only for desktop."
+}

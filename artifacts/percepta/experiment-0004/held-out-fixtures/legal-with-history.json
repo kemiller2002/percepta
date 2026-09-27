@@ -1,0 +1,9 @@
+{
+  "name": "held-out-04",
+  "predicates": [
+    "hypothesis-is-falsified"
+  ],
+  "capabilities": {
+    "confirm-root-cause": "legal"
+  }
+}

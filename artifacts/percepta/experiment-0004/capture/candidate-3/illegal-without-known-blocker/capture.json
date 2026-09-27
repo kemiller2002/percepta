@@ -1,0 +1,948 @@
+{
+  "candidate": "candidate-3",
+  "caseId": "illegal-without-known-blocker",
+  "state": {
+    "name": "held-out-05",
+    "predicates": [],
+    "capabilities": {
+      "confirm-root-cause": "illegal"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "desktop-1440x900",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1563,
+      "horizontalOverflow": false,
+      "tiles": 2,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "landscape-1180x820",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1560,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "portrait-820x1180",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1705,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "phone-390x844",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 2962,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    }
+  ],
+  "controls": [
+    {
+      "index": 0,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Skip to workspace",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#workspace",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 1,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Observation",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-observation",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 2,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Hypotheses",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-hypotheses",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 3,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Unknowns",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-unknowns",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 4,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Actions",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-legal-actions",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 5,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Evidence",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-evidence",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 6,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "Persistence",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#region-persistence-state",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 7,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "E1",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#ev-1",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 8,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "E2",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#ev-2",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 9,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "E1",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#ev-1",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 10,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "E1",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#ev-1",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 11,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Confirm root cause",
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "Why unavailable: The current state marks this action as not permitted. No specific blocker was reported.",
+      "isConfirmRootCauseControl": true
+    },
+    {
+      "index": 12,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "H1",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#hyp-h-registry",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 13,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "H2",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#hyp-h-cache",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 14,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "H3",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#hyp-h-disk",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    },
+    {
+      "index": 15,
+      "tag": "a",
+      "role": null,
+      "accessibleName": "H1",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": "#hyp-h-registry",
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    }
+  ],
+  "confirmControl": [
+    {
+      "tag": "button",
+      "visibleText": "Confirm root cause",
+      "ariaLabel": null,
+      "visible": true,
+      "disabled": true,
+      "ariaDisabled": "true",
+      "describedByText": "Why unavailable: The current state marks this action as not permitted. No specific blocker was reported.",
+      "enclosingContainerText": "Next actions Availability comes from the application state; this workspace does not override it. Confirm root cause Unavailable Record the explanation that accounts for the observation. Requires an active (not falsified) hypothesis. Why unavailable: The current state marks this action as not permitted. No specific blocker was reported."
+    }
+  ],
+  "probes": [
+    {
+      "controlIndex": 0,
+      "tag": "a",
+      "accessibleName": "Skip to workspace",
+      "isConfirmRootCauseControl": false,
+      "outcome": "not-clickable: locator.click: Timeout 2000ms exceeded.",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": null,
+      "errors": []
+    },
+    {
+      "controlIndex": 1,
+      "tag": "a",
+      "accessibleName": "Observation",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "focused": {
+          "tag": "a",
+          "text": "Observation"
+        },
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": "#region-observation"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": null,
+      "errors": []
+    },
+    {
+      "controlIndex": 2,
+      "tag": "a",
+      "accessibleName": "Hypotheses",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 417,
+        "focused": {
+          "tag": "a",
+          "text": "Hypotheses"
+        },
+        "headingsInViewport": [
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#region-hypotheses"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-002.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 3,
+      "tag": "a",
+      "accessibleName": "Unknowns",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 142,
+        "focused": {
+          "tag": "a",
+          "text": "Unknowns"
+        },
+        "headingsInViewport": [
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": "#region-unknowns"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-003.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 4,
+      "tag": "a",
+      "accessibleName": "Actions",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 249,
+        "focused": {
+          "tag": "a",
+          "text": "Actions"
+        },
+        "headingsInViewport": [
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": "#region-legal-actions"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-004.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 5,
+      "tag": "a",
+      "accessibleName": "Evidence",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 538,
+        "focused": {
+          "tag": "a",
+          "text": "Evidence"
+        },
+        "headingsInViewport": [
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#region-evidence"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-005.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 6,
+      "tag": "a",
+      "accessibleName": "Persistence",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 538,
+        "focused": {
+          "tag": "a",
+          "text": "Persistence"
+        },
+        "headingsInViewport": [
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#region-persistence-state"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-006.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 7,
+      "tag": "a",
+      "accessibleName": "E1",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 538,
+        "focused": {
+          "tag": "li",
+          "text": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3"
+        },
+        "headingsInViewport": [
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#ev-1"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-007.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 8,
+      "tag": "a",
+      "accessibleName": "E2",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 538,
+        "focused": {
+          "tag": "li",
+          "text": "E2 The registry mirror returned HTTP 200 with a Content-Length for the template archive. Source: Mirror access log Relationship: neutral H1"
+        },
+        "headingsInViewport": [
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#ev-2"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-008.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 9,
+      "tag": "a",
+      "accessibleName": "E1",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 663,
+        "focused": {
+          "tag": "li",
+          "text": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3"
+        },
+        "headingsInViewport": [
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#ev-1"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-009.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 10,
+      "tag": "a",
+      "accessibleName": "E1",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 663,
+        "focused": {
+          "tag": "li",
+          "text": "E1 CI log shows the read stopping at 0 of 4096 bytes during template extraction. Source: CI job log Relationship: supports H1supports H2consistent with H3"
+        },
+        "headingsInViewport": [
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#ev-1"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-010.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 12,
+      "tag": "a",
+      "accessibleName": "H1",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 282,
+        "focused": {
+          "tag": "li",
+          "text": "H1: Template archive is truncated when fetched from the registry mirror Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The error reports an unexpected end of archive while materializing a template. Evidence: E1 supportsE2 neutral"
+        },
+        "headingsInViewport": [
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": "#hyp-h-registry"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-012.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 13,
+      "tag": "a",
+      "accessibleName": "H2",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 494,
+        "focused": {
+          "tag": "li",
+          "text": "H2: Stale local template cache on the runner serves a partial archive Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The runner reuses a cache directory between jobs. Evidence: E1 supports"
+        },
+        "headingsInViewport": [
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#hyp-h-cache"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-013.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 14,
+      "tag": "a",
+      "accessibleName": "H3",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 663,
+        "focused": {
+          "tag": "li",
+          "text": "H3: Runner disk quota is exhausted during extraction Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: Extraction failures can surface as short reads when writes fail. Evidence: E1 consistent with"
+        },
+        "headingsInViewport": [
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Evidence",
+          "Persistence"
+        ],
+        "hash": "#hyp-h-disk"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-014.viewport.png",
+      "errors": []
+    },
+    {
+      "controlIndex": 15,
+      "tag": "a",
+      "accessibleName": "H1",
+      "isConfirmRootCauseControl": false,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation Preserved",
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 282,
+        "focused": {
+          "tag": "li",
+          "text": "H1: Template archive is truncated when fetched from the registry mirror Under consideration No falsification is reported in the current state. This is not a confirmation. Basis: The error reports an unexpected end of archive while materializing a template. Evidence: E1 supportsE2 neutral"
+        },
+        "headingsInViewport": [
+          "Investigation status Open",
+          "Competing hypotheses",
+          "H1: Template archive is truncated when fetched from the registry mirror",
+          "H2: Stale local template cache on the runner serves a partial archive",
+          "H3: Runner disk quota is exhausted during extraction",
+          "Unresolved unknowns",
+          "Next actions"
+        ],
+        "hash": "#hyp-h-registry"
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": "probe-015.viewport.png",
+      "errors": []
+    }
+  ]
+}

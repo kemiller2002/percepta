@@ -1,0 +1,44 @@
+{
+  "item": "item-01",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Actions' card: button 'Confirm root cause' rendered enabled (dark filled style, not greyed), with adjoining text 'LEGALITY Availability follows the supplied capability map, not UI inference.' rendered-evidence.json confirmRootCauseControl shows disabled:false, ariaDisabled:'false'. operabilityProbes[0] (controlIndex 0, isConfirmRootCauseControl true) outcome 'clicked', after.focused = {tag:button, text:'Confirm root cause'}, errors: []. This matches capabilities.confirm-root-cause = 'legal' in state.json.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "aria.txt identical across all four viewports: button 'Confirm root cause' present and not marked disabled at every viewport."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png / aria.txt, 'Competing hypotheses' card: badge 'FALSIFIED', strong text 'Candidate explanation retained for history', body text 'Evidence has falsified this hypothesis. It remains visible as a considered explanation; actions requiring an active hypothesis are unavailable.' The hypothesis is not removed from the DOM/visual output despite being falsified.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical 'Competing hypotheses' heading, FALSIFIED badge and text present in aria.txt for all three other viewports."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Banner text 'Investigation open' remains shown alongside the falsified hypothesis. The 'Actions' card's 'Confirm root cause' control is enabled/executable (see obligation 1 evidence) even though the sole retained hypothesis is falsified, and the falsified-hypothesis text scopes the block narrowly ('actions requiring an active hypothesis are unavailable') rather than disabling the whole page. No global blocked/locked banner or disabling of the whole workspace is present.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Banner text 'Investigation open' and enabled 'Confirm root cause' button both appear identically in every viewport's aria.txt."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "operabilityProbes[0].viewportScreenshotAfter is null, so the post-click visual state of the 'Confirm root cause' click was not directly viewable as an image; judgment relied on the recorded focus/heading/ariaDiff data instead, which showed no page errors, no aria changes, and focus correctly landing on the clicked control. This is sufficient to support 'executable' per the scoring rules but does not itself demonstrate any post-click confirmation UI (none was required by the obligations)."
+}

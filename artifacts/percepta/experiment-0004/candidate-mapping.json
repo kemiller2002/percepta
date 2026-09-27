@@ -1,0 +1,40 @@
+{
+  "mapping": [
+    {
+      "candidate": "candidate-1",
+      "lane": "treatment-a",
+      "branch": "experiment/percepta-0004-openai-treatment-a",
+      "provider": "openai",
+      "condition": "treatment",
+      "frozenCommit": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+      "indexHtmlSha256": "190736abd66a86f2248d0bed32bd202f48c98bd7a6fc2bafb5a143c0f834a4ef"
+    },
+    {
+      "candidate": "candidate-2",
+      "lane": "control-a",
+      "branch": "experiment/percepta-0004-openai-control-a",
+      "provider": "openai",
+      "condition": "control",
+      "frozenCommit": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+      "indexHtmlSha256": "b8ea011008d4079bafd358b437cb954ed197aa1557ad4d635c0a4d3c8b481045"
+    },
+    {
+      "candidate": "candidate-3",
+      "lane": "treatment-b",
+      "branch": "experiment/percepta-0004-claude-treatment-b",
+      "provider": "claude",
+      "condition": "treatment",
+      "frozenCommit": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+      "indexHtmlSha256": "d0223ea8137b4bee96dcad036a761f68b380f8bd9756f1bcc7da34c95c487bc9"
+    },
+    {
+      "candidate": "candidate-4",
+      "lane": "control-b",
+      "branch": "experiment/percepta-0004-claude-control-b",
+      "provider": "claude",
+      "condition": "control",
+      "frozenCommit": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+      "indexHtmlSha256": "51daaabb59f3988eed5180b2ea731d2c202b6ae44b3bc807f8670e4d5944b416"
+    }
+  ]
+}

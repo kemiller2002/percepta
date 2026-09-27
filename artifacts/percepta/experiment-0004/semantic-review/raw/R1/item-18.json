@@ -1,0 +1,77 @@
+{
+  "item": "item-18",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, right column bottom card 'Persistence': badge 'PENDING', 'Remote write pending', 'Changes are not yet confirmed as persisted remotely.' Same text in desktop aria tree under heading 'Persistence' [level=2]. Supported by predicate github-write-is-pending.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Persistence card with PENDING badge and text visible in all screenshots; aria trees identical to desktop."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "No success or saved wording appears anywhere. The Persistence card explicitly says 'Changes are not yet confirmed as persisted remotely.' (desktop full.png, aria tree).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical content at all viewports; no success claim."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Header pill 'Investigation open · verification required'. Outstanding obligations card says '...so the investigation remains unresolved.' Hypothesis is marked 'ACTIVE Candidate explanation... Remains viable while evidence is gathered.' 'Confirm root cause' is disabled.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Header pill and the unresolved text are visible at all viewports."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Right column card 'Outstanding obligations': badge 'VERIFY', 'Verify corrective action', 'A corrective action has not yet been verified...'. Header pill says 'verification required'. Supported by predicate corrective-action-not-verified.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The VERIFY item is visible in every screenshot."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json confirmRootCauseControl: disabled=true, aria-disabled='true'. Aria: button 'Confirm root cause' [disabled]. Visible text below it: 'Unavailable: required verification remains outstanding.' This is consistent with capability confirm-root-cause=illegal. No probes were run because the only visible control is disabled.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Greyed-out disabled button and 'Unavailable' text are visible at all viewports; aria trees show [disabled]."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Minor inferred causal link: the unavailability reason attributes the illegal capability to outstanding verification. The state gives the illegality and the not-verified predicate separately and never states that one causes the other. The reason itself is grounded in an active predicate, so this is a borderline inference, not an invented blocker.",
+      "evidence": "Actions card: 'Unavailable: required verification remains outstanding.' The Outstanding obligations card similarly says '...so the investigation remains unresolved.'"
+    },
+    {
+      "description": "The disabled reason is not programmatically associated with the button (describedByText is empty). It is shown as an adjacent status element, not through aria-describedby. This is an accessibility note, not a fabrication.",
+      "evidence": "rendered-evidence.json controls[0].describedByText = ''"
+    }
+  ],
+  "evidenceLimitations": "operabilityProbes is empty because the only visible control is disabled. A hidden control 'Go to blocking unknown' exists but is not visible, so it was not evaluated. None of these limitations prevented a judgment."
+}

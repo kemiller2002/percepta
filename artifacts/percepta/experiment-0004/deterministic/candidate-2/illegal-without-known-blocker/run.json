@@ -1,0 +1,32 @@
+{
+  "subject": "candidate-2",
+  "run": "illegal-without-known-blocker",
+  "fixtures": [
+    "illegal-without-known-blocker"
+  ],
+  "stagedSha256Before": "b8ea011008d4079bafd358b437cb954ed197aa1557ad4d635c0a4d3c8b481045",
+  "stagedSha256After": "b8ea011008d4079bafd358b437cb954ed197aa1557ad4d635c0a4d3c8b481045",
+  "expectedSha256": "b8ea011008d4079bafd358b437cb954ed197aa1557ad4d635c0a4d3c8b481045",
+  "byteIdentical": true,
+  "command": [
+    "dotnet",
+    "$SCRATCH/build/bin/Percepta.Cli/release/Percepta.Cli.dll",
+    "verify",
+    "--contract",
+    ".percepta/contracts/indy-init-investigation-workspace.json",
+    "--url",
+    "$SCRATCH/staging/candidate-2/index.html",
+    "--fixture",
+    "$REPO/artifacts/percepta/experiment-0004/held-out-fixtures/illegal-without-known-blocker.json",
+    "--out",
+    "$REPO/artifacts/percepta/experiment-0004/deterministic/candidate-2/illegal-without-known-blocker/evidence.json",
+    "--screenshots",
+    "$REPO/artifacts/percepta/experiment-0004/deterministic/candidate-2/illegal-without-known-blocker/screenshots"
+  ],
+  "cwd": "$SCRATCH/baseline (detached worktree at f474c449)",
+  "startedAtUtc": "2026-09-27T05:07:54.549831+00:00",
+  "finishedAtUtc": "2026-09-27T05:07:56.066026+00:00",
+  "exitCode": 3,
+  "evidencePresent": true,
+  "complete": false
+}

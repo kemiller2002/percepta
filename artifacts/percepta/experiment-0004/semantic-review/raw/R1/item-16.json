@@ -1,0 +1,53 @@
+{
+  "item": "item-16",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Desktop full.png Next actions panel: enabled primary button 'Confirm root cause' with '✓ Available' badge and the note 'Availability comes from the application state; this workspace does not override it.' Banner also reads 'Confirm root cause: available'. rendered-evidence controls[12]: disabled=false, ariaDisabled=null. Probe 12: clicked; focus landed on the button; the aria diff added 'Request recorded locally. The outcome depends on the application state; nothing has been saved remotely by this click.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The accessibility trees at all viewports are identical to desktop. The phone screenshot shows the enabled button with the '✓ Available' badge."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Competing hypotheses list keeps H3 'Runner disk quota is exhausted during extraction' with the text badge '✕ Falsified — retained for the record' and 'It stays listed so the reasoning history is preserved; it is no longer an active candidate.' The nav shows 'Hypotheses (1 falsified)', and Investigation status lists 'A hypothesis has been falsified hypothesis-is-falsified'. Probes 15 and 17 (H3 links) move focus to the H3 item. The falsified status is carried by text, not by strikethrough alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The accessibility trees are identical. The phone screenshot shows the H3 card with the Falsified badge and its explanatory text."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The banner shows '◌ Investigation open' and 'Confirm root cause: available'. Investigation status is '◌ Open'. H1 and H2 stay '○ Under consideration'. The Confirm root cause button stays enabled (probe 12 clicked). No blocked or halted state is shown anywhere.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The accessibility trees are identical across viewports. No viewport has horizontal overflow or page errors."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "The state supplies only the predicate 'hypothesis-is-falsified' and does not say which hypothesis. The page names H3 as the falsified one, says E3 falsifies it, and states for H1 and H2 that 'No falsification is reported in the current state'. That attribution comes from page content, not from the supplied state. The hedge on H1 and H2 is carefully worded. Low severity.",
+      "evidence": "Competing hypotheses section and Evidence E3 in desktop-1440x900.full.png and desktop-1440x900.aria.txt"
+    },
+    {
+      "description": "The action description states a precondition: 'Requires an active (not falsified) hypothesis.' The supplied capabilities do not state this rule. It does not contradict the legal capability because active hypotheses are shown, but it is an unsupplied domain rule. Low severity.",
+      "evidence": "Next actions panel, confirmRootCauseControl.enclosingContainerText"
+    }
+  ],
+  "evidenceLimitations": "The probe for 'Skip to workspace' (control 0) timed out and was not clickable. This does not affect any obligation. The accessibility-tree files are byte-identical across viewports, so responsive judgments rely on the full-page screenshots for layout."
+}

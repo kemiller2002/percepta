@@ -1,0 +1,1035 @@
+{
+  "schemaVersion": 1,
+  "byCondition": {
+    "treatment": {
+      "candidates": [
+        "treatment-a",
+        "treatment-b"
+      ],
+      "fullyCorrectCases": 8,
+      "cases": 10,
+      "obligationsPassed": 48,
+      "obligationsEvaluated": 50,
+      "byReviewer": {
+        "R1": 8,
+        "R2": 10
+      },
+      "requiredCategoriesPassed": 9,
+      "requiredCategoriesEvaluated": 12,
+      "responsiveFullyPreservedCases": 8,
+      "fabricatedOrContradictoryObligationFailures": 2,
+      "fullyCorrectRate": 0.8,
+      "fullyCorrectRateByReviewer": {
+        "R1": 0.8,
+        "R2": 1.0
+      }
+    },
+    "control": {
+      "candidates": [
+        "control-a",
+        "control-b"
+      ],
+      "fullyCorrectCases": 6,
+      "cases": 10,
+      "obligationsPassed": 45,
+      "obligationsEvaluated": 50,
+      "byReviewer": {
+        "R1": 6,
+        "R2": 8
+      },
+      "requiredCategoriesPassed": 8,
+      "requiredCategoriesEvaluated": 12,
+      "responsiveFullyPreservedCases": 6,
+      "fabricatedOrContradictoryObligationFailures": 3,
+      "fullyCorrectRate": 0.6,
+      "fullyCorrectRateByReviewer": {
+        "R1": 0.6,
+        "R2": 0.8
+      }
+    }
+  },
+  "byProviderAndCondition": {
+    "openai": {
+      "treatment": {
+        "candidates": [
+          "treatment-a"
+        ],
+        "fullyCorrectCases": 5,
+        "cases": 5,
+        "obligationsPassed": 25,
+        "obligationsEvaluated": 25,
+        "byReviewer": {
+          "R1": 5,
+          "R2": 5
+        },
+        "requiredCategoriesPassed": 4,
+        "requiredCategoriesEvaluated": 6,
+        "responsiveFullyPreservedCases": 5,
+        "fabricatedOrContradictoryObligationFailures": 0,
+        "fullyCorrectRate": 1.0,
+        "fullyCorrectRateByReviewer": {
+          "R1": 1.0,
+          "R2": 1.0
+        }
+      },
+      "control": {
+        "candidates": [
+          "control-a"
+        ],
+        "fullyCorrectCases": 3,
+        "cases": 5,
+        "obligationsPassed": 23,
+        "obligationsEvaluated": 25,
+        "byReviewer": {
+          "R1": 3,
+          "R2": 3
+        },
+        "requiredCategoriesPassed": 4,
+        "requiredCategoriesEvaluated": 6,
+        "responsiveFullyPreservedCases": 3,
+        "fabricatedOrContradictoryObligationFailures": 0,
+        "fullyCorrectRate": 0.6,
+        "fullyCorrectRateByReviewer": {
+          "R1": 0.6,
+          "R2": 0.6
+        }
+      }
+    },
+    "claude": {
+      "treatment": {
+        "candidates": [
+          "treatment-b"
+        ],
+        "fullyCorrectCases": 3,
+        "cases": 5,
+        "obligationsPassed": 23,
+        "obligationsEvaluated": 25,
+        "byReviewer": {
+          "R1": 3,
+          "R2": 5
+        },
+        "requiredCategoriesPassed": 5,
+        "requiredCategoriesEvaluated": 6,
+        "responsiveFullyPreservedCases": 3,
+        "fabricatedOrContradictoryObligationFailures": 2,
+        "fullyCorrectRate": 0.6,
+        "fullyCorrectRateByReviewer": {
+          "R1": 0.6,
+          "R2": 1.0
+        }
+      },
+      "control": {
+        "candidates": [
+          "control-b"
+        ],
+        "fullyCorrectCases": 3,
+        "cases": 5,
+        "obligationsPassed": 22,
+        "obligationsEvaluated": 25,
+        "byReviewer": {
+          "R1": 3,
+          "R2": 5
+        },
+        "requiredCategoriesPassed": 4,
+        "requiredCategoriesEvaluated": 6,
+        "responsiveFullyPreservedCases": 3,
+        "fabricatedOrContradictoryObligationFailures": 3,
+        "fullyCorrectRate": 0.6,
+        "fullyCorrectRateByReviewer": {
+          "R1": 0.6,
+          "R2": 1.0
+        }
+      }
+    }
+  },
+  "perCandidate": [
+    {
+      "candidate": "candidate-1",
+      "fullyCorrectCases": 5,
+      "cases": 5,
+      "fullyCorrectCasesByReviewer": {
+        "R1": 5,
+        "R2": 5
+      },
+      "obligationsPassed": 25,
+      "obligationsEvaluated": 25,
+      "obligationsPassedByReviewer": {
+        "R1": 25,
+        "R2": 25
+      },
+      "disagreements": 0,
+      "responsiveFullyPreservedCases": 5,
+      "responsivePreservedObligations": 25,
+      "fabricatedOrContradictoryObligationFailures": 0,
+      "reviewerReportedFabricatedOrForbidden": {
+        "R1": 8,
+        "R2": 0
+      },
+      "deterministic": {
+        "combined": {
+          "complete": false,
+          "exitCode": 3,
+          "categories": {
+            "contract-validation": {
+              "status": "Passed",
+              "reason": null
+            },
+            "structural": {
+              "status": "Passed",
+              "reason": null
+            },
+            "state-projection": {
+              "status": "Failed",
+              "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+            },
+            "interaction": {
+              "status": "Failed",
+              "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+            },
+            "accessibility": {
+              "status": "Passed",
+              "reason": null
+            },
+            "responsive": {
+              "status": "Passed",
+              "reason": null
+            }
+          }
+        },
+        "requiredCategoriesPassed": 4,
+        "requiredCategoriesEvaluated": 6,
+        "perCase": {
+          "combined-blocker-falsification": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "pending-unverified": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "all-constraints": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible. | Fixture 'held-out-03' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-03' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-03' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-03' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "legal-with-history": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible."
+              },
+              "interaction": {
+                "status": "Unavailable",
+                "reason": "No fixture declares capability 'confirm-root-cause' illegal. | No fixture declares capability 'confirm-root-cause' unavailable. | No fixture declares capability 'confirm-root-cause' blocked."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "illegal-without-known-blocker": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Unavailable",
+                "reason": "No state fixture covers: hypothesis-is-falsified, blocking-unknown-exists, github-write-is-pending, corrective-action-not-verified."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          }
+        }
+      },
+      "lane": "treatment-a",
+      "branch": "experiment/percepta-0004-openai-treatment-a",
+      "provider": "openai",
+      "condition": "treatment",
+      "frozenCommit": "d104371f69ae4b184769e85296fd7d4c1cd85c76",
+      "churn": {
+        "commitsSinceBaseline": 2,
+        "filesChanged": 2,
+        "linesAdded": 48,
+        "linesDeleted": 0,
+        "indexHtmlLines": 26,
+        "correctiveIterations": 0
+      }
+    },
+    {
+      "candidate": "candidate-2",
+      "fullyCorrectCases": 3,
+      "cases": 5,
+      "fullyCorrectCasesByReviewer": {
+        "R1": 3,
+        "R2": 3
+      },
+      "obligationsPassed": 23,
+      "obligationsEvaluated": 25,
+      "obligationsPassedByReviewer": {
+        "R1": 23,
+        "R2": 23
+      },
+      "disagreements": 0,
+      "responsiveFullyPreservedCases": 3,
+      "responsivePreservedObligations": 23,
+      "fabricatedOrContradictoryObligationFailures": 0,
+      "reviewerReportedFabricatedOrForbidden": {
+        "R1": 3,
+        "R2": 1
+      },
+      "deterministic": {
+        "combined": {
+          "complete": false,
+          "exitCode": 3,
+          "categories": {
+            "contract-validation": {
+              "status": "Passed",
+              "reason": null
+            },
+            "structural": {
+              "status": "Passed",
+              "reason": null
+            },
+            "state-projection": {
+              "status": "Failed",
+              "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+            },
+            "interaction": {
+              "status": "Failed",
+              "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+            },
+            "accessibility": {
+              "status": "Passed",
+              "reason": null
+            },
+            "responsive": {
+              "status": "Passed",
+              "reason": null
+            }
+          }
+        },
+        "requiredCategoriesPassed": 4,
+        "requiredCategoriesEvaluated": 6,
+        "perCase": {
+          "combined-blocker-falsification": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "pending-unverified": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "all-constraints": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible. | Fixture 'held-out-03' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-03' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-03' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-03' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "legal-with-history": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible."
+              },
+              "interaction": {
+                "status": "Unavailable",
+                "reason": "No fixture declares capability 'confirm-root-cause' illegal. | No fixture declares capability 'confirm-root-cause' unavailable. | No fixture declares capability 'confirm-root-cause' blocked."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "illegal-without-known-blocker": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Unavailable",
+                "reason": "No state fixture covers: hypothesis-is-falsified, blocking-unknown-exists, github-write-is-pending, corrective-action-not-verified."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          }
+        }
+      },
+      "lane": "control-a",
+      "branch": "experiment/percepta-0004-openai-control-a",
+      "provider": "openai",
+      "condition": "control",
+      "frozenCommit": "c99950ba1cf79a8f590e0f050b3b4efadecc0ad1",
+      "churn": {
+        "commitsSinceBaseline": 1,
+        "filesChanged": 2,
+        "linesAdded": 120,
+        "linesDeleted": 0,
+        "indexHtmlLines": 95,
+        "correctiveIterations": 0
+      }
+    },
+    {
+      "candidate": "candidate-3",
+      "fullyCorrectCases": 3,
+      "cases": 5,
+      "fullyCorrectCasesByReviewer": {
+        "R1": 3,
+        "R2": 5
+      },
+      "obligationsPassed": 23,
+      "obligationsEvaluated": 25,
+      "obligationsPassedByReviewer": {
+        "R1": 23,
+        "R2": 25
+      },
+      "disagreements": 2,
+      "responsiveFullyPreservedCases": 3,
+      "responsivePreservedObligations": 23,
+      "fabricatedOrContradictoryObligationFailures": 2,
+      "reviewerReportedFabricatedOrForbidden": {
+        "R1": 13,
+        "R2": 0
+      },
+      "deterministic": {
+        "combined": {
+          "complete": false,
+          "exitCode": 3,
+          "categories": {
+            "contract-validation": {
+              "status": "Passed",
+              "reason": null
+            },
+            "structural": {
+              "status": "Passed",
+              "reason": null
+            },
+            "state-projection": {
+              "status": "Failed",
+              "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible."
+            },
+            "interaction": {
+              "status": "Passed",
+              "reason": null
+            },
+            "accessibility": {
+              "status": "Passed",
+              "reason": null
+            },
+            "responsive": {
+              "status": "Passed",
+              "reason": null
+            }
+          }
+        },
+        "requiredCategoriesPassed": 5,
+        "requiredCategoriesEvaluated": 6,
+        "perCase": {
+          "combined-blocker-falsification": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible."
+              },
+              "interaction": {
+                "status": "Passed",
+                "reason": null
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "pending-unverified": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible."
+              },
+              "interaction": {
+                "status": "Passed",
+                "reason": null
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "all-constraints": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-03' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-03' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible."
+              },
+              "interaction": {
+                "status": "Passed",
+                "reason": null
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "legal-with-history": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible."
+              },
+              "interaction": {
+                "status": "Unavailable",
+                "reason": "No fixture declares capability 'confirm-root-cause' illegal. | No fixture declares capability 'confirm-root-cause' unavailable. | No fixture declares capability 'confirm-root-cause' blocked."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "illegal-without-known-blocker": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Unavailable",
+                "reason": "No state fixture covers: hypothesis-is-falsified, blocking-unknown-exists, github-write-is-pending, corrective-action-not-verified."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          }
+        }
+      },
+      "lane": "treatment-b",
+      "branch": "experiment/percepta-0004-claude-treatment-b",
+      "provider": "claude",
+      "condition": "treatment",
+      "frozenCommit": "ed5e15fd28d7c33dd4bd51014d1c1f4d62bdbb4b",
+      "churn": {
+        "commitsSinceBaseline": 1,
+        "filesChanged": 2,
+        "linesAdded": 615,
+        "linesDeleted": 0,
+        "indexHtmlLines": 532,
+        "correctiveIterations": 0
+      }
+    },
+    {
+      "candidate": "candidate-4",
+      "fullyCorrectCases": 3,
+      "cases": 5,
+      "fullyCorrectCasesByReviewer": {
+        "R1": 3,
+        "R2": 5
+      },
+      "obligationsPassed": 22,
+      "obligationsEvaluated": 25,
+      "obligationsPassedByReviewer": {
+        "R1": 22,
+        "R2": 25
+      },
+      "disagreements": 3,
+      "responsiveFullyPreservedCases": 3,
+      "responsivePreservedObligations": 22,
+      "fabricatedOrContradictoryObligationFailures": 3,
+      "reviewerReportedFabricatedOrForbidden": {
+        "R1": 15,
+        "R2": 0
+      },
+      "deterministic": {
+        "combined": {
+          "complete": false,
+          "exitCode": 3,
+          "categories": {
+            "contract-validation": {
+              "status": "Passed",
+              "reason": null
+            },
+            "structural": {
+              "status": "Passed",
+              "reason": null
+            },
+            "state-projection": {
+              "status": "Failed",
+              "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+            },
+            "interaction": {
+              "status": "Failed",
+              "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+            },
+            "accessibility": {
+              "status": "Passed",
+              "reason": null
+            },
+            "responsive": {
+              "status": "Passed",
+              "reason": null
+            }
+          }
+        },
+        "requiredCategoriesPassed": 4,
+        "requiredCategoriesEvaluated": 6,
+        "perCase": {
+          "combined-blocker-falsification": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-01' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-01' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "pending-unverified": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-02' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-02' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "all-constraints": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-03' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'blocker-visible' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'dependent-action-unavailable' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'unavailable-reason-visible' is not visible. | Fixture 'held-out-03' activates 'blocking-unknown-exists', but observation 'blocker-navigation-available' is not visible. | Fixture 'held-out-03' activates 'github-write-is-pending', but observation 'persistence-pending-visible' is not visible. | Fixture 'held-out-03' activates 'github-write-is-pending', but observation 'no-false-remote-success' is not visible. | Fixture 'held-out-03' activates 'corrective-action-not-verified', but observation 'unresolved-not-resolved' is not visible. | Fixture 'held-out-03' activates 'corrective-action-not-verified', but observation 'verification-obligation-visible' is not visible."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "legal-with-history": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Failed",
+                "reason": "Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-hypothesis-retained' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'falsified-state-noncolor' is not visible. | Fixture 'held-out-04' activates 'hypothesis-is-falsified', but observation 'inactive-actions-unavailable' is not visible."
+              },
+              "interaction": {
+                "status": "Unavailable",
+                "reason": "No fixture declares capability 'confirm-root-cause' illegal. | No fixture declares capability 'confirm-root-cause' unavailable. | No fixture declares capability 'confirm-root-cause' blocked."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          },
+          "illegal-without-known-blocker": {
+            "complete": false,
+            "exitCode": 3,
+            "categories": {
+              "contract-validation": {
+                "status": "Passed",
+                "reason": null
+              },
+              "structural": {
+                "status": "Passed",
+                "reason": null
+              },
+              "state-projection": {
+                "status": "Unavailable",
+                "reason": "No state fixture covers: hypothesis-is-falsified, blocking-unknown-exists, github-write-is-pending, corrective-action-not-verified."
+              },
+              "interaction": {
+                "status": "Failed",
+                "reason": "Capability 'confirm-root-cause' has no visible unavailable explanation. | Capability 'confirm-root-cause' has no visible path to blocking information."
+              },
+              "accessibility": {
+                "status": "Passed",
+                "reason": null
+              },
+              "responsive": {
+                "status": "Passed",
+                "reason": null
+              }
+            }
+          }
+        }
+      },
+      "lane": "control-b",
+      "branch": "experiment/percepta-0004-claude-control-b",
+      "provider": "claude",
+      "condition": "control",
+      "frozenCommit": "6b3ef30b75aaab4812919b7f56e8085dbb0fe442",
+      "churn": {
+        "commitsSinceBaseline": 1,
+        "filesChanged": 2,
+        "linesAdded": 567,
+        "linesDeleted": 0,
+        "indexHtmlLines": 516,
+        "correctiveIterations": 0
+      }
+    }
+  ]
+}

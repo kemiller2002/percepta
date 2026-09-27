@@ -1,0 +1,61 @@
+{
+  "item": "item-15",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png Actions card (right column): 'Confirm root cause' button rendered greyed; aria tree: button \"Confirm root cause\" [disabled]; rendered-evidence controls[0] disabled=true, ariaDisabled=\"true\", isConfirmRootCauseControl=true; no probe run because disabled. Adjacent status: 'Unavailable: the supplied capability is illegal in the current domain state.' ties unavailability to the illegal capability (state: confirm-root-cause=illegal).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Aria trees identical across all viewports; screenshots show disabled button and the same status text in the Actions card."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Unresolved unknowns card shows only a generic 'UNKNOWN' badge with 'No opposite fact is inferred from information that has not been supplied.' No unknown is labelled blocking, and the Actions reason cites only the capability. The 'Go to blocking unknown' control exists in the DOM but has visible=false (rendered-evidence controls[1]) and does not appear in the aria tree or screenshots.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same content at every viewport; no blocking unknown or visible 'Go to blocking unknown' control."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The only stated reason is 'the supplied capability is illegal in the current domain state' plus 'LEGALITY Availability follows the supplied capability map, not UI inference.' Triggering observation states 'No additional domain facts have been supplied.' Other content is generic placeholder text ('Candidate explanation', 'Evidence record') with no domain-specific claim. predicates=[].",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical text across viewports."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Visible text 'Unavailable: ...' exposed as role=status next to the disabled button; the button stays disabled, which matches capability=illegal. The LEGALITY note states that availability follows the supplied capability map. Minor: describedByText for the button is empty, so the reason is conveyed through the adjacent status region and not through aria-describedby.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Status text visible directly under the disabled button at all viewports; no horizontal overflow."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [
+    {
+      "description": "Minor/borderline: header chip 'Investigation open' and the single 'ACTIVE Candidate explanation' assert investigation and hypothesis status that no predicate supplies. They are generic and make no domain claim, so no obligation was failed on this basis.",
+      "evidence": "desktop-1440x900.full.png header top-right chip; Competing hypotheses card"
+    }
+  ],
+  "evidenceLimitations": "No operability probes were recorded because the only visible control is disabled. The confirm control's aria-describedby is empty, so the association between the reason and the button relies on visual and DOM adjacency (role=status in the same Actions container)."
+}

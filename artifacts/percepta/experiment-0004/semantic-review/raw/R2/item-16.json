@@ -1,0 +1,44 @@
+{
+  "item": "item-16",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: banner text '◌ Investigation open Confirm root cause: available'; Next actions region shows button 'Confirm root cause' with '✓ Available' and no disabled/aria-disabled attributes (rendered-evidence.json controls index 12: disabled:false, ariaDisabled:null). operabilityProbes controlIndex 12 shows outcome 'clicked' with ariaDiff added: 'Request recorded locally. The outcome depends on the application state; nothing has been saved remotely by this click.' This matches capabilities.confirm-root-cause = 'legal' in state.json.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical banner text, button state, and Next actions region text present verbatim in all three other viewports' aria trees."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt Competing hypotheses region lists H3 with heading 'H3: Runner disk quota is exhausted during extraction', status '✕ Falsified — retained for the record', and explanatory text 'Evidence E3 rules this out. It stays listed so the reasoning history is preserved; it is no longer an active candidate.' The navigation also shows link text 'Hypotheses (1 falsified)'. Probe controlIndex 15 (click H3 link) navigates focus to that same li text, confirming it is present and reachable, not merely rendered as static text.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "H3 falsified entry and 'Hypotheses (1 falsified)' nav link text are verbatim identical in all three other viewport aria trees."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt Investigation status region shows '◌ Open' (not blocked) with active state fact 'A hypothesis has been falsified' (code: hypothesis-is-falsified) presented as a fact, not a blocking condition. The Next actions region independently states 'Confirm root cause' is '✓ Available' with the qualifier 'Requires an active (not falsified) hypothesis' -- and two non-falsified hypotheses (H1, H2) remain 'Under consideration', so the requirement is satisfiable and availability is not gated by H3's falsification. Probe controlIndex 12 confirms the button is actually clickable (outcome: 'clicked'), i.e. the investigation is not blocked.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Investigation status 'Open', the two under-consideration hypotheses, and the available Confirm root cause button are verbatim identical in all three other viewport aria trees."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "None. All required evidence (state.json, obligations.json, rendered-evidence.json, all four viewport aria trees, and the desktop operability probes) was present and internally consistent, with all four viewports' accessibility trees textually identical."
+}

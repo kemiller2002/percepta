@@ -1,0 +1,56 @@
+{
+  "item": "item-17",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Desktop full.png Next actions panel: 'Confirm root cause' button rendered dashed/greyed with '✕ Unavailable' badge; rendered-evidence controls[11] disabled=true, aria-disabled=true, isConfirmRootCauseControl=true (not force-clicked, no probe). Reason ties to capability: 'Why unavailable: The current state marks this action as not permitted.' Header also reads 'Confirm root cause: unavailable'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Accessibility trees identical to desktop (button disabled, same why-unavailable text); phone screenshot shows same disabled button and Unavailable badge."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Why-unavailable text explicitly says 'No specific blocker was reported.' The one listed unknown ('? Open When was the runner template cache last cleared?') is presented as an open question, not labeled as blocking and not referenced as the reason confirmation is unavailable. Investigation status: 'The current state reports no contract-recognised facts. Nothing is inferred from their absence.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same text at all viewports per identical aria trees and phone screenshot."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The only stated reason is generic and capability-derived: 'The current state marks this action as not permitted. No specific blocker was reported.' Hypotheses show 'No falsification is reported in the current state. This is not a confirmation.' rather than asserting falsification or confirmation. The action description line 'Requires an active (not falsified) hypothesis.' is a general precondition description, not placed under 'Why unavailable' and not asserted as the cause.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical text across viewports."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Unavailability is communicated in text ('✕ Unavailable' badge, 'Why unavailable:' block, header 'Confirm root cause: unavailable') and programmatically (disabled + aria-describedby text 'Why unavailable: ...'). Panel states 'Availability comes from the application state; this workspace does not override it.' Button remains disabled; not conveyed by color alone.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "No horizontal overflow at any viewport; same controls and text in each aria tree."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "Domain content (observation, hypotheses H1-H3, evidence E1/E2, the open unknown) is not present in state.json and appears to be fixed page content; it is not presented as state-derived predicates or as a blocker, so it was not counted as fabricated. Landscape and portrait full screenshots were not individually inspected; responsive judgments rely on identical accessibility trees, viewport metadata (no overflow, no errors), and the phone screenshot."
+}

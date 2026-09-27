@@ -1,0 +1,44 @@
+{
+  "item": "item-19",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: button 'Confirm root cause' has aria-disabled=false, describedByText 'Available in the current state.', enclosing container text 'Actions 1 available, 0 unavailable. Availability comes from the runtime and is not overridden here. Confirm root cause Available in the current state.' The state's capabilities map sets confirm-root-cause: legal, matching this. operabilityProbes controlIndex 9 shows outcome 'clicked' and ariaDiff.added includes a listitem 'Confirm root cause — requested locally (not confirmed persisted)', confirming the control is genuinely user-operable (probe-009.viewport.png).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "landscape/portrait/phone aria.txt each show the identical button 'Confirm root cause' with 'Available in the current state.' text; controls are assumed present per instructions."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt, region 'Competing hypotheses (1 active)', subsection 'Other hypothesis state reported': listitem 'Falsified — Hypothesis is falsified' with code 'hypothesis-is-falsified' and text '— Retained in the record: it was considered and is now contradicted.' This directly and non-ambiguously represents the falsified hypothesis-is-falsified predicate as retained rather than removed.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical 'Other hypothesis state reported' listitem text appears verbatim in all three other-viewport aria.txt files."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: banner summary list shows 'Viable explanations: 3', 'Unknowns: 0', 'Obligations: 0', 'Actions available: 1'; region 'Competing hypotheses' paragraph states '3 of 3 listed explanations remain viable. Falsified explanations stay listed.'; region 'Unresolved unknowns (0 active)' states 'No unknowns are reported as active' (unknowns are the stated blocking mechanism, and none are active); region 'Actions' shows the single action as 'Available in the current state', and probe-009 confirms it is actually clickable. None of this is contradicted by the falsified-hypothesis listing, so the presence of one falsified hypothesis is not shown to block the investigation.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same summary counts, viability paragraph, unknowns region, and action availability text are identical across all viewport aria.txt files."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "None encountered; state.json, obligations.json, all four viewport screenshots/aria trees, rendered-evidence.json, and the operability probes were sufficient to judge every obligation directly."
+}

@@ -1,0 +1,137 @@
+{
+  "candidate": "candidate-1",
+  "caseId": "legal-with-history",
+  "state": {
+    "name": "held-out-04",
+    "predicates": [
+      "hypothesis-is-falsified"
+    ],
+    "capabilities": {
+      "confirm-root-cause": "legal"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "desktop-1440x900",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 900,
+      "horizontalOverflow": false,
+      "tiles": 1,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "landscape-1180x820",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 820,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "portrait-820x1180",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1180,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    },
+    {
+      "viewport": "phone-390x844",
+      "protocol": "called",
+      "errors": [],
+      "docHeight": 1405,
+      "horizontalOverflow": false,
+      "tiles": 0,
+      "title": "Investigation Workspace"
+    }
+  ],
+  "controls": [
+    {
+      "index": 0,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Confirm root cause",
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": "false",
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": true
+    },
+    {
+      "index": 1,
+      "tag": "button",
+      "role": null,
+      "accessibleName": "Go to blocking unknown",
+      "visible": false,
+      "disabled": false,
+      "ariaDisabled": null,
+      "ariaExpanded": null,
+      "href": null,
+      "describedByText": "",
+      "isConfirmRootCauseControl": false
+    }
+  ],
+  "confirmControl": [
+    {
+      "tag": "button",
+      "visibleText": "Confirm root cause",
+      "ariaLabel": null,
+      "visible": true,
+      "disabled": false,
+      "ariaDisabled": "false",
+      "describedByText": "",
+      "enclosingContainerText": "Actions Confirm root cause LEGALITYAvailability follows the supplied capability map, not UI inference."
+    }
+  ],
+  "probes": [
+    {
+      "controlIndex": 0,
+      "tag": "button",
+      "accessibleName": "Confirm root cause",
+      "isConfirmRootCauseControl": true,
+      "outcome": "clicked",
+      "before": {
+        "scrollY": 0,
+        "focused": null,
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses",
+          "Evidence",
+          "Unresolved unknowns",
+          "Actions",
+          "Persistence"
+        ],
+        "hash": ""
+      },
+      "after": {
+        "scrollY": 0,
+        "focused": {
+          "tag": "button",
+          "text": "Confirm root cause"
+        },
+        "headingsInViewport": [
+          "Investigation Workspace",
+          "Triggering observation",
+          "Competing hypotheses",
+          "Evidence",
+          "Unresolved unknowns",
+          "Actions",
+          "Persistence"
+        ],
+        "hash": ""
+      },
+      "ariaDiff": {
+        "added": [],
+        "removed": []
+      },
+      "viewportScreenshotAfter": null,
+      "errors": []
+    }
+  ]
+}

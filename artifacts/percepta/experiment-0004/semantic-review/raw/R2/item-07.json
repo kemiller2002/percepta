@@ -1,0 +1,92 @@
+{
+  "item": "item-07",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "falsified hypothesis remains visibly represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png / desktop-1440x900.aria.txt, 'Contradictions' region: listitem with strong text 'Hypothesis Is Falsified' and text 'Active runtime predicate'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical accessibility tree and visible 'Contradictions' card with 'Hypothesis Is Falsified' text at all four viewports (phone-390x844.full.png confirms same card stacked)."
+      }
+    },
+    {
+      "obligation": "falsified status is non-color",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png: the 'Hypothesis Is Falsified' item carries a red/orange left accent bar, but the status is also conveyed by the visible text labels 'Hypothesis Is Falsified' and 'Active runtime predicate' in the 'Contradictions' region and accessibility tree, so the meaning is not color-only.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same text-based representation present in every viewport's aria tree."
+      }
+    },
+    {
+      "obligation": "blocking unknown is visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png / aria.txt, 'Unresolved unknowns' region: listitem with strong text 'Blocking Unknown Exists' and text 'Active runtime predicate'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "'Unresolved unknowns' card with 'Blocking Unknown Exists' present in all four aria trees and in the phone screenshot."
+      }
+    },
+    {
+      "obligation": "confirmation is unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "rendered-evidence.json controls[0]: {accessibleName: 'Confirm Root Cause', disabled: true, ariaDisabled: 'true', isConfirmRootCauseControl: true}; desktop aria.txt: 'button \"Confirm Root Cause\" [disabled]'; capabilities.confirm-root-cause is 'illegal' in state.json.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Disabled 'Confirm Root Cause' button with adjacent 'Unavailable' badge appears identically in every viewport's aria tree and in the phone screenshot."
+      }
+    },
+    {
+      "obligation": "unavailability has a visible reason",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "confirmRootCauseControl.enclosingContainerText: 'Unavailable because the runtime marks this capability illegal. Review active unknowns, contradictions, obligations, and evidence for blocking context.' This reason correctly cites the supplied capability ('confirm-root-cause': 'illegal') and does not fabricate an unsupported cause.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical reason text present in the 'Actions' region of every viewport's aria tree."
+      }
+    },
+    {
+      "obligation": "user can navigate from unavailable confirmation to blocking information",
+      "judgment": "fail",
+      "failureType": "inaccessible-operation",
+      "evidence": "rendered-evidence.json operabilityProbes is an empty array — the only control on the page (controls[0]) is the disabled 'Confirm Root Cause' button, which per protocol was not force-clicked, and no other visible/enabled control exists. The reason text ('Review active unknowns, contradictions, obligations, and evidence for blocking context.') is plain prose with no href/button/anchor role in the aria tree or controls list, so there is no user-operable mechanism that takes the user to the 'Unresolved unknowns' or 'Contradictions' regions; the user can only find them by manual scrolling, which the obligation's own definition of 'navigate' (a user-operable control with probe evidence of scroll/focus landing on it) excludes.",
+      "responsive": {
+        "landscape-1180x820": "not-preserved",
+        "portrait-820x1180": "not-preserved",
+        "phone-390x844": "not-preserved",
+        "notes": "No navigation control exists at desktop, so none can be preserved at other viewports either; same static layout with no links/buttons connecting the reason text to the blocking-information regions in any aria tree."
+      }
+    },
+    {
+      "obligation": "falsification does not erase unrelated blocker semantics",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Both the 'Contradictions' region ('Hypothesis Is Falsified') and the separate 'Unresolved unknowns' region ('Blocking Unknown Exists') are simultaneously present and distinct in desktop-1440x900.full.png and the aria tree; the falsification predicate did not suppress or merge the blocking-unknown predicate's card.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Both cards remain separate and both present in every viewport's aria tree."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "rendered-evidence.json operabilityProbes is empty and no probe screenshots were provided, since the only visible control (Confirm Root Cause) is disabled and was correctly not force-clicked; this leaves no direct operability evidence beyond the accessibility tree and static screenshots for confirming the absence of a navigation control, though the absence of any other entry in the controls list is itself sufficient to conclude no such control exists."
+}

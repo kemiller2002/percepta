@@ -1,0 +1,44 @@
+{
+  "item": "item-11",
+  "reviewer": "R1",
+  "obligations": [
+    {
+      "obligation": "confirmation is executable because supplied capability authority is legal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png Actions region: enabled 'Confirm Root Cause' button with an 'Available' badge; rendered-evidence controls[0] disabled=false, ariaDisabled=false; operabilityProbes[0] outcome 'clicked' with focus landing on the button. This matches state capability confirm-root-cause=legal, and no blocker is shown.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The ARIA trees match desktop exactly. The phone screenshot shows the enabled button with the 'Available' badge."
+      }
+    },
+    {
+      "obligation": "falsified historical hypothesis remains represented",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The Contradictions region lists 'Hypothesis Is Falsified' with the subtext 'Active runtime predicate' (desktop full.png, center card, and the ARIA tree). The falsified hypothesis is kept visible and is not deleted. The state supplies no hypothesis identity, so the label is the only representation the state allows. 'Competing hypotheses: No active hypotheses supplied' does not contradict it, because it refers to active hypotheses only.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The Contradictions card with 'Hypothesis Is Falsified' is present at every viewport."
+      }
+    },
+    {
+      "obligation": "one falsified hypothesis does not imply the whole investigation is blocked",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "No blocked or halted language appears anywhere. The falsified predicate appears only as a Contradictions item, while the Actions region keeps 'Confirm Root Cause' enabled and marked 'Available' (probe 0 clicked successfully). Outstanding obligations reads 'No active obligations supplied.'",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The same content and enabled control appear at every viewport."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "Only a desktop tile-01 exists because the page fits in one viewport. Clicking Confirm Root Cause produced no ARIA diff, so the evidence cannot show what happens after confirmation, but no obligation requires that. The item representing the falsified hypothesis is a generic predicate label with no hypothesis content, because the state supplies none."
+}

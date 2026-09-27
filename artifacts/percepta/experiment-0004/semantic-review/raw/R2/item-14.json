@@ -1,0 +1,68 @@
+{
+  "item": "item-14",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "persistence is visibly pending",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.full.png, 'Outstanding obligations' region: 'OPEN Github write is pending — Predicate github-write-is-pending — Work still required.' Corroborated by 'Persistence status' region: 'Remote persistence (runtime-reported): Remote persistence status has not been reported. Do not assume work is saved.' and header summary 'Remote persistence: not reported'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "aria.txt for all four viewports is textually identical; the obligation listitem and persistence section text are unchanged."
+      }
+    },
+    {
+      "obligation": "remote success is not claimed",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Persistence status' region, 'Remote persistence (runtime-reported)' subheading: 'Remote persistence status has not been reported. Do not assume work is saved.' No text anywhere on the page asserts a saved/synced/successful remote write; the outstanding obligation 'Github write is pending' further confirms no success is claimed.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical text across all four aria trees."
+      }
+    },
+    {
+      "obligation": "investigation is not represented as resolved",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Triggering observation' region: 'Scope: Observed failure; no cause has been established by this record.' 'Competing hypotheses (0 active)' region: '3 of 3 listed explanations remain viable' with each hypothesis tagged 'VIABLE — OPEN' and 'it has not been ruled in or out.' No hypothesis is marked resolved/confirmed/closed.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical text across all four aria trees."
+      }
+    },
+    {
+      "obligation": "verification work remains visible",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Outstanding obligations (2 active)' region, second listitem: 'OPEN Corrective action not verified — Predicate corrective-action-not-verified — Work still required.' This obligation is visible in the desktop screenshot and reachable via the 'Obligations' nav link (probe controlIndex 5) and the direct anchor link (probe controlIndex 11, which focuses the li reading 'OPEN Corrective action not verified Predicate corrective-action-not-verified — Work still required.').",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical obligations list text across all four aria trees."
+      }
+    },
+    {
+      "obligation": "confirmation remains unavailable",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "'Actions' region: button labeled 'Unavailable: Confirm root cause' with ariaDisabled='true' and describedByText 'Unavailable: the runtime marks this action as not permitted in the current state. Active conditions that may be blocking it: Github write is pending (obligations) Corrective action not verified (obligations).' operabilityProbes controlIndex 9 recorded outcome 'not-clickable: locator.click: Timeout 2000ms exceeded' (button not interactable), consistent with capabilities.confirm-root-cause = 'illegal' and the blocking predicates github-write-is-pending / corrective-action-not-verified.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical disabled-button markup and description text across all four aria trees."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "The aria accessibility trees for all four viewports are textually identical, so responsive preservation is inferred from that identity plus the full-page screenshots rather than viewport-specific operability probes (probes were only run at desktop 1440x900, as instructed). No screenshot artifact indicated truncation, missing regions, or rendering errors at any viewport, and horizontalOverflow/page errors were false/empty for all four."
+}

@@ -1,0 +1,32 @@
+{
+  "subject": "candidate-1",
+  "run": "pending-unverified",
+  "fixtures": [
+    "pending-unverified"
+  ],
+  "stagedSha256Before": "190736abd66a86f2248d0bed32bd202f48c98bd7a6fc2bafb5a143c0f834a4ef",
+  "stagedSha256After": "190736abd66a86f2248d0bed32bd202f48c98bd7a6fc2bafb5a143c0f834a4ef",
+  "expectedSha256": "190736abd66a86f2248d0bed32bd202f48c98bd7a6fc2bafb5a143c0f834a4ef",
+  "byteIdentical": true,
+  "command": [
+    "dotnet",
+    "$SCRATCH/build/bin/Percepta.Cli/release/Percepta.Cli.dll",
+    "verify",
+    "--contract",
+    ".percepta/contracts/indy-init-investigation-workspace.json",
+    "--url",
+    "$SCRATCH/staging/candidate-1/index.html",
+    "--fixture",
+    "$REPO/artifacts/percepta/experiment-0004/held-out-fixtures/pending-unverified.json",
+    "--out",
+    "$REPO/artifacts/percepta/experiment-0004/deterministic/candidate-1/pending-unverified/evidence.json",
+    "--screenshots",
+    "$REPO/artifacts/percepta/experiment-0004/deterministic/candidate-1/pending-unverified/screenshots"
+  ],
+  "cwd": "$SCRATCH/baseline (detached worktree at f474c449)",
+  "startedAtUtc": "2026-09-27T05:07:40.264841+00:00",
+  "finishedAtUtc": "2026-09-27T05:07:41.873968+00:00",
+  "exitCode": 3,
+  "evidencePresent": true,
+  "complete": false
+}

@@ -1,0 +1,138 @@
+- link "Skip to workspace":
+  - /url: "#workspace"
+- banner:
+  - heading "Investigation Workspace" [level=1]
+  - paragraph: What currently explains the observation, and what should be tested next?
+  - text: "◌ Investigation open Confirm root cause: available"
+- navigation "Workspace sections":
+  - list:
+    - listitem:
+      - link "Observation":
+        - /url: "#region-observation"
+    - listitem:
+      - link "Hypotheses (1 falsified)":
+        - /url: "#region-hypotheses"
+    - listitem:
+      - link "Unknowns":
+        - /url: "#region-unknowns"
+    - listitem:
+      - link "Actions":
+        - /url: "#region-legal-actions"
+    - listitem:
+      - link "Evidence":
+        - /url: "#region-evidence"
+    - listitem:
+      - link "Persistence":
+        - /url: "#region-persistence-state"
+- main:
+  - region "Triggering observation ◆ Preserved":
+    - heading "Triggering observation ◆ Preserved" [level=2]
+    - paragraph:
+      - strong: "`indy init` exits with status 1 while scaffolding a new workspace on the CI runner."
+    - blockquote "Observed output": "error: failed to materialize template \"service-basic\" cause: unexpected end of archive (read 0 of 4096 bytes) exit status 1"
+    - term: Source
+    - definition: CI job log — pipeline “nightly-scaffold”, runner linux-x64-03
+    - term: Reported by
+    - definition: Automated nightly check
+    - paragraph: Preserved verbatim. Later findings annotate this observation; they do not replace it.
+  - region "Investigation status ◌ Open":
+    - heading "Investigation status ◌ Open" [level=2]
+    - paragraph: "Active state facts:"
+    - list:
+      - listitem:
+        - text: A hypothesis has been falsified
+        - code: hypothesis-is-falsified
+  - region "Competing hypotheses":
+    - heading "Competing hypotheses" [level=2]
+    - paragraph: Explanations are listed side by side, not ranked. No numeric confidence is shown because none is supplied.
+    - list:
+      - 'listitem "H1: Template archive is truncated when fetched from the registry mirror"':
+        - 'heading "H1: Template archive is truncated when fetched from the registry mirror" [level=3]'
+        - paragraph: ○ Under consideration
+        - paragraph: No falsification is reported in the current state. This is not a confirmation.
+        - paragraph: "Basis: The error reports an unexpected end of archive while materializing a template."
+        - paragraph:
+          - text: "Evidence:"
+          - link "E1":
+            - /url: "#ev-1"
+          - text: supports
+          - link "E2":
+            - /url: "#ev-2"
+          - text: neutral
+      - 'listitem "H2: Stale local template cache on the runner serves a partial archive"':
+        - 'heading "H2: Stale local template cache on the runner serves a partial archive" [level=3]'
+        - paragraph: ○ Under consideration
+        - paragraph: No falsification is reported in the current state. This is not a confirmation.
+        - paragraph: "Basis: The runner reuses a cache directory between jobs."
+        - paragraph:
+          - text: "Evidence:"
+          - link "E1":
+            - /url: "#ev-1"
+          - text: supports
+      - 'listitem "H3: Runner disk quota is exhausted during extraction"':
+        - 'heading "H3: Runner disk quota is exhausted during extraction" [level=3]'
+        - paragraph: ✕ Falsified — retained for the record
+        - paragraph: Evidence E3 rules this out. It stays listed so the reasoning history is preserved; it is no longer an active candidate.
+        - paragraph: "Basis: Extraction failures can surface as short reads when writes fail."
+        - paragraph:
+          - text: "Evidence:"
+          - link "E1":
+            - /url: "#ev-1"
+          - text: consistent with
+          - link "E3":
+            - /url: "#ev-3"
+          - text: falsifies
+  - region "Unresolved unknowns":
+    - heading "Unresolved unknowns" [level=2]
+    - list:
+      - listitem:
+        - paragraph: "? Open When was the runner template cache last cleared?"
+  - region "Next actions":
+    - heading "Next actions" [level=2]
+    - paragraph: Availability comes from the application state; this workspace does not override it.
+    - button "Confirm root cause"
+    - text: ✓ Available
+    - paragraph: Record the explanation that accounts for the observation. Requires an active (not falsified) hypothesis.
+    - paragraph
+  - region "Evidence":
+    - heading "Evidence" [level=2]
+    - list:
+      - listitem:
+        - paragraph:
+          - strong: E1
+          - text: CI log shows the read stopping at 0 of 4096 bytes during template extraction.
+        - paragraph: "Source: CI job log"
+        - paragraph:
+          - text: "Relationship: supports"
+          - link "H1":
+            - /url: "#hyp-h-registry"
+          - text: supports
+          - link "H2":
+            - /url: "#hyp-h-cache"
+          - text: consistent with
+          - link "H3":
+            - /url: "#hyp-h-disk"
+      - listitem:
+        - paragraph:
+          - strong: E2
+          - text: The registry mirror returned HTTP 200 with a Content-Length for the template archive.
+        - paragraph: "Source: Mirror access log"
+        - paragraph:
+          - text: "Relationship: neutral"
+          - link "H1":
+            - /url: "#hyp-h-registry"
+      - listitem:
+        - paragraph:
+          - strong: E3
+          - text: Runner disk usage during the failing job peaked at 18 GB of a 44 GB quota; no write errors were logged.
+        - paragraph: "Source: Runner metrics"
+        - paragraph:
+          - text: "Relationship: falsifies"
+          - link "H3":
+            - /url: "#hyp-h-disk"
+  - region "Persistence":
+    - heading "Persistence" [level=2]
+    - strong: "This device:"
+    - text: ● Local working copy Edits in this workspace exist locally.
+    - strong: "GitHub:"
+    - text: "? Not reported The current state does not report remote persistence. Remote save is not assumed."

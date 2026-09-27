@@ -1,0 +1,56 @@
+{
+  "item": "item-12",
+  "reviewer": "R2",
+  "obligations": [
+    {
+      "obligation": "confirmation remains unavailable because capability authority is illegal",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt: 'button \"Unavailable: Confirm root cause\" [disabled]'; rendered-evidence.json confirmRootCauseControl shows disabled: false but ariaDisabled: \"true\" and describedByText 'Unavailable: the runtime marks this action as not permitted in the current state.' Probe controlIndex 9 outcome 'not-clickable: locator.click: Timeout 2000ms exceeded.', before/after identical (no state change), consistent with state.json capabilities.confirm-root-cause = 'illegal'.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "All three aria.txt files contain the identical disabled button and description text as desktop."
+      }
+    },
+    {
+      "obligation": "UI does not invent a blocking unknown that was not supplied",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "desktop-1440x900.aria.txt region 'Unresolved unknowns (0 active)': 'No unknowns are reported as active.' The Actions region description reads 'No specific blocking condition is reported,' naming no invented unknown, consistent with state.json predicates: [] (no unknown predicate active).",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Identical 'Unresolved unknowns (0 active)' / 'No unknowns are reported as active.' text present in all three aria.txt files."
+      }
+    },
+    {
+      "obligation": "UI does not fabricate a domain-specific reason unsupported by active predicates",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "The disabled-action description is generic: 'the runtime marks this action as not permitted in the current state. No specific blocking condition is reported.' No hypothesis, contradiction, or domain fact (e.g. payment timeout, pool exhaustion, config deploy) is cited as the blocking reason; hypotheses region explicitly states 'No runtime state references this explanation; it has not been ruled in or out' for all three listed hypotheses, matching predicates: [] in state.json.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "Same generic, non-domain-specific unavailability text in all three aria.txt files."
+      }
+    },
+    {
+      "obligation": "unavailability is still communicated without overriding capability authority",
+      "judgment": "pass",
+      "failureType": null,
+      "evidence": "Actions region heading text: '0 available, 1 unavailable. Availability comes from the runtime and is not overridden here.' plus the disabled button labeled 'Unavailable: Confirm root cause' with ariaDisabled true, matching capabilities.confirm-root-cause = 'illegal' in state.json. The UI communicates unavailability (visible label, disabled state, described-by text) while explicitly disclaiming any local override of runtime authority.",
+      "responsive": {
+        "landscape-1180x820": "preserved",
+        "portrait-820x1180": "preserved",
+        "phone-390x844": "preserved",
+        "notes": "The 'Availability comes from the runtime and is not overridden here' sentence and disabled button appear identically in all three aria.txt files."
+      }
+    }
+  ],
+  "fabricatedOrForbiddenMeaning": [],
+  "evidenceLimitations": "No .full.png screenshots for landscape/portrait/phone viewports were inspected visually beyond the aria trees (aria text was identical to desktop across all viewports, so visual review was not needed to establish preservation of these obligations). rendered-evidence.json's confirmRootCauseControl reports disabled: false alongside ariaDisabled: \"true\"; the operability probe (timeout on click, no state change) and the described-by text corroborate that the control is non-operable, so this discrepancy did not affect judgment."
+}
