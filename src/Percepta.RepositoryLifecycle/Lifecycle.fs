@@ -136,11 +136,11 @@ Stable verification hooks include:
                     requiredInt "configurationVersion" root,
                     requiredString "managedRegionSha256" root
                 with
-                | Some schemaVersion, Some component, Some installedVersion, Some configurationVersion, Some managedRegionSha256 ->
+                | Some schemaVersion, Some componentName, Some installedVersion, Some configurationVersion, Some managedRegionSha256 ->
                     Ok(
                         Some
                             { SchemaVersion = schemaVersion
-                              Component = component
+                              Component = componentName
                               InstalledVersion = installedVersion
                               ConfigurationVersion = configurationVersion
                               ManagedRegionSha256 = managedRegionSha256 }
