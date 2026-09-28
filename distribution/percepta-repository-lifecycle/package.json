@@ -1,0 +1,17 @@
+{
+  "name": "@echelon-foundry/percepta-repository-lifecycle",
+  "version": "0.1.0",
+  "description": "Repository lifecycle launcher for Percepta",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "percepta-repo": "bin/percepta-repo.mjs"
+  },
+  "files": [
+    "bin/percepta-repo.mjs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}
