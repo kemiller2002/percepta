@@ -2,8 +2,14 @@ name: Percepta Repository Lifecycle Release
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "percepta-repo-v*"
+    paths:
+      - "src/Percepta.RepositoryLifecycle/**"
+      - "distribution/percepta-repository-lifecycle/**"
+      - ".github/workflows/percepta-repository-lifecycle-release.yml"
   workflow_dispatch:
 
 permissions:
@@ -13,7 +19,48 @@ permissions:
   artifact-metadata: write
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      tag: ${{ steps.release.outputs.tag }}
+      should_release: ${{ steps.release.outputs.should_release }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Resolve lifecycle release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./distribution/percepta-repository-lifecycle/package.json').version")"
+          tag="percepta-repo-v$version"
+
+          if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "$tag" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match lifecycle version $tag." >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag already exists; no publication required."
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Release $tag does not exist and will be published."
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+          fi
+
   publish:
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -31,21 +78,6 @@ jobs:
       - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "10.0.x"
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "24"
-
-      - name: Verify release identity
-        shell: bash
-        run: |
-          set -euo pipefail
-          version="$(node -p "require('./distribution/percepta-repository-lifecycle/package.json').version")"
-          expected="percepta-repo-v$version"
-          if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "$expected" ]]; then
-            echo "Tag $GITHUB_REF_NAME does not match lifecycle version $expected." >&2
-            exit 1
-          fi
 
       - name: Publish lifecycle binary
         shell: bash
@@ -81,8 +113,10 @@ jobs:
           if-no-files-found: error
 
   release:
-    if: github.ref_type == 'tag'
-    needs: publish
+    needs:
+      - prepare
+      - publish
+    if: needs.prepare.outputs.should_release == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -117,7 +151,8 @@ jobs:
       - name: Create immutable GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
         shell: bash
         run: |
           set -euo pipefail
-          gh release create "$GITHUB_REF_NAME"             assets/*             checksums.txt             --repo "$GITHUB_REPOSITORY"             --title "$GITHUB_REF_NAME"             --notes "Percepta repository lifecycle $GITHUB_REF_NAME. Semantic Percepta verification remains in the separate percepta CLI."
+          gh release create "$RELEASE_TAG"             assets/*             checksums.txt             --repo "$GITHUB_REPOSITORY"             --target "$GITHUB_SHA"             --title "$RELEASE_TAG"             --notes "Percepta repository lifecycle $RELEASE_TAG. Semantic Percepta verification remains in the separate percepta CLI."
