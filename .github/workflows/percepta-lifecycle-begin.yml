@@ -1,0 +1,67 @@
+name: Begin governed Percepta lifecycle work
+
+on:
+  push:
+    branches:
+      - feature/percepta-lifecycle-distribution
+    paths:
+      - ".github/workflows/percepta-lifecycle-begin.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  begin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install current Praxis toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/kemiller2002/praxis/main/scripts/install-native.sh | sh
+          echo "$HOME/.echelon/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.echelon/bin:$PATH"
+          echelon setup
+
+      - name: Establish Praxis work context
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.echelon/bin:$PATH"
+          work_id="WI-PERCEPTA-LIFECYCLE-001"
+
+          if ! ros work show "$work_id" >/dev/null 2>&1; then
+            ros add "Add reusable Percepta repository lifecycle distribution"               --id "$work_id"               --priority high               --tag percepta,lifecycle,distribution               --source manual               --source-reference "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md"
+          fi
+
+          ros work ready "$work_id"
+          ros work begin "$work_id" --type feature
+          ros work context "$work_id"
+          ros validate
+
+      - name: Commit Praxis state
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git status --porcelain .ros | grep -q .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .ros
+            git commit -m "Begin Percepta lifecycle work"
+            git pull --rebase origin feature/percepta-lifecycle-distribution
+            git push origin HEAD:feature/percepta-lifecycle-distribution
+          else
+            echo "No Praxis state changes to commit."
+          fi
