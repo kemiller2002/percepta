@@ -81,16 +81,16 @@ Stable verification hooks include:
 
     let private canonicalRegionSha = sha256 canonicalRegion
 
-    let private targetPath target relativePath =
+    let private targetPath (target: string) (relativePath: string) =
         Path.Combine(Path.GetFullPath target, relativePath)
 
-    let private ensureParent path =
+    let private ensureParent (path: string) =
         match Path.GetDirectoryName path with
         | null -> ()
         | parent when String.IsNullOrWhiteSpace parent -> ()
         | parent -> Directory.CreateDirectory parent |> ignore
 
-    let private atomicWrite path content =
+    let private atomicWrite (path: string) (content: string) =
         ensureParent path
         let temporary = $"{path}.percepta-{Guid.NewGuid():N}.tmp"
 
@@ -101,17 +101,17 @@ Stable verification hooks include:
             if File.Exists temporary then
                 File.Delete temporary
 
-    let private tryProperty name (element: JsonElement) =
+    let private tryProperty (name: string) (element: JsonElement) =
         let mutable value = Unchecked.defaultof<JsonElement>
         if element.TryGetProperty(name, &value) then Some value else None
 
-    let private requiredString name (element: JsonElement) =
+    let private requiredString (name: string) (element: JsonElement) =
         match tryProperty name element with
         | Some value when value.ValueKind = JsonValueKind.String ->
             value.GetString() |> Option.ofObj
         | _ -> None
 
-    let private requiredInt name (element: JsonElement) =
+    let private requiredInt (name: string) (element: JsonElement) =
         match tryProperty name element with
         | Some value when value.ValueKind = JsonValueKind.Number ->
             match value.TryGetInt32() with
@@ -119,7 +119,7 @@ Stable verification hooks include:
             | _ -> None
         | _ -> None
 
-    let private readManifest target =
+    let private readManifest (target: string) =
         let path = targetPath target ManifestPath
 
         if not (File.Exists path) then
@@ -171,7 +171,7 @@ Stable verification hooks include:
         | RegionPresent of fileContent: string * startIndex: int * endExclusive: int * region: string
         | RegionInvalid of error: string
 
-    let private inspectRegion target =
+    let private inspectRegion (target: string) =
         let path = targetPath target AgentsPath
 
         if not (File.Exists path) then
@@ -198,7 +198,7 @@ Stable verification hooks include:
                     let region = content.Substring(startIndex, endExclusive - startIndex)
                     RegionPresent(content, startIndex, endExclusive, region)
 
-    let private appendRegion existing =
+    let private appendRegion (existing: string option) =
         match existing with
         | None -> canonicalRegion + Environment.NewLine
         | Some content when content.Length = 0 -> canonicalRegion + Environment.NewLine
@@ -213,17 +213,17 @@ Stable verification hooks include:
 
             content + separator + canonicalRegion + Environment.NewLine
 
-    let private replaceRegion content startIndex endExclusive =
+    let private replaceRegion (content: string) (startIndex: int) (endExclusive: int) =
         content.Substring(0, startIndex)
         + canonicalRegion
         + content.Substring(endExclusive)
 
-    let private parseVersion value =
+    let private parseVersion (value: string) =
         match Version.TryParse value with
         | true, version -> Ok version
         | _ -> Error $"Version '{value}' is not a valid semantic numeric version."
 
-    let private compareInstalled installed =
+    let private compareInstalled (installed: string) =
         match parseVersion installed, parseVersion ToolVersion with
         | Ok installedVersion, Ok toolVersion -> Ok(compare installedVersion toolVersion)
         | Error error, _
@@ -238,7 +238,7 @@ Stable verification hooks include:
               yield
                   $"Unsupported Percepta configurationVersion {manifest.ConfigurationVersion}; this CLI supports {ConfigurationVersion}." ]
 
-    let private regionIntegrityErrors target (manifest: InstallationManifest) =
+    let private regionIntegrityErrors (target: string) (manifest: InstallationManifest) =
         match inspectRegion target with
         | RegionInvalid error -> [ error ]
         | RegionAbsent _ -> [ $"{AgentsPath} is missing the managed Percepta region." ]
@@ -249,7 +249,7 @@ Stable verification hooks include:
                   yield
                       $"{AgentsPath} Percepta region differs from the version recorded by {ManifestPath}; Conditor/Percepta will not overwrite a local edit." ]
 
-    let private currentVerificationErrors target (manifest: InstallationManifest) =
+    let private currentVerificationErrors (target: string) (manifest: InstallationManifest) =
         manifestErrors manifest
         @ [ if not (String.Equals(manifest.ManagedRegionSha256, canonicalRegionSha, StringComparison.OrdinalIgnoreCase)) then
                 yield $"{ManifestPath} does not describe the canonical managed region for Percepta {ToolVersion}." ]
@@ -262,7 +262,7 @@ Stable verification hooks include:
                else
                    [ $"{AgentsPath} Percepta region is not canonical for Percepta {ToolVersion}." ])
 
-    let inspect target =
+    let inspect (target: string) =
         match readManifest target with
         | Error errors ->
             { Manifest = None
@@ -312,7 +312,7 @@ Stable verification hooks include:
                           State = Invalid errors
                           Errors = errors }
 
-    let verify target =
+    let verify (target: string) =
         let inspection = inspect target
 
         match inspection.State with
@@ -333,7 +333,7 @@ Stable verification hooks include:
     let private manifestChange () =
         PlannedChange.WriteFile(ManifestPath, manifestContent ())
 
-    let planInit target =
+    let planInit (target: string) =
         match readManifest target with
         | Error errors -> Error errors
         | Ok None ->
@@ -372,7 +372,7 @@ Stable verification hooks include:
                             Error
                                 [ $"{AgentsPath} Percepta region was locally modified; init will not overwrite it." ]
 
-    let planUpgrade target =
+    let planUpgrade (target: string) =
         match readManifest target with
         | Error errors -> Error errors
         | Ok None -> Error [ "Percepta repository lifecycle is not installed; run 'percepta-repo init' first." ]
@@ -403,7 +403,7 @@ Stable verification hooks include:
                         else
                             Ok [ replaceAgentsChange content startIndex endExclusive; manifestChange () ]
 
-    let apply target changes =
+    let apply (target: string) (changes: PlannedChange list) =
         try
             for change in changes do
                 match change with
