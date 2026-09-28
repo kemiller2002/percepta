@@ -6,7 +6,11 @@ on:
       - "src/Percepta.RepositoryLifecycle/**"
       - "tests/Percepta.RepositoryLifecycle.Tests/**"
       - "distribution/percepta-repository-lifecycle/**"
+      - "schemas/percepta-repository-*.schema.json"
+      - "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md"
+      - "package.json"
       - ".github/workflows/percepta-repository-lifecycle.yml"
+      - ".github/workflows/percepta-repository-lifecycle-release.yml"
       - "Directory.Packages.props"
       - "global.json"
   pull_request:
@@ -14,7 +18,11 @@ on:
       - "src/Percepta.RepositoryLifecycle/**"
       - "tests/Percepta.RepositoryLifecycle.Tests/**"
       - "distribution/percepta-repository-lifecycle/**"
+      - "schemas/percepta-repository-*.schema.json"
+      - "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md"
+      - "package.json"
       - ".github/workflows/percepta-repository-lifecycle.yml"
+      - ".github/workflows/percepta-repository-lifecycle-release.yml"
       - "Directory.Packages.props"
       - "global.json"
   workflow_dispatch:
