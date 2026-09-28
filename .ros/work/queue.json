@@ -91,6 +91,31 @@
       },
       "source": "cond-managed-repair",
       "sourceReference": "artifacts/percepta/experiment-0002/EVALUATION.md"
+    },
+    {
+      "id": "WI-PERCEPTA-LIFECYCLE-001",
+      "title": "Add reusable Percepta repository lifecycle distribution",
+      "description": null,
+      "tags": [
+        "percepta",
+        "lifecycle",
+        "distribution"
+      ],
+      "priority": "high",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-09-28T01:18:59.953Z",
+      "updatedAt": "2026-09-28T01:36:29.000Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "automation",
+        "id": "github/github-actions",
+        "provider": "github",
+        "model": "unknown",
+        "runtime": "github-actions"
+      },
+      "source": "manual",
+      "sourceReference": "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md"
     }
   ]
 }

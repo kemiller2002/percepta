@@ -32,6 +32,37 @@ The repository is designed to bootstrap itself in GitHub Actions. The bootstrap 
 Do not copy Forma, Folio, Limen, Aegis, or engineering-context source into this repository. Consume their versioned packages/lifecycle installers and preserve their ownership boundaries.
 
 
+
+## Repository lifecycle
+
+Percepta intentionally has two separate executable surfaces:
+
+- `percepta` compiles and verifies semantic UI contracts and rendered evidence.
+- `percepta-repo` installs and verifies the Percepta repository capability itself.
+
+Do not use lifecycle health as semantic UI evidence, and do not make semantic verification commands own repository installation state.
+
+The repository lifecycle owns only:
+
+- `.echelon/percepta.json`; and
+- the bounded `echelon:percepta` managed region inside `AGENTS.md`.
+
+It does not own `.percepta/contracts/`, application code, browser binaries, semantic evidence, Praxis/Ordo state, or sibling Echelon managed regions.
+
+From a source checkout:
+
+```bash
+npm run percepta-repo -- init
+npm run percepta-repo -- status
+npm run percepta-repo -- verify --strict
+npm run percepta-repo -- doctor
+npm run percepta-repo -- upgrade
+```
+
+The release distribution uses the tiny `@echelon-foundry/percepta-repository-lifecycle` launcher. The launcher contains no lifecycle policy: it downloads the self-contained binary matching its exact package version from the immutable `percepta-repo-v<version>` GitHub Release, verifies SHA-256, caches it, and forwards arguments and stdio.
+
+See [Percepta Repository Lifecycle Distribution](docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md).
+
 ## What Percepta governs
 
 Percepta defines and verifies what a user must be able to perceive about application state, available actions, constraints, and unresolved work.

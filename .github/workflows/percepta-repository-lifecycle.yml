@@ -1,0 +1,92 @@
+name: Percepta Repository Lifecycle
+
+on:
+  push:
+    paths:
+      - "src/Percepta.RepositoryLifecycle/**"
+      - "tests/Percepta.RepositoryLifecycle.Tests/**"
+      - "distribution/percepta-repository-lifecycle/**"
+      - "schemas/percepta-repository-*.schema.json"
+      - "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md"
+      - "package.json"
+      - ".github/workflows/percepta-repository-lifecycle.yml"
+      - ".github/workflows/percepta-repository-lifecycle-release.yml"
+      - "Directory.Packages.props"
+      - "global.json"
+  pull_request:
+    paths:
+      - "src/Percepta.RepositoryLifecycle/**"
+      - "tests/Percepta.RepositoryLifecycle.Tests/**"
+      - "distribution/percepta-repository-lifecycle/**"
+      - "schemas/percepta-repository-*.schema.json"
+      - "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md"
+      - "package.json"
+      - ".github/workflows/percepta-repository-lifecycle.yml"
+      - ".github/workflows/percepta-repository-lifecycle-release.yml"
+      - "Directory.Packages.props"
+      - "global.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lifecycle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Test lifecycle launcher
+        run: node distribution/percepta-repository-lifecycle/launcher.test.mjs
+
+      - name: Inspect lifecycle launcher package
+        working-directory: distribution/percepta-repository-lifecycle
+        run: npm pack --dry-run
+
+      - name: Build lifecycle CLI
+        run: dotnet build src/Percepta.RepositoryLifecycle/Percepta.RepositoryLifecycle.fsproj --configuration Release
+
+      - name: Run lifecycle tests
+        run: dotnet run --project tests/Percepta.RepositoryLifecycle.Tests/Percepta.RepositoryLifecycle.Tests.fsproj --configuration Release
+
+      - name: Publish self-contained lifecycle binary
+        run: |
+          dotnet publish src/Percepta.RepositoryLifecycle/Percepta.RepositoryLifecycle.fsproj             --configuration Release             --runtime linux-x64             --self-contained true             -p:PublishSingleFile=true             -p:DebugType=None             -p:DebugSymbols=false             --output "$RUNNER_TEMP/percepta-repo-native"
+          test -x "$RUNNER_TEMP/percepta-repo-native/percepta-repo"
+          "$RUNNER_TEMP/percepta-repo-native/percepta-repo" --version
+
+      - name: Clean-room lifecycle smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="$RUNNER_TEMP/percepta-repo-target"
+          mkdir -p "$target"
+          printf '# Existing agent contract\n\nKeep this content.\n' > "$target/AGENTS.md"
+
+          "$RUNNER_TEMP/percepta-repo-native/percepta-repo" init --target "$target"
+          "$RUNNER_TEMP/percepta-repo-native/percepta-repo" verify --strict --target "$target"
+          "$RUNNER_TEMP/percepta-repo-native/percepta-repo" status --json --target "$target" > "$RUNNER_TEMP/status.json"
+          grep -F '"state": "current"' "$RUNNER_TEMP/status.json"
+          grep -F '# Existing agent contract' "$target/AGENTS.md"
+          grep -F '<!-- echelon:percepta:start -->' "$target/AGENTS.md"
+
+          first_manifest="$(sha256sum "$target/.echelon/percepta.json")"
+          first_agents="$(sha256sum "$target/AGENTS.md")"
+
+          "$RUNNER_TEMP/percepta-repo-native/percepta-repo" init --target "$target"
+
+          test "$first_manifest" = "$(sha256sum "$target/.echelon/percepta.json")"
+          test "$first_agents" = "$(sha256sum "$target/AGENTS.md")"
+
+      - name: Doctor smoke
+        run: |
+          "$RUNNER_TEMP/percepta-repo-native/percepta-repo" doctor --json --target "$RUNNER_TEMP/percepta-repo-target" > "$RUNNER_TEMP/doctor.json"
+          grep -F '"healthy": true' "$RUNNER_TEMP/doctor.json"

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echelonfoundry.com/schemas/percepta-repository-status/v1",
+  "title": "Percepta Repository Lifecycle Status",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "component",
+    "lifecycleVersion",
+    "state",
+    "installedVersion",
+    "errors"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "component": {
+      "const": "percepta"
+    },
+    "lifecycleVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "uninstalled",
+        "current",
+        "upgrade-required",
+        "newer-than-cli",
+        "invalid"
+      ]
+    },
+    "installedVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

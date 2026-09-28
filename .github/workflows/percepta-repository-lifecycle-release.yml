@@ -1,0 +1,158 @@
+name: Percepta Repository Lifecycle Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "percepta-repo-v*"
+    paths:
+      - "src/Percepta.RepositoryLifecycle/**"
+      - "distribution/percepta-repository-lifecycle/**"
+      - ".github/workflows/percepta-repository-lifecycle-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+  artifact-metadata: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      tag: ${{ steps.release.outputs.tag }}
+      should_release: ${{ steps.release.outputs.should_release }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Resolve lifecycle release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./distribution/percepta-repository-lifecycle/package.json').version")"
+          tag="percepta-repo-v$version"
+
+          if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "$tag" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match lifecycle version $tag." >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag already exists; no publication required."
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Release $tag does not exist and will be published."
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        rid:
+          - linux-x64
+          - linux-arm64
+          - osx-x64
+          - osx-arm64
+          - win-x64
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Publish lifecycle binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          rid="${{ matrix.rid }}"
+          out="$RUNNER_TEMP/publish"
+          asset_dir="$RUNNER_TEMP/asset"
+          mkdir -p "$out" "$asset_dir"
+
+          dotnet publish src/Percepta.RepositoryLifecycle/Percepta.RepositoryLifecycle.fsproj             --configuration Release             --runtime "$rid"             --self-contained true             -p:PublishSingleFile=true             -p:DebugType=None             -p:DebugSymbols=false             --output "$out"
+
+          if [[ "$rid" == win-* ]]; then
+            source="$out/percepta-repo.exe"
+            asset="$asset_dir/percepta-repo-$rid.exe"
+          else
+            source="$out/percepta-repo"
+            asset="$asset_dir/percepta-repo-$rid"
+            chmod +x "$source"
+          fi
+
+          cp "$source" "$asset"
+
+      - name: Attest binary provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: ${{ runner.temp }}/asset/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: percepta-repo-${{ matrix.rid }}
+          path: ${{ runner.temp }}/asset/*
+          if-no-files-found: error
+
+  release:
+    needs:
+      - prepare
+      - publish
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: percepta-repo-*
+          path: assets
+          merge-multiple: true
+
+      - name: Verify binary provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for asset in assets/*; do
+            gh attestation verify "$asset" --repo "$GITHUB_REPOSITORY"
+          done
+
+      - name: Create checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          (
+            cd assets
+            sha256sum percepta-repo-* > ../checksums.txt
+          )
+          cat checksums.txt
+
+      - name: Create immutable GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "$RELEASE_TAG"             assets/*             checksums.txt             --repo "$GITHUB_REPOSITORY"             --target "$GITHUB_SHA"             --title "$RELEASE_TAG"             --notes "Percepta repository lifecycle $RELEASE_TAG. Semantic Percepta verification remains in the separate percepta CLI."

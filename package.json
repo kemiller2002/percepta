@@ -11,13 +11,18 @@
     "echelon:verify": "./ros verify && ordo verify && visual-engineering verify --strict && communication-engineering verify --strict && limen verify",
     "echelon:status": "./ros status && ordo status && visual-engineering status && communication-engineering status && limen status",
     "echelon:doctor": "./ros doctor && ordo doctor && visual-engineering doctor && communication-engineering doctor && limen doctor",
-    "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release && dotnet build src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release && npm run test:core",
+    "verify": "npm run echelon:verify && dotnet build src/Percepta.Foundation/Percepta.Foundation.fsproj --configuration Release && dotnet build src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release && npm run lifecycle:build && npm run lifecycle:test && npm run lifecycle:launcher:test && npm run test:core",
     "test:core": "dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release",
     "percepta": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release --",
     "percepta:doctor": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- doctor",
     "percepta:compile": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- compile",
     "percepta:install-browser": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- install-browser",
-    "test:percepta:fixture": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- verify --contract .percepta/contracts/indy-init-investigation-workspace.json --url tests/fixtures/indy-init/index.html --fixture tests/fixtures/indy-init/blocked.json --fixture tests/fixtures/indy-init/legal.json --semantic-review tests/fixtures/indy-init/semantic-review.json"
+    "test:percepta:fixture": "dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- verify --contract .percepta/contracts/indy-init-investigation-workspace.json --url tests/fixtures/indy-init/index.html --fixture tests/fixtures/indy-init/blocked.json --fixture tests/fixtures/indy-init/legal.json --semantic-review tests/fixtures/indy-init/semantic-review.json",
+    "lifecycle:build": "dotnet build src/Percepta.RepositoryLifecycle/Percepta.RepositoryLifecycle.fsproj --configuration Release",
+    "lifecycle:test": "dotnet run --project tests/Percepta.RepositoryLifecycle.Tests/Percepta.RepositoryLifecycle.Tests.fsproj --configuration Release",
+    "lifecycle:launcher:test": "node distribution/percepta-repository-lifecycle/launcher.test.mjs",
+    "lifecycle:pack:inspect": "npm pack --dry-run --prefix distribution/percepta-repository-lifecycle",
+    "percepta-repo": "dotnet run --project src/Percepta.RepositoryLifecycle/Percepta.RepositoryLifecycle.fsproj --configuration Release --"
   },
   "dependencies": {
     "@echelon-foundry/design-system": "https://github.com/kemiller2002/forma/releases/download/v0.2.0/echelon-foundry-design-system-0.2.0.tgz",
