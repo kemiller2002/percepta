@@ -32,6 +32,17 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Test lifecycle launcher
+        run: node distribution/percepta-repository-lifecycle/launcher.test.mjs
+
+      - name: Inspect lifecycle launcher package
+        working-directory: distribution/percepta-repository-lifecycle
+        run: npm pack --dry-run
+
       - name: Build lifecycle CLI
         run: dotnet build src/Percepta.RepositoryLifecycle/Percepta.RepositoryLifecycle.fsproj --configuration Release
 
