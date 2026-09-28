@@ -63,7 +63,7 @@ module Cli =
         writer.WriteEndObject()
         writer.Flush()
 
-    let private writePlanJson operation changes =
+    let private writePlanJson (operation: string) (changes: PlannedChange list) =
         use stream = Console.OpenStandardOutput()
         let mutable options = JsonWriterOptions()
         options.Indented <- true
@@ -82,11 +82,11 @@ module Cli =
         writer.WriteEndObject()
         writer.Flush()
 
-    let private printErrors errors =
+    let private printErrors (errors: string list) =
         for error in errors do
             eprintfn "%s" error
 
-    let private applyPlan operation args plan =
+    let private applyPlan (operation: string) (args: string list) (plan: Result<PlannedChange list, string list>) =
         let dryRun = hasFlag "--dry-run" args
         let json = hasFlag "--json" args
 
