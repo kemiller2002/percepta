@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echelonfoundry.com/schemas/percepta-repository-installation/v1",
+  "title": "Percepta Repository Installation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "component",
+    "installedVersion",
+    "configurationVersion",
+    "managedRegionSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "component": {
+      "const": "percepta"
+    },
+    "installedVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configurationVersion": {
+      "const": 1
+    },
+    "managedRegionSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
