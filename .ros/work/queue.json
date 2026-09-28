@@ -102,10 +102,10 @@
         "distribution"
       ],
       "priority": "high",
-      "status": "ready",
+      "status": "complete",
       "attachments": [],
       "createdAt": "2026-09-28T01:18:59.953Z",
-      "updatedAt": "2026-09-28T01:19:00.000Z",
+      "updatedAt": "2026-09-28T01:36:29.000Z",
       "createdBy": "unknown",
       "createdByActor": {
         "kind": "automation",
