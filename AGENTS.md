@@ -121,3 +121,7 @@ Use these stable verification hooks where applicable:
 - `data-percepta-blocker-link-for`
 
 A UI task with a Percepta contract is not complete merely because it renders or because an agent says it is complete. Required Percepta evidence must be acceptable to the governing completion policy.
+
+## CI observation discipline
+
+Commit and push incremental recovery points. Keep working after pushes when independent work remains. Do not wait for remote CI after every push. Check remote CI at the final implementation boundary by default, or earlier only when the result is needed to proceed safely. Ordinary commit-driven CI should wait for a 10-minute quiet period so nearby commits batch together.
