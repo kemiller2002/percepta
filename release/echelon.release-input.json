@@ -1,0 +1,51 @@
+{
+  "schema": "echelon.release-input/v1",
+  "systemId": "percepta",
+  "distributionClass": "self-contained-native-cli",
+  "executable": "percepta-repo",
+  "compatibilityAliases": [],
+  "provides": [],
+  "distribution": {
+    "mechanism": "github-release",
+    "package": null,
+    "url": null
+  },
+  "artifacts": [
+    {
+      "name": "percepta-repo-linux-x64",
+      "purpose": "executable",
+      "platform": "linux-x64",
+      "mediaType": "application/octet-stream"
+    },
+    {
+      "name": "percepta-repo-linux-arm64",
+      "purpose": "executable",
+      "platform": "linux-arm64",
+      "mediaType": "application/octet-stream"
+    },
+    {
+      "name": "percepta-repo-osx-x64",
+      "purpose": "executable",
+      "platform": "osx-x64",
+      "mediaType": "application/octet-stream"
+    },
+    {
+      "name": "percepta-repo-osx-arm64",
+      "purpose": "executable",
+      "platform": "osx-arm64",
+      "mediaType": "application/octet-stream"
+    },
+    {
+      "name": "percepta-repo-win-x64.exe",
+      "purpose": "executable",
+      "platform": "win-x64",
+      "mediaType": "application/vnd.microsoft.portable-executable"
+    },
+    {
+      "name": "checksums.txt",
+      "purpose": "checksums",
+      "platform": null,
+      "mediaType": "text/plain"
+    }
+  ]
+}
