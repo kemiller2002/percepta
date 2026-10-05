@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "protocolVersion": "1.0.0",
   "repository": "percepta",
-  "actor": "claude",
+  "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-09-28T01:36:29.000Z",
+  "updatedAt": "2026-10-05T18:04:50Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -94,6 +94,24 @@
         "EXE-20260928T011900535Z-1dab30ea"
       ],
       "completedAt": "2026-09-28T01:36:29.000Z"
+    },
+    {
+      "id": "WI-PERCEPTA-EX0004-ROS-REPAIR",
+      "type": "research",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "research-record",
+          "path": "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md"
+        }
+      ],
+      "updatedAt": "2026-10-05T18:04:50Z",
+      "telemetryExecutionIds": [
+        "EXE-20261005T180423181Z-8899f496"
+      ],
+      "completedAt": "2026-10-05T18:04:50Z",
+      "conclusion": "EX-PERCEPTA-2026-0004 record uses a schema-legal status; execution bundle relocated byte-identically to experiments/; registry rebuilt"
     }
   ]
 }
