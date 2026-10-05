@@ -10,4 +10,5 @@
 | WI-PERCEPTA-EX0003-ROS-REPAIR | Repair EX-PERCEPTA-2026-0003 ROS records | complete | percepta, experiment | high |
 | WI-PERCEPTA-EX0004-COMPLETE | Complete EX-PERCEPTA-2026-0004 with evidence and research decision | complete | percepta, experiment | high |
 | WI-PERCEPTA-EX0004-ROS-REPAIR | Repair EX-PERCEPTA-2026-0004 ROS records | complete | percepta, experiment | high |
+| WI-PERCEPTA-HY0005-SUPPORTED | Mark HY-PERCEPTA-2026-0005 supported per owner decision | complete | percepta, experiment | high |
 | WI-PERCEPTA-LIFECYCLE-001 | Add reusable Percepta repository lifecycle distribution | complete | percepta, lifecycle, distribution | high |
