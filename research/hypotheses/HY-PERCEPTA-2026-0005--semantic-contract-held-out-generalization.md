@@ -2,7 +2,7 @@
 id: HY-PERCEPTA-2026-0005
 title: Percepta semantic contracts improve held-out state generalization
 research_area: percepta-verification
-status: active
+status: supported
 created: 2026-09-25
 author_agent: chatgpt
 confidence: low
@@ -39,3 +39,9 @@ Under DF-PERCEPTA-2026-0001, the status stays `active` and confidence moves from
 - every semantic reviewer was an AI model;
 - the evaluator procedure was not frozen before implementation;
 - Evaluation 1 found no difference within the Claude pair.
+
+## Status update (2026-10-05)
+
+Under DF-PERCEPTA-2026-0002, the repository owner, kemiller2002, decided to mark this hypothesis `supported`. That record supersedes DF-PERCEPTA-2026-0001. Confidence stays `low`, because the evidence has not changed.
+
+The status means support from one small pilot under its preregistered descriptive criterion. The limitations listed above still apply in full.

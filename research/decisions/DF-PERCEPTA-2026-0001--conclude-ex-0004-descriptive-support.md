@@ -1,7 +1,7 @@
 ---
 id: DF-PERCEPTA-2026-0001
 title: Conclude EX-PERCEPTA-2026-0004 with descriptive support for HY-PERCEPTA-2026-0005; keep the hypothesis active at low confidence
-status: accepted
+status: superseded
 type: decision-record
 decision_type: research
 research_area: percepta-verification
@@ -16,7 +16,8 @@ related_documents:
   - research/evidence/EV-PERCEPTA-2026-0002--held-out-semantic-generalization-results.md
   - artifacts/percepta/experiment-0004/EVALUATIONS.md
 supersedes: []
-superseded_by: []
+superseded_by:
+  - DF-PERCEPTA-2026-0002
 tags:
   - percepta
   - experiment
@@ -24,6 +25,8 @@ tags:
 ---
 
 # DF-PERCEPTA-2026-0001
+
+> **Superseded by DF-PERCEPTA-2026-0002 (2026-10-05).** The repository owner decided to mark HY-PERCEPTA-2026-0005 `supported`. That replaces item 4 below. Items 1 to 3 still stand and are restated in DF-PERCEPTA-2026-0002.
 
 ## Context
 
