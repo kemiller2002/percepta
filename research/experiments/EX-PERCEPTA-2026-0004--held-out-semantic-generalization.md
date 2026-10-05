@@ -2,18 +2,18 @@
 id: EX-PERCEPTA-2026-0004
 title: Held-out semantic-state generalization
 research_area: percepta-verification
-status: preregistered
+status: active
 created: 2026-09-25
 author_agent: chatgpt
 tests_hypotheses:
   - HY-PERCEPTA-2026-0005
 related_theories: []
 inputs:
-  - research/experiments/EX-PERCEPTA-2026-0004/frozen-product-brief.md
-  - research/experiments/EX-PERCEPTA-2026-0004/frozen-runtime-protocol.md
+  - experiments/EX-PERCEPTA-2026-0004/frozen-product-brief.md
+  - experiments/EX-PERCEPTA-2026-0004/frozen-runtime-protocol.md
   - .percepta/contracts/indy-init-investigation-workspace.json
 evaluation_only_inputs:
-  - research/experiments/EX-PERCEPTA-2026-0004/held-out-semantic-cases.json
+  - experiments/EX-PERCEPTA-2026-0004/held-out-semantic-cases.json
 outputs:
   - artifacts/percepta/experiment-0004/results.json
 ---
@@ -110,3 +110,10 @@ No experimental evaluator runs before first-pass freeze.
 ## Stop condition
 
 Do not begin implementation until all inputs and lane instructions are frozen and registered.
+
+## Administrative amendment (2026-10-05, metadata and location only)
+
+No preregistered design, outcome, criterion, or frozen input was changed. The preregistration as frozen is git blob `b74f0a475b99bca46fca1783099c467a361fa2bc`; everything above this section is unchanged from it except the `status` value and the three bundle paths in the front matter.
+
+- `status` changed from `preregistered` to `active`. `preregistered` is not an experiment lifecycle state in `schemas/experiment.schema.json` (`proposed`, `active`, `blocked`, `completed`, `cancelled`). The lanes have run and two independent evaluations exist under `artifacts/percepta/experiment-0004/`, so `active` is the accurate state. It becomes `completed` once an evidence record is written and HY-PERCEPTA-2026-0005 is updated.
+- The execution bundle (frozen brief, runtime protocol, held-out cases, lane instructions, and the treatment-b lane output) moved from `research/experiments/EX-PERCEPTA-2026-0004/` to `experiments/EX-PERCEPTA-2026-0004/`, following `experiments/README.md`. The move is byte-identical: every git blob ID is unchanged. Frozen lane instructions, evaluation records, and integrity manifests still name the original `research/experiments/...` paths. Those were the paths when they ran, and they are left unedited.

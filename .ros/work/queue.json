@@ -132,6 +132,23 @@
       "createdBy": "unknown",
       "source": "manual",
       "sourceReference": null
+    },
+    {
+      "id": "WI-PERCEPTA-EX0004-ROS-REPAIR",
+      "title": "Repair EX-PERCEPTA-2026-0004 ROS records",
+      "description": null,
+      "tags": [
+        "percepta",
+        "experiment"
+      ],
+      "priority": "high",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-10-05T18:04:18.468Z",
+      "updatedAt": "2026-10-05T18:04:50Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
     }
   ]
 }
