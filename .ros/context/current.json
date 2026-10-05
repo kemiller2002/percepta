@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-05T18:04:50Z",
+  "updatedAt": "2026-10-05T22:50:21Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -141,6 +141,28 @@
       ],
       "completedAt": "2026-10-05T18:04:50Z",
       "conclusion": "EX-PERCEPTA-2026-0004 record uses a schema-legal status; execution bundle relocated byte-identically to experiments/; registry rebuilt"
+    },
+    {
+      "id": "WI-PERCEPTA-EX0004-COMPLETE",
+      "type": "research",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "research-record",
+          "path": "research/evidence/EV-PERCEPTA-2026-0002--held-out-semantic-generalization-results.md"
+        },
+        {
+          "type": "research-record",
+          "path": "research/decisions/DF-PERCEPTA-2026-0001--conclude-ex-0004-descriptive-support.md"
+        }
+      ],
+      "updatedAt": "2026-10-05T22:50:21Z",
+      "telemetryExecutionIds": [
+        "EXE-20261005T224902645Z-20900453"
+      ],
+      "completedAt": "2026-10-05T22:50:21Z",
+      "conclusion": "EX-PERCEPTA-2026-0004 completed: descriptive support for HY-PERCEPTA-2026-0005 (treatment > control in both independent evaluations: 8/10 vs 6/10 and 10/10 vs 5/10); hypothesis kept active at low confidence"
     }
   ]
 }

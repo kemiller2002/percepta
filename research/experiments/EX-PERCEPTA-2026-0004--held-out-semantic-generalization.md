@@ -2,7 +2,7 @@
 id: EX-PERCEPTA-2026-0004
 title: Held-out semantic-state generalization
 research_area: percepta-verification
-status: active
+status: completed
 created: 2026-09-25
 author_agent: chatgpt
 tests_hypotheses:
@@ -16,6 +16,9 @@ evaluation_only_inputs:
   - experiments/EX-PERCEPTA-2026-0004/held-out-semantic-cases.json
 outputs:
   - artifacts/percepta/experiment-0004/results.json
+  - artifacts/percepta/experiment-0004/independent-evaluation-2/results.json
+  - EV-PERCEPTA-2026-0002
+  - DF-PERCEPTA-2026-0001
 ---
 
 # Experiment
@@ -117,3 +120,11 @@ No preregistered design, outcome, criterion, or frozen input was changed. The pr
 
 - `status` changed from `preregistered` to `active`. `preregistered` is not an experiment lifecycle state in `schemas/experiment.schema.json` (`proposed`, `active`, `blocked`, `completed`, `cancelled`). The lanes have run and two independent evaluations exist under `artifacts/percepta/experiment-0004/`, so `active` is the accurate state. It becomes `completed` once an evidence record is written and HY-PERCEPTA-2026-0005 is updated.
 - The execution bundle (frozen brief, runtime protocol, held-out cases, lane instructions, and the treatment-b lane output) moved from `research/experiments/EX-PERCEPTA-2026-0004/` to `experiments/EX-PERCEPTA-2026-0004/`, following `experiments/README.md`. The move is byte-identical: every git blob ID is unchanged. Frozen lane instructions, evaluation records, and integrity manifests still name the original `research/experiments/...` paths. Those were the paths when they ran, and they are left unedited.
+
+## Completion (2026-10-05)
+
+`status` changed from `active` to `completed`. The preregistered design, outcome, criterion and frozen inputs are unchanged. The `outputs` front matter now also lists Evaluation 2's results, the evidence record and the decision record.
+
+- Evidence: `EV-PERCEPTA-2026-0002`. Evaluation 1 gives treatment 8/10 against control 6/10 fully correct held-out cases. Evaluation 2 gives treatment 10/10 against control 5/10. Both meet the preregistered support criterion (treatment rate > control rate).
+- Verdict: **descriptive support** for HY-PERCEPTA-2026-0005. This is a small pilot and is not statistically conclusive.
+- Decision: `DF-PERCEPTA-2026-0001`. The experiment is completed. HY-PERCEPTA-2026-0005 stays `active`, and its confidence moves from `very-low` to `low`.

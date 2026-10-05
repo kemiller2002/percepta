@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "confidence": "low",
+    "created": "2026-10-05",
+    "decision_type": "research",
+    "id": "DF-PERCEPTA-2026-0001",
+    "path": "research/decisions/DF-PERCEPTA-2026-0001--conclude-ex-0004-descriptive-support.md",
+    "related_documents": [
+      "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md",
+      "research/hypotheses/HY-PERCEPTA-2026-0005--semantic-contract-held-out-generalization.md",
+      "research/evidence/EV-PERCEPTA-2026-0002--held-out-semantic-generalization-results.md",
+      "artifacts/percepta/experiment-0004/EVALUATIONS.md"
+    ],
+    "research_area": "percepta-verification",
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [
+      "EV-PERCEPTA-2026-0002"
+    ],
+    "tags": [
+      "percepta",
+      "experiment",
+      "held-out-generalization"
+    ],
+    "title": "Conclude EX-PERCEPTA-2026-0004 with descriptive support for HY-PERCEPTA-2026-0005; keep the hypothesis active at low confidence",
+    "type": "decision-record",
+    "updated": "2026-10-05"
+  }
+]

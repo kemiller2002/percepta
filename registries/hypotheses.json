@@ -65,7 +65,7 @@
   },
   {
     "author_agent": "chatgpt",
-    "confidence": "very-low",
+    "confidence": "low",
     "contradicting_evidence": [],
     "created": "2026-09-25",
     "id": "HY-PERCEPTA-2026-0005",
@@ -75,7 +75,10 @@
     "status": "active",
     "superseded_by": [],
     "supersedes": [],
-    "supporting_evidence": [],
-    "title": "Percepta semantic contracts improve held-out state generalization"
+    "supporting_evidence": [
+      "EV-PERCEPTA-2026-0002"
+    ],
+    "title": "Percepta semantic contracts improve held-out state generalization",
+    "updated": "2026-10-05"
   }
 ]
