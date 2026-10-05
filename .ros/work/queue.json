@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "percepta",
-  "nextSeq": 1,
+  "nextSeq": 2,
   "items": [
     {
       "id": "WI-INDY-UI-001",
@@ -116,6 +116,22 @@
       },
       "source": "manual",
       "sourceReference": "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md"
+    },
+    {
+      "id": "WI-0001",
+      "title": "Upgrade Limen to 0.7.0 (@echelon-foundry/limen) and declare boundary notApplicable until browser engine code exists",
+      "description": null,
+      "tags": [
+        "limen"
+      ],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-10-05T17:00:39.272Z",
+      "updatedAt": "2026-10-05T17:01:13Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
     },
     {
       "id": "WI-PERCEPTA-EX0004-ROS-REPAIR",

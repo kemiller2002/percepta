@@ -22,7 +22,7 @@ Percepta SHALL consume:
 
 - Forma / `@echelon-foundry/design-system`;
 - Folio / `@echelon-foundry/print-components`;
-- Limen / `@echelon-foundry/typescript-wasm-kernel`;
+- Limen / `@echelon-foundry/limen` (formerly `@echelon-foundry/typescript-wasm-kernel`);
 - `EchelonFoundry.Aegis.Core`;
 - `EchelonFoundry.Aegis.Integration.GitHub`;
 - `EchelonFoundry.Aegis.Store.GitHub`.
