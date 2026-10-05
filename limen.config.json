@@ -1,11 +1,8 @@
 {
   "configurationVersion": 1,
   "boundary": {
-    "engine": [
-      "src/engine"
-    ],
-    "kernel": [
-      "src/kernel"
-    ]
+    "notApplicable": {
+      "rationale": "Percepta has no browser-side engine or kernel code yet: it is an F#/.NET contract compiler and verification CLI whose browser access is the Playwright adapter (a host, not a Limen engine). src/engine and src/kernel are reserved placeholders that hold only README.md; replace this declaration with real engine and kernel paths when browser-facing behavior is introduced."
+    }
   }
 }

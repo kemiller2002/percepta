@@ -14,7 +14,7 @@ Before meaningful work:
 ## Required application components
 
 - Use **Forma** (`@echelon-foundry/design-system`) for shared UI tokens, foundations, components, patterns, accessibility contracts, branding, and skins. Do not copy Forma CSS into Percepta.
-- Use **Limen** (`@echelon-foundry/typescript-wasm-kernel`) as the browser boundary. Application meaning, state, authorization, and legal transitions stay behind the boundary.
+- Use **Limen** (`@echelon-foundry/limen`; formerly `@echelon-foundry/typescript-wasm-kernel`) as the browser boundary. Application meaning, state, authorization, and legal transitions stay behind the boundary.
 - Use **Aegis** for unexpected operational faults and recovery. Do not expose raw faults directly in the UI; map them to safe presentation state.
 - Use **Folio** (`@echelon-foundry/print-components`) for printable/report output. Do not create a parallel print primitive system inside Percepta.
 
