@@ -26,5 +26,39 @@
       "adversarial-testing"
     ],
     "title": "Adversarial Percepta mutation experiment results"
+  },
+  {
+    "confidence": "low",
+    "contradicts": [],
+    "created": "2026-10-05",
+    "created_by_agent": "anthropic/claude-code",
+    "evidence_type": "test-result",
+    "id": "EV-PERCEPTA-2026-0002",
+    "path": "research/evidence/EV-PERCEPTA-2026-0002--held-out-semantic-generalization-results.md",
+    "related_documents": [
+      "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md",
+      "research/hypotheses/HY-PERCEPTA-2026-0005--semantic-contract-held-out-generalization.md",
+      "research/decisions/DF-PERCEPTA-2026-0001--conclude-ex-0004-descriptive-support.md",
+      "artifacts/percepta/experiment-0004/EVALUATIONS.md"
+    ],
+    "related_theories": [],
+    "research_area": "percepta-verification",
+    "retrieved": "2026-10-05",
+    "source_author": "Two independent AI evaluation sessions (Claude Code), each with two blinded AI semantic reviewers",
+    "source_date": "2026-09-27",
+    "source_title": "EX-PERCEPTA-2026-0004 frozen first-pass evaluations 1 and 2",
+    "source_uri": "https://github.com/kemiller2002/percepta/tree/main/artifacts/percepta/experiment-0004",
+    "status": "accepted",
+    "supports": [
+      "HY-PERCEPTA-2026-0005"
+    ],
+    "tags": [
+      "percepta",
+      "semantic-contracts",
+      "held-out-generalization",
+      "blinded-review",
+      "pilot"
+    ],
+    "title": "Held-out semantic-state generalization pilot results (EX-PERCEPTA-2026-0004)"
   }
 ]

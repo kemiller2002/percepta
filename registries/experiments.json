@@ -79,12 +79,15 @@
       ".percepta/contracts/indy-init-investigation-workspace.json"
     ],
     "outputs": [
-      "artifacts/percepta/experiment-0004/results.json"
+      "artifacts/percepta/experiment-0004/results.json",
+      "artifacts/percepta/experiment-0004/independent-evaluation-2/results.json",
+      "EV-PERCEPTA-2026-0002",
+      "DF-PERCEPTA-2026-0001"
     ],
     "path": "research/experiments/EX-PERCEPTA-2026-0004--held-out-semantic-generalization.md",
     "related_theories": [],
     "research_area": "percepta-verification",
-    "status": "active",
+    "status": "completed",
     "tests_hypotheses": [
       "HY-PERCEPTA-2026-0005"
     ],
