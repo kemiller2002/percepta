@@ -19,7 +19,7 @@ The current committed baseline is:
 - Aegis Core 1.0.0
 - Aegis GitHub integration 1.0.0
 - Aegis GitHub store 1.0.0
-- Forma 0.2.0, consumed from the immutable GitHub release artifact
+- Forma 0.4.1 (`echelon-current`), consumed from the immutable GitHub release artifact
 - Folio 0.3.0, pinned to commit `2b101b6d840a670abb959148fff8e1477c059eda` until its npm package is available
 - Limen 0.6.1
 - Visual Engineering 1.0.0
