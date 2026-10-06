@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "percepta",
-  "nextSeq": 2,
+  "nextSeq": 3,
   "items": [
     {
       "id": "WI-INDY-UI-001",
@@ -180,6 +180,20 @@
       "attachments": [],
       "createdAt": "2026-10-05T23:23:18Z",
       "updatedAt": "2026-10-05T23:23:49Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0002",
+      "title": "Upgrade Limen to 0.7.1 to match the echelon-current channel",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-10-06T09:37:46.413Z",
+      "updatedAt": "2026-10-06T09:38:06Z",
       "createdBy": "unknown",
       "source": "manual",
       "sourceReference": null
