@@ -1,4 +1,4 @@
-name: ROS validation
+name: Praxis validation
 
 on:
   pull_request:
@@ -23,10 +23,13 @@ jobs:
           export PATH="$HOME/.echelon/bin:$PATH"
           echelon setup
 
-      - name: Check ROS registries
-        run: ros registry check
+      - name: Check Praxis registries
+        run: praxis registry check
 
-      - name: Validate ROS state
-        run: ros validate
+      - name: Validate Praxis state
+        run: praxis validate
         env:
+          PRAXIS_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
+          # Compatibility: Praxis releases pinned from before the rename read
+          # only the legacy name (DF-ROS-2026-A050).
           ROS_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
