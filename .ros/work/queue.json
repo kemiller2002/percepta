@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "percepta",
-  "nextSeq": 3,
+  "nextSeq": 4,
   "items": [
     {
       "id": "WI-INDY-UI-001",
@@ -194,6 +194,20 @@
       "attachments": [],
       "createdAt": "2026-10-06T09:37:46.413Z",
       "updatedAt": "2026-10-06T09:38:06Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0003",
+      "title": "Upgrade Forma to 0.4.1 to match the echelon-current channel",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-10-06T09:47:43.645Z",
+      "updatedAt": "2026-10-06T10:04:31Z",
       "createdBy": "unknown",
       "source": "manual",
       "sourceReference": null
