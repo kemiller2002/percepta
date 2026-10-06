@@ -4,6 +4,7 @@
 |---|---|---|---|---|
 | ROS-INSTALL-3-4-0 | ROS-INSTALL-3-4-0 | complete |  |  |
 | WI-0001 | Upgrade Limen to 0.7.0 (@echelon-foundry/limen) and declare boundary notApplicable until browser engine code exists | complete | limen | medium |
+| WI-0002 | Upgrade Limen to 0.7.1 to match the echelon-current channel | complete |  | medium |
 | WI-INDY-UI-001 | Add and validate Indy Init Percepta screen contracts | complete | percepta, indy-init | high |
 | WI-PERCEPTA-EX0002-EVAL | Record EX-PERCEPTA-2026-0002 frozen first-pass evaluation results | complete | percepta, experiment | high |
 | WI-PERCEPTA-EX0002-EVAL-ATTRIBUTION | Attribute EX-PERCEPTA-2026-0002 evaluation artifacts | complete | percepta, experiment | high |
