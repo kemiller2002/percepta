@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-06T13:58:12.000Z",
+  "updatedAt": "2026-10-06T16:32:55.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -329,6 +329,51 @@
         }
       },
       "completedAt": "2026-10-06T13:58:12.000Z"
+    },
+    {
+      "id": "WI-0006",
+      "type": "mechanical",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".echelon/toolchain.json"
+        },
+        {
+          "type": "implementation",
+          "path": "conditor.json"
+        },
+        {
+          "type": "implementation",
+          "path": ".conditor/lock.json"
+        }
+      ],
+      "updatedAt": "2026-10-06T16:32:55.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261006T163025762Z-0f982998"
+      ],
+      "latestCheckpoint": {
+        "id": "e2cbc73880dcec8bae759ca6",
+        "recordedAt": "2026-10-06T16:32:54.000Z",
+        "executionId": "EXE-20261006T163025762Z-0f982998",
+        "repository": "percepta",
+        "branch": "final-sweep-372",
+        "commit": "aeae1961b76a6dcd9ce107c4192a5e9140caa2f2",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "final-sweep-372",
+        "remoteCommit": "aeae1961b76a6dcd9ce107c4192a5e9140caa2f2",
+        "summary": "upgrades applied, Conditor adopted, verified, pushed",
+        "nextAction": "complete, PR",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-06T16:32:55.000Z"
     }
   ]
 }
