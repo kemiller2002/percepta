@@ -31,6 +31,6 @@
   },
   "devDependencies": {
     "@echelon-foundry/communication-engineering": "github:kemiller2002/communication-engineering#4590d2fe6f7e80b339117d3fbee5803f2dd39122",
-    "@echelon-foundry/visual-engineering": "1.0.0"
+    "@echelon-foundry/visual-engineering": "1.0.1"
   }
 }

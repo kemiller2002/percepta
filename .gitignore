@@ -40,9 +40,9 @@ dist/
 site-dist/
 
 # BEGIN echelon:visual-engineering
-# Installed Visual Engineering context. Refresh it with:
-#   npx @echelon-foundry/visual-engineering init
-.visual-engineering/
+# Installed Visual Engineering context. It is required and must be committed.
+# Refresh it with: npx @echelon-foundry/visual-engineering upgrade
+!.visual-engineering/
 # END echelon:visual-engineering
 
 # Generated Percepta verification output
