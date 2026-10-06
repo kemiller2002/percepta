@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-06T12:23:13.000Z",
+  "updatedAt": "2026-10-06T12:24:02.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -243,13 +243,47 @@
     {
       "id": "WI-0004",
       "type": "mechanical",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-10-06T12:23:13.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".echelon/ros.json"
+        },
+        {
+          "type": "documentation",
+          "path": "AGENTS.md"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/praxis-validation.yml"
+        }
+      ],
+      "updatedAt": "2026-10-06T12:24:02.000Z",
       "telemetryExecutionIds": [
         "EXE-20261006T122313641Z-cd499733"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "d3c14a665af20977311991e8",
+        "recordedAt": "2026-10-06T12:24:00.000Z",
+        "executionId": "EXE-20261006T122313641Z-cd499733",
+        "repository": "percepta",
+        "branch": "chore/praxis-3.7.1",
+        "commit": "fdc6480bae13991de7ebf729aa7c83265284a859",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "chore/praxis-3.7.1",
+        "remoteCommit": "fdc6480bae13991de7ebf729aa7c83265284a859",
+        "summary": "upgrade applied, verified, pushed",
+        "nextAction": "complete, PR",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-06T12:24:02.000Z"
     }
   ]
 }
