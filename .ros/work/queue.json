@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "percepta",
-  "nextSeq": 8,
+  "nextSeq": 9,
   "items": [
     {
       "id": "WI-INDY-UI-001",
@@ -295,6 +295,27 @@
       "attachments": [],
       "createdAt": "2026-10-08T07:17:04.349Z",
       "updatedAt": "2026-10-08T07:18:00.267Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "anthropic/claude-code",
+        "provider": "anthropic",
+        "model": "unknown",
+        "runtime": "claude-code"
+      },
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0008",
+      "title": "Upgrade Limen from 0.7.1 to 0.9.0 (echelon-current)",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-10-09T00:27:57.563Z",
+      "updatedAt": "2026-10-09T00:28:26.000Z",
       "createdBy": "unknown",
       "createdByActor": {
         "kind": "agent",
