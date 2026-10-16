@@ -186,3 +186,9 @@ Required evidence fails closed. A required `Unavailable` result is not a pass an
 The first browser adapter uses Microsoft Playwright. Playwright remains outside `Percepta.Core`.
 
 See [Executable Verification](docs/EXECUTABLE-VERIFICATION.md).
+
+## License
+
+Source available under PolyForm Noncommercial 1.0.0 for permitted noncommercial uses. Commercial use requires a separate license from Echelon Foundry. Previously distributed versions remain subject to the licenses under which they were released.
+
+Commercial licensing information is forthcoming.
