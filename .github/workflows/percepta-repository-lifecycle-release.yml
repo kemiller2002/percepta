@@ -9,6 +9,7 @@ on:
     paths:
       - "src/Percepta.RepositoryLifecycle/**"
       - "distribution/percepta-repository-lifecycle/**"
+      - "release/**"
       - ".github/workflows/percepta-repository-lifecycle-release.yml"
   workflow_dispatch:
 
@@ -146,7 +147,27 @@ jobs:
             cd assets
             sha256sum percepta-repo-* > ../checksums.txt
           )
+          cp checksums.txt assets/checksums.txt
           cat checksums.txt
+
+      - name: Generate shared Echelon release manifest
+        uses: kemiller2002/echelon-registry/actions/release-contract@73d1e87fe40c703eb1cd5e7cf7caf9d852f788b9
+        with:
+          release-input: release/echelon.release-input.json
+          artifact-dir: assets
+          output: echelon-release.json
+          version: ${{ needs.prepare.outputs.version }}
+          tag: ${{ needs.prepare.outputs.tag }}
+          commit: ${{ github.sha }}
+          release-stage: stable
+
+      - name: Inspect generated release manifest
+        run: python3 -m json.tool echelon-release.json
+
+      - name: Attest release manifest provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: echelon-release.json
 
       - name: Create immutable GitHub release
         env:
@@ -155,4 +176,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh release create "$RELEASE_TAG"             assets/*             checksums.txt             --repo "$GITHUB_REPOSITORY"             --target "$GITHUB_SHA"             --title "$RELEASE_TAG"             --notes "Percepta repository lifecycle $RELEASE_TAG. Semantic Percepta verification remains in the separate percepta CLI."
+          gh release create "$RELEASE_TAG"             assets/*             echelon-release.json             --repo "$GITHUB_REPOSITORY"             --target "$GITHUB_SHA"             --title "$RELEASE_TAG"             --notes "Percepta repository lifecycle $RELEASE_TAG. Semantic Percepta verification remains in the separate percepta CLI."
