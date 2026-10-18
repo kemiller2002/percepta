@@ -326,6 +326,30 @@
       },
       "source": "manual",
       "sourceReference": null
+    },
+    {
+      "id": "INGEST-REQS-20261018",
+      "title": "Ingest outstanding Praxis requirement sources",
+      "description": "Claim and derive canonical requirements from Percepta visual experiment source; preserve provenance and keep implementation work separate.",
+      "tags": [
+        "requirements",
+        "ingestion"
+      ],
+      "priority": "high",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-10-18T12:48:41.469Z",
+      "updatedAt": "2026-10-18T12:48:41.696Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "openai/codex",
+        "provider": "openai",
+        "model": "unknown",
+        "runtime": "codex"
+      },
+      "source": "user",
+      "sourceReference": "2026-10-18 ingestion request"
     }
   ]
 }

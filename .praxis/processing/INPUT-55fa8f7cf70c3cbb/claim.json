@@ -1,0 +1,42 @@
+{
+  "schema": "praxis.inbox-claim/1",
+  "claimId": "INPUT-55fa8f7cf70c3cbb",
+  "state": "claimed",
+  "source": {
+    "path": ".praxis/inbox/documents/2026-10-14-PERCEPTA-VIS-001.md",
+    "fileName": "2026-10-14-PERCEPTA-VIS-001.md",
+    "sha256": "03aa538523979161dac3afed496cca14959bf09a73410666ae757aa7f2cb1c82",
+    "size": 4302
+  },
+  "claimedAt": "2026-10-18T12:49:02.468Z",
+  "claimant": {
+    "kind": "agent",
+    "id": "openai/codex",
+    "provider": "openai",
+    "model": "unknown",
+    "runtime": "codex"
+  },
+  "executionId": "EXE-20261018T124842050Z-a670be90",
+  "derivations": [
+    {
+      "kind": "requirement",
+      "targetKind": "path",
+      "target": "requirements/VISUAL-DECISION-EXPERIMENT.md",
+      "summary": "Preregistered visual-decision quality experiment requirements",
+      "locator": "requirements/VISUAL-DECISION-EXPERIMENT.md",
+      "recordedAt": "2026-10-18T12:53:10.182Z",
+      "actor": {
+        "kind": "agent",
+        "id": "openai/codex",
+        "provider": "openai",
+        "model": "unknown",
+        "runtime": "codex"
+      },
+      "executionId": "EXE-20261018T124842050Z-a670be90"
+    }
+  ],
+  "noDerivationReason": null,
+  "closedAt": null,
+  "releaseReason": null,
+  "rejectionReason": null
+}
