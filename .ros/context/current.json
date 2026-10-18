@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-09T00:28:26.000Z",
+  "updatedAt": "2026-10-18T13:03:46.706Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -478,6 +478,82 @@
       },
       "completedAt": "2026-10-09T00:28:26.000Z",
       "conclusion": "Limen upgraded 0.7.1 -> 0.9.0; limen verify --strict and the repository checks pass locally"
+    },
+    {
+      "id": "INGEST-REQS-20261018",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "requirements/VISUAL-DECISION-EXPERIMENT.md"
+        },
+        {
+          "type": "tests",
+          "path": "docs/verification/requirements-ingestion-2026-10-18.md"
+        }
+      ],
+      "updatedAt": "2026-10-18T12:59:02.094Z",
+      "telemetryExecutionIds": [
+        "EXE-20261018T124842050Z-a670be90"
+      ],
+      "latestCheckpoint": {
+        "id": "db2d3fc29def3dcb5690c5ac",
+        "recordedAt": "2026-10-18T12:58:40.554Z",
+        "executionId": "EXE-20261018T124842050Z-a670be90",
+        "stepId": "STEP-20261018T124851160Z-f74143bd",
+        "repository": "percepta",
+        "branch": "codex/ingest-outstanding-requirements-20261018",
+        "commit": "d8e4f051187771185c15f031c505511c2cf3a1cb",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta.git"
+        },
+        "remoteBranch": "codex/ingest-outstanding-requirements-20261018",
+        "remoteCommit": "d8e4f051187771185c15f031c505511c2cf3a1cb",
+        "summary": "Percepta visual experiment source ingested and linked to issue 36",
+        "nextAction": "Complete the ingestion work item and open the review PR",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-18T12:59:02.094Z",
+      "conclusion": "All authorized source documents for this repository were canonically ingested; implementation requirements remain open."
+    },
+    {
+      "id": "PRAXIS-EXECUTIONS-COMPAT-20261018",
+      "type": "mechanical",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [],
+      "updatedAt": "2026-10-18T13:03:46.706Z",
+      "telemetryExecutionIds": [
+        "EXE-20261018T130141700Z-255cc3b7"
+      ],
+      "latestCheckpoint": {
+        "id": "78efe3d5dbe1195a7844a30a",
+        "recordedAt": "2026-10-18T13:03:27.682Z",
+        "executionId": "EXE-20261018T130141700Z-255cc3b7",
+        "repository": "percepta",
+        "branch": "codex/ingest-outstanding-requirements-20261018",
+        "commit": "856c74d2ad3b01319ffd38392aac277b2ba8e3b1",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta.git"
+        },
+        "remoteBranch": "codex/ingest-outstanding-requirements-20261018",
+        "remoteCommit": "856c74d2ad3b01319ffd38392aac277b2ba8e3b1",
+        "summary": "Aligned attribution policy with Praxis-managed execution state and verified pinned/current validators",
+        "nextAction": "Complete compatibility work and verify PR checks",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-18T13:03:46.706Z",
+      "conclusion": "Praxis-managed .ros/executions state is excluded from product attribution; pinned and current validator behavior was checked."
     }
   ]
 }

@@ -2,6 +2,8 @@
 
 | ID | Work | Status | Tags | Priority |
 |---|---|---|---|---|
+| INGEST-REQS-20261018 | Ingest outstanding Praxis requirement sources | complete | requirements, ingestion | high |
+| PRAXIS-EXECUTIONS-COMPAT-20261018 | Exclude Praxis-managed execution state from attribution | complete | governance, compatibility | high |
 | ROS-INSTALL-3-4-0 | ROS-INSTALL-3-4-0 | complete |  |  |
 | WI-0001 | Upgrade Limen to 0.7.0 (@echelon-foundry/limen) and declare boundary notApplicable until browser engine code exists | complete | limen | medium |
 | WI-0002 | Upgrade Limen to 0.7.1 to match the echelon-current channel | complete |  | medium |
