@@ -336,10 +336,10 @@
         "ingestion"
       ],
       "priority": "high",
-      "status": "ready",
+      "status": "complete",
       "attachments": [],
       "createdAt": "2026-10-18T12:48:41.469Z",
-      "updatedAt": "2026-10-18T12:48:41.696Z",
+      "updatedAt": "2026-10-18T12:59:02.094Z",
       "createdBy": "unknown",
       "createdByActor": {
         "kind": "agent",
