@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "percepta",
-  "nextSeq": 9,
+  "nextSeq": 10,
   "items": [
     {
       "id": "WI-INDY-UI-001",
@@ -374,6 +374,27 @@
       },
       "source": "CI validation",
       "sourceReference": "percepta/actions/runs/39129621742"
+    },
+    {
+      "id": "WI-0009",
+      "title": "Submit PERCEPTA-SEMCLI-001 intake: semantic UI verification CLI is implemented but unreleased",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-10-24T12:37:53.388Z",
+      "updatedAt": "2026-10-24T12:38:51.000Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "anthropic/claude-code",
+        "provider": "anthropic",
+        "model": "unknown",
+        "runtime": "claude-code"
+      },
+      "source": "manual",
+      "sourceReference": null
     }
   ]
 }
