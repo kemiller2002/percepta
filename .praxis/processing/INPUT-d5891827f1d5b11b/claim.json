@@ -1,0 +1,58 @@
+{
+  "schema": "praxis.inbox-claim/1",
+  "claimId": "INPUT-d5891827f1d5b11b",
+  "state": "claimed",
+  "source": {
+    "path": ".praxis/inbox/documents/2026-10-24-PERCEPTA-SEMCLI-001.md",
+    "fileName": "2026-10-24-PERCEPTA-SEMCLI-001.md",
+    "sha256": "88c4569b3a6fbaccc086e83b328c52bbfa1142a9e4d876fcabfe75517408c33d",
+    "size": 8179
+  },
+  "claimedAt": "2026-10-25T01:13:52.584Z",
+  "claimant": {
+    "kind": "agent",
+    "id": "anthropic/claude-code",
+    "provider": "anthropic",
+    "model": "unknown",
+    "runtime": "claude-code"
+  },
+  "executionId": "EXE-20261025T011347900Z-13edea17",
+  "derivations": [
+    {
+      "kind": "requirement",
+      "targetKind": "path",
+      "target": "requirements/SEMANTIC-CLI-DISTRIBUTION.md",
+      "summary": "RQ-PERCEPTA-SEMCLI-001: distribute the semantic CLI (.1-.6 and acceptance criteria preserved)",
+      "locator": null,
+      "recordedAt": "2026-10-25T01:20:52.973Z",
+      "actor": {
+        "kind": "agent",
+        "id": "anthropic/claude-code",
+        "provider": "anthropic",
+        "model": "unknown",
+        "runtime": "claude-code"
+      },
+      "executionId": "EXE-20261025T011347900Z-13edea17"
+    },
+    {
+      "kind": "decision",
+      "targetKind": "path",
+      "target": "research/decisions/DF-PERCEPTA-2026-0003--release-percepta-semantic-cli.md",
+      "summary": "DF-PERCEPTA-2026-0003: owner decisions for the five open questions",
+      "locator": null,
+      "recordedAt": "2026-10-25T01:20:53.328Z",
+      "actor": {
+        "kind": "agent",
+        "id": "anthropic/claude-code",
+        "provider": "anthropic",
+        "model": "unknown",
+        "runtime": "claude-code"
+      },
+      "executionId": "EXE-20261025T011347900Z-13edea17"
+    }
+  ],
+  "noDerivationReason": null,
+  "closedAt": null,
+  "releaseReason": null,
+  "rejectionReason": null
+}

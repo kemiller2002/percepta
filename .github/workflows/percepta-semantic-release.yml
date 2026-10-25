@@ -1,0 +1,192 @@
+name: Percepta Semantic CLI Release
+
+# Publishes the Percepta semantic CLI (`percepta`) as an immutable GitHub
+# release tagged `percepta-semantic-v<version>` (PERCEPTA-SEMCLI-001,
+# DF-PERCEPTA-2026-0003). The version is held in
+# distribution/percepta-semantic/version and is independent of percepta-repo.
+#
+# Release paths, as decided by the repository owner on 2026-10-24:
+# - a push to main whose version has no release yet (tags cannot be pushed
+#   from the agent sandbox, so this is the normal path);
+# - an operator-pushed `percepta-semantic-v*` tag, which must match the version;
+# - workflow_dispatch.
+# A version that is already released is never republished.
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "percepta-semantic-v*"
+    paths:
+      - "src/Percepta.Core/**"
+      - "src/Percepta.Adapter.Playwright/**"
+      - "src/Percepta.Cli/**"
+      - "distribution/percepta-semantic/**"
+      - ".github/workflows/percepta-semantic-build.yml"
+      - ".github/workflows/percepta-semantic-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+  artifact-metadata: write
+
+concurrency:
+  group: percepta-semantic-release
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      tag: ${{ steps.release.outputs.tag }}
+      should_release: ${{ steps.release.outputs.should_release }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Resolve semantic CLI release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(tr -d ' \r\n' < distribution/percepta-semantic/version)"
+          if ! printf '%s\n' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "distribution/percepta-semantic/version is not a semantic version: '$version'" >&2
+            exit 1
+          fi
+          tag="percepta-semantic-v$version"
+
+          if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "$tag" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match semantic CLI version $tag." >&2
+            exit 1
+          fi
+
+          if [[ "$GITHUB_REF_TYPE" == "branch" && "$GITHUB_REF_NAME" != "main" ]]; then
+            echo "Releases are cut only from main or a matching tag (got $GITHUB_REF_NAME)." >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag already exists; no publication required."
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Release $tag does not exist and will be published."
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
+    uses: ./.github/workflows/percepta-semantic-build.yml
+    with:
+      attest: true
+
+  release:
+    needs:
+      - prepare
+      - build
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: percepta-semantic-archive-*
+          path: assets
+          merge-multiple: true
+
+      - name: Check the asset set
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for rid in linux-x64 linux-arm64 osx-x64 osx-arm64; do
+            test -f "assets/percepta-semantic-$VERSION-$rid.tar.gz"
+          done
+          test -f "assets/percepta-semantic-$VERSION-win-x64.zip"
+          test "$(find assets -type f | wc -l)" -eq 5
+          ls -l assets
+
+      - name: Verify archive provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for asset in assets/*; do
+            gh attestation verify "$asset" --repo "$GITHUB_REPOSITORY"
+          done
+
+      - name: Create checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          (
+            cd assets
+            sha256sum percepta-semantic-* > ../checksums.txt
+          )
+          cat checksums.txt
+
+      - name: Write release notes
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "Percepta semantic CLI \`percepta\` $VERSION."
+            echo
+            echo "Checks rendered UI against Percepta screen contracts and writes evidence that follows \`schemas/percepta-evidence.schema.json\`. Commands: \`compile\`, \`verify\`, \`status\`, \`doctor\`, \`install-browser\`, \`version\`."
+            echo
+            echo "**percepta-repo lifecycle health is not semantic evidence.** \`percepta-repo\` (tags \`percepta-repo-v*\`) reports only whether Percepta is installed in a repository. It does not show that any UI meets its contract. This release does not change \`percepta-repo\`, and \`percepta\` never changes repository installation state."
+            echo
+            echo "## Assets"
+            echo
+            echo "Each archive is a self-contained .NET 8 publish, so the host needs no .NET runtime and no \`DOTNET_ROLL_FORWARD\`. It includes the Playwright driver in \`.playwright/\`. Extract the whole archive, then run \`percepta install-browser\`. Without a launchable browser, \`doctor\` and \`verify\` fail."
+            echo
+            echo '```text'
+            cat checksums.txt
+            echo '```'
+            echo
+            echo "Verify with \`sha256sum --check --ignore-missing checksums.txt\` and \`gh attestation verify <asset> --repo $GITHUB_REPOSITORY\`."
+            echo
+            echo "## Tested"
+            echo
+            echo "- linux-x64: in an \`ubuntu:24.04\` container with no .NET, CI checked that \`doctor\` fails without a browser, then ran \`install-browser\` and \`doctor\`. The canonical Indy Init verification exited 0 with both fixtures and failed without them. Every machine-addressable adversarial mutant failed. All evidence validated against the schema."
+            echo "- linux-arm64, osx-x64, osx-arm64, win-x64: CI checked only that \`percepta version\` starts on a native runner. Browser verification on these platforms was not tested."
+            echo
+            echo "## Notes"
+            echo
+            echo "- Consumer guide: \`docs/PERCEPTA-SEMANTIC-CLI.md\`. Decision: \`DF-PERCEPTA-2026-0003\`."
+            echo "- Planned echelon-registry record: \`systemId: percepta-semantic\`, \`executable: percepta\`. It is created in echelon-registry, not by this release."
+            echo "- No Node launcher in this release. macOS archives are not notarized."
+            echo "- Source commit: $GITHUB_SHA"
+          } > release-notes.md
+          cat release-notes.md
+
+      - name: Create immutable GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "$RELEASE_TAG" \
+            assets/* \
+            checksums.txt \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "$RELEASE_TAG" \
+            --notes-file release-notes.md

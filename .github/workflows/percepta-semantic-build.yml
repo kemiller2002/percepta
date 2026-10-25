@@ -1,0 +1,185 @@
+name: Percepta Semantic CLI Build
+
+# Reusable build for the Percepta semantic CLI (`percepta`), PERCEPTA-SEMCLI-001.
+# Called by percepta-semantic-cli.yml (pull requests) and
+# percepta-semantic-release.yml (releases) so that what is smoke-tested on a
+# pull request is built exactly the way it is released.
+#
+# Permissions are inherited from the caller. Attestation runs only when the
+# caller passes `attest: true` and grants id-token/attestations write.
+
+on:
+  workflow_call:
+    inputs:
+      attest:
+        description: Attest build provenance for each archive.
+        type: boolean
+        default: false
+
+jobs:
+  package:
+    name: package (${{ matrix.rid }})
+    runs-on: ${{ matrix.build_os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: linux-x64
+            build_os: ubuntu-latest
+          - rid: linux-arm64
+            build_os: ubuntu-latest
+          # macOS app hosts are signed (ad hoc) only when published on macOS.
+          - rid: osx-x64
+            build_os: macos-latest
+          - rid: osx-arm64
+            build_os: macos-latest
+          - rid: win-x64
+            build_os: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Publish and archive
+        shell: bash
+        run: distribution/percepta-semantic/package.sh "${{ matrix.rid }}" "$RUNNER_TEMP/dist"
+
+      - name: Attest archive provenance
+        if: inputs.attest
+        uses: actions/attest@v4
+        with:
+          subject-path: ${{ runner.temp }}/dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: percepta-semantic-archive-${{ matrix.rid }}
+          path: ${{ runner.temp }}/dist/*
+          if-no-files-found: error
+
+  start-check:
+    name: start check (${{ matrix.rid }})
+    needs: package
+    runs-on: ${{ matrix.check_os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: linux-arm64
+            check_os: ubuntu-24.04-arm
+          - rid: osx-x64
+            check_os: macos-15-intel
+          - rid: osx-arm64
+            check_os: macos-latest
+          - rid: win-x64
+            check_os: windows-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/download-artifact@v5
+        with:
+          name: percepta-semantic-archive-${{ matrix.rid }}
+          path: dist
+
+      - name: Start the released executable without DOTNET_ROLL_FORWARD
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset DOTNET_ROLL_FORWARD
+          version="$(tr -d ' \r\n' < distribution/percepta-semantic/version)"
+          rid="${{ matrix.rid }}"
+          name="percepta-semantic-$version-$rid"
+          mkdir -p install
+          if [[ "$rid" == win-* ]]; then
+            if command -v unzip >/dev/null 2>&1; then
+              unzip -q "dist/$name.zip" -d install
+            else
+              7z x -y -oinstall "dist/$name.zip" >/dev/null
+            fi
+            exe="install/$name/percepta.exe"
+          else
+            tar -xzf "dist/$name.tar.gz" -C install
+            exe="install/$name/percepta"
+          fi
+          test -f "install/$name/.playwright/package/cli.js"
+          reported="$("$exe" version)"
+          echo "$reported"
+          case "$reported" in
+            "percepta $version" | "percepta $version+"*) ;;
+            *) echo "Unexpected version output: $reported (expected $version)" >&2; exit 1 ;;
+          esac
+
+  adversarial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Install matching Chromium (source build, for the in-process harness only)
+        run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- install-browser
+
+      - name: Run adversarial Percepta experiment
+        run: dotnet run --project tests/Percepta.Adversarial.Tests/Percepta.Adversarial.Tests.fsproj --configuration Release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: percepta-semantic-adversarial
+          path: artifacts/percepta/adversarial
+          if-no-files-found: error
+
+  smoke:
+    name: consumer smoke (linux-x64, no .NET)
+    needs:
+      - package
+      - adversarial
+    runs-on: ubuntu-latest
+    # A clean container: no .NET runtime or SDK of any version is present.
+    container: ubuntu:24.04
+
+    steps:
+      - name: Install host prerequisites (no .NET)
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update -qq
+          apt-get install -y -qq --no-install-recommends ca-certificates libicu74 python3 python3-jsonschema unzip
+
+      - uses: actions/checkout@v6
+
+      - uses: actions/download-artifact@v5
+        with:
+          name: percepta-semantic-archive-linux-x64
+          path: dist
+
+      - uses: actions/download-artifact@v5
+        with:
+          name: percepta-semantic-adversarial
+          path: adversarial
+
+      - name: Run the released archive as a consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(tr -d ' \r\n' < distribution/percepta-semantic/version)"
+          distribution/percepta-semantic/smoke.sh \
+            "dist/percepta-semantic-$version-linux-x64.tar.gz" \
+            "$GITHUB_WORKSPACE" \
+            adversarial \
+            "$RUNNER_TEMP/smoke"
+
+      - name: Upload smoke evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: percepta-semantic-smoke-evidence
+          path: ${{ runner.temp }}/smoke/evidence
+          if-no-files-found: warn

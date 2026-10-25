@@ -1,0 +1,36 @@
+name: Percepta Semantic CLI
+
+# Pull-request gate for the distributable Percepta semantic CLI
+# (PERCEPTA-SEMCLI-001): builds every release archive, starts each on a native
+# runner, and runs the linux-x64 archive as a consumer on a host with no .NET.
+
+on:
+  pull_request:
+    paths:
+      - "src/Percepta.Core/**"
+      - "src/Percepta.Adapter.Playwright/**"
+      - "src/Percepta.Cli/**"
+      - "distribution/percepta-semantic/**"
+      - "tests/Percepta.Adversarial.Tests/**"
+      - "tests/fixtures/indy-init/**"
+      - ".percepta/contracts/**"
+      - "schemas/percepta-evidence.schema.json"
+      - ".github/workflows/percepta-semantic-build.yml"
+      - ".github/workflows/percepta-semantic-cli.yml"
+      - ".github/workflows/percepta-semantic-release.yml"
+      - "global.json"
+      - "Directory.Packages.props"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: percepta-semantic-cli-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: ./.github/workflows/percepta-semantic-build.yml
+    with:
+      attest: false
