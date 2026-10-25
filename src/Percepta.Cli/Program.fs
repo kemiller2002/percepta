@@ -518,6 +518,22 @@ module Cli =
         printfn "  percepta status [--evidence path]"
         printfn "  percepta doctor [--contract path]"
         printfn "  percepta install-browser"
+        printfn "  percepta version"
+
+    /// The released version line (PERCEPTA-SEMCLI-001); a source build reports the project default.
+    let versionCommand () =
+        let assembly = System.Reflection.Assembly.GetExecutingAssembly()
+
+        let version =
+            System.Reflection.CustomAttributeExtensions.GetCustomAttribute<System.Reflection.AssemblyInformationalVersionAttribute>(
+                assembly
+            )
+            |> Option.ofObj
+            |> Option.map _.InformationalVersion
+            |> Option.defaultValue "unknown"
+
+        printfn "percepta %s" version
+        0
 
 let private execute argv =
     let root = Cli.findRepositoryRoot (Directory.GetCurrentDirectory())
@@ -529,6 +545,8 @@ let private execute argv =
     | "status" :: rest -> Cli.statusCommand root rest
     | "doctor" :: rest -> Cli.doctorCommand root rest |> fun task -> task.GetAwaiter().GetResult()
     | [ "install-browser" ] -> BrowserVerification.installChromium ()
+    | [ "version" ]
+    | [ "--version" ] -> Cli.versionCommand ()
     | _ ->
         Cli.usage ()
         1

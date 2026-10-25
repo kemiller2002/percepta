@@ -13,6 +13,8 @@
 | WI-0006 | Move percepta to Praxis 3.7.2, Ordo 1.4.2, Visual Engineering 1.0.1 and adopt Conditor | complete | praxis, ordo, toolchain | medium |
 | WI-0007 | Move percepta to Ordo 1.5.0 via echelon-current 1.2.0 (conditor upgrade --current) | complete |  | medium |
 | WI-0008 | Upgrade Limen from 0.7.1 to 0.9.0 (echelon-current) | complete |  | medium |
+| WI-0009 | Submit PERCEPTA-SEMCLI-001 intake: semantic UI verification CLI is implemented but unreleased | complete |  | medium |
+| WI-0010 | Release the Percepta semantic verification CLI (PERCEPTA-SEMCLI-001): self-contained per-RID archives, percepta-semantic-v* release workflow, CI smoke, consumer docs | ready |  | medium |
 | WI-INDY-UI-001 | Add and validate Indy Init Percepta screen contracts | complete | percepta, indy-init | high |
 | WI-PERCEPTA-EX0002-EVAL | Record EX-PERCEPTA-2026-0002 frozen first-pass evaluation results | complete | percepta, experiment | high |
 | WI-PERCEPTA-EX0002-EVAL-ATTRIBUTION | Attribute EX-PERCEPTA-2026-0002 evaluation artifacts | complete | percepta, experiment | high |

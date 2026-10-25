@@ -59,5 +59,52 @@
     "title": "Mark HY-PERCEPTA-2026-0005 supported on the EX-PERCEPTA-2026-0004 evidence (owner decision)",
     "type": "decision-record",
     "updated": "2026-10-05"
+  },
+  {
+    "confidence": "high",
+    "created": "2026-10-25",
+    "decision_type": "engineering",
+    "derived_from": [
+      "RQ-PERCEPTA-SEMCLI-001"
+    ],
+    "id": "DF-PERCEPTA-2026-0003",
+    "path": "research/decisions/DF-PERCEPTA-2026-0003--release-percepta-semantic-cli.md",
+    "provenance": {
+      "contributions": {
+        "EXE-20261025T011347900Z-13edea17": {
+          "actor": {
+            "id": "anthropic/claude-code",
+            "kind": "agent",
+            "model": "unknown",
+            "provider": "anthropic",
+            "runtime": "claude-code"
+          },
+          "at": "2026-10-25T01:20:43.000Z",
+          "operations": [
+            "created"
+          ],
+          "reason": "Record owner decisions (2026-10-24: 'Release it', 'Do what you recommend') for the semantic CLI release"
+        }
+      }
+    },
+    "related_documents": [
+      "requirements/SEMANTIC-CLI-DISTRIBUTION.md",
+      "docs/PERCEPTA-SEMANTIC-CLI.md",
+      "docs/PERCEPTA-LIFECYCLE-DISTRIBUTION.md",
+      "docs/verification/semantic-cli-investigation-2026-10-24.md"
+    ],
+    "research_area": "percepta-distribution",
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [],
+    "tags": [
+      "percepta",
+      "distribution",
+      "release"
+    ],
+    "title": "Release the Percepta semantic CLI as self-contained per-platform archives on its own percepta-semantic-v* version line",
+    "type": "decision-record",
+    "updated": "2026-10-25"
   }
 ]

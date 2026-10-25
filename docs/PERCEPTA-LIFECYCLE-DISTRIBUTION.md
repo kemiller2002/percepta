@@ -11,6 +11,8 @@ Percepta has two distinct executable concerns and they MUST remain distinct:
 
 Repository lifecycle commands must never reinterpret semantic verification results, and semantic commands must never mutate repository installation state.
 
+The two are released separately. `percepta-repo` uses tags `percepta-repo-v*` (this document). `percepta` uses tags `percepta-semantic-v*`, with its own version in `distribution/percepta-semantic/version` ([PERCEPTA-SEMANTIC-CLI.md](PERCEPTA-SEMANTIC-CLI.md), `DF-PERCEPTA-2026-0003`).
+
 ## Lifecycle-owned state
 
 `percepta-repo` owns:

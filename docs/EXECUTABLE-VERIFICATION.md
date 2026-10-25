@@ -23,6 +23,8 @@ The canonical Indy Init contract is:
 
 ## CLI
 
+Outside this repository, use the released `percepta` archive (tags `percepta-semantic-v*`). It needs no .NET installation. See [PERCEPTA-SEMANTIC-CLI.md](PERCEPTA-SEMANTIC-CLI.md). The `dotnet run` commands below are source builds for developing Percepta. Their output is not released evidence.
+
 From the repository root:
 
 ```bash

@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-18T13:03:46.706Z",
+  "updatedAt": "2026-10-25T01:13:47.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -554,6 +554,79 @@
       },
       "completedAt": "2026-10-18T13:03:46.706Z",
       "conclusion": "Praxis-managed .ros/executions state is excluded from product attribution; pinned and current validator behavior was checked."
+    },
+    {
+      "id": "WI-0009",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".praxis/inbox/documents/2026-10-24-PERCEPTA-SEMCLI-001.md"
+        },
+        {
+          "type": "tests",
+          "path": "docs/verification/semantic-cli-investigation-2026-10-24.md"
+        }
+      ],
+      "updatedAt": "2026-10-24T12:38:51.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261024T123805162Z-f8d94fb8"
+      ],
+      "latestCheckpoint": {
+        "id": "615e97dd6f9bbf8c0399a55d",
+        "recordedAt": "2026-10-24T12:38:50.000Z",
+        "executionId": "EXE-20261024T123805162Z-f8d94fb8",
+        "repository": "percepta",
+        "branch": "claude/semantic-ui-verification",
+        "commit": "3bdd5f86d27db9e8757c5bbfda4a9f735205d941",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/semantic-ui-verification",
+        "remoteCommit": "3bdd5f86d27db9e8757c5bbfda4a9f735205d941",
+        "summary": "Intake submitted and verification results recorded",
+        "nextAction": "Operator ingests PERCEPTA-SEMCLI-001",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-24T12:38:51.000Z",
+      "conclusion": "Intake submitted; semantic CLI implemented but unreleased; no release cut"
+    },
+    {
+      "id": "WI-0010",
+      "type": "task",
+      "state": "active",
+      "semanticState": "active",
+      "evidence": [],
+      "updatedAt": "2026-10-25T01:13:47.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261025T011347900Z-13edea17"
+      ],
+      "latestCheckpoint": {
+        "id": "46450d79f3b9b4277d9a9940",
+        "recordedAt": "2026-10-25T01:21:58.000Z",
+        "executionId": "EXE-20261025T011347900Z-13edea17",
+        "repository": "percepta",
+        "branch": "claude/percepta-semantic-release",
+        "commit": "6c733d4bcc04e9d69516e839229bc2e0be5ae6ba",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/percepta-semantic-release",
+        "remoteCommit": "6c733d4bcc04e9d69516e839229bc2e0be5ae6ba",
+        "summary": "Packaging, smoke, release workflows, consumer docs, RQ/DF and inbox completion pushed",
+        "nextAction": "Open PR, wait for CI, fix failures, merge, confirm percepta-semantic-v0.1.0 release",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      }
     }
   ]
 }
