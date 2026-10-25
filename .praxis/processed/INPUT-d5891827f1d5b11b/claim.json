@@ -1,7 +1,7 @@
 {
   "schema": "praxis.inbox-claim/1",
   "claimId": "INPUT-d5891827f1d5b11b",
-  "state": "claimed",
+  "state": "completed",
   "source": {
     "path": ".praxis/inbox/documents/2026-10-24-PERCEPTA-SEMCLI-001.md",
     "fileName": "2026-10-24-PERCEPTA-SEMCLI-001.md",
@@ -52,7 +52,7 @@
     }
   ],
   "noDerivationReason": null,
-  "closedAt": null,
+  "closedAt": "2026-10-25T01:21:46.055Z",
   "releaseReason": null,
   "rejectionReason": null
 }
