@@ -606,7 +606,27 @@
       "updatedAt": "2026-10-25T01:13:47.000Z",
       "telemetryExecutionIds": [
         "EXE-20261025T011347900Z-13edea17"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "46450d79f3b9b4277d9a9940",
+        "recordedAt": "2026-10-25T01:21:58.000Z",
+        "executionId": "EXE-20261025T011347900Z-13edea17",
+        "repository": "percepta",
+        "branch": "claude/percepta-semantic-release",
+        "commit": "6c733d4bcc04e9d69516e839229bc2e0be5ae6ba",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/percepta-semantic-release",
+        "remoteCommit": "6c733d4bcc04e9d69516e839229bc2e0be5ae6ba",
+        "summary": "Packaging, smoke, release workflows, consumer docs, RQ/DF and inbox completion pushed",
+        "nextAction": "Open PR, wait for CI, fix failures, merge, confirm percepta-semantic-v0.1.0 release",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      }
     }
   ]
 }
