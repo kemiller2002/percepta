@@ -526,8 +526,8 @@
         "name": "ros-work-protocol",
         "mechanism": "blocked-transition"
       },
-      "lastAssessedAt": "2026-10-25T17:28:30.000Z",
-      "recordedAt": "2026-10-25T17:28:30.000Z",
+      "lastAssessedAt": "2026-10-25T17:30:45.000Z",
+      "recordedAt": "2026-10-25T17:30:45.000Z",
       "history": [
         {
           "status": "unknown",
@@ -545,14 +545,30 @@
     },
     {
       "metricId": "agent.resumes",
-      "status": "unknown",
-      "reason": "runtime capability not reported or mapped",
-      "discoveredAt": "2026-10-25T17:20:31.383Z",
+      "status": "derived",
+      "reason": "normalized measurement recorded",
+      "discoveredAt": "2026-10-25T17:29:45.000Z",
       "source": {
-        "type": "environment",
-        "name": "runtime-identity",
-        "mechanism": "whitelisted-codex-environment"
-      }
+        "type": "calculated",
+        "name": "ros-work-protocol",
+        "mechanism": "resume-transition"
+      },
+      "lastAssessedAt": "2026-10-25T17:29:45.000Z",
+      "recordedAt": "2026-10-25T17:29:45.000Z",
+      "history": [
+        {
+          "status": "unknown",
+          "reason": "runtime capability not reported or mapped",
+          "source": {
+            "type": "environment",
+            "name": "runtime-identity",
+            "mechanism": "whitelisted-codex-environment"
+          },
+          "discoveredAt": "2026-10-25T17:20:31.383Z",
+          "lastAssessedAt": "2026-10-25T17:20:31.383Z",
+          "recordedAt": "2026-10-25T17:20:31.383Z"
+        }
+      ]
     },
     {
       "metricId": "agent.human_escalations",
@@ -1403,6 +1419,46 @@
       },
       "collectedAt": "2026-10-25T17:28:30.000Z",
       "schemaVersion": "1.0.0"
+    },
+    {
+      "measurementId": "MEAS-3844baa66d0bb706d7bf44a9",
+      "id": "agent.resumes",
+      "value": 1,
+      "unit": "count",
+      "currency": null,
+      "quality": "derived",
+      "confidence": null,
+      "scope": "execution",
+      "aggregation": "sum",
+      "dimensions": {},
+      "pricing": null,
+      "source": {
+        "type": "calculated",
+        "name": "ros-work-protocol",
+        "mechanism": "resume-transition"
+      },
+      "collectedAt": "2026-10-25T17:29:45.000Z",
+      "schemaVersion": "1.0.0"
+    },
+    {
+      "measurementId": "MEAS-98498ab3eaf4b58df8d3f46a",
+      "id": "agent.interruptions",
+      "value": 1,
+      "unit": "count",
+      "currency": null,
+      "quality": "derived",
+      "confidence": null,
+      "scope": "execution",
+      "aggregation": "sum",
+      "dimensions": {},
+      "pricing": null,
+      "source": {
+        "type": "calculated",
+        "name": "ros-work-protocol",
+        "mechanism": "blocked-transition"
+      },
+      "collectedAt": "2026-10-25T17:30:45.000Z",
+      "schemaVersion": "1.0.0"
     }
   ],
   "rawTelemetry": [
@@ -1525,6 +1581,28 @@
         "mechanism": "json"
       },
       "eventId": "TEVT-5f31b4c816553b333b1d4f99"
+    },
+    {
+      "type": "work.resumed",
+      "occurredAt": "2026-10-25T17:29:45.000Z",
+      "reason": null,
+      "source": {
+        "type": "ros-clock",
+        "name": "ros",
+        "mechanism": "work-lifecycle"
+      },
+      "eventId": "TEVT-4c7ccf20e004ed650597cce1"
+    },
+    {
+      "type": "work.blocked",
+      "occurredAt": "2026-10-25T17:30:45.000Z",
+      "reason": "Published Percepta 0.1.0 accepts a mismatched fixture hash because evidence schema v1 does not bind input/config/source/dependency identities, and the semantic CLI has no Echelon Registry release record; a versioned Percepta release plus registry admission is required",
+      "source": {
+        "type": "ros-clock",
+        "name": "ros",
+        "mechanism": "work-lifecycle"
+      },
+      "eventId": "TEVT-2bab94666271dcc409725844"
     }
   ],
   "repository": {

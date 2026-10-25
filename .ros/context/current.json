@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-25T17:28:30.000Z",
+  "updatedAt": "2026-10-25T17:30:45.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -634,26 +634,26 @@
       "state": "blocked",
       "semanticState": "blocked",
       "evidence": [],
-      "updatedAt": "2026-10-25T17:28:30.000Z",
+      "updatedAt": "2026-10-25T17:30:45.000Z",
       "telemetryExecutionIds": [
         "EXE-20261025T172031383Z-365b9321"
       ],
       "latestCheckpoint": {
-        "id": "523a6af8c03d1981ede39e17",
-        "recordedAt": "2026-10-25T17:28:21.000Z",
+        "id": "3901d91fb65ba8e1357dec25",
+        "recordedAt": "2026-10-25T17:29:49.000Z",
         "executionId": "EXE-20261025T172031383Z-365b9321",
         "stepId": "STEP-20261025T172036000Z-71ae33dc",
         "repository": "percepta",
         "branch": "codex/percepta-release-compatibility-verification",
-        "commit": "57ac51b8e297c2ff6048c2a971c9ebe689f05259",
+        "commit": "f232178af751c62765b7833df519a0a95f376da2",
         "remote": {
           "name": "origin",
           "url": "https://github.com/kemiller2002/percepta.git"
         },
         "remoteBranch": "codex/percepta-release-compatibility-verification",
-        "remoteCommit": "57ac51b8e297c2ff6048c2a971c9ebe689f05259",
-        "summary": "Executed Percepta 0.1.0 twice, preserved raw evidence, and reproduced D4 input-hash acceptance plus missing registry admission",
-        "nextAction": "Close the intake and block the work item on a versioned evidence-binding release and registry record",
+        "remoteCommit": "f232178af751c62765b7833df519a0a95f376da2",
+        "summary": "Final blocked handoff: intake processed, raw release evidence durable, D4 incompatibility and registry blocker recorded",
+        "nextAction": "Publish a versioned Percepta evidence-binding contract/release, add the percepta-semantic registry record, then rerun Task 3B",
         "verification": {
           "status": "verified",
           "mechanism": "git-remote-observation"
