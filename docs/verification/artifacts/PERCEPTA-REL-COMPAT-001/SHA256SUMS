@@ -1,0 +1,14 @@
+4b220b11d8a0ff08d4c113209aec198b9f5614f15a95f1c71d647716bc06aba2  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/d2-missing-evidence.json
+50a250697279b08f72265c8f69860d643ac8b1fe92d70d811354efe523d458a1  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/d4-mismatched-input.json
+849e19fafac9cfbf29dfdcca04f049557979f84833980d3e00c8d737c1dfe340  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/d7-failed-evaluation.json
+d930347ec55dca9c6de4d88e8ce11cebe1bad8b7bb6f7b19ed1bca918045bd49  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/experiment-config.json
+cacec4e6e26f072a1409a414d445fa40a7472fb90cd0a34da585934c61a52f37  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-a-screenshots/desktop-reference.png
+bade8f0ffe785388fccc42afe48df72660eea0902dcfba25c44aeb2458e1a67a  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-a-screenshots/ipad-landscape.png
+3814613e35a4ee50d1a1e573f9f95ddcdf2d69aaa2b612c546a0c701c0169d1d  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-a-screenshots/ipad-portrait.png
+52c1d718df45da17a293fc0c532e855368acb4d62e67c5cee2e52475197dd20e  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-a-screenshots/narrow-phone.png
+f30812b2960ee01924684f333e847693590c4882c7b450b604396e39bf3289df  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-a.evidence.json
+cacec4e6e26f072a1409a414d445fa40a7472fb90cd0a34da585934c61a52f37  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-b-screenshots/desktop-reference.png
+bade8f0ffe785388fccc42afe48df72660eea0902dcfba25c44aeb2458e1a67a  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-b-screenshots/ipad-landscape.png
+3814613e35a4ee50d1a1e573f9f95ddcdf2d69aaa2b612c546a0c701c0169d1d  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-b-screenshots/ipad-portrait.png
+52c1d718df45da17a293fc0c532e855368acb4d62e67c5cee2e52475197dd20e  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-b-screenshots/narrow-phone.png
+e79ac1266dbcecb0c2f5685d3bc7cd2ecaca40723fc09a8605ba1ad2702cb002  docs/verification/artifacts/PERCEPTA-REL-COMPAT-001/run-b.evidence.json

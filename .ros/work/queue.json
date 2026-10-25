@@ -416,6 +416,30 @@
       },
       "source": "manual",
       "sourceReference": null
+    },
+    {
+      "id": "PERCEPTA-REL-COMPAT-001",
+      "title": "Verify Percepta published release compatibility and reproducibility",
+      "description": "Execute Task 3B against published Percepta, Praxis, Ordo, and Dokimos artifacts with two isolated runs and negative evidence cases",
+      "tags": [
+        "release-verification",
+        "percepta"
+      ],
+      "priority": "high",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-10-25T17:20:26.000Z",
+      "updatedAt": "2026-10-25T17:20:30.000Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "openai/codex",
+        "provider": "openai",
+        "model": "unknown",
+        "runtime": "codex"
+      },
+      "source": "praxis-inbox",
+      "sourceReference": "INPUT-f3341f0395eb4722"
     }
   ]
 }

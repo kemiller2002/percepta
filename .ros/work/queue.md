@@ -3,6 +3,7 @@
 | ID | Work | Status | Tags | Priority |
 |---|---|---|---|---|
 | INGEST-REQS-20261018 | Ingest outstanding Praxis requirement sources | complete | requirements, ingestion | high |
+| PERCEPTA-REL-COMPAT-001 | Verify Percepta published release compatibility and reproducibility | ready | release-verification, percepta | high |
 | PRAXIS-EXECUTIONS-COMPAT-20261018 | Exclude Praxis-managed execution state from attribution | complete | governance, compatibility | high |
 | ROS-INSTALL-3-4-0 | ROS-INSTALL-3-4-0 | complete |  |  |
 | WI-0001 | Upgrade Limen to 0.7.0 (@echelon-foundry/limen) and declare boundary notApplicable until browser engine code exists | complete | limen | medium |
@@ -14,7 +15,7 @@
 | WI-0007 | Move percepta to Ordo 1.5.0 via echelon-current 1.2.0 (conditor upgrade --current) | complete |  | medium |
 | WI-0008 | Upgrade Limen from 0.7.1 to 0.9.0 (echelon-current) | complete |  | medium |
 | WI-0009 | Submit PERCEPTA-SEMCLI-001 intake: semantic UI verification CLI is implemented but unreleased | complete |  | medium |
-| WI-0010 | Release the Percepta semantic verification CLI (PERCEPTA-SEMCLI-001): self-contained per-RID archives, percepta-semantic-v* release workflow, CI smoke, consumer docs | ready |  | medium |
+| WI-0010 | Release the Percepta semantic verification CLI (PERCEPTA-SEMCLI-001): self-contained per-RID archives, percepta-semantic-v* release workflow, CI smoke, consumer docs | active |  | medium |
 | WI-INDY-UI-001 | Add and validate Indy Init Percepta screen contracts | complete | percepta, indy-init | high |
 | WI-PERCEPTA-EX0002-EVAL | Record EX-PERCEPTA-2026-0002 frozen first-pass evaluation results | complete | percepta, experiment | high |
 | WI-PERCEPTA-EX0002-EVAL-ATTRIBUTION | Attribute EX-PERCEPTA-2026-0002 evaluation artifacts | complete | percepta, experiment | high |
