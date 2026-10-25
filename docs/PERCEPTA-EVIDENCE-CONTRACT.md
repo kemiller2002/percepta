@@ -26,6 +26,12 @@ collection rules:
 screen contract, local rendered target, state fixtures, supplied semantic
 review, and any visual baselines that existed before execution.
 
+Source-controlled inputs (`contract`, `target`, `fixture`, and
+`semantic-review`) must also match the Git blob at `sourceRevision`. A visual
+baseline may be created by an earlier run in the same controlled workspace; it
+is bound by its recorded content digest but is not required to exist in the Git
+tree.
+
 `configurationDigest` hashes this canonical object in order:
 `contractReference`, `contractSha256`, `updateBaselines`. `contractSha256`
 hashes Percepta's normalized contract serialization, rather than arbitrary

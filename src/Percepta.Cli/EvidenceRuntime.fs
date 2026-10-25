@@ -211,6 +211,10 @@ module EvidenceRuntime =
 
     let inputRevisionMismatches sourceRoot sourceRevision (inputs: InputIdentity list) =
         inputs
+        // Visual baselines may be created by a prior run in the same controlled
+        // workspace. They are still content-bound inputs, but are not source
+        // files and therefore cannot be required to exist in the Git tree.
+        |> List.filter (fun input -> input.Role <> "visual-baseline")
         |> List.choose (fun input ->
             match runGitBytes sourceRoot [ "show"; $"{sourceRevision}:{input.Path}" ] with
             | Error _ -> Some($"{input.Path} is not available at source revision {sourceRevision}.")
