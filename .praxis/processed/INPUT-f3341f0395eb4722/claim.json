@@ -1,7 +1,7 @@
 {
   "schema": "praxis.inbox-claim/1",
   "claimId": "INPUT-f3341f0395eb4722",
-  "state": "claimed",
+  "state": "completed",
   "source": {
     "path": ".praxis/inbox/documents/2026-10-25-PERCEPTA-REL-COMPAT-001.md",
     "fileName": "2026-10-25-PERCEPTA-REL-COMPAT-001.md",
@@ -36,7 +36,7 @@
     }
   ],
   "noDerivationReason": null,
-  "closedAt": null,
+  "closedAt": "2026-10-25T17:28:26.226Z",
   "releaseReason": null,
   "rejectionReason": null
 }

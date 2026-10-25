@@ -46,15 +46,22 @@
         "type": "ros-git",
         "name": "git",
         "mechanism": "repository-baseline"
+      },
+      {
+        "type": "runtime-output",
+        "name": "generic-telemetry-envelope",
+        "mechanism": "json"
       }
     ]
   },
   "classification": {
     "types": [
-      "release-verification"
+      "experiment"
     ],
-    "rationale": null,
-    "evidence": [],
+    "rationale": "Published-artifact compatibility and reproducibility experiment",
+    "evidence": [
+      "docs/verification/percepta-release-compatibility-2026-10-25.md"
+    ],
     "rd": null
   },
   "capabilities": [
@@ -511,14 +518,30 @@
     },
     {
       "metricId": "agent.interruptions",
-      "status": "unknown",
-      "reason": "runtime capability not reported or mapped",
-      "discoveredAt": "2026-10-25T17:20:31.383Z",
+      "status": "derived",
+      "reason": "normalized measurement recorded",
+      "discoveredAt": "2026-10-25T17:28:30.000Z",
       "source": {
-        "type": "environment",
-        "name": "runtime-identity",
-        "mechanism": "whitelisted-codex-environment"
-      }
+        "type": "calculated",
+        "name": "ros-work-protocol",
+        "mechanism": "blocked-transition"
+      },
+      "lastAssessedAt": "2026-10-25T17:28:30.000Z",
+      "recordedAt": "2026-10-25T17:28:30.000Z",
+      "history": [
+        {
+          "status": "unknown",
+          "reason": "runtime capability not reported or mapped",
+          "source": {
+            "type": "environment",
+            "name": "runtime-identity",
+            "mechanism": "whitelisted-codex-environment"
+          },
+          "discoveredAt": "2026-10-25T17:20:31.383Z",
+          "lastAssessedAt": "2026-10-25T17:20:31.383Z",
+          "recordedAt": "2026-10-25T17:20:31.383Z"
+        }
+      ]
     },
     {
       "metricId": "agent.resumes",
@@ -1360,9 +1383,60 @@
       },
       "collectedAt": "2026-10-25T17:20:31.383Z",
       "schemaVersion": "1.0.0"
+    },
+    {
+      "measurementId": "MEAS-0118cdea7e96c89df2356143",
+      "id": "agent.interruptions",
+      "value": 1,
+      "unit": "count",
+      "currency": null,
+      "quality": "derived",
+      "confidence": null,
+      "scope": "execution",
+      "aggregation": "sum",
+      "dimensions": {},
+      "pricing": null,
+      "source": {
+        "type": "calculated",
+        "name": "ros-work-protocol",
+        "mechanism": "blocked-transition"
+      },
+      "collectedAt": "2026-10-25T17:28:30.000Z",
+      "schemaVersion": "1.0.0"
     }
   ],
-  "rawTelemetry": [],
+  "rawTelemetry": [
+    {
+      "snapshotId": "classification-1792949336968",
+      "adapter": "generic",
+      "schemaVersion": null,
+      "collectedAt": "2026-10-25T17:28:56.971Z",
+      "source": {
+        "type": "runtime-output",
+        "name": "generic-telemetry-envelope",
+        "mechanism": "json"
+      },
+      "payload": {},
+      "payloadBytes": 2,
+      "discoveredFields": [],
+      "redactions": []
+    },
+    {
+      "snapshotId": "classification-1792949344139",
+      "adapter": "generic",
+      "schemaVersion": null,
+      "collectedAt": "2026-10-25T17:29:04.142Z",
+      "source": {
+        "type": "runtime-output",
+        "name": "generic-telemetry-envelope",
+        "mechanism": "json"
+      },
+      "payload": {},
+      "payloadBytes": 2,
+      "discoveredFields": [],
+      "redactions": []
+    }
+  ],
   "events": [
     {
       "type": "execution.started",
@@ -1406,6 +1480,51 @@
         "name": "step",
         "mechanism": "step-lifecycle"
       }
+    },
+    {
+      "type": "work.blocked",
+      "occurredAt": "2026-10-25T17:28:30.000Z",
+      "reason": "Published Percepta 0.1.0 accepts a mismatched fixture hash because evidence schema v1 does not bind input/config/source/dependency identities, and the semantic CLI has no Echelon Registry release record; a versioned Percepta release plus registry admission is required",
+      "source": {
+        "type": "ros-clock",
+        "name": "ros",
+        "mechanism": "work-lifecycle"
+      },
+      "eventId": "TEVT-6e32d56458f91ca2ac361a31"
+    },
+    {
+      "type": "telemetry.snapshot.ingested",
+      "snapshotId": "classification-1792949336968",
+      "adapter": "generic",
+      "rawRetention": {
+        "status": "retained",
+        "reason": null,
+        "payloadBytes": 2
+      },
+      "occurredAt": "2026-10-25T17:28:56.971Z",
+      "source": {
+        "type": "runtime-output",
+        "name": "generic-telemetry-envelope",
+        "mechanism": "json"
+      },
+      "eventId": "TEVT-a16385a307d83874128fedf8"
+    },
+    {
+      "type": "telemetry.snapshot.ingested",
+      "snapshotId": "classification-1792949344139",
+      "adapter": "generic",
+      "rawRetention": {
+        "status": "retained",
+        "reason": null,
+        "payloadBytes": 2
+      },
+      "occurredAt": "2026-10-25T17:29:04.142Z",
+      "source": {
+        "type": "runtime-output",
+        "name": "generic-telemetry-envelope",
+        "mechanism": "json"
+      },
+      "eventId": "TEVT-5f31b4c816553b333b1d4f99"
     }
   ],
   "repository": {

@@ -50,8 +50,8 @@
   "humanOnlyTransitions": [],
   "parentExecution": null,
   "startedAt": "2026-10-25T17:20:31.524Z",
-  "state": "active",
-  "stateReason": null,
+  "state": "blocked",
+  "stateReason": "Published Percepta 0.1.0 accepts a mismatched fixture hash because evidence schema v1 does not bind input/config/source/dependency identities, and the semantic CLI has no Echelon Registry release record; a versioned Percepta release plus registry admission is required",
   "origin": {
     "kind": "work-transition",
     "reference": "work.begin"
