@@ -13,13 +13,20 @@ percepta version
 percepta install-browser                      # once per machine or PLAYWRIGHT_BROWSERS_PATH
 percepta doctor --contract .percepta/contracts/<screen>.json
 percepta verify --contract .percepta/contracts/<screen>.json \
-  --url <url-or-html-file> --fixture <state.json> [--fixture ...] \
+  --url <local-html-file> --fixture <state.json> [--fixture ...] \
   --out <evidence.json>
+percepta validate-evidence --evidence <evidence.json> \
+  --source-root <trusted-checkout> \
+  --trusted-artifact-metadata <verified-archive>/percepta-artifact.json
 ```
 
 `verify` exits `0` only when every required evidence category is acceptable.
 It exits `3` when a required category is `Failed` or `Unavailable`, and `2` for
 invalid input. Treat any exit code other than `0` as not complete.
+
+The archive's `percepta-artifact.json` identifies the released assembly and its
+resolved dependencies. Trust it only after verifying the archive checksum and
+GitHub build-provenance attestation.
 
 Full guide: <https://github.com/kemiller2002/percepta/blob/main/docs/PERCEPTA-SEMANTIC-CLI.md>
 

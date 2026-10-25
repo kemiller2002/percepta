@@ -440,6 +440,30 @@
       },
       "source": "praxis-inbox",
       "sourceReference": "INPUT-f3341f0395eb4722"
+    },
+    {
+      "id": "PERCEPTA-EVIDENCE-CONTRACT-001",
+      "title": "Implement and release Percepta versioned evidence contract",
+      "description": "Implement evidence contract v1.0.0 with input, configuration, source, artifact, dependency, integrity, and independent validation bindings; publish and verify the release",
+      "tags": [
+        "evidence-contract",
+        "release"
+      ],
+      "priority": "high",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-10-25T18:14:29.000Z",
+      "updatedAt": "2026-10-25T18:14:34.000Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "openai/codex",
+        "provider": "openai",
+        "model": "unknown",
+        "runtime": "codex"
+      },
+      "source": "praxis-inbox",
+      "sourceReference": ".praxis/inbox/documents/2026-10-25-PERCEPTA-EVIDENCE-CONTRACT-001.md"
     }
   ]
 }

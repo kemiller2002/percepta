@@ -105,7 +105,9 @@ percepta verify \
   --out artifacts/percepta/<screen>.evidence.json
 ```
 
-- `--url` accepts an `http(s)://` or `file://` URL, or a path to an HTML file.
+- Evidence contract `1.0.0` requires `--url` to identify a local file (a path
+  or `file://` URL), so the validator can bind its bytes to the recorded source
+  revision. HTTP(S) targets are rejected rather than recorded without provenance.
 - Pass one `--fixture` for each state the contract declares. Without fixtures,
   state-projection and interaction evidence is `Unavailable` and the run
   fails.
@@ -125,7 +127,7 @@ percepta verify \
 | `10` | Unexpected operational fault. The message includes a reference ID. |
 
 Treat any exit code other than `0` as not complete. Also read the report: it
-follows `schemas/percepta-evidence.schema.json` (`schemaVersion` 1). The
+follows `schemas/percepta-evidence.schema.json` (`schemaVersion` `1.0.0`). The
 `complete` field must be `true`, and each entry in `results` has `requirement`,
 `kind`, `required`, `status` (`Passed`, `Failed`, `Unavailable`,
 `NotApplicable` or `AcceptedDeviation`), `summary`, `source` and
@@ -144,6 +146,24 @@ if [ "$code" -ne 0 ] || [ "$(jq -r .complete "$evidence")" != "true" ]; then
   exit 1
 fi
 ```
+
+Contract 1.0.0 also records and hashes the actual experiment inputs, effective
+configuration, Git source revision, running Percepta artifact, resolved
+dependencies, and durable evidence artifacts. See
+[Percepta evidence contract 1.0.0](PERCEPTA-EVIDENCE-CONTRACT.md). Validate a
+package independently with:
+
+```sh
+percepta validate-evidence \
+  --evidence "$evidence" \
+  --source-root "$trusted_checkout" \
+  --trusted-artifact-metadata "$verified_release/percepta-artifact.json" \
+  --out validation.json
+```
+
+Only `VALID` (exit `0`) permits acceptance. `INVALID` exits `3`, and
+missing trusted source or release metadata produces `UNVERIFIABLE` with exit
+`4`.
 
 Keep the evidence file, the exit code and the release version
 (`percepta version`) with the work item. A source build run with

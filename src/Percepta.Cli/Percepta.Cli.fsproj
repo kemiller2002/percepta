@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="EvidenceRuntime.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 </Project>
