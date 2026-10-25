@@ -1,0 +1,51 @@
+{
+  "schema": "task3b.controlled-experiment/1",
+  "experimentId": "PERCEPTA-REL-COMPAT-001-CANONICAL",
+  "sourceRevision": "3c3889d037402a5bf84b50267249ce7ead4689d4",
+  "percepta": {
+    "version": "0.1.0",
+    "artifact": "percepta-semantic-0.1.0-osx-arm64.tar.gz",
+    "artifactSha256": "735e8acf99fa53d3802ea7cfbff7fa955079cbea553b94e74c463e72a2cf3b36",
+    "contractSchemaVersion": 1,
+    "evidenceSchemaVersion": 1
+  },
+  "compatibleStack": {
+    "praxis": {
+      "version": "3.20.0",
+      "releaseSha": "ee6430af3c03aa958c4e5663d65269457269db3d"
+    },
+    "ordo": {
+      "version": "1.17.0",
+      "releaseSha": "bb43c26c106f4cbe972234636c5c67edc235c188"
+    },
+    "dokimos": {
+      "version": "0.7.0",
+      "releaseSha": "04b5f856367b47a087285109c1fc5923ec351389"
+    }
+  },
+  "inputs": {
+    ".percepta/contracts/indy-init-investigation-workspace.json": "265a8d05f6f7c3f14938819a18e3d3e6f239f03865b88b18784dab4af7b2516d",
+    "fixtures/index.html": "e4c119ac018f480942caafd7d7ad4c0390ca24ae6983eeef206fdf8c88cb641b",
+    "fixtures/blocked.json": "690221af229b8e71cfe5e422a14b78dfd0f7b683134ed1de5d19f13a9438b6f9",
+    "fixtures/legal.json": "0f0972e56cfd1acd8d3d6e0da44517846d7ababe24e0e8c49a0828e5b7db22ec"
+  },
+  "command": [
+    "percepta",
+    "verify",
+    "--contract",
+    ".percepta/contracts/indy-init-investigation-workspace.json",
+    "--url",
+    "fixtures/index.html",
+    "--fixture",
+    "fixtures/blocked.json",
+    "--fixture",
+    "fixtures/legal.json",
+    "--out",
+    "evidence.json"
+  ],
+  "acceptance": {
+    "exitCode": 0,
+    "complete": true,
+    "requiredEvidenceMustBeAcceptable": true
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "percepta.release-compatibility-verification/1",
+  "workItemId": "PERCEPTA-REL-COMPAT-001",
+  "fixtureId": "PERCEPTA-REL-COMPAT-001-CANONICAL",
+  "releaseSet": {
+    "percepta": {
+      "version": "0.1.0",
+      "releaseSha": "3c3889d037402a5bf84b50267249ce7ead4689d4",
+      "artifactSha256": "735e8acf99fa53d3802ea7cfbff7fa955079cbea553b94e74c463e72a2cf3b36"
+    },
+    "praxis": {
+      "version": "3.20.0",
+      "releaseSha": "ee6430af3c03aa958c4e5663d65269457269db3d",
+      "artifactSha256": "56b61dff5c147464e45dcb4f090ec0cfb827e4bd457692a47b0534faf82a1149"
+    },
+    "ordo": {
+      "version": "1.17.0",
+      "releaseSha": "bb43c26c106f4cbe972234636c5c67edc235c188",
+      "artifactSha256": "7426f6f31e577ee61a842cec031405c51f9d6dbf58c39a1d59c8a41feedf3d2d"
+    },
+    "dokimos": {
+      "version": "0.7.0",
+      "releaseSha": "04b5f856367b47a087285109c1fc5923ec351389",
+      "artifactSha256": "45d8bb4d3ac0da8b9ba58a1e29d369eee9ef546b73860057488961d447c6ef69"
+    }
+  },
+  "contracts": {
+    "screenContractSchemaVersion": 1,
+    "evidenceSchemaVersion": 1,
+    "declaredPraxisRequirement": null,
+    "declaredOrdoRequirement": null,
+    "declaredDokimosRequirement": null
+  },
+  "reproducibility": {
+    "configurationSha256": "d930347ec55dca9c6de4d88e8ce11cebe1bad8b7bb6f7b19ed1bca918045bd49",
+    "runAExitCode": 0,
+    "runBExitCode": 0,
+    "runAEvidenceSha256": "f30812b2960ee01924684f333e847693590c4882c7b450b604396e39bf3289df",
+    "runBEvidenceSha256": "e79ac1266dbcecb0c2f5685d3bc7cd2ecaca40723fc09a8605ba1ad2702cb002",
+    "normalizedSemanticSha256": "3bcbe70c62dd50fc40d69890bb791e1d5e0a97eb78852ab7120c0feba01fe3db",
+    "equivalent": true
+  },
+  "matrix": [
+    {"id": "D1", "expected": "ACCEPT", "actual": "ACCEPT", "exitCode": 0, "result": "PASS"},
+    {"id": "D2", "expected": "REJECT", "actual": "REJECT", "exitCode": 3, "result": "PASS"},
+    {"id": "D3", "expected": "REJECT", "actual": "REJECT_AT_PRAXIS_DOKIMOS_BOUNDARY", "exitCode": 3, "result": "PASS_REUSED"},
+    {"id": "D4", "expected": "REJECT", "actual": "ACCEPT", "exitCode": 0, "result": "FAIL"},
+    {"id": "D5", "expected": "REJECT", "actual": "REJECT", "exitCode": 2, "result": "PASS"},
+    {"id": "D6", "expected": "REJECT", "actual": "REJECT", "exitCode": 2, "result": "PASS"},
+    {"id": "D7", "expected": "REJECT", "actual": "REJECT", "exitCode": 3, "result": "PASS"},
+    {"id": "D8", "expected": "REJECT", "actual": "REJECT_AT_PRAXIS_DOKIMOS_BOUNDARY", "exitCode": 3, "result": "PASS_REUSED"}
+  ],
+  "compatibilityStatus": "INCOMPATIBLE",
+  "implementationChanges": [],
+  "blockers": [
+    {
+      "owner": "kemiller2002/percepta",
+      "code": "PERCEPTA.EVIDENCE.INPUT_BINDING_UNAVAILABLE",
+      "detail": "Published evidence schema version 1 does not bind target, fixture, configuration, source, or dependency identities; D4 was accepted."
+    },
+    {
+      "owner": "kemiller2002/echelon-registry",
+      "code": "REGISTRY.PERCEPTA_SEMANTIC.RELEASE_MISSING",
+      "detail": "No percepta-semantic release record exists; only percepta-repo is registered."
+    }
+  ],
+  "verdict": "BLOCKED"
+}

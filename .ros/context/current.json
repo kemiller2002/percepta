@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-25T01:13:47.000Z",
+  "updatedAt": "2026-10-25T18:14:34.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -622,6 +622,71 @@
         "remoteCommit": "6c733d4bcc04e9d69516e839229bc2e0be5ae6ba",
         "summary": "Packaging, smoke, release workflows, consumer docs, RQ/DF and inbox completion pushed",
         "nextAction": "Open PR, wait for CI, fix failures, merge, confirm percepta-semantic-v0.1.0 release",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      }
+    },
+    {
+      "id": "PERCEPTA-REL-COMPAT-001",
+      "type": "research",
+      "state": "blocked",
+      "semanticState": "blocked",
+      "evidence": [],
+      "updatedAt": "2026-10-25T17:30:45.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261025T172031383Z-365b9321"
+      ],
+      "latestCheckpoint": {
+        "id": "3901d91fb65ba8e1357dec25",
+        "recordedAt": "2026-10-25T17:29:49.000Z",
+        "executionId": "EXE-20261025T172031383Z-365b9321",
+        "stepId": "STEP-20261025T172036000Z-71ae33dc",
+        "repository": "percepta",
+        "branch": "codex/percepta-release-compatibility-verification",
+        "commit": "f232178af751c62765b7833df519a0a95f376da2",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta.git"
+        },
+        "remoteBranch": "codex/percepta-release-compatibility-verification",
+        "remoteCommit": "f232178af751c62765b7833df519a0a95f376da2",
+        "summary": "Final blocked handoff: intake processed, raw release evidence durable, D4 incompatibility and registry blocker recorded",
+        "nextAction": "Publish a versioned Percepta evidence-binding contract/release, add the percepta-semantic registry record, then rerun Task 3B",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "blockReason": "Published Percepta 0.1.0 accepts a mismatched fixture hash because evidence schema v1 does not bind input/config/source/dependency identities, and the semantic CLI has no Echelon Registry release record; a versioned Percepta release plus registry admission is required"
+    },
+    {
+      "id": "PERCEPTA-EVIDENCE-CONTRACT-001",
+      "type": "feature",
+      "state": "active",
+      "semanticState": "active",
+      "evidence": [],
+      "updatedAt": "2026-10-25T18:14:34.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261025T181434474Z-443cfc7c"
+      ],
+      "latestCheckpoint": {
+        "id": "5f0d2180445c42e8139c0760",
+        "recordedAt": "2026-10-25T22:39:15.000Z",
+        "executionId": "EXE-20261025T181434474Z-443cfc7c",
+        "stepId": "STEP-20261025T223804000Z-a23beb41",
+        "repository": "percepta",
+        "branch": "codex/percepta-evidence-contract-v1",
+        "commit": "652e246d3910c5d4e87bf39b8ad20aa99dd96d84",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta.git"
+        },
+        "remoteBranch": "codex/percepta-evidence-contract-v1",
+        "remoteCommit": "652e246d3910c5d4e87bf39b8ad20aa99dd96d84",
+        "summary": "Evidence contract 1.0.0 implementation, validator, regression matrix, and release packaging are committed and pushed at 652e246",
+        "nextAction": "Open and merge the implementation PR, verify the 0.2.0 release workflow, then independently retest the downloaded artifact",
         "verification": {
           "status": "verified",
           "mechanism": "git-remote-observation"

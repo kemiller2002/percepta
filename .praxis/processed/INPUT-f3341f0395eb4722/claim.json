@@ -1,0 +1,42 @@
+{
+  "schema": "praxis.inbox-claim/1",
+  "claimId": "INPUT-f3341f0395eb4722",
+  "state": "completed",
+  "source": {
+    "path": ".praxis/inbox/documents/2026-10-25-PERCEPTA-REL-COMPAT-001.md",
+    "fileName": "2026-10-25-PERCEPTA-REL-COMPAT-001.md",
+    "sha256": "3adbd7fea5097cd49458a2444107da3beec754f77561b237ded2582b0d5dc72e",
+    "size": 1431
+  },
+  "claimedAt": "2026-10-25T17:20:21.726Z",
+  "claimant": {
+    "kind": "agent",
+    "id": "openai/codex",
+    "provider": "openai",
+    "model": "unknown",
+    "runtime": "codex"
+  },
+  "executionId": null,
+  "derivations": [
+    {
+      "kind": "evidence",
+      "targetKind": "path",
+      "target": "docs/verification/percepta-release-compatibility-2026-10-25.md",
+      "summary": "Executed Percepta 0.1.0 release compatibility and reproducibility verification; D4 input-hash mismatch accepted and registry admission absent",
+      "locator": null,
+      "recordedAt": "2026-10-25T17:27:47.487Z",
+      "actor": {
+        "kind": "agent",
+        "id": "openai/codex",
+        "provider": "openai",
+        "model": "unknown",
+        "runtime": "codex"
+      },
+      "executionId": "EXE-20261025T172031383Z-365b9321"
+    }
+  ],
+  "noDerivationReason": null,
+  "closedAt": "2026-10-25T17:28:26.226Z",
+  "releaseReason": null,
+  "rejectionReason": null
+}

@@ -106,5 +106,51 @@
     "title": "Release the Percepta semantic CLI as self-contained per-platform archives on its own percepta-semantic-v* version line",
     "type": "decision-record",
     "updated": "2026-10-25"
+  },
+  {
+    "confidence": "high",
+    "created": "2026-10-25",
+    "decision_type": "engineering",
+    "derived_from": [],
+    "id": "DF-PERCEPTA-2026-0004",
+    "path": "research/decisions/DF-PERCEPTA-2026-0004--version-evidence-contract.md",
+    "provenance": {
+      "contributions": {
+        "EXE-20261025T181434474Z-443cfc7c": {
+          "actor": {
+            "id": "openai/codex",
+            "kind": "agent",
+            "model": "unknown",
+            "provider": "openai",
+            "runtime": "codex"
+          },
+          "at": "2026-10-25T22:37:47.000Z",
+          "operations": [
+            "created"
+          ],
+          "reason": "Define Percepta evidence contract 1.0.0 and its independent validation boundary"
+        }
+      }
+    },
+    "related_documents": [
+      "docs/PERCEPTA-EVIDENCE-CONTRACT.md",
+      "schemas/percepta-evidence.schema.json",
+      "docs/PERCEPTA-SEMANTIC-CLI.md"
+    ],
+    "research_area": "percepta-evidence",
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [
+      "docs/verification/percepta-release-compatibility-2026-10-25.md"
+    ],
+    "tags": [
+      "percepta",
+      "evidence",
+      "reproducibility"
+    ],
+    "title": "Version Percepta experiment evidence and bind it to reproducible inputs and runtime identities",
+    "type": "decision-record",
+    "updated": "2026-10-25"
   }
 ]

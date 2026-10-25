@@ -79,6 +79,7 @@ bin_dir="$work/install/percepta-semantic-$version-linux-x64"
 percepta="$bin_dir/percepta"
 [ -x "$percepta" ] || { echo "Missing executable $percepta" >&2; exit 1; }
 [ -f "$bin_dir/.playwright/package/cli.js" ] || fail "archive lacks the Playwright driver"
+[ -f "$bin_dir/percepta-artifact.json" ] || fail "archive lacks trusted artifact metadata"
 
 step "Consumer project outside the Percepta checkout"
 consumer="$work/consumer"
@@ -86,6 +87,12 @@ mkdir -p "$consumer/.percepta/contracts" "$consumer/fixtures" "$consumer/mutants
 cp "$repo_root/.percepta/contracts/indy-init-investigation-workspace.json" "$consumer/.percepta/contracts/"
 cp "$repo_root/tests/fixtures/indy-init/"* "$consumer/fixtures/"
 cd "$consumer"
+git init -q
+git config user.email "percepta-smoke@example.invalid"
+git config user.name "Percepta release smoke"
+git remote add origin "https://github.com/kemiller2002/percepta.git"
+git add .
+git commit -qm "fixture: establish trusted source revision"
 
 step "percepta version"
 run "$percepta" version
@@ -128,6 +135,27 @@ run "$percepta" verify \
 complete="$(evidence_complete evidence/pass.json)" || fail "evidence/pass.json does not validate against the schema"
 [ "$complete" = "true" ] || fail "canonical evidence is not complete"
 
+step "Repeat canonical verification independently"
+run "$percepta" verify \
+  --contract .percepta/contracts/indy-init-investigation-workspace.json \
+  --url fixtures/index.html \
+  --fixture fixtures/blocked.json \
+  --fixture fixtures/legal.json \
+  --semantic-review fixtures/semantic-review.json \
+  --out evidence/repeat.json
+[ "$code" -eq 0 ] || fail "repeated canonical verification exited $code"
+complete="$(evidence_complete evidence/repeat.json)" || fail "evidence/repeat.json does not validate against the schema"
+[ "$complete" = "true" ] || fail "repeated canonical evidence is not complete"
+
+step "Evidence contract v1.0.0 positive, reproducibility and negative matrix"
+"$repo_root/distribution/percepta-semantic/evidence-contract-smoke.sh" \
+  "$percepta" \
+  "$consumer" \
+  "$consumer/evidence/pass.json" \
+  "$consumer/evidence/repeat.json" \
+  "$bin_dir/percepta-artifact.json" \
+  "$work/evidence-contract"
+
 step "Canonical verification without fixtures fails closed"
 run "$percepta" verify \
   --contract .percepta/contracts/indy-init-investigation-workspace.json \
@@ -152,9 +180,11 @@ if not results.get("canonicalControlComplete"):
 for result in results["results"]:
     print(f'{result["mutation"]}\t{result["class"]}\t{"true" if result["complete"] else "false"}')
 PY
+cp "$adversarial/mutants/"*.html "$consumer/mutants/"
+git add mutants
+git commit -qm "fixture: bind adversarial mutants to a source revision"
 machine=0
 while IFS="$(printf '\t')" read -r mutation class harness_complete <&3; do
-  cp "$adversarial/mutants/$mutation.html" "mutants/$mutation.html"
   run "$percepta" verify \
     --contract .percepta/contracts/indy-init-investigation-workspace.json \
     --url "mutants/$mutation.html" \

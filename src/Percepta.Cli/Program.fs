@@ -6,7 +6,9 @@ open System.Text.Json
 open Percepta.Core
 open Percepta.Core.Compilation
 open Percepta.Core.Evidence
+open Percepta.Core.EvidenceEnvelope
 open Percepta.Adapter.Playwright
+open Percepta.Cli.EvidenceRuntime
 open Aegis
 
 module Cli =
@@ -130,46 +132,6 @@ module Cli =
         | Unavailable reason -> "Unavailable", Some reason
         | NotApplicable reason -> "NotApplicable", Some reason
         | AcceptedDeviation reason -> "AcceptedDeviation", Some reason
-
-    let private writeEvidenceReport path (report: EvidenceReport) =
-        ensureDirectoryForFile path
-        use stream = File.Create(path)
-        use writer = new Utf8JsonWriter(stream, JsonWriterOptions(Indented = true))
-        writer.WriteStartObject()
-        writer.WriteNumber("schemaVersion", report.SchemaVersion)
-        writer.WriteString("screen", screenId report.Screen)
-        writer.WriteString("contractSha256", report.ContractSha256)
-        writer.WriteString("generatedAtUtc", report.GeneratedAtUtc)
-        writer.WriteBoolean("complete", report.Complete)
-        writer.WritePropertyName("results")
-        writer.WriteStartArray()
-
-        for result in report.Results do
-            let status, reason = statusName result.Status
-            writer.WriteStartObject()
-            writer.WriteString("requirement", verificationId result.Requirement)
-            writer.WriteString("kind", Compilation.evidenceKindName result.Kind)
-            writer.WriteBoolean("required", result.Required)
-            writer.WriteString("status", status)
-
-            match reason with
-            | Some value -> writer.WriteString("reason", value)
-            | None -> ()
-
-            writer.WriteString("summary", result.Summary)
-            writer.WriteString("source", result.Source)
-            writer.WritePropertyName("evidenceReferences")
-            writer.WriteStartArray()
-
-            for reference in result.EvidenceReferences do
-                writer.WriteStringValue(reference)
-
-            writer.WriteEndArray()
-            writer.WriteEndObject()
-
-        writer.WriteEndArray()
-        writer.WriteEndObject()
-        writer.Flush()
 
     let private contractHash contract =
         let bytes = Encoding.UTF8.GetBytes(ContractSerialization.serialize contract)
@@ -354,6 +316,13 @@ module Cli =
                                 else
                                     Path.Combine(root, target)
 
+                            let semanticReviewPath =
+                                tryOption "--semantic-review" args
+                                |> Option.map (fun path ->
+                                    if Path.IsPathRooted path then path else Path.Combine(root, path))
+
+                            let semanticReview = semanticReviewPath |> Option.map readExternalReview
+
                             let options: BrowserVerification.Options =
                                 {
                                     Url = url
@@ -363,85 +332,274 @@ module Cli =
                                     UpdateBaselines = hasFlag "--update-baselines" args
                                 }
 
-                            let! adapterResults = BrowserVerification.verify options contract
+                            match sourceIdentity root, artifactMetadata () with
+                            | Error error, _
+                            | _, Error error ->
+                                eprintfn "%s" error
+                                return 2
+                            | Ok(sourceRoot, repository, sourceRevision), Ok artifactMetadata ->
+                                match
+                                    collectInputs
+                                        sourceRoot
+                                        sourceRevision
+                                        contractPath
+                                        url
+                                        fixtures
+                                        semanticReviewPath
+                                        baselines
+                                with
+                                | Error error ->
+                                    eprintfn "%s" error
+                                    return 2
+                                | Ok inputs ->
+                                    let! adapterResults = BrowserVerification.verify options contract
 
-                            let semanticReview =
-                                tryOption "--semantic-review" args
-                                |> Option.map (fun path ->
-                                    let resolved =
-                                        if Path.IsPathRooted path then path else Path.Combine(root, path)
+                                    let resultForRequirement (requirement: EvidenceRequirement) =
+                                        match requirement.Kind with
+                                        | ContractValidation ->
+                                            toEvidenceRecord
+                                                requirement
+                                                "percepta-core"
+                                                Passed
+                                                "Typed contract parsed and validated successfully."
+                                                [ contractPath ]
+                                        | SemanticVisualReview ->
+                                            match semanticReview with
+                                            | Some review ->
+                                                toEvidenceRecord
+                                                    requirement
+                                                    "external-semantic-review"
+                                                    review.Status
+                                                    review.Summary
+                                                    review.References
+                                            | None ->
+                                                toEvidenceRecord
+                                                    requirement
+                                                    "external-semantic-review"
+                                                    (Unavailable "No semantic visual review evidence was supplied.")
+                                                    "Semantic visual review is supporting evidence and was not supplied."
+                                                    []
+                                        | kind ->
+                                            match adapterResults |> List.tryFind (fun result -> result.Kind = kind) with
+                                            | Some result ->
+                                                toEvidenceRecord
+                                                    requirement
+                                                    "playwright"
+                                                    result.Status
+                                                    result.Summary
+                                                    result.EvidenceReferences
+                                            | None ->
+                                                toEvidenceRecord
+                                                    requirement
+                                                    "percepta"
+                                                    (Unavailable $"No adapter produced evidence for {Compilation.evidenceKindName kind}.")
+                                                    "Required verification adapter evidence is unavailable."
+                                                    []
 
-                                    readExternalReview resolved)
+                                    let records =
+                                        contract.EvidenceRequirements |> List.map resultForRequirement
 
-                            let resultForRequirement (requirement: EvidenceRequirement) =
-                                match requirement.Kind with
-                                | ContractValidation ->
-                                    toEvidenceRecord
-                                        requirement
-                                        "percepta-core"
-                                        Passed
-                                        "Typed contract parsed and validated successfully."
-                                        [ contractPath ]
-                                | SemanticVisualReview ->
-                                    match semanticReview with
-                                    | Some review ->
-                                        toEvidenceRecord
-                                            requirement
-                                            "external-semantic-review"
-                                            review.Status
-                                            review.Summary
-                                            review.References
-                                    | None ->
-                                        toEvidenceRecord
-                                            requirement
-                                            "external-semantic-review"
-                                            (Unavailable "No semantic visual review evidence was supplied.")
-                                            "Semantic visual review is supporting evidence and was not supplied."
-                                            []
-                                | kind ->
-                                    match adapterResults |> List.tryFind (fun result -> result.Kind = kind) with
-                                    | Some result ->
-                                        toEvidenceRecord
-                                            requirement
-                                            "playwright"
-                                            result.Status
-                                            result.Summary
-                                            result.EvidenceReferences
-                                    | None ->
-                                        toEvidenceRecord
-                                            requirement
-                                            "percepta"
-                                            (Unavailable $"No adapter produced evidence for {Compilation.evidenceKindName kind}.")
-                                            "Required verification adapter evidence is unavailable."
-                                            []
+                                    let references =
+                                        evidenceReferences sourceRoot sourceRevision inputs records
 
-                            let records =
-                                contract.EvidenceRequirements |> List.map resultForRequirement
+                                    match relativePath sourceRoot contractPath with
+                                    | Error error ->
+                                        eprintfn "%s" error
+                                        return 2
+                                    | Ok contractReference ->
+                                        let configuration =
+                                            {
+                                                ContractReference = contractReference
+                                                ContractSha256 = contractHash contract
+                                                UpdateBaselines = options.UpdateBaselines
+                                            }
 
-                            let report =
-                                Evidence.createReport
-                                    (contractHash contract)
-                                    (DateTimeOffset.UtcNow.ToString("O"))
-                                    contract
-                                    records
+                                        match
+                                            Percepta.Cli.EvidenceRuntime.createReport
+                                                sourceRoot
+                                                repository
+                                                sourceRevision
+                                                screen
+                                                (DateTimeOffset.UtcNow.ToString("O"))
+                                                contract.Id
+                                                inputs
+                                                configuration
+                                                artifactMetadata.Artifact
+                                                artifactMetadata.Dependencies
+                                                records
+                                                references
+                                        with
+                                        | Error error ->
+                                            eprintfn "%s" error
+                                            return 2
+                                        | Ok report ->
+                                            let output =
+                                                tryOption "--out" args
+                                                |> Option.map (fun path ->
+                                                    if Path.IsPathRooted path then path else Path.Combine(root, path))
+                                                |> Option.defaultValue (
+                                                    Path.Combine(root, ".percepta", "evidence", $"{screen}.evidence.json")
+                                                )
 
-                            let output =
-                                tryOption "--out" args
-                                |> Option.map (fun path -> if Path.IsPathRooted path then path else Path.Combine(root, path))
-                                |> Option.defaultValue (Path.Combine(root, ".percepta", "evidence", $"{screen}.evidence.json"))
+                                            ensureDirectoryForFile output
+                                            File.WriteAllText(output, EvidenceEnvelope.serialize report)
 
-                            writeEvidenceReport output report
+                                            for result in report.EvaluationResults do
+                                                let status, _ = statusName result.Status
+                                                let marker = if result.Required then "*" else " "
+                                                printfn
+                                                    "%s %-24s %-18s %s"
+                                                    marker
+                                                    (verificationId result.Requirement)
+                                                    status
+                                                    result.Summary
 
-                            for result in report.Results do
-                                let status, _ = statusName result.Status
-                                let marker = if result.Required then "*" else " "
-                                printfn "%s %-24s %-18s %s" marker (verificationId result.Requirement) status result.Summary
+                                            printfn "Evidence: %s" output
+                                            printfn "Evidence digest: %s" report.EvidenceDigest
+                                            printfn "Complete: %b" (report.Outcome = Satisfied)
 
-                            printfn "Evidence: %s" output
-                            printfn "Complete: %b" report.Complete
-
-                            return if report.Complete then 0 else 3
+                                            return if report.Outcome = Satisfied then 0 else 3
         }
+
+    let artifactMetadataCommand args =
+        try
+            match tryOption "--out" args, Percepta.Cli.EvidenceRuntime.artifactMetadata () with
+            | _, Error error ->
+                eprintfn "%s" error
+                2
+            | output, Ok metadata ->
+                let json = EvidenceEnvelope.serializeArtifactMetadata metadata
+
+                match output with
+                | None -> printfn "%s" json
+                | Some path ->
+                    let full = Path.GetFullPath(path)
+                    ensureDirectoryForFile full
+                    File.WriteAllText(full, json)
+                    printfn "Artifact metadata: %s" full
+
+                0
+        with ex ->
+            eprintfn "Cannot emit Percepta artifact metadata: %s" ex.Message
+            2
+
+    let validateEvidenceCommand root args =
+        let evidencePath =
+            tryOption "--evidence" args
+            |> Option.map (fun path -> if Path.IsPathRooted path then path else Path.Combine(root, path))
+
+        let outputPath =
+            tryOption "--out" args
+            |> Option.map (fun path -> if Path.IsPathRooted path then path else Path.Combine(root, path))
+
+        let sourceRoot =
+            tryOption "--source-root" args
+            |> Option.map Path.GetFullPath
+            |> Option.defaultValue root
+
+        match evidencePath with
+        | None ->
+            eprintfn "validate-evidence requires --evidence <path>."
+            2
+        | Some path when not (File.Exists path) ->
+            let result =
+                {
+                    Status = Invalid
+                    Findings =
+                        [
+                            {
+                                Code = "PERCEPTA.EVIDENCE.PACKAGE_MISSING"
+                                Message = $"Evidence package is unavailable: {path}"
+                            }
+                        ]
+                }
+
+            writeValidationResult outputPath path result
+            3
+        | Some path ->
+            match EvidenceEnvelope.deserialize (File.ReadAllText(path)) with
+            | Error errors ->
+                let result =
+                    {
+                        Status = Invalid
+                        Findings =
+                            errors
+                            |> List.map (fun message ->
+                                {
+                                    Code = "PERCEPTA.EVIDENCE.SCHEMA_INVALID"
+                                    Message = message
+                                })
+                    }
+
+                writeValidationResult outputPath path result
+                3
+            | Ok report ->
+                match sourceIdentity sourceRoot with
+                | Error error ->
+                    let result =
+                        {
+                            Status = Unverifiable
+                            Findings =
+                                [
+                                    {
+                                        Code = "PERCEPTA.EVIDENCE.SOURCE_TRUST_UNAVAILABLE"
+                                        Message = error
+                                    }
+                                ]
+                        }
+
+                    writeValidationResult outputPath path result
+                    4
+                | Ok(actualRoot, repository, revision) ->
+                    let trustedArtifact =
+                        tryOption "--trusted-artifact-metadata" args
+                        |> Option.bind (fun metadataPath ->
+                            let resolved =
+                                if Path.IsPathRooted metadataPath then
+                                    metadataPath
+                                else
+                                    Path.Combine(root, metadataPath)
+
+                            if File.Exists resolved then
+                                match EvidenceEnvelope.deserializeArtifactMetadata (File.ReadAllText(resolved)) with
+                                | Ok metadata -> Some metadata
+                                | Error _ -> None
+                            else
+                                None)
+
+                    let baseResult =
+                        EvidenceEnvelope.validate
+                            {
+                                SourceRoot = actualRoot
+                                Repository = repository
+                                SourceRevision = revision
+                                TrustedArtifact = trustedArtifact
+                            }
+                            report
+
+                    let revisionFindings =
+                        inputRevisionMismatches actualRoot revision report.Inputs
+                        |> List.map (fun message ->
+                            {
+                                Code = "PERCEPTA.EVIDENCE.INPUT_SOURCE_MISMATCH"
+                                Message = message
+                            })
+
+                    let result =
+                        if List.isEmpty revisionFindings then
+                            baseResult
+                        else
+                            {
+                                Status = Invalid
+                                Findings = baseResult.Findings @ revisionFindings
+                            }
+
+                    writeValidationResult outputPath path result
+
+                    match result.Status with
+                    | Valid -> 0
+                    | Invalid -> 3
+                    | Unverifiable -> 4
 
     let doctorCommand root args =
         task {
@@ -515,6 +673,8 @@ module Cli =
         printfn "Percepta CLI"
         printfn "  percepta compile [--contract path] [--out directory]"
         printfn "  percepta verify [--contract path] --url url-or-file [--fixture path ...] [--semantic-review path] [--update-baselines]"
+        printfn "  percepta validate-evidence --evidence path --source-root path --trusted-artifact-metadata path [--out path]"
+        printfn "  percepta artifact-metadata [--out path]"
         printfn "  percepta status [--evidence path]"
         printfn "  percepta doctor [--contract path]"
         printfn "  percepta install-browser"
@@ -542,6 +702,8 @@ let private execute argv =
     match args with
     | "compile" :: rest -> Cli.compileCommand root rest
     | "verify" :: rest -> Cli.verifyCommand root rest |> fun task -> task.GetAwaiter().GetResult()
+    | "validate-evidence" :: rest -> Cli.validateEvidenceCommand root rest
+    | "artifact-metadata" :: rest -> Cli.artifactMetadataCommand rest
     | "status" :: rest -> Cli.statusCommand root rest
     | "doctor" :: rest -> Cli.doctorCommand root rest |> fun task -> task.GetAwaiter().GetResult()
     | [ "install-browser" ] -> BrowserVerification.installChromium ()

@@ -148,7 +148,7 @@ jobs:
           {
             echo "Percepta semantic CLI \`percepta\` $VERSION."
             echo
-            echo "Checks rendered UI against Percepta screen contracts and writes evidence that follows \`schemas/percepta-evidence.schema.json\`. Commands: \`compile\`, \`verify\`, \`status\`, \`doctor\`, \`install-browser\`, \`version\`."
+            echo "Checks rendered UI against Percepta screen contracts and writes versioned, evidence-bound results that follow \`schemas/percepta-evidence.schema.json\`. Commands: \`compile\`, \`verify\`, \`validate-evidence\`, \`artifact-metadata\`, \`status\`, \`doctor\`, \`install-browser\`, \`version\`."
             echo
             echo "**percepta-repo lifecycle health is not semantic evidence.** \`percepta-repo\` (tags \`percepta-repo-v*\`) reports only whether Percepta is installed in a repository. It does not show that any UI meets its contract. This release does not change \`percepta-repo\`, and \`percepta\` never changes repository installation state."
             echo
@@ -164,7 +164,7 @@ jobs:
             echo
             echo "## Tested"
             echo
-            echo "- linux-x64: in an \`ubuntu:24.04\` container with no .NET, CI checked that \`doctor\` fails without a browser, then ran \`install-browser\` and \`doctor\`. The canonical Indy Init verification exited 0 with both fixtures and failed without them. Every machine-addressable adversarial mutant failed. All evidence validated against the schema."
+            echo "- linux-x64: in an \`ubuntu:24.04\` container with no .NET, CI checked browser setup, two reproducible canonical executions, the evidence-contract P1-P3/N1-N14 matrix, required-evidence failure, every machine-addressable adversarial mutant, and JSON Schema conformance."
             echo "- linux-arm64, osx-x64, osx-arm64, win-x64: CI checked only that \`percepta version\` starts on a native runner. Browser verification on these platforms was not tested."
             echo
             echo "## Notes"

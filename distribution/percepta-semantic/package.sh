@@ -48,6 +48,7 @@ dotnet publish "$repo_root/src/Percepta.Cli/Percepta.Cli.fsproj" \
   --configuration Release \
   --runtime "$rid" \
   --self-contained true \
+  --artifacts-path "$work/artifacts" \
   -p:PublishSingleFile=false \
   -p:Version="$version" \
   -p:DebugType=None \
@@ -72,6 +73,46 @@ if ! find "$stage/.playwright/node" -type f \( -name node -o -name node.exe \) |
   echo "Playwright Node driver binary missing from publish output ($stage/.playwright/node)." >&2
   exit 1
 fi
+
+source_revision="$(git -C "$repo_root" rev-parse HEAD)"
+python3 -I - "$stage" "$version" "$source_revision" <<'PY'
+import hashlib, json, pathlib, sys
+stage = pathlib.Path(sys.argv[1])
+version = sys.argv[2]
+source_revision = sys.argv[3]
+with (stage / "Percepta.Cli.deps.json").open(encoding="utf-8") as handle:
+    libraries = json.load(handle)["libraries"]
+resolved = {key.rsplit("/", 1)[0].lower(): key.rsplit("/", 1)[1] for key in libraries}
+files = {
+    "EchelonFoundry.Aegis.Core": "Aegis.Core.dll",
+    "FSharp.Core": "FSharp.Core.dll",
+    "Microsoft.Playwright": "Microsoft.Playwright.dll",
+}
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+dependencies = []
+for name, file_name in sorted(files.items()):
+    dependencies.append({
+        "dependencyName": name,
+        "dependencyVersion": resolved[name.lower()],
+        "dependencyDigest": digest(stage / file_name),
+        "dependencyDigestAlgorithm": "sha-256",
+    })
+metadata = {
+    "schemaVersion": "1.0.0",
+    "artifact": {
+        "artifactName": "percepta-semantic",
+        "artifactVersion": version,
+        "artifactSourceRevision": source_revision,
+        "artifactDigest": digest(stage / "Percepta.Cli.dll"),
+        "artifactDigestAlgorithm": "sha-256",
+    },
+    "dependencies": dependencies,
+}
+with (stage / "percepta-artifact.json").open("w", encoding="utf-8") as handle:
+    json.dump(metadata, handle, indent=2)
+    handle.write("\n")
+PY
 
 printf '%s\n' "$version" > "$stage/VERSION"
 cp "$repo_root/LICENSE" "$repo_root/NOTICE" "$stage/"
