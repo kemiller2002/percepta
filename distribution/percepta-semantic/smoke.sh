@@ -180,9 +180,11 @@ if not results.get("canonicalControlComplete"):
 for result in results["results"]:
     print(f'{result["mutation"]}\t{result["class"]}\t{"true" if result["complete"] else "false"}')
 PY
+cp "$adversarial/mutants/"*.html "$consumer/mutants/"
+git add mutants
+git commit -qm "fixture: bind adversarial mutants to a source revision"
 machine=0
 while IFS="$(printf '\t')" read -r mutation class harness_complete <&3; do
-  cp "$adversarial/mutants/$mutation.html" "mutants/$mutation.html"
   run "$percepta" verify \
     --contract .percepta/contracts/indy-init-investigation-workspace.json \
     --url "mutants/$mutation.html" \
