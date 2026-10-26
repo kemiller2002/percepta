@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-25T18:14:34.000Z",
+  "updatedAt": "2026-10-26T06:55:42.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -664,34 +664,52 @@
     {
       "id": "PERCEPTA-EVIDENCE-CONTRACT-001",
       "type": "feature",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-10-25T18:14:34.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Percepta.Cli/EvidenceRuntime.fs"
+        },
+        {
+          "type": "tests",
+          "path": "distribution/percepta-semantic/evidence-contract-smoke.sh"
+        },
+        {
+          "type": "verification-report",
+          "path": "docs/verification/percepta-evidence-contract-2026-10-26.md"
+        },
+        {
+          "type": "test-results",
+          "path": "docs/verification/artifacts/PERCEPTA-EVIDENCE-CONTRACT-001/results.json"
+        }
+      ],
+      "updatedAt": "2026-10-26T06:55:42.000Z",
       "telemetryExecutionIds": [
         "EXE-20261025T181434474Z-443cfc7c"
       ],
       "latestCheckpoint": {
-        "id": "304cfc4e3ef9941c96ba344c",
-        "recordedAt": "2026-10-26T06:44:03.000Z",
+        "id": "23eaeab1deb325e73663e537",
+        "recordedAt": "2026-10-26T06:55:03.000Z",
         "executionId": "EXE-20261025T181434474Z-443cfc7c",
-        "stepId": "STEP-20261026T063936000Z-0745165e",
+        "stepId": "STEP-20261026T065438000Z-c9000708",
         "repository": "percepta",
-        "branch": "codex/percepta-evidence-contract-v1-reproducibility",
-        "commit": "3c4f60dea4a586b1225bb6a18454d4f2943fa0ac",
+        "branch": "codex/percepta-evidence-contract-release-verification",
+        "commit": "fccec0e8a5a4eef0e4e2ca049d591bf1e65bb806",
         "remote": {
           "name": "origin",
           "url": "https://github.com/kemiller2002/percepta.git"
         },
-        "remoteBranch": "codex/percepta-evidence-contract-v1-reproducibility",
-        "remoteCommit": "3c4f60dea4a586b1225bb6a18454d4f2943fa0ac",
-        "summary": "Reproduced 0.2.0 cross-workspace digest instability, normalized repository-local evaluation paths, added independent-worktree release smoke, and passed the 18-case source matrix.",
-        "nextAction": "Run PR CI, merge the patch, publish 0.2.1, and repeat independent verification against the downloaded artifact.",
+        "remoteBranch": "codex/percepta-evidence-contract-release-verification",
+        "remoteCommit": "fccec0e8a5a4eef0e4e2ca049d591bf1e65bb806",
+        "summary": "Published and independently verified Percepta semantic CLI 0.2.1 evidence contract v1.0.0; durable release report and 18-case machine summary are committed and pushed.",
+        "nextAction": "Complete the Praxis work item with the release report and machine-readable results as evidence, validate final Praxis state, and merge the evidence-record PR.",
         "verification": {
           "status": "verified",
           "mechanism": "git-remote-observation"
         }
-      }
+      },
+      "completedAt": "2026-10-26T06:55:42.000Z"
     }
   ]
 }

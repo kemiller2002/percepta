@@ -1,0 +1,54 @@
+{
+  "schema": "percepta.evidence-contract-release-verification/1",
+  "workItem": "PERCEPTA-EVIDENCE-CONTRACT-001",
+  "verdict": "PASS",
+  "contractVersion": "1.0.0",
+  "release": {
+    "version": "0.2.1",
+    "tag": "percepta-semantic-v0.2.1",
+    "sourceRevision": "8b78df803abb401e2e77320203a2b944d919f6c7",
+    "archive": "percepta-semantic-0.2.1-osx-arm64.tar.gz",
+    "archiveSha256": "66f3db5f61569fff5b76167f683cf83f463e09d51ec632ccb6d07596b74f0135",
+    "artifactSha256": "98a787bbf792b0ee540d2f8b8f982d446889c3cb5f8e362e13b6fe44ff72e565",
+    "workflowRun": "40281896075"
+  },
+  "experiment": {
+    "id": "investigation-workspace",
+    "runIds": [
+      "628b4241-ee3c-42c5-b6e1-5884874ecb49",
+      "97caf94c-013a-4d23-933d-30daa92b4bc3"
+    ],
+    "sourceRevision": "8b78df803abb401e2e77320203a2b944d919f6c7",
+    "inputDigest": "65cf9fe248520bcae7f0a8809d514cb4440c15876a11d8d624762cbc9ad8aa3a",
+    "configurationDigest": "ba61e2ca7b1b855836c4916a4f0e874bd9bd37104245ba5439a524bfeca72bdc",
+    "evidenceDigest": "235203efcaf59bc2371188890f2d6dc69e7c017764247e9eb23806348f5464e6",
+    "outcome": "satisfied",
+    "executionExitCodes": [0, 0],
+    "independentlyValidated": true
+  },
+  "matrix": {
+    "commandExitCode": 0,
+    "passed": 18,
+    "failed": 0,
+    "tests": {
+      "P1": "VALID/0",
+      "P1-repeat": "VALID/0",
+      "P2": "equivalent",
+      "P3": "equivalent",
+      "N1": "INVALID/3",
+      "N2": "INVALID/3",
+      "N3": "INVALID/3",
+      "N4": "INVALID/3",
+      "N5": "INVALID/3",
+      "N6": "INVALID/3",
+      "N7": "INVALID/3",
+      "N8": "INVALID/3",
+      "N9": "INVALID/3",
+      "N10": "INVALID/3",
+      "N11": "INVALID/3",
+      "N12": "INVALID/3",
+      "N13": "UNVERIFIABLE/4",
+      "N14": "INVALID/3"
+    }
+  }
+}

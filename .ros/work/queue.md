@@ -3,7 +3,7 @@
 | ID | Work | Status | Tags | Priority |
 |---|---|---|---|---|
 | INGEST-REQS-20261018 | Ingest outstanding Praxis requirement sources | complete | requirements, ingestion | high |
-| PERCEPTA-EVIDENCE-CONTRACT-001 | Implement and release Percepta versioned evidence contract | ready | evidence-contract, release | high |
+| PERCEPTA-EVIDENCE-CONTRACT-001 | Implement and release Percepta versioned evidence contract | complete | evidence-contract, release | high |
 | PERCEPTA-REL-COMPAT-001 | Verify Percepta published release compatibility and reproducibility | blocked | release-verification, percepta | high |
 | PRAXIS-EXECUTIONS-COMPAT-20261018 | Exclude Praxis-managed execution state from attribution | complete | governance, compatibility | high |
 | ROS-INSTALL-3-4-0 | ROS-INSTALL-3-4-0 | complete |  |  |
