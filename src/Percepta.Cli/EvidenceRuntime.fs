@@ -295,6 +295,34 @@ module EvidenceRuntime =
         |> List.distinctBy (fun value -> value.Path)
         |> List.sortBy _.Path
 
+    let private normalizeEvaluationReferences (sourceRoot: string) (records: EvidenceRecord list) =
+        let rec normalizeReferences (normalized: string list) (remaining: string list) =
+            match remaining with
+            | [] -> Ok(List.rev normalized)
+            | reference :: remaining ->
+                let normalizedReference =
+                    if Path.IsPathRooted reference then
+                        relativePath sourceRoot reference
+                    else
+                        Ok(normalizeSlashes reference)
+
+                match normalizedReference with
+                | Error error -> Error error
+                | Ok value -> normalizeReferences (value :: normalized) remaining
+
+        let rec normalizeRecords (normalized: EvidenceRecord list) (remaining: EvidenceRecord list) =
+            match remaining with
+            | [] -> Ok(List.rev normalized)
+            | record :: remaining ->
+                match normalizeReferences [] record.EvidenceReferences with
+                | Error error -> Error error
+                | Ok references ->
+                    normalizeRecords
+                        ({ record with EvidenceReferences = references } :: normalized)
+                        remaining
+
+        normalizeRecords [] records
+
     let createReport
         sourceRoot
         repository
@@ -306,14 +334,17 @@ module EvidenceRuntime =
         configuration
         artifact
         dependencies
-        results
-        references
+        (results: EvidenceRecord list)
+        (references: EvidenceReference list)
         =
-        if List.isEmpty references then
+        match normalizeEvaluationReferences sourceRoot results with
+        | Error error ->
+            Error($"Evaluation evidence references must resolve within the source repository: {error}")
+        | Ok normalizedResults when List.isEmpty references ->
             Error "No durable evidence artifacts were produced; evidence contract v1.0.0 cannot be emitted."
-        else
+        | Ok normalizedResults ->
             let outcome =
-                if results
+                if normalizedResults
                    |> List.filter _.Required
                    |> List.forall (fun record -> Evidence.isAcceptable record.Status) then
                     Satisfied
@@ -337,7 +368,7 @@ module EvidenceRuntime =
                     Artifact = artifact
                     Dependencies = dependencies
                     Outcome = outcome
-                    EvaluationResults = results
+                    EvaluationResults = normalizedResults
                     EvidenceReferences = references
                     EvidenceDigest = String.replicate 64 "0"
                     EvidenceDigestAlgorithm = Sha256Algorithm

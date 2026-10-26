@@ -48,9 +48,11 @@ source JSON whitespace.
 7. `screen`.
 
 The stable projection excludes `runId`, `createdAt`, `evidenceDigest` itself,
-and the legacy compatibility projection. Therefore two executions with
-unchanged stable content have the same `evidenceDigest`. The digest establishes
-integrity, not producer authenticity.
+and the legacy compatibility projection. File references in evaluation results
+are stored relative to the source root, so temporary checkout locations do not
+enter the stable projection. Therefore two executions with unchanged stable
+content have the same `evidenceDigest`. The digest establishes integrity, not
+producer authenticity.
 
 ## Runtime-derived provenance
 
