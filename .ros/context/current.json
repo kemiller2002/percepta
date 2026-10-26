@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-25T18:14:34.000Z",
+  "updatedAt": "2026-10-26T06:55:42.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -664,10 +664,27 @@
     {
       "id": "PERCEPTA-EVIDENCE-CONTRACT-001",
       "type": "feature",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-10-25T18:14:34.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Percepta.Cli/EvidenceRuntime.fs"
+        },
+        {
+          "type": "tests",
+          "path": "distribution/percepta-semantic/evidence-contract-smoke.sh"
+        },
+        {
+          "type": "verification-report",
+          "path": "docs/verification/percepta-evidence-contract-2026-10-26.md"
+        },
+        {
+          "type": "test-results",
+          "path": "docs/verification/artifacts/PERCEPTA-EVIDENCE-CONTRACT-001/results.json"
+        }
+      ],
+      "updatedAt": "2026-10-26T06:55:42.000Z",
       "telemetryExecutionIds": [
         "EXE-20261025T181434474Z-443cfc7c"
       ],
@@ -691,7 +708,8 @@
           "status": "verified",
           "mechanism": "git-remote-observation"
         }
-      }
+      },
+      "completedAt": "2026-10-26T06:55:42.000Z"
     }
   ]
 }
