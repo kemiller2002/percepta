@@ -672,21 +672,21 @@
         "EXE-20261025T181434474Z-443cfc7c"
       ],
       "latestCheckpoint": {
-        "id": "5f0d2180445c42e8139c0760",
-        "recordedAt": "2026-10-25T22:39:15.000Z",
+        "id": "304cfc4e3ef9941c96ba344c",
+        "recordedAt": "2026-10-26T06:44:03.000Z",
         "executionId": "EXE-20261025T181434474Z-443cfc7c",
-        "stepId": "STEP-20261025T223804000Z-a23beb41",
+        "stepId": "STEP-20261026T063936000Z-0745165e",
         "repository": "percepta",
-        "branch": "codex/percepta-evidence-contract-v1",
-        "commit": "652e246d3910c5d4e87bf39b8ad20aa99dd96d84",
+        "branch": "codex/percepta-evidence-contract-v1-reproducibility",
+        "commit": "3c4f60dea4a586b1225bb6a18454d4f2943fa0ac",
         "remote": {
           "name": "origin",
           "url": "https://github.com/kemiller2002/percepta.git"
         },
-        "remoteBranch": "codex/percepta-evidence-contract-v1",
-        "remoteCommit": "652e246d3910c5d4e87bf39b8ad20aa99dd96d84",
-        "summary": "Evidence contract 1.0.0 implementation, validator, regression matrix, and release packaging are committed and pushed at 652e246",
-        "nextAction": "Open and merge the implementation PR, verify the 0.2.0 release workflow, then independently retest the downloaded artifact",
+        "remoteBranch": "codex/percepta-evidence-contract-v1-reproducibility",
+        "remoteCommit": "3c4f60dea4a586b1225bb6a18454d4f2943fa0ac",
+        "summary": "Reproduced 0.2.0 cross-workspace digest instability, normalized repository-local evaluation paths, added independent-worktree release smoke, and passed the 18-case source matrix.",
+        "nextAction": "Run PR CI, merge the patch, publish 0.2.1, and repeat independent verification against the downloaded artifact.",
         "verification": {
           "status": "verified",
           "mechanism": "git-remote-observation"

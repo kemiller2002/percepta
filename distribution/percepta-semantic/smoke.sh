@@ -135,7 +135,10 @@ run "$percepta" verify \
 complete="$(evidence_complete evidence/pass.json)" || fail "evidence/pass.json does not validate against the schema"
 [ "$complete" = "true" ] || fail "canonical evidence is not complete"
 
-step "Repeat canonical verification independently"
+step "Repeat canonical verification in an independent workspace"
+repeat_consumer="$work/consumer-repeat"
+git -C "$consumer" worktree add -q --detach "$repeat_consumer" HEAD
+cd "$repeat_consumer"
 run "$percepta" verify \
   --contract .percepta/contracts/indy-init-investigation-workspace.json \
   --url fixtures/index.html \
@@ -146,13 +149,14 @@ run "$percepta" verify \
 [ "$code" -eq 0 ] || fail "repeated canonical verification exited $code"
 complete="$(evidence_complete evidence/repeat.json)" || fail "evidence/repeat.json does not validate against the schema"
 [ "$complete" = "true" ] || fail "repeated canonical evidence is not complete"
+cd "$consumer"
 
 step "Evidence contract v1.0.0 positive, reproducibility and negative matrix"
 "$repo_root/distribution/percepta-semantic/evidence-contract-smoke.sh" \
   "$percepta" \
   "$consumer" \
   "$consumer/evidence/pass.json" \
-  "$consumer/evidence/repeat.json" \
+  "$repeat_consumer/evidence/repeat.json" \
   "$bin_dir/percepta-artifact.json" \
   "$work/evidence-contract"
 
