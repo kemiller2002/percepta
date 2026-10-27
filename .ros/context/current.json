@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-10-27T18:08:10Z",
+  "updatedAt": "2026-10-27T18:09:09Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -714,13 +714,43 @@
     {
       "id": "WI-0011",
       "type": "task",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-10-27T18:08:10Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "distribution/percepta-semantic/version"
+        },
+        {
+          "type": "tests",
+          "path": "/tmp/claude-0/-home-user/cf565065-a168-5486-8bfa-956f257becfe/scratchpad/percepta-0.3.0-tests.txt"
+        }
+      ],
+      "updatedAt": "2026-10-27T18:09:09Z",
       "telemetryExecutionIds": [
         "EXE-20261027T180810294Z-df5c2e9c"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "ddb9ec4768a635e166005a74",
+        "recordedAt": "2026-10-27T18:09:08Z",
+        "executionId": "EXE-20261027T180810294Z-df5c2e9c",
+        "repository": "percepta",
+        "branch": "claude/rehearsal-5-prep-qlbywr-release",
+        "commit": "363c8071054c41146108ffec3f14e1ecdf84b186",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/rehearsal-5-prep-qlbywr-release",
+        "remoteCommit": "363c8071054c41146108ffec3f14e1ecdf84b186",
+        "summary": "percepta-semantic version bumped to 0.3.0; core and binding tests pass",
+        "nextAction": "Complete, open the release PR; merge to main publishes percepta-semantic-v0.3.0",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-27T18:09:09Z"
     }
   ]
 }

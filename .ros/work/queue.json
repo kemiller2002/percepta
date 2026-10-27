@@ -471,10 +471,10 @@
       "description": null,
       "tags": [],
       "priority": "medium",
-      "status": "ready",
+      "status": "complete",
       "attachments": [],
       "createdAt": "2026-10-27T18:08:09.550Z",
-      "updatedAt": "2026-10-27T18:08:09Z",
+      "updatedAt": "2026-10-27T18:09:09Z",
       "createdBy": "unknown",
       "createdByActor": {
         "kind": "agent",
