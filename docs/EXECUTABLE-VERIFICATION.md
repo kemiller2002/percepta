@@ -49,6 +49,10 @@ dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj -- verify \
   --fixture tests/fixtures/indy-init/legal.json
 ```
 
+## Applications with many screens
+
+A served application with its own screen ids and routes is verified with `percepta verify-app` and an application-owned screen binding. See [SCREEN-BINDING.md](SCREEN-BINDING.md) for the binding file, the screen-identity attribute, the state-injection contract and the `PASS` / `FAIL` / `NOT-BOUND` / `NOT-APPLICABLE` verdicts.
+
 ## Semantic hooks
 
 Percepta's browser adapter recognizes semantic evidence hooks.
@@ -84,8 +88,9 @@ The application's domain model remains authoritative.
 A testable application may expose:
 
 ```javascript
-window.__perceptaSetState = state => {
+window.__perceptaSetState = async state => {
   // Ask the application to project this explicit test state.
+  // Percepta awaits a returned promise.
 };
 ```
 

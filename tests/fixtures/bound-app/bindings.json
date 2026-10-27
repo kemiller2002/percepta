@@ -1,0 +1,13 @@
+{
+  "schema": "percepta.screen-bindings/1",
+  "application": "percepta-bound-fixture",
+  "stateInjection": true,
+  "screens": [
+    {
+      "contract": "investigation-workspace",
+      "appScreen": "investigation-workspace",
+      "path": "index.html#/workspace",
+      "fixtures": ["../indy-init/blocked.json", "../indy-init/legal.json"]
+    }
+  ]
+}
