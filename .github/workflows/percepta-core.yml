@@ -12,6 +12,7 @@ on:
       - "examples/Percepta.Examples/**"
       - "examples/indy-init/**"
       - "tests/Percepta.Core.Tests/**"
+      - "tests/Percepta.Binding.Tests/**"
       - "tests/Percepta.Adversarial.Tests/**"
       - "research/experiments/**"
       - "research/hypotheses/**"
@@ -29,6 +30,7 @@ on:
       - "examples/Percepta.Examples/**"
       - "examples/indy-init/**"
       - "tests/Percepta.Core.Tests/**"
+      - "tests/Percepta.Binding.Tests/**"
       - "tests/fixtures/**"
       - ".percepta/contracts/**"
       - ".github/workflows/percepta-core.yml"
@@ -71,6 +73,9 @@ jobs:
       - name: Build adversarial experiment
         run: dotnet build tests/Percepta.Adversarial.Tests/Percepta.Adversarial.Tests.fsproj --configuration Release
 
+      - name: Build screen-binding tests
+        run: dotnet build tests/Percepta.Binding.Tests/Percepta.Binding.Tests.fsproj --configuration Release
+
       - name: Run Percepta.Core tests
         run: dotnet run --project tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj --configuration Release
 
@@ -95,6 +100,28 @@ jobs:
 
       - name: Run adversarial Percepta experiment
         run: dotnet run --project tests/Percepta.Adversarial.Tests/Percepta.Adversarial.Tests.fsproj --configuration Release
+
+      - name: Run screen-binding browser tests
+        run: dotnet run --project tests/Percepta.Binding.Tests/Percepta.Binding.Tests.fsproj --configuration Release
+
+      - name: Prove an unbound or excluded screen never passes (verify-app)
+        shell: bash
+        run: |
+          set +e
+          cli() { dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- verify-app --base-url tests/fixtures/bound-app/ --contracts tests/fixtures/bound-app/contracts --ready-timeout-ms 10000 "$@"; }
+          cli --bindings tests/fixtures/bound-app/bindings.json --out artifacts/percepta/verify-app/unbound.json
+          unbound=$?
+          cli --bindings tests/fixtures/bound-app/bindings-declared-exclusion.json --out artifacts/percepta/verify-app/excluded.json
+          excluded=$?
+          cli --bindings tests/fixtures/bound-app/bindings-declared-exclusion.json --allow-not-applicable --out artifacts/percepta/verify-app/excluded-allowed.json
+          allowed=$?
+          set -e
+          test "$unbound" -eq 3 || { echo "Expected NOT-BOUND to fail (exit 3), got $unbound"; exit 1; }
+          test "$excluded" -eq 3 || { echo "Expected NOT-APPLICABLE to block by default (exit 3), got $excluded"; exit 1; }
+          test "$allowed" -eq 0 || { echo "Expected an explicitly allowed exclusion with a passing bound screen to complete, got $allowed"; exit 1; }
+          test "$(jq -r '.screens[] | select(.contract=="S16-counterfactual-sandbox") | .verdict' artifacts/percepta/verify-app/unbound.json)" = "NOT-BOUND"
+          test "$(jq -r '.screens[] | select(.contract=="S16-counterfactual-sandbox") | .verdict' artifacts/percepta/verify-app/excluded-allowed.json)" = "NOT-APPLICABLE"
+          test "$(jq -r '.counts.PASS' artifacts/percepta/verify-app/excluded-allowed.json)" = "1"
 
       - name: Compile discoverable contracts
         run: dotnet run --project src/Percepta.Cli/Percepta.Cli.fsproj --configuration Release -- compile --out artifacts/percepta/compiled

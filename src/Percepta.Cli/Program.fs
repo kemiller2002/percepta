@@ -461,6 +461,272 @@ module Cli =
                                             return if report.Outcome = Satisfied then 0 else 3
         }
 
+    /// Maps adapter evidence onto a contract's declared evidence requirements (no semantic review is
+    /// supplied in an application run, so that evidence is Unavailable, never assumed).
+    let private recordsFor (contract: ScreenContract) contractPath (adapterResults: BrowserVerification.AdapterEvidence list) =
+        contract.EvidenceRequirements
+        |> List.map (fun requirement ->
+            match requirement.Kind with
+            | ContractValidation ->
+                toEvidenceRecord requirement "percepta-core" Passed "Typed contract parsed and validated successfully." [ contractPath ]
+            | SemanticVisualReview ->
+                toEvidenceRecord
+                    requirement
+                    "external-semantic-review"
+                    (Unavailable "No semantic visual review evidence was supplied.")
+                    "Semantic visual review is not part of an application run."
+                    []
+            | kind ->
+                match adapterResults |> List.tryFind (fun result -> result.Kind = kind) with
+                | Some result -> toEvidenceRecord requirement "playwright" result.Status result.Summary result.EvidenceReferences
+                | None ->
+                    toEvidenceRecord
+                        requirement
+                        "percepta"
+                        (Unavailable $"No adapter produced evidence for {Compilation.evidenceKindName kind}.")
+                        "Required verification adapter evidence is unavailable."
+                        [])
+
+    type private ScreenRun =
+        {
+            ContractScreen: string
+            ContractPath: string
+            Verdict: Binding.ScreenVerdict
+            AppScreen: string option
+            Url: string option
+            Records: EvidenceRecord list
+        }
+
+    let private writeApplicationReport (path: string) (application: string) (baseUrl: string) allowNotApplicable (orphans: string list) complete (runs: ScreenRun list) =
+        ensureDirectoryForFile path
+        use stream = File.Create(path)
+        use writer = new Utf8JsonWriter(stream, JsonWriterOptions(Indented = true))
+        writer.WriteStartObject()
+        writer.WriteString("schema", "percepta.application-verification/1")
+        writer.WriteString("application", application)
+        writer.WriteString("baseUrl", baseUrl)
+        // A served application is not a revision-bound input; this report is not a v1 evidence envelope.
+        writer.WriteBoolean("revisionBoundEvidence", false)
+        writer.WriteBoolean("allowNotApplicable", allowNotApplicable)
+        writer.WriteBoolean("complete", complete)
+        writer.WriteStartObject("counts")
+
+        for name in [ "PASS"; "FAIL"; "NOT-BOUND"; "NOT-APPLICABLE" ] do
+            writer.WriteNumber(name, runs |> List.filter (fun run -> Binding.verdictName run.Verdict = name) |> List.length)
+
+        writer.WriteEndObject()
+        writer.WriteStartArray("orphanBindings")
+        orphans |> List.iter writer.WriteStringValue
+        writer.WriteEndArray()
+        writer.WriteStartArray("screens")
+
+        for run in runs do
+            writer.WriteStartObject()
+            writer.WriteString("contract", run.ContractScreen)
+            writer.WriteString("contractPath", run.ContractPath)
+            writer.WriteString("verdict", Binding.verdictName run.Verdict)
+
+            match run.Verdict with
+            | Binding.Fail reason
+            | Binding.NotApplicableVerdict reason -> writer.WriteString("reason", reason)
+            | Binding.NotBoundVerdict -> writer.WriteString("reason", "The application's bindings do not mention this contract.")
+            | Binding.Pass -> ()
+
+            run.AppScreen |> Option.iter (fun value -> writer.WriteString("appScreen", value))
+            run.Url |> Option.iter (fun value -> writer.WriteString("url", value))
+            writer.WriteStartArray("evidence")
+
+            for record in run.Records do
+                let status, reason = statusName record.Status
+                writer.WriteStartObject()
+                writer.WriteString("requirement", verificationId record.Requirement)
+                writer.WriteString("kind", Compilation.evidenceKindName record.Kind)
+                writer.WriteBoolean("required", record.Required)
+                writer.WriteString("status", status)
+                reason |> Option.iter (fun value -> writer.WriteString("reason", value))
+                writer.WriteString("summary", record.Summary)
+                writer.WriteStartArray("references")
+                record.EvidenceReferences |> List.iter writer.WriteStringValue
+                writer.WriteEndArray()
+                writer.WriteEndObject()
+
+            writer.WriteEndArray()
+            writer.WriteEndObject()
+
+        writer.WriteEndArray()
+        writer.WriteEndObject()
+        writer.Flush()
+
+    /// Verifies every contract under the contracts directory against the application screens named in
+    /// its bindings (docs/SCREEN-BINDING.md). Exit 0 only when the run is complete.
+    let verifyAppCommand root args =
+        task {
+            let resolvePath (path: string) = if Path.IsPathRooted path then path else Path.GetFullPath(Path.Combine(root, path))
+
+            let bindingsPath =
+                tryOption "--bindings" args |> Option.map resolvePath |> Option.defaultValue (Path.Combine(root, ".percepta", "bindings.json"))
+
+            let contractsDirectory =
+                tryOption "--contracts" args |> Option.map resolvePath |> Option.defaultValue (Path.Combine(root, ".percepta", "contracts"))
+
+            let allowNotApplicable = hasFlag "--allow-not-applicable" args
+
+            let readyTimeout =
+                tryOption "--ready-timeout-ms" args
+                |> Option.bind (fun value ->
+                    match Double.TryParse(value, Globalization.NumberStyles.Float, Globalization.CultureInfo.InvariantCulture) with
+                    | true, parsed when parsed > 0.0 -> Some parsed
+                    | _ -> None)
+                |> Option.defaultValue 30000.0
+
+            match tryOption "--base-url" args, File.Exists bindingsPath, Directory.Exists contractsDirectory with
+            | None, _, _ ->
+                eprintfn "verify-app requires --base-url <url> (the served application, e.g. http://127.0.0.1:4321/)."
+                return 2
+            | _, false, _ ->
+                eprintfn "Screen bindings not found: %s (see docs/SCREEN-BINDING.md)." bindingsPath
+                return 2
+            | _, _, false ->
+                eprintfn "Contracts directory not found: %s" contractsDirectory
+                return 2
+            | Some baseUrlText, true, true ->
+                match Binding.parse (File.ReadAllText bindingsPath) with
+                | Error errors ->
+                    eprintfn "Screen bindings are invalid (%s):" bindingsPath
+                    errors |> List.iter (eprintfn "  %s")
+                    return 2
+                | Ok bindings ->
+                    let baseUrl =
+                        let normalized =
+                            match Uri.TryCreate(baseUrlText, UriKind.Absolute) with
+                            | true, uri -> uri.AbsoluteUri
+                            | _ -> (Path.GetFullPath(baseUrlText) |> Uri).AbsoluteUri
+
+                        if normalized.EndsWith("/", StringComparison.Ordinal) then normalized else normalized + "/"
+
+                    let bindingsDirectory = Path.GetDirectoryName(bindingsPath)
+                    let contractPaths = Directory.GetFiles(contractsDirectory, "*.json") |> Array.sort |> Array.toList
+                    let loaded = contractPaths |> List.map (fun path -> path, loadContract path)
+
+                    let runOne (path: string, result: Result<ScreenContract, string list>) =
+                        task {
+                            match result with
+                            | Error errors ->
+                                return
+                                    {
+                                        ContractScreen = Path.GetFileNameWithoutExtension path
+                                        ContractPath = path
+                                        Verdict = Binding.Fail("INVALID-CONTRACT: " + String.concat " | " errors)
+                                        AppScreen = None
+                                        Url = None
+                                        Records = []
+                                    }
+                            | Ok contract ->
+                                let screen = screenId contract.Id
+                                let resolution = Binding.resolve bindings contract.Id
+
+                                match resolution with
+                                | Binding.ResolvedBound bound ->
+                                    let url = Uri(Uri(baseUrl), bound.Path).AbsoluteUri
+                                    let evidenceRoot = Path.Combine(root, ".percepta", "evidence", "application", screen)
+
+                                    let options: BrowserVerification.Options =
+                                        {
+                                            Url = url
+                                            StateFixturePaths =
+                                                bound.Fixtures
+                                                |> List.map (fun fixture ->
+                                                    if Path.IsPathRooted fixture then fixture else Path.GetFullPath(Path.Combine(bindingsDirectory, fixture)))
+                                            ScreenshotDirectory = Path.Combine(evidenceRoot, "screenshots")
+                                            BaselineDirectory = Path.Combine(root, ".percepta", "baselines", screen)
+                                            UpdateBaselines = false
+                                        }
+
+                                    let missingFixtures = options.StateFixturePaths |> List.filter (File.Exists >> not)
+
+                                    if not (List.isEmpty missingFixtures) then
+                                        return
+                                            {
+                                                ContractScreen = screen
+                                                ContractPath = path
+                                                Verdict = Binding.Fail("Bound state fixtures are missing: " + String.concat ", " missingFixtures)
+                                                AppScreen = Some bound.AppScreen
+                                                Url = Some url
+                                                Records = []
+                                            }
+                                    else
+                                        let target: BrowserVerification.ScreenTarget =
+                                            {
+                                                AppScreen = bound.AppScreen
+                                                StateInjection = bindings.StateInjection
+                                                ReadyTimeoutMs = readyTimeout
+                                            }
+
+                                        let! adapterResults = BrowserVerification.verifyBound target options contract
+                                        let records = recordsFor contract path adapterResults
+
+                                        return
+                                            {
+                                                ContractScreen = screen
+                                                ContractPath = path
+                                                Verdict = Binding.verdict resolution records
+                                                AppScreen = Some bound.AppScreen
+                                                Url = Some url
+                                                Records = records
+                                            }
+                                | _ ->
+                                    return
+                                        {
+                                            ContractScreen = screen
+                                            ContractPath = path
+                                            Verdict = Binding.verdict resolution []
+                                            AppScreen = None
+                                            Url = None
+                                            Records = []
+                                        }
+                        }
+
+                    let runs = ResizeArray<ScreenRun>()
+
+                    for item in loaded do
+                        let! run = runOne item
+                        runs.Add run
+
+                    let runs = List.ofSeq runs
+
+                    let orphans =
+                        loaded
+                        |> List.choose (fun (_, result) -> result |> Result.toOption |> Option.map _.Id)
+                        |> Binding.orphans bindings
+                        |> List.map screenId
+
+                    let complete = Binding.complete allowNotApplicable orphans.Length (runs |> List.map _.Verdict)
+
+                    let output =
+                        tryOption "--out" args
+                        |> Option.map resolvePath
+                        |> Option.defaultValue (Path.Combine(root, ".percepta", "evidence", "application-verification.json"))
+
+                    writeApplicationReport output bindings.Application baseUrl allowNotApplicable orphans complete runs
+
+                    for run in runs do
+                        let detail =
+                            match run.Verdict with
+                            | Binding.Fail reason
+                            | Binding.NotApplicableVerdict reason -> reason
+                            | Binding.NotBoundVerdict -> "not mentioned in the application's bindings"
+                            | Binding.Pass -> defaultArg run.AppScreen ""
+
+                        printfn "%-15s %-40s %s" (Binding.verdictName run.Verdict) run.ContractScreen detail
+
+                    for orphan in orphans do
+                        printfn "%-15s %-40s %s" "ORPHAN-BINDING" orphan "binding names a contract that does not exist"
+
+                    printfn "Report: %s" output
+                    printfn "Complete: %b" complete
+                    return if complete then 0 else 3
+        }
+
     let artifactMetadataCommand args =
         try
             match tryOption "--out" args, Percepta.Cli.EvidenceRuntime.artifactMetadata () with
@@ -673,6 +939,7 @@ module Cli =
         printfn "Percepta CLI"
         printfn "  percepta compile [--contract path] [--out directory]"
         printfn "  percepta verify [--contract path] --url url-or-file [--fixture path ...] [--semantic-review path] [--update-baselines]"
+        printfn "  percepta verify-app --base-url url [--bindings path] [--contracts directory] [--out path] [--allow-not-applicable] [--ready-timeout-ms n]"
         printfn "  percepta validate-evidence --evidence path --source-root path --trusted-artifact-metadata path [--out path]"
         printfn "  percepta artifact-metadata [--out path]"
         printfn "  percepta status [--evidence path]"
@@ -702,6 +969,7 @@ let private execute argv =
     match args with
     | "compile" :: rest -> Cli.compileCommand root rest
     | "verify" :: rest -> Cli.verifyCommand root rest |> fun task -> task.GetAwaiter().GetResult()
+    | "verify-app" :: rest -> Cli.verifyAppCommand root rest |> fun task -> task.GetAwaiter().GetResult()
     | "validate-evidence" :: rest -> Cli.validateEvidenceCommand root rest
     | "artifact-metadata" :: rest -> Cli.artifactMetadataCommand rest
     | "status" :: rest -> Cli.statusCommand root rest

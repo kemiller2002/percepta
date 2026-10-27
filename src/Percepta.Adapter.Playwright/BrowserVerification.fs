@@ -136,7 +136,8 @@ module BrowserVerification =
         task {
             let! _ =
                 page.EvaluateAsync(
-                    "json => { if (typeof window.__perceptaSetState !== 'function') throw new Error('window.__perceptaSetState is not defined'); window.__perceptaSetState(JSON.parse(json)); }",
+                    // The hook may return a promise; the state counts as applied only once it settles.
+                    "async json => { if (typeof window.__perceptaSetState !== 'function') throw new Error('window.__perceptaSetState is not defined'); await window.__perceptaSetState(JSON.parse(json)); }",
                     fixture.RawJson
                 )
 
@@ -183,6 +184,37 @@ module BrowserVerification =
 
                 if colorOnlyCount > 0 then
                     problems.Add($"{colorOnlyCount} state element(s) communicate state without text or an accessible label.")
+
+            // Component boundaries: each contract region is one element, regions do not nest inside one
+            // another, and capability hooks sit on native interactive controls (the semantic and interaction
+            // authority for Forma components), not on generic containers.
+            let regionIds = contract.Regions |> List.map (fun region -> regionId region.Id) |> List.toArray
+
+            let! boundaryProblems =
+                page.EvaluateAsync<string array>(
+                    """ids => {
+                      const problems = [];
+                      const roots = new Map();
+                      for (const id of ids) {
+                        const matches = [...document.querySelectorAll('[data-percepta-region]')].filter(el => el.getAttribute('data-percepta-region') === id);
+                        if (matches.length > 1) problems.push(`Region '${id}' has ${matches.length} boundaries; a region must be exactly one element.`);
+                        if (matches.length >= 1) roots.set(id, matches[0]);
+                      }
+                      for (const [id, el] of roots) {
+                        for (const [other, otherEl] of roots) {
+                          if (id !== other && otherEl.contains(el)) problems.push(`Region '${id}' is nested inside region '${other}'.`);
+                        }
+                      }
+                      const interactive = 'button, a[href], input, select, textarea, summary, [role=button], [role=link], [role=menuitem], [role=tab], [role=switch], [role=checkbox]';
+                      for (const el of document.querySelectorAll('[data-percepta-capability]')) {
+                        if (!el.matches(interactive)) problems.push(`Capability '${el.getAttribute('data-percepta-capability')}' is bound to a non-interactive <${el.tagName.toLowerCase()}>.`);
+                      }
+                      return problems;
+                    }""",
+                    regionIds
+                )
+
+            problems.AddRange boundaryProblems
 
             return
                 evidence
@@ -337,7 +369,84 @@ module BrowserVerification =
                     (fixtures |> List.map (fun fixture -> fixture.Name))
         }
 
-    let private checkAccessibility (page: IPage) =
+    /// Presses Tab until every expected capability was focused or the budget is spent.
+    let rec private tabWalk (page: IPage) (expected: Set<string>) remaining (reached: Map<string, bool>) : Task<Map<string, bool>> =
+        task {
+            if remaining = 0 || Set.isSubset expected (reached |> Map.keys |> Set.ofSeq) then
+                return reached
+            else
+                do! page.Keyboard.PressAsync("Tab")
+
+                let! focused =
+                    page.EvaluateAsync<string array>(
+                        """() => {
+                          const el = document.activeElement;
+                          const id = el && el.getAttribute && el.getAttribute('data-percepta-capability');
+                          if (!id) return [];
+                          const style = getComputedStyle(el);
+                          const indicated = style.outlineStyle !== 'none' && parseFloat(style.outlineWidth || '0') > 0 || style.boxShadow !== 'none' || style.outlineStyle === 'auto';
+                          return [id, String(indicated)];
+                        }"""
+                    )
+
+                let next =
+                    match focused with
+                    | [| id; indicated |] -> Map.add id (indicated = "true") reached
+                    | _ -> reached
+
+                return! tabWalk page expected (remaining - 1) next
+        }
+
+
+    /// Keyboard accessibility: every visible, enabled capability control must be reachable with Tab from
+    /// the start of the document and must show a focus indicator when reached by keyboard.
+    let private checkKeyboardReachability (page: IPage) =
+        task {
+            let! expected =
+                page.EvaluateAsync<string array>(
+                    """() => [...document.querySelectorAll('[data-percepta-capability]')]
+                      .filter(el => el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden')
+                      .filter(el => !el.disabled && el.getAttribute('aria-disabled') !== 'true')
+                      .map(el => el.getAttribute('data-percepta-capability'))"""
+                )
+
+            if expected.Length = 0 then
+                return [||]
+            else
+                let! focusableCount =
+                    page.EvaluateAsync<int>(
+                        """() => {
+                          if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur();
+                          return document.querySelectorAll('a[href], button, input, select, textarea, summary, [tabindex]').length;
+                        }"""
+                    )
+
+                let! reached = tabWalk page (Set.ofArray expected) (min 400 (focusableCount + 2)) Map.empty
+
+                return
+                    expected
+                    |> Array.distinct
+                    |> Array.choose (fun id ->
+                        match Map.tryFind id reached with
+                        | None -> Some $"Capability '{id}' is not reachable with the keyboard (Tab)."
+                        | Some false -> Some $"Capability '{id}' has no visible focus indicator."
+                        | Some true -> None)
+        }
+
+    /// Keyboard reachability in every supplied state (capabilities are often enabled only in some states),
+    /// or in the current state when no state fixture is supplied.
+    let rec private keyboardAcrossStates (page: IPage) (fixtures: Fixture list) (problems: string list) : Task<string list> =
+        task {
+            match fixtures with
+            | [] -> return problems
+            | fixture :: rest ->
+                do! applyFixture page fixture
+                let! found = checkKeyboardReachability page
+                let labelled = found |> Array.map (fun problem -> $"[{fixture.Name}] {problem}") |> List.ofArray
+                return! keyboardAcrossStates page rest (problems @ labelled)
+        }
+
+    let private checkAccessibility (page: IPage) (fixtures: Fixture list) =
         task {
             let! problems =
                 page.EvaluateAsync<string array>(
@@ -361,9 +470,21 @@ module BrowserVerification =
                         const labelledBy = el.getAttribute('aria-labelledby');
                         if (!name && !labelledBy) problems.push('Interactive element lacks an accessible name: ' + el.tagName.toLowerCase());
                       }
+                      for (const el of document.querySelectorAll('[tabindex]')) {
+                        if (el.tabIndex > 0) problems.push('Positive tabindex overrides the document focus order: ' + el.tagName.toLowerCase());
+                      }
                       return problems;
                     }"""
                 )
+
+            let! keyboardProblems =
+                match fixtures with
+                | [] -> checkKeyboardReachability page
+                | _ -> task {
+                    let! found = keyboardAcrossStates page fixtures []
+                    return Array.ofList found }
+
+            let problems = Array.append problems keyboardProblems
 
             return
                 evidence
@@ -477,11 +598,38 @@ module BrowserVerification =
             return responsive, visual
         }
 
-    let verify options contract =
-        task {
-            let fixtures = options.StateFixturePaths |> List.map loadFixture
-            let url = normalizeUrl options.Url
+    /// An application screen a contract is bound to (see Percepta.Core.Binding and docs/SCREEN-BINDING.md).
+    type ScreenTarget =
+        {
+            /// Expected value of the data-percepta-screen attribute on the rendered screen root.
+            AppScreen: string
+            /// The application declares that it implements window.__perceptaSetState.
+            StateInjection: bool
+            /// How long to wait for the screen identity to appear (applications that boot asynchronously).
+            ReadyTimeoutMs: float
+        }
 
+    let private adapterKinds =
+        [ Structural; StateProjection; Interaction; Accessibility; Responsive; VisualRegression ]
+
+    let private runChecks (page: IPage) options contract fixtures =
+        task {
+            match fixtures with
+            | first :: _ -> do! applyFixture page first
+            | [] -> ()
+
+            let! structural = checkStructural page contract
+            let! stateProjection = checkStateProjections page contract fixtures
+            let! interaction = checkInteraction page contract fixtures
+            let! accessibility = checkAccessibility page fixtures
+            let! responsive, visual =
+                checkResponsiveAndScreenshots page contract options (fixtures |> List.tryHead)
+
+            return [ structural; stateProjection; interaction; accessibility; responsive; visual ]
+        }
+
+    let private withBrowser (url: string) (body: IPage -> Task<AdapterEvidence list>) =
+        task {
             try
                 let! playwright = Microsoft.Playwright.Playwright.CreateAsync()
                 use playwright = playwright
@@ -495,46 +643,123 @@ module BrowserVerification =
 
                 do! page.GotoAsync(url) :> Task
 
-                match fixtures with
-                | first :: _ -> do! applyFixture page first
-                | [] -> ()
-
-                let! structural = checkStructural page contract
-                let! stateProjection = checkStateProjections page contract fixtures
-                let! interaction = checkInteraction page contract fixtures
-                let! accessibility = checkAccessibility page
-                let! responsive, visual =
-                    checkResponsiveAndScreenshots page contract options (fixtures |> List.tryHead)
-
+                let! results = body page
                 do! browser.CloseAsync()
-
-                return
-                    [
-                        structural
-                        stateProjection
-                        interaction
-                        accessibility
-                        responsive
-                        visual
-                    ]
+                return results
             with ex ->
-                let unavailable kind =
-                    evidence
-                        kind
-                        (Unavailable ex.Message)
-                        "Browser verification could not run."
-                        []
+                return
+                    adapterKinds
+                    |> List.map (fun kind ->
+                        evidence
+                            kind
+                            (Unavailable ex.Message)
+                            "Browser verification could not run."
+                            [])
+        }
+
+    let verify options contract =
+        let fixtures = options.StateFixturePaths |> List.map loadFixture
+        withBrowser (normalizeUrl options.Url) (fun page -> runChecks page options contract fixtures)
+
+    /// Waits for the bound screen's identity. Error carries the identities actually rendered.
+    let private establishScreen (page: IPage) (target: ScreenTarget) =
+        task {
+            let selector = $"[data-percepta-screen=\"{target.AppScreen}\"]"
+
+            try
+                let! _ =
+                    page.WaitForSelectorAsync(
+                        selector,
+                        PageWaitForSelectorOptions(State = WaitForSelectorState.Attached, Timeout = Nullable(float32 target.ReadyTimeoutMs))
+                    )
+
+                let! count = page.Locator(selector).CountAsync()
 
                 return
-                    [
-                        unavailable Structural
-                        unavailable StateProjection
-                        unavailable Interaction
-                        unavailable Accessibility
-                        unavailable Responsive
-                        unavailable VisualRegression
-                    ]
+                    if count = 1 then
+                        Ok()
+                    else
+                        Error $"Screen identity '{target.AppScreen}' is rendered {count} times; exactly one screen root is required."
+            with :? TimeoutException ->
+                let! rendered =
+                    page.EvaluateAsync<string array>(
+                        "() => [...document.querySelectorAll('[data-percepta-screen]')].map(el => el.getAttribute('data-percepta-screen'))"
+                    )
+
+                let found =
+                    if rendered.Length = 0 then "no data-percepta-screen element" else String.Join(", ", rendered)
+
+                return Error $"Expected screen '{target.AppScreen}' was not rendered within {target.ReadyTimeoutMs} ms (found: {found})."
         }
+
+    /// Replaces the status of state-dependent evidence. A failure the checks already found is never
+    /// downgraded: it is kept, and a new failure reason is appended to it.
+    let private overrideKinds kinds status summary (results: AdapterEvidence list) =
+        results
+        |> List.map (fun result ->
+            match List.contains result.Kind kinds, result.Status, status with
+            | false, _, _ -> result
+            | true, Failed existing, Failed added -> { result with Status = Failed $"{added} | {existing}"; Summary = summary }
+            | true, Failed _, _ -> result
+            | true, _, _ -> { result with Status = status; Summary = summary })
+
+    let private legalityDependent (contract: ScreenContract) =
+        contract.Capabilities
+        |> List.exists (function
+            | MustExpose _ -> false
+            | _ -> true)
+
+    /// Verifies a contract against the application screen it is bound to. The screen identity must be
+    /// established before any other check runs; state-dependent checks report the state-injection gap
+    /// instead of silently checking the default state.
+    let verifyBound (target: ScreenTarget) (options: Options) (contract: ScreenContract) =
+        let fixtures = options.StateFixturePaths |> List.map loadFixture
+
+        withBrowser (normalizeUrl options.Url) (fun page ->
+            task {
+                match! establishScreen page target with
+                | Error reason ->
+                    return
+                        adapterKinds
+                        |> List.map (fun kind ->
+                            evidence
+                                kind
+                                (Failed $"SCREEN-IDENTITY: {reason}")
+                                "Checks were not run: the bound screen was not established."
+                                [])
+                | Ok() ->
+                    let! hookPresent =
+                        page.EvaluateAsync<bool>("() => typeof window.__perceptaSetState === 'function'")
+
+                    let stateDependent =
+                        [
+                            if not (List.isEmpty contract.StateProjections) then StateProjection
+                            if legalityDependent contract then Interaction
+                        ]
+
+                    match target.StateInjection, hookPresent with
+                    | true, true ->
+                        return! runChecks page options contract fixtures
+                    | true, false ->
+                        let! results = runChecks page options contract []
+
+                        return
+                            overrideKinds
+                                stateDependent
+                                (Failed $"STATE-INJECTION-MISSING: the binding declares state injection, but window.__perceptaSetState is not a function on screen '{target.AppScreen}'.")
+                                "State-dependent obligations cannot be exercised."
+                                results
+                    | false, _ ->
+                        let! results = runChecks page options contract []
+
+                        return
+                            overrideKinds
+                                stateDependent
+                                (Unavailable "STATE-INJECTION-UNSUPPORTED: the application declares no state-injection hook, so state-dependent obligations cannot be exercised.")
+                                "State-dependent obligations cannot be exercised."
+                                results
+            })
+
 
     let doctor () =
         task {

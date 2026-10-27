@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "screen": "investigation-workspace",
+  "purpose": "Investigate an observed failure without prematurely converging on an explanation.",
+  "primaryQuestion": "What currently explains the observation, and what should be tested next?",
+  "regions": [
+    { "id": "observation", "purpose": "Preserve the triggering observation and its source.", "hierarchy": "primary", "visibility": { "kind": "always" } },
+    { "id": "hypotheses", "purpose": "Compare active, weakened, and falsified explanations.", "hierarchy": "primary", "visibility": { "kind": "always" } },
+    { "id": "contradictions", "purpose": "Expose evidence that conflicts with the current explanation.", "hierarchy": "primary", "visibility": { "kind": "when", "predicate": "contradictions-present" } },
+    { "id": "unknowns", "purpose": "Expose unresolved information, especially blockers.", "hierarchy": "primary", "visibility": { "kind": "always" } },
+    { "id": "obligations", "purpose": "Show work required before legal progress can continue.", "hierarchy": "primary", "visibility": { "kind": "when", "predicate": "obligations-present" } },
+    { "id": "evidence", "purpose": "Expose evidence and its relationship to hypotheses.", "hierarchy": "secondary", "visibility": { "kind": "always" } },
+    { "id": "legal-actions", "purpose": "Show available and unavailable next actions.", "hierarchy": "primary", "visibility": { "kind": "always" } },
+    { "id": "persistence-state", "purpose": "Distinguish local, pending, synced, conflicted, and failed persistence.", "hierarchy": "secondary", "visibility": { "kind": "always" } }
+  ],
+  "capabilities": [
+    { "kind": "expose", "capability": "confirm-root-cause" },
+    { "kind": "disable-when-illegal", "capability": "confirm-root-cause" },
+    { "kind": "explain-when-unavailable", "capability": "confirm-root-cause" },
+    { "kind": "navigate-to-blocker", "capability": "confirm-root-cause" }
+  ],
+  "stateProjections": [
+    {
+      "when": "hypothesis-is-falsified",
+      "observations": [
+        { "id": "falsified-hypothesis-retained", "description": "Falsified hypothesis remains represented." },
+        { "id": "falsified-state-noncolor", "description": "Falsified state is perceivable without color alone." },
+        { "id": "inactive-actions-unavailable", "description": "Actions that require an active hypothesis are unavailable." }
+      ]
+    },
+    {
+      "when": "blocking-unknown-exists",
+      "observations": [
+        { "id": "blocker-visible", "description": "Blocker is visible in the active workspace." },
+        { "id": "dependent-action-unavailable", "description": "Dependent action is unavailable." },
+        { "id": "unavailable-reason-visible", "description": "Reason for unavailability is visible." },
+        { "id": "blocker-navigation-available", "description": "User can navigate to the blocker." }
+      ]
+    },
+    {
+      "when": "github-write-is-pending",
+      "observations": [
+        { "id": "persistence-pending-visible", "description": "Persistence state is Pending." },
+        { "id": "no-false-remote-success", "description": "UI does not claim remote success." }
+      ]
+    },
+    {
+      "when": "corrective-action-not-verified",
+      "observations": [
+        { "id": "unresolved-not-resolved", "description": "Investigation is not represented as Resolved." },
+        { "id": "verification-obligation-visible", "description": "Verification obligation remains visible." }
+      ]
+    }
+  ],
+  "forbiddenPatterns": [
+    "chat-only-primary-interface",
+    "hide-blocking-obligation",
+    "delete-falsified-hypothesis",
+    "color-only-state",
+    "optimistic-persistence-success",
+    "unsupported-confidence-percentage",
+    "linearize-competing-hypotheses"
+  ],
+  "breakpoints": [
+    { "name": "ipad-portrait", "width": 820, "height": 1180, "requiredRegionsVisible": ["hypotheses", "unknowns", "legal-actions"], "observations": [] },
+    { "name": "ipad-landscape", "width": 1180, "height": 820, "requiredRegionsVisible": ["hypotheses", "unknowns", "legal-actions"], "observations": [] },
+    { "name": "narrow-phone", "width": 390, "height": 844, "requiredRegionsVisible": ["hypotheses", "unknowns", "legal-actions"], "observations": [] },
+    { "name": "desktop-reference", "width": 1440, "height": 900, "requiredRegionsVisible": ["observation", "hypotheses", "unknowns", "legal-actions"], "observations": [] }
+  ],
+  "evidenceRequirements": [
+    { "id": "contract-validation", "kind": "contract-validation", "description": "Contract is internally valid.", "required": true },
+    { "id": "structural", "kind": "structural", "description": "Required semantic regions and implementation hooks are present.", "required": true },
+    { "id": "state-projection", "kind": "state-projection", "description": "Declared domain states project to the required user-facing meaning.", "required": true },
+    { "id": "interaction", "kind": "interaction", "description": "Capabilities are discoverable, constrained, and explain unavailable actions.", "required": true },
+    { "id": "accessibility", "kind": "accessibility", "description": "Applicable accessibility obligations pass.", "required": true },
+    { "id": "responsive", "kind": "responsive", "description": "Required semantics survive the declared viewport classes.", "required": true },
+    { "id": "visual-regression", "kind": "visual-regression", "description": "No material clipping, overlap, missing region, or hierarchy regression is observed.", "required": false },
+    { "id": "semantic-visual-review", "kind": "semantic-visual-review", "description": "Visual review supports the declared information hierarchy and product meaning.", "required": false }
+  ]
+}

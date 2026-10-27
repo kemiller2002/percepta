@@ -16,6 +16,7 @@
     <Compile Include="Compilation.fs" />
     <Compile Include="ContractSerialization.fs" />
     <Compile Include="Evidence.fs" />
+    <Compile Include="Binding.fs" />
     <Compile Include="EvidenceEnvelope.fs" />
   </ItemGroup>
 </Project>
