@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "percepta",
-  "nextSeq": 11,
+  "nextSeq": 12,
   "items": [
     {
       "id": "WI-INDY-UI-001",
@@ -464,6 +464,27 @@
       },
       "source": "praxis-inbox",
       "sourceReference": ".praxis/inbox/documents/2026-10-25-PERCEPTA-EVIDENCE-CONTRACT-001.md"
+    },
+    {
+      "id": "WI-0011",
+      "title": "Release percepta-semantic 0.3.0 (verify-app and screen bindings, PR #43) for the Rehearsal 5 dependency set",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-10-27T18:08:09.550Z",
+      "updatedAt": "2026-10-27T18:08:09Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "anthropic/claude-code",
+        "provider": "anthropic",
+        "model": "unknown",
+        "runtime": "claude-code"
+      },
+      "source": "manual",
+      "sourceReference": null
     }
   ]
 }
