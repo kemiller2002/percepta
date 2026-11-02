@@ -198,6 +198,93 @@ let bindingParseChecks =
 for name, passed in bindingChecks @ bindingParseChecks do
     check name passed
 
+// ---------------------------------------------------------------- specification preflight (PER-SPEC-PREFLIGHT)
+
+do
+    let t id state event guard next effects : Specification.Transition =
+        { Id = id; State = state; Event = event; Guard = guard; Next = next; Effects = effects }
+
+    let machine transitions : Specification.Machine = { Id = "SM-PUMP"; Initial = "Idle"; Transitions = transitions }
+
+    let spec machines invariants types operations catalog : Specification.Specification =
+        { Machines = machines; Invariants = invariants; Types = types; Operations = operations
+          Catalog = catalog; UnsupportedObligations = [] }
+
+    let noCatalog : Specification.Catalog = { Carrier = None; Commands = [] }
+
+    let bound : Specification.Invariant =
+        { Id = "INV-PUMP"; Machines = [ "SM-PUMP" ]
+          Statement = "Each start is logged; under a stuck valve at most three pump strokes in 30 seconds." }
+
+    let path =
+        [ t "P1" "Idle" "Start" "true" "Pumping" [ "one pump stroke" ]
+          t "P2" "Pumping" "Stall" "true" "Stalled" [ "log the stall" ] ]
+
+    let findings transitions = Specification.analyze (spec [ machine (path @ transitions) ] [ bound ] [] [] noCatalog)
+    let rules transitions = findings transitions |> List.map _.Rule
+
+    let types fsharp = Specification.parseTypes fsharp
+
+    let carrierSpec fsharp =
+        spec [] [] (types fsharp)
+            [ { Interface = "IF-KERNEL"; Name = "Decide"; Signature = "Policy -> Envelope -> Decision" } ]
+            { Carrier = Some "Envelope"; Commands = [ "OpenValve"; "CloseValve"; "Flush" ] }
+
+    check "spec: a rate bound is extracted from prose" (
+        Specification.rateBounds bound = [ { Invariant = "INV-PUMP"; Effect = "pump stroke"; Max = 3; WindowSeconds = 30; Condition = "under a stuck valve" } ])
+
+    let contradiction = findings [ t "P3" "Stalled" "Retry" "operator retried" "Stalled" [ "one pump stroke" ] ]
+
+    check "spec: an unguarded self-loop emitting a rate-bounded effect is a likely contradiction with a counterexample" (
+        match contradiction with
+        | [ f ] ->
+            f.Kind = Specification.LikelyContradiction && f.Subjects = [ "INV-PUMP"; "SM-PUMP"; "P3" ] && f.Blocking && f.OwnerDecision
+            && (f.Counterexample |> List.filter (fun line -> line.Contains "pump stroke #") |> List.length) = 4
+        | _ -> false)
+
+    check "spec: a contradiction is never reported as proven when the bound came from prose" (
+        contradiction |> List.forall (fun f -> f.Kind <> Specification.ProvenContradiction))
+
+    check "spec: a counter or a clock in the loop's guard bounds it" (
+        not (List.contains "rate-bound-vs-unbounded-loop" (rules [ t "P3" "Stalled" "Retry" "fewer than three retries made" "Stalled" [ "one pump stroke" ] ]))
+        && rules [ t "P3" "Stalled" "Retry" "at least 20 seconds after the last stroke" "Stalled" [ "one pump stroke" ] ] = [])
+
+    check "spec: an effect stated as none, a negated effect or a substring is not an emission" (
+        rules [ t "P3" "Stalled" "Retry" "true" "Stalled" [ "none: confirms the PumpStrokeAnswer" ] ] = []
+        && rules [ t "P3" "Stalled" "Retry" "true" "Stalled" [ "send no pump stroke" ] ] = [])
+
+    check "spec: a counter guard without its complement is a missing specification" (
+        match findings [ t "P3" "Stalled" "ReadFailed" "fewer than three reads made" "Stalled" [ "schedule a read" ] ] with
+        | [ f ] -> f.Kind = Specification.MissingSpecification && f.Rule = "counter-guard-without-complement" && not f.Blocking
+        | _ -> false)
+
+    check "spec: both sides of the counter, or a state reference, need no complement" (
+        rules [ t "P3" "Stalled" "ReadFailed" "fewer than three reads made" "Stalled" [ "schedule a read" ]
+                t "P4" "Stalled" "ReadFailed" "three reads already made" "Stalled" [ "offer check again" ] ] = []
+        && rules [ t "P3" "Stalled" "Resolved" "SM-VALVE reached Open" "Idle" [ "resume" ] ] = [])
+
+    check "spec: F# records, multi-case and single-case unions parse" (
+        types "type Id = Id of Guid\ntype Envelope = { CommandId: Guid; Target: Id; Version: int64 option }\ntype Decision =\n    | Allowed of string list\n    | Blocked" =
+            [ Specification.Union("Id", [ "Id", Some "Guid" ])
+              Specification.Record("Envelope", [ "CommandId", "Guid"; "Target", "Id"; "Version", "int64 option" ])
+              Specification.Union("Decision", [ "Allowed", Some "string list"; "Blocked", None ]) ])
+
+    check "spec: a carrier of identities and versions cannot discriminate the catalog's commands" (
+        match Specification.analyze (carrierSpec "type Id = Id of Guid\ntype Envelope = { CommandId: Guid; Target: Id; Version: int64 option }\ntype Box = { Pending: Envelope list }") with
+        | [ f ] ->
+            f.Kind = Specification.MissingInterface && f.Subjects = [ "Envelope"; "IF-KERNEL.Decide" ]
+            && f.Counterexample |> List.exists (fun l -> l.Contains "Box carries Envelope (Pending)")
+        | _ -> false)
+
+    check "spec: a carrier with a command union, a string or an opaque type is sufficient" (
+        Specification.analyze (carrierSpec "type Command =\n    | OpenValve\n    | CloseValve\ntype Envelope = { CommandId: Guid; Command: Command }") = []
+        && Specification.analyze (carrierSpec "type Envelope = { CommandId: Guid; Kind: string }") = []
+        && Specification.analyze (carrierSpec "type Envelope = { CommandId: Guid; Body: CommandBody }") = [])
+
+    check "spec: the catalog's command tables and carrier are read from markdown" (
+        Specification.readCatalog "Every command is carried inside Envelope.\n\n| Command | Primary event(s) |\n| --- | --- |\n| OpenValve | ValveOpened |\n| `Flush` | Flushed |\n\n| Event | x |\n| --- | --- |\n| ValveOpened | y |"
+            = { Carrier = Some "Envelope"; Commands = [ "OpenValve"; "Flush" ] })
+
 if List.isEmpty failures then
     printfn "Percepta.Core.Tests: all checks passed."
 else
