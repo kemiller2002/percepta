@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-11-02T01:23:20Z",
+  "updatedAt": "2026-11-02T06:44:24Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -792,6 +792,47 @@
         }
       },
       "completedAt": "2026-11-02T01:23:20Z"
+    },
+    {
+      "id": "PER-SPEC-VOCAB",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Percepta.Core/Specification.fs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/Percepta.Core.Tests/Program.fs"
+        }
+      ],
+      "updatedAt": "2026-11-02T06:44:24Z",
+      "telemetryExecutionIds": [
+        "EXE-20261102T064236037Z-c9fc3438"
+      ],
+      "latestCheckpoint": {
+        "id": "38aab78458f5cc1dd7b9a5e1",
+        "recordedAt": "2026-11-02T06:44:23Z",
+        "executionId": "EXE-20261102T064236037Z-c9fc3438",
+        "repository": "percepta",
+        "branch": "claude/spec-preflight-already-sent",
+        "commit": "92527ed1ae6cc7e5c9dcb14d8439f1b2944090a2",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/spec-preflight-already-sent",
+        "remoteCommit": "92527ed1ae6cc7e5c9dcb14d8439f1b2944090a2",
+        "summary": "at-limit vocabulary fix",
+        "nextAction": "owner review",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-02T06:44:24Z"
     }
   ]
 }
