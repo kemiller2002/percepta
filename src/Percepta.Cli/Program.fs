@@ -935,6 +935,39 @@ module Cli =
 
             0
 
+    /// `percepta spec-preflight` (PER-SPEC-PREFLIGHT): contradictions and interface gaps in a
+    /// specification package before implementation. Exit 0 nothing blocking, 3 blocking findings,
+    /// 2 unreadable input.
+    let specPreflightCommand (root: string) args =
+        let resolve (value: string) = if Path.IsPathRooted value then value else Path.Combine(root, value)
+        let read name = tryOption name args |> Option.map (resolve >> File.ReadAllText)
+        try
+            let machines = read "--machines" |> Option.map Specification.readMachines |> Option.defaultValue []
+            let invariants = read "--invariants" |> Option.map Specification.readInvariants |> Option.defaultValue []
+            let types, operations = read "--interfaces" |> Option.map Specification.readInterfaces |> Option.defaultValue ([], [])
+            let catalog = read "--catalog" |> Option.map Specification.readCatalog |> Option.defaultValue { Carrier = None; Commands = [] }
+            let refusals = read "--refusals" |> Option.map Specification.readRefusals |> Option.defaultValue []
+            let spec : Specification.Specification =
+                { Machines = machines; Invariants = invariants; Types = types; Operations = operations
+                  Catalog = catalog; UnsupportedObligations = refusals }
+            let findings = Specification.analyze spec
+            let json = Specification.toJson spec findings
+            match tryOption "--out" args with
+            | Some out ->
+                let path = resolve out
+                Directory.CreateDirectory(Path.GetDirectoryName path |> Option.ofObj |> Option.defaultValue ".") |> ignore
+                File.WriteAllText(path, json + "\n")
+            | None -> ()
+            printfn "%s" json
+            if findings |> List.exists _.Blocking then 3 else 0
+        with
+        | :? IOException as ex ->
+            eprintfn "spec-preflight: %s" ex.Message
+            2
+        | :? System.Text.Json.JsonException as ex ->
+            eprintfn "spec-preflight: malformed JSON: %s" ex.Message
+            2
+
     let usage () =
         printfn "Percepta CLI"
         printfn "  percepta compile [--contract path] [--out directory]"
@@ -945,6 +978,7 @@ module Cli =
         printfn "  percepta status [--evidence path]"
         printfn "  percepta doctor [--contract path]"
         printfn "  percepta install-browser"
+        printfn "  percepta spec-preflight [--machines path] [--invariants path] [--interfaces path] [--catalog path] [--refusals path] [--out path]"
         printfn "  percepta version"
 
     /// The released version line (PERCEPTA-SEMCLI-001); a source build reports the project default.
@@ -974,6 +1008,7 @@ let private execute argv =
     | "artifact-metadata" :: rest -> Cli.artifactMetadataCommand rest
     | "status" :: rest -> Cli.statusCommand root rest
     | "doctor" :: rest -> Cli.doctorCommand root rest |> fun task -> task.GetAwaiter().GetResult()
+    | "spec-preflight" :: rest -> Cli.specPreflightCommand root rest
     | [ "install-browser" ] -> BrowserVerification.installChromium ()
     | [ "version" ]
     | [ "--version" ] -> Cli.versionCommand ()
