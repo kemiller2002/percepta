@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-11-02T06:44:24Z",
+  "updatedAt": "2026-11-02T20:31:55Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -833,6 +833,27 @@
         }
       },
       "completedAt": "2026-11-02T06:44:24Z"
+    },
+    {
+      "id": "PER-SEM-REL-040",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "distribution/percepta-semantic/version"
+        },
+        {
+          "type": "tests",
+          "path": "distribution/percepta-semantic/smoke.sh"
+        }
+      ],
+      "updatedAt": "2026-11-02T20:31:55Z",
+      "telemetryExecutionIds": [
+        "EXE-20261102T202906561Z-f05282bc"
+      ],
+      "completedAt": "2026-11-02T20:31:55Z"
     }
   ]
 }
