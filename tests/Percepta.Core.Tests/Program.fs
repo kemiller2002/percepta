@@ -261,7 +261,10 @@ do
     check "spec: both sides of the counter, or a state reference, need no complement" (
         rules [ t "P3" "Stalled" "ReadFailed" "fewer than three reads made" "Stalled" [ "schedule a read" ]
                 t "P4" "Stalled" "ReadFailed" "three reads already made" "Stalled" [ "offer check again" ] ] = []
-        && rules [ t "P3" "Stalled" "Resolved" "SM-VALVE reached Open" "Idle" [ "resume" ] ] = [])
+        && rules [ t "P3" "Stalled" "Resolved" "SM-VALVE reached Open" "Idle" [ "resume" ] ] = []
+        // "already sent" is the at-limit side as much as "already made" (found on Indy Init v4.1.2's T-S32/T-S63).
+        && rules [ t "P3" "Stalled" "Resume" "fewer than four reads sent in the last 60 s" "Stalled" [ "one read" ]
+                   t "P4" "Stalled" "Resume" "four reads already sent in the last 60 s" "Stalled" [ "send nothing" ] ] = [])
 
     check "spec: F# records, multi-case and single-case unions parse" (
         types "type Id = Id of Guid\ntype Envelope = { CommandId: Guid; Target: Id; Version: int64 option }\ntype Decision =\n    | Allowed of string list\n    | Blocked" =

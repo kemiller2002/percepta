@@ -184,7 +184,7 @@ module Specification =
     // ------------------------------------------------------------------ rule 2: guard coverage
 
     let private belowLimit = Regex(@"fewer than|less than|not reached|limit not|remaining|at most", RegexOptions.IgnoreCase)
-    let private atLimit = Regex(@"already made|(?<!not )\blimit reached|\bspent\b|exhausted|no \w+ left|limit hit", RegexOptions.IgnoreCase)
+    let private atLimit = Regex(@"\balready (made|sent|used|done)\b|(?<!not )\blimit reached|\bspent\b|exhausted|no \w+ left|limit hit", RegexOptions.IgnoreCase)
 
     /// A (state, event) pair legal only on one side of a counter (below the limit, or at it) has no
     /// transition for the other side: the input fails closed there, which no table states as intended.
