@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-11-25T13:07:30.000Z",
+  "updatedAt": "2026-11-25T15:49:40Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -897,6 +897,17 @@
       "blockReason": "Blocked on Aegis 2.0.1: Aegis 2.0.0 nuspec requires FSharp.Core >= 11.0.101, so restore fails with NU1605 against the repository FSharp.Core pin; pins will be retargeted to 2.0.1",
       "completedAt": "2026-11-25T13:07:30.000Z",
       "conclusion": "Aegis pins retargeted 2.0.0 -> 2.0.1 and pushed; all CI-built projects build clean; Core, Binding (11), Adversarial and RepositoryLifecycle (25) tests pass"
+    },
+    {
+      "id": "WI-0013",
+      "type": "task",
+      "state": "active",
+      "semanticState": "active",
+      "evidence": [],
+      "updatedAt": "2026-11-25T15:49:40Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T154941020Z-d79901b9"
+      ]
     }
   ]
 }
