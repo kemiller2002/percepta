@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-11-02T20:31:55Z",
+  "updatedAt": "2026-11-25T15:51:59Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -854,6 +854,90 @@
         "EXE-20261102T202906561Z-f05282bc"
       ],
       "completedAt": "2026-11-02T20:31:55Z"
+    },
+    {
+      "id": "WI-0012",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "Directory.Packages.props"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/percepta-core.yml"
+        }
+      ],
+      "updatedAt": "2026-11-25T13:07:30.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T121732760Z-820a2b3b"
+      ],
+      "latestCheckpoint": {
+        "id": "b8a96109a68c6b43265888c6",
+        "recordedAt": "2026-11-25T13:07:29.000Z",
+        "executionId": "EXE-20261125T121732760Z-820a2b3b",
+        "repository": "percepta",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "c6a5daec3262f74db55905e5a642fb78682d6e5c",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "c6a5daec3262f74db55905e5a642fb78682d6e5c",
+        "summary": "Aegis pins retargeted 2.0.0 -> 2.0.1 and pushed; all CI-built projects build clean; Core, Binding (11), Adversarial and RepositoryLifecycle (25) tests pass",
+        "nextAction": "Complete WI-0012, rebuild registry, validate, push Praxis state",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "blockReason": "Blocked on Aegis 2.0.1: Aegis 2.0.0 nuspec requires FSharp.Core >= 11.0.101, so restore fails with NU1605 against the repository FSharp.Core pin; pins will be retargeted to 2.0.1",
+      "completedAt": "2026-11-25T13:07:30.000Z",
+      "conclusion": "Aegis pins retargeted 2.0.0 -> 2.0.1 and pushed; all CI-built projects build clean; Core, Binding (11), Adversarial and RepositoryLifecycle (25) tests pass"
+    },
+    {
+      "id": "WI-0013",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "Directory.Packages.props"
+        },
+        {
+          "type": "tests",
+          "path": "tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj"
+        }
+      ],
+      "updatedAt": "2026-11-25T15:51:59Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T154941020Z-d79901b9"
+      ],
+      "latestCheckpoint": {
+        "id": "4bdb2b458ade962856f187e4",
+        "recordedAt": "2026-11-25T15:51:58Z",
+        "executionId": "EXE-20261125T154941020Z-d79901b9",
+        "repository": "percepta",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "efcea052074cc5012dae050997e9852c1333910d",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "efcea052074cc5012dae050997e9852c1333910d",
+        "summary": "Aegis pins retargeted 2.0.1 -> 2.0.2; all projects build clean on SDK 10.0.404; Core, Binding, Adversarial and RepositoryLifecycle tests pass",
+        "nextAction": "Complete WI-0013; update PR to 2.0.2 and confirm CI",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-25T15:51:59Z"
     }
   ]
 }

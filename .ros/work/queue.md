@@ -3,6 +3,9 @@
 | ID | Work | Status | Tags | Priority |
 |---|---|---|---|---|
 | INGEST-REQS-20261018 | Ingest outstanding Praxis requirement sources | complete | requirements, ingestion | high |
+| PER-SEM-REL-040 | PER-SEM-REL-040 | complete |  |  |
+| PER-SPEC-PREFLIGHT | PER-SPEC-PREFLIGHT | complete |  |  |
+| PER-SPEC-VOCAB | PER-SPEC-VOCAB | complete |  |  |
 | PERCEPTA-EVIDENCE-CONTRACT-001 | Implement and release Percepta versioned evidence contract | complete | evidence-contract, release | high |
 | PERCEPTA-REL-COMPAT-001 | Verify Percepta published release compatibility and reproducibility | blocked | release-verification, percepta | high |
 | PRAXIS-EXECUTIONS-COMPAT-20261018 | Exclude Praxis-managed execution state from attribution | complete | governance, compatibility | high |
@@ -18,6 +21,8 @@
 | WI-0009 | Submit PERCEPTA-SEMCLI-001 intake: semantic UI verification CLI is implemented but unreleased | complete |  | medium |
 | WI-0010 | Release the Percepta semantic verification CLI (PERCEPTA-SEMCLI-001): self-contained per-RID archives, percepta-semantic-v* release workflow, CI smoke, consumer docs | active |  | medium |
 | WI-0011 | Release percepta-semantic 0.3.0 (verify-app and screen bindings, PR #43) for the Rehearsal 5 dependency set | complete |  | medium |
+| WI-0012 | Upgrade Aegis 1.0.0 -> 2.0.0 (echelon-current 1.40.0) | complete |  | medium |
+| WI-0013 | Retarget Aegis 2.0.1 -> 2.0.2 (detached capture no longer blocks single-threaded WebAssembly hosts) | complete |  | medium |
 | WI-INDY-UI-001 | Add and validate Indy Init Percepta screen contracts | complete | percepta, indy-init | high |
 | WI-PERCEPTA-EX0002-EVAL | Record EX-PERCEPTA-2026-0002 frozen first-pass evaluation results | complete | percepta, experiment | high |
 | WI-PERCEPTA-EX0002-EVAL-ATTRIBUTION | Attribute EX-PERCEPTA-2026-0002 evaluation artifacts | complete | percepta, experiment | high |
