@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-11-02T20:31:55Z",
+  "updatedAt": "2026-11-25T12:17:32.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -854,6 +854,17 @@
         "EXE-20261102T202906561Z-f05282bc"
       ],
       "completedAt": "2026-11-02T20:31:55Z"
+    },
+    {
+      "id": "WI-0012",
+      "type": "task",
+      "state": "active",
+      "semanticState": "active",
+      "evidence": [],
+      "updatedAt": "2026-11-25T12:17:32.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T121732760Z-820a2b3b"
+      ]
     }
   ]
 }
