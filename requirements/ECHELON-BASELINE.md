@@ -21,6 +21,7 @@ The native versions SHALL be pinned in `.echelon/toolchain.json`. Installed life
 Percepta SHALL consume:
 
 - Forma / `@echelon-foundry/design-system`;
+- the Echelon theme / `@echelon-foundry/echelon-theme` (the Echelon brand, which left Forma at 1.0.0); a Percepta surface loads it after Forma's `all.css`, in the theme's order `echelon.css`, `echelon-fonts.css`, `echelon-app.css`, and sets `data-forma-brand="echelon"`;
 - Folio / `@echelon-foundry/print-components`;
 - Limen / `@echelon-foundry/limen` (formerly `@echelon-foundry/typescript-wasm-kernel`);
 - `EchelonFoundry.Aegis.Core`;
@@ -37,6 +38,6 @@ The bootstrap process SHALL fail rather than silently omit a component whose pac
 
 ## Ownership boundaries
 
-Forma owns shared visual primitives and design tokens. Folio owns shared print primitives. Limen owns browser capability boundaries. Aegis owns unexpected operational-fault modelling and recovery contracts. Ordo owns engineering state/transition methodology. Praxis owns repository work protocol and durable execution evidence. Visual Engineering and Communication Engineering own their evidence-bounded implementation contexts.
+Forma owns shared visual primitives and design tokens; the Echelon theme owns the Echelon brand. Folio owns shared print primitives. Limen owns browser capability boundaries. Aegis owns unexpected operational-fault modelling and recovery contracts. Ordo owns engineering state/transition methodology. Praxis owns repository work protocol and durable execution evidence. Visual Engineering and Communication Engineering own their evidence-bounded implementation contexts.
 
 Percepta owns composition, UI-system-specific domain models, demonstrations, integration, and any Percepta-specific components that are not candidates for the shared libraries.

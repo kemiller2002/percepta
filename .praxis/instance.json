@@ -1,0 +1,12 @@
+{
+  "schema": "praxis.instance/1",
+  "instanceId": "pxi-1fe712b158044a2da4d581ef2c14faf2",
+  "createdAt": "2026-11-25T18:35:44.155Z",
+  "createdWith": "3.25.0",
+  "repository": {
+    "provider": "github",
+    "repositoryId": null,
+    "repository": "kemiller2002/percepta"
+  },
+  "predecessors": []
+}
