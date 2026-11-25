@@ -23,6 +23,7 @@
 | WI-0011 | Release percepta-semantic 0.3.0 (verify-app and screen bindings, PR #43) for the Rehearsal 5 dependency set | complete |  | medium |
 | WI-0012 | Upgrade Aegis 1.0.0 -> 2.0.0 (echelon-current 1.40.0) | complete |  | medium |
 | WI-0013 | Retarget Aegis 2.0.1 -> 2.0.2 (detached capture no longer blocks single-threaded WebAssembly hosts) | complete |  | medium |
+| WI-0014 | Upgrade to echelon-current 1.42.0 (Praxis 3.25.0, Ordo 1.20.0, Forma 1.0.1 with Echelon theme 1.1.0, Limen 0.9.1, Folio 0.4.1) | complete |  | medium |
 | WI-INDY-UI-001 | Add and validate Indy Init Percepta screen contracts | complete | percepta, indy-init | high |
 | WI-PERCEPTA-EX0002-EVAL | Record EX-PERCEPTA-2026-0002 frozen first-pass evaluation results | complete | percepta, experiment | high |
 | WI-PERCEPTA-EX0002-EVAL-ATTRIBUTION | Attribute EX-PERCEPTA-2026-0002 evaluation artifacts | complete | percepta, experiment | high |

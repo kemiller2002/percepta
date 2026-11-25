@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-11-25T15:51:59Z",
+  "updatedAt": "2026-11-25T18:41:19.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -938,6 +938,47 @@
         }
       },
       "completedAt": "2026-11-25T15:51:59Z"
+    },
+    {
+      "id": "WI-0014",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "conditor.json"
+        },
+        {
+          "type": "tests",
+          "path": "requirements/ECHELON-BASELINE.md"
+        }
+      ],
+      "updatedAt": "2026-11-25T18:41:19.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T183450946Z-4306190a"
+      ],
+      "latestCheckpoint": {
+        "id": "3b98b4a8d71aa00dbc78ca54",
+        "recordedAt": "2026-11-25T18:41:18.000Z",
+        "executionId": "EXE-20261125T183450946Z-4306190a",
+        "repository": "percepta",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "fd7bd123641d3ff61df5e89133998e8c2704dbca",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "fd7bd123641d3ff61df5e89133998e8c2704dbca",
+        "summary": "Upgraded to echelon-current 1.42.0 (Praxis 3.25.0, Ordo 1.20.0, Forma 1.0.1, Limen 0.9.1, Folio 0.4.1, Echelon theme 1.1.0); builds and Percepta suites pass",
+        "nextAction": "Open a draft PR and watch CI",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-25T18:41:19.000Z"
     }
   ]
 }
