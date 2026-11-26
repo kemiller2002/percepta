@@ -555,10 +555,10 @@
       "description": null,
       "tags": [],
       "priority": "medium",
-      "status": "ready",
+      "status": "complete",
       "attachments": [],
       "createdAt": "2026-11-26T00:31:33.126Z",
-      "updatedAt": "2026-11-26T00:31:34Z",
+      "updatedAt": "2026-11-26T00:37:31Z",
       "createdBy": "unknown",
       "createdByActor": {
         "kind": "agent",

@@ -4,7 +4,7 @@
   "repository": "percepta",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-24T04:22:02.116Z",
-  "updatedAt": "2026-11-26T00:31:34Z",
+  "updatedAt": "2026-11-26T00:37:31Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -983,13 +983,43 @@
     {
       "id": "WI-0015",
       "type": "task",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-11-26T00:31:34Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "conditor.json"
+        },
+        {
+          "type": "tests",
+          "path": "tests/Percepta.Core.Tests/Percepta.Core.Tests.fsproj"
+        }
+      ],
+      "updatedAt": "2026-11-26T00:37:31Z",
       "telemetryExecutionIds": [
         "EXE-20261126T003136674Z-7ff72c3b"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "f3c324fcb736ace5160aecef",
+        "recordedAt": "2026-11-26T00:37:23Z",
+        "executionId": "EXE-20261126T003136674Z-7ff72c3b",
+        "repository": "percepta",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "fef2accef1a3b4a165c87a3cb1c5e8635d015a6d",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/percepta"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "fef2accef1a3b4a165c87a3cb1c5e8635d015a6d",
+        "summary": "echelon-current 1.43.0 upgrade committed and pushed; local builds and tests pass",
+        "nextAction": "Complete the work item, open a draft PR and watch CI",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-26T00:37:31Z"
     }
   ]
 }
